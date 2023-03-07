@@ -55,8 +55,6 @@ public class ImageUtil {
             int g = sc.nextInt();
             int b = sc.nextInt();
             System.out.println("Color of pixel ("+j+","+i+"): "+ r+","+g+","+b);
-            //dummy change
-            System.out.println("Color of pixel ("+j+","+i+"): "+ r+","+g+","+b);
 
         }
     }
