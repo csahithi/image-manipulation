@@ -1,6 +1,12 @@
+package controller;
+
 import java.util.Scanner;
 import java.io.FileNotFoundException;
 import java.io.FileInputStream;
+
+import model.ImageProcessingImpl;
+import model.ImageProcessingModel;
+import model.Pixel;
 
 
 /**
@@ -14,15 +20,17 @@ public class ImageUtil {
    *
    * @param filename the path of the file. 
    */
-  public static void readPPM(String filename) {
+  public static ImageProcessingModel readPPM(String filename) {
     Scanner sc;
+    ImageProcessingModel m;
+
     
     try {
         sc = new Scanner(new FileInputStream(filename));
     }
     catch (FileNotFoundException e) {
         System.out.println("File "+filename+ " not found!");
-        return;
+        return null;
     }
     StringBuilder builder = new StringBuilder();
     //read the file line by line, and populate a string. This will throw away any comment lines
@@ -32,6 +40,7 @@ public class ImageUtil {
             builder.append(s+System.lineSeparator());
         }
     }
+
     
     //now set up the scanner to read from the string we just built
     sc = new Scanner(builder.toString());
@@ -48,17 +57,21 @@ public class ImageUtil {
     System.out.println("Height of image: "+height);
     int maxValue = sc.nextInt();
     System.out.println("Maximum value of a color in this file (usually 255): "+maxValue);
-    
+    Pixel[][] listOfPixels=new Pixel[height][width];
+
     for (int i=0;i<height;i++) {
         for (int j=0;j<width;j++) {
-            int r = sc.nextInt();
-            int g = sc.nextInt();
-            int b = sc.nextInt();
-            System.out.println("Color of pixel ("+j+","+i+"): "+ r+","+g+","+b);
-
+          listOfPixels[i][j].colorComponent.redComponent = sc.nextInt();
+          listOfPixels[i][j].colorComponent.greenComponent = sc.nextInt();
+          listOfPixels[i][j].colorComponent.blueComponent = sc.nextInt();
         }
     }
+    m=new ImageProcessingImpl(width,height,maxValue,listOfPixels);
+    return m;
+
   }
+
+
 
   //demo main
   public static void main(String []args) {
