@@ -1,5 +1,7 @@
 package model;
 
+import controller.ImageUtil;
+
 public class ImageProcessingImpl implements ImageProcessingModel{
   private int width;
   private int height;
@@ -13,10 +15,9 @@ public class ImageProcessingImpl implements ImageProcessingModel{
     this.listOfPixels = listOfPixels;
   }
 
-
   @Override
-  public void loadImage(String imagePath, ImageProcessingModel destImage) {
-
+  public ImageProcessingModel loadImage(String imagePath) {
+    return ImageUtil.readPPM(imagePath);
   }
 
   @Override

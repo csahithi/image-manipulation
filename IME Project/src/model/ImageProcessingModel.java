@@ -2,7 +2,7 @@ package model;
 
 public interface  ImageProcessingModel {
 
-  void loadImage(String imagePath, ImageProcessingModel destImage);
+  ImageProcessingModel loadImage(String imagePath);
   void saveImage(String imagePath);
   void greyscaleRedComponent(ImageProcessingModel destImage);
   void greyscaleGreenComponent(ImageProcessingModel destImage);
