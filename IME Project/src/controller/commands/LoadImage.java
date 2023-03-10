@@ -1,15 +1,20 @@
 package controller.commands;
 
+import controller.CommandController;
 import controller.IController;
 import model.ImageProcessingModel;
 
 public class LoadImage implements IController {
-
   String imagePath;
-  public LoadImage(String imagePath){
-    this.imagePath=imagePath;
+  String destImage;
+
+  public LoadImage(String imagePath, String destImage) {
+    this.imagePath = imagePath;
+    this.destImage = destImage;
   }
 
   @Override
-  public void go(ImageProcessingModel m) {m.loadImage(imagePath);}
+  public void go(ImageProcessingModel m) {
+    CommandController.listOfImages.put(destImage, m.loadImage(imagePath));
+  }
 }

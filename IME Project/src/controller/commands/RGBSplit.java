@@ -1,26 +1,29 @@
 package controller.commands;
 
 
+import controller.CommandController;
 import controller.IController;
 import model.ImageProcessingModel;
 
 public class RGBSplit implements IController {
+  String redImage;
+  String greenImage;
+  String blueImage;
 
-  ImageProcessingModel redImage;
-
-  ImageProcessingModel greenImage;
-  ImageProcessingModel blueImage;
-
-  public RGBSplit(ImageProcessingModel redImage,ImageProcessingModel greenImage,
-                  ImageProcessingModel blueImage){
-    this.blueImage=blueImage;
-    this.greenImage=greenImage;
-    this.redImage=redImage;
+  public RGBSplit(String redImage, String greenImage, String blueImage) {
+    this.redImage = redImage;
+    this.greenImage = greenImage;
+    this.blueImage = blueImage;
   }
-
 
   @Override
   public void go(ImageProcessingModel m) {
-    m.rgbSplit(redImage,greenImage,blueImage);
+    ImageProcessingModel redImageModel = m;
+    ImageProcessingModel greenImageModel = m;
+    ImageProcessingModel blueImageModel = m;
+    m.rgbSplit(redImageModel, greenImageModel, blueImageModel);
+    CommandController.listOfImages.put(redImage, redImageModel);
+    CommandController.listOfImages.put(greenImage, greenImageModel);
+    CommandController.listOfImages.put(blueImage, blueImageModel);
   }
 }
