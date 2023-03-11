@@ -1,14 +1,16 @@
 package model;
 
-import controller.ImageUtil;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
-public class ImageProcessingImpl implements ImageProcessingModel{
+public class ImageProcessingImpl implements ImageProcessingModel {
   private int width;
   private int height;
   private int maxValueOfColor;
   private Pixel[][] listOfPixels;
 
-  public ImageProcessingImpl(int width, int height, int maxValueOfColor, Pixel[][] listOfPixels){
+  public ImageProcessingImpl(int width, int height, int maxValueOfColor, Pixel[][] listOfPixels) {
     this.width = width;
     this.height = height;
     this.maxValueOfColor = maxValueOfColor;
@@ -17,19 +19,19 @@ public class ImageProcessingImpl implements ImageProcessingModel{
 
   @Override
   public ImageProcessingModel loadImage(String imagePath) {
-    return ImageUtil.readPPM(imagePath);
+    return ReadPPMUtil.readPPM(imagePath);
   }
 
   @Override
-  public void saveImage(String imagePath) {
-
+  public void saveImage(String imagePath) throws IOException {
+    CreatePPMUtil.createPPM(imagePath, this);
   }
 
   @Override
   public void greyscaleRedComponent(ImageProcessingModel destImage) {
     Pixel[][] listOfPixelsDestImage = this.listOfPixels;
-    for(int i=0; i<this.height; i++){
-      for(int j=0; j<this.width; j++){
+    for (int i = 0; i < this.height; i++) {
+      for (int j = 0; j < this.width; j++) {
         listOfPixelsDestImage[i][j].colorComponent.greenComponent
                 = listOfPixelsDestImage[i][j].colorComponent.redComponent;
         listOfPixelsDestImage[i][j].colorComponent.blueComponent
@@ -42,8 +44,8 @@ public class ImageProcessingImpl implements ImageProcessingModel{
   @Override
   public void greyscaleGreenComponent(ImageProcessingModel destImage) {
     Pixel[][] listOfPixelsDestImage = this.listOfPixels;
-    for(int i=0; i<this.height; i++){
-      for(int j=0; j<this.width; j++){
+    for (int i = 0; i < this.height; i++) {
+      for (int j = 0; j < this.width; j++) {
         listOfPixelsDestImage[i][j].colorComponent.redComponent
                 = listOfPixelsDestImage[i][j].colorComponent.greenComponent;
         listOfPixelsDestImage[i][j].colorComponent.blueComponent
@@ -56,8 +58,8 @@ public class ImageProcessingImpl implements ImageProcessingModel{
   @Override
   public void greyscaleBlueComponent(ImageProcessingModel destImage) {
     Pixel[][] listOfPixelsDestImage = this.listOfPixels;
-    for(int i=0; i<this.height; i++){
-      for(int j=0; j<this.width; j++){
+    for (int i = 0; i < this.height; i++) {
+      for (int j = 0; j < this.width; j++) {
         listOfPixelsDestImage[i][j].colorComponent.redComponent
                 = listOfPixelsDestImage[i][j].colorComponent.blueComponent;
         listOfPixelsDestImage[i][j].colorComponent.greenComponent
@@ -70,8 +72,8 @@ public class ImageProcessingImpl implements ImageProcessingModel{
   @Override
   public void greyscaleValueComponent(ImageProcessingModel destImage) {
     Pixel[][] listOfPixelsDestImage = this.listOfPixels;
-    for(int i=0; i<this.height; i++){
-      for(int j=0; j<this.width; j++){
+    for (int i = 0; i < this.height; i++) {
+      for (int j = 0; j < this.width; j++) {
         listOfPixelsDestImage[i][j].colorComponent.redComponent
                 = listOfPixelsDestImage[i][j].valueComponent;
         listOfPixelsDestImage[i][j].colorComponent.greenComponent
@@ -86,8 +88,8 @@ public class ImageProcessingImpl implements ImageProcessingModel{
   @Override
   public void greyscaleIntensityComponent(ImageProcessingModel destImage) {
     Pixel[][] listOfPixelsDestImage = this.listOfPixels;
-    for(int i=0; i<this.height; i++){
-      for(int j=0; j<this.width; j++){
+    for (int i = 0; i < this.height; i++) {
+      for (int j = 0; j < this.width; j++) {
 //        listOfPixelsDestImage[i][j].colorComponent.redComponent
 //                = listOfPixelsDestImage[i][j].intensityComponent;
 //        listOfPixelsDestImage[i][j].colorComponent.greenComponent
@@ -102,8 +104,8 @@ public class ImageProcessingImpl implements ImageProcessingModel{
   @Override
   public void greyscaleLumaComponent(ImageProcessingModel destImage) {
     Pixel[][] listOfPixelsDestImage = this.listOfPixels;
-    for(int i=0; i<this.height; i++){
-      for(int j=0; j<this.width; j++){
+    for (int i = 0; i < this.height; i++) {
+      for (int j = 0; j < this.width; j++) {
 //        listOfPixelsDestImage[i][j].colorComponent.redComponent
 //                = listOfPixelsDestImage[i][j].lumaComponent;
 //        listOfPixelsDestImage[i][j].colorComponent.greenComponent
@@ -119,8 +121,8 @@ public class ImageProcessingImpl implements ImageProcessingModel{
   public void horizontalFlip(ImageProcessingModel destImage) {
     Pixel[][] listOfPixelsDestImage = this.listOfPixels;
     Pixel t;
-    for(int i=0; i<this.height; i++){
-      for(int j=0; j<this.width/2; j++){
+    for (int i = 0; i < this.height; i++) {
+      for (int j = 0; j < this.width / 2; j++) {
         t = listOfPixelsDestImage[i][j];
         listOfPixelsDestImage[i][j] = listOfPixelsDestImage[i][this.width - j - 1];
         listOfPixelsDestImage[i][this.width - j - 1] = t;
@@ -133,11 +135,11 @@ public class ImageProcessingImpl implements ImageProcessingModel{
   public void verticalFlip(ImageProcessingModel destImage) {
     Pixel[][] listOfPixelsDestImage = this.listOfPixels;
     Pixel t;
-    for(int i=0; i<this.width; i++){
-      for(int j=0; j<this.height/2; j++){
+    for (int i = 0; i < this.height / 2; i++) {
+      for (int j = 0; j < this.width; j++) {
         t = listOfPixelsDestImage[i][j];
-        listOfPixelsDestImage[i][j] = listOfPixelsDestImage[i][this.height - j - 1];
-        listOfPixelsDestImage[i][this.height - j - 1] = t;
+        listOfPixelsDestImage[i][j] = listOfPixelsDestImage[this.height - i - 1][j];
+        listOfPixelsDestImage[this.height - i - 1][j] = t;
       }
     }
     destImage.setPixels(listOfPixelsDestImage);
@@ -146,11 +148,11 @@ public class ImageProcessingImpl implements ImageProcessingModel{
   @Override
   public void brighten(int increment, ImageProcessingModel destImage) {
     Pixel[][] listOfPixelsDestImage = this.listOfPixels;
-    for(int i=0; i<this.height; i++){
-      for(int j=0; j<this.width; j++){
-        listOfPixelsDestImage[i][j].colorComponent.redComponent+=increment;
-        listOfPixelsDestImage[i][j].colorComponent.greenComponent+=increment;
-        listOfPixelsDestImage[i][j].colorComponent.blueComponent+=increment;
+    for (int i = 0; i < this.height; i++) {
+      for (int j = 0; j < this.width; j++) {
+        listOfPixelsDestImage[i][j].colorComponent.redComponent += increment;
+        listOfPixelsDestImage[i][j].colorComponent.greenComponent += increment;
+        listOfPixelsDestImage[i][j].colorComponent.blueComponent += increment;
       }
     }
     destImage.setPixels(listOfPixelsDestImage);
@@ -162,8 +164,8 @@ public class ImageProcessingImpl implements ImageProcessingModel{
     Pixel[][] listOfPixelsRedDestImage = this.listOfPixels;
     Pixel[][] listOfPixelsGreenDestImage = this.listOfPixels;
     Pixel[][] listOfPixelsBlueDestImage = this.listOfPixels;
-    for(int i=0; i<this.height; i++){
-      for(int j=0; j<this.width; j++){
+    for (int i = 0; i < this.height; i++) {
+      for (int j = 0; j < this.width; j++) {
         listOfPixelsRedDestImage[i][j].colorComponent.greenComponent =
                 listOfPixelsRedDestImage[i][j].colorComponent.redComponent;
         listOfPixelsRedDestImage[i][j].colorComponent.blueComponent
@@ -187,8 +189,8 @@ public class ImageProcessingImpl implements ImageProcessingModel{
   public void rgbCombine(ImageProcessingModel destImage, ImageProcessingModel redImage,
                          ImageProcessingModel greenImage, ImageProcessingModel blueImage) {
     Pixel[][] listOfPixelsDestImage = this.listOfPixels;
-    for(int i=0; i<this.height; i++){
-      for(int j=0; j<this.width; j++){
+    for (int i = 0; i < this.height; i++) {
+      for (int j = 0; j < this.width; j++) {
         listOfPixelsDestImage[i][j].colorComponent.redComponent
                 = redImage.getPixels()[i][j].colorComponent.redComponent;
         listOfPixelsDestImage[i][j].colorComponent.greenComponent
@@ -200,13 +202,48 @@ public class ImageProcessingImpl implements ImageProcessingModel{
     destImage.setPixels(listOfPixelsDestImage);
   }
 
+
   @Override
-  public void setPixels(Pixel[][] listOfPixels){
+  public void setPixels(Pixel[][] listOfPixels) {
     this.listOfPixels = listOfPixels;
   }
 
   @Override
-  public Pixel[][] getPixels(){
+  public Pixel[][] getPixels() {
     return this.listOfPixels;
   }
+
+  @Override
+  public int getWidth() {
+    return width;
+  }
+
+  @Override
+  public int getHeight() {
+    return height;
+  }
+
+  @Override
+  public int getMaxValue() {
+    return maxValueOfColor;
+  }
+
+  @Override
+  public void RunScriptFile(String filePath) {
+    try {
+      BufferedReader reader = new BufferedReader(new FileReader(filePath)); // create a new reader to read the file
+      String line = reader.readLine();
+      while (line != null) {
+        // execute each line of the script
+        System.out.println("Executing line: " + line);
+        // replace this line with your own code to execute each line of the script
+        line = reader.readLine();
+      }
+      reader.close(); // close the reader after finishing the script
+    } catch (Exception e) {
+      System.err.println("Error while running script file: " + e.getMessage());
+    }
+  }
+
+
 }

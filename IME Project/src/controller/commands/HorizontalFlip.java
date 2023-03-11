@@ -7,8 +7,8 @@ import model.ImageProcessingModel;
 public class HorizontalFlip implements IController {
   String destImage;
 
-  public HorizontalFlip(String destImage){
-    this.destImage=destImage;
+  public HorizontalFlip(String destImage) {
+    this.destImage = destImage;
   }
 
   @Override

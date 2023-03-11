@@ -1,9 +1,11 @@
 package model;
 
+import java.io.IOException;
+
 public interface  ImageProcessingModel {
 
   ImageProcessingModel loadImage(String imagePath);
-  void saveImage(String imagePath);
+  void saveImage(String imagePath) throws IOException;
   void greyscaleRedComponent(ImageProcessingModel destImage);
   void greyscaleGreenComponent(ImageProcessingModel destImage);
   void greyscaleBlueComponent(ImageProcessingModel destImage);
@@ -18,5 +20,12 @@ public interface  ImageProcessingModel {
   void rgbCombine(ImageProcessingModel destImage, ImageProcessingModel redImage,
                   ImageProcessingModel greenImage,ImageProcessingModel blueImage);
   void setPixels(Pixel[][] listOfPixels);
+
+
   Pixel[][] getPixels();
+
+  int getWidth();
+  int getHeight();
+  int getMaxValue();
+  void RunScriptFile(String filePath);
 }

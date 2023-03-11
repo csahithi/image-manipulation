@@ -1,19 +1,15 @@
-package controller;
+package model;
 
-import java.util.Scanner;
-import java.io.FileNotFoundException;
 import java.io.FileInputStream;
-
-import model.ImageProcessingImpl;
-import model.ImageProcessingModel;
-import model.Pixel;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 
 /**
  * This class contains utility methods to read a PPM image from file and simply print its contents. Feel free to change this method
  * as required.
  */
-public class ImageUtil {
+public class ReadPPMUtil {
 
   /**
    * Read an image file in the PPM format and print the colors.
@@ -51,17 +47,16 @@ public class ImageUtil {
       System.out.println("Invalid PPM file: plain RAW file should begin with P3");
     }
     int width = sc.nextInt();
-    System.out.println("Width of image: " + width);
+//    System.out.println("Width of image: " + width);
     int height = sc.nextInt();
-    System.out.println("Height of image: " + height);
+//    System.out.println("Height of image: " + height);
     int maxValue = sc.nextInt();
-    System.out.println("Maximum value of a color in this file (usually 255): " + maxValue);
+//    System.out.println("Maximum value of a color in this file (usually 255): " + maxValue);
     listOfPixels = new Pixel[height][width];
     for (int i = 0; i < height; i++) {
       for (int j = 0; j < width; j++) {
-        listOfPixels[i][j].colorComponent.redComponent = sc.nextInt();
-        listOfPixels[i][j].colorComponent.greenComponent = sc.nextInt();
-        listOfPixels[i][j].colorComponent.blueComponent = sc.nextInt();
+//        load images/koala.ppm k
+        listOfPixels[i][j]= new Pixel(j,i,sc.nextInt(),sc.nextInt(),sc.nextInt());
       }
     }
     m = new ImageProcessingImpl(width, height, maxValue, listOfPixels);
@@ -76,10 +71,10 @@ public class ImageUtil {
 //    if (args.length > 0) {
 //      filename = args[0];
 //    } else {
-//      filename = "Koala.ppm";
+//      filename = "koala.ppm";
 //    }
 //
-//    ImageUtil.readPPM(filename);
+//    ReadPPMUtil.readPPM(filename);
 //  }
 }
 
