@@ -1,7 +1,5 @@
 package model;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 
 public class ImageProcessingImpl implements ImageProcessingModel {
@@ -90,12 +88,12 @@ public class ImageProcessingImpl implements ImageProcessingModel {
     Pixel[][] listOfPixelsDestImage = this.listOfPixels;
     for (int i = 0; i < this.height; i++) {
       for (int j = 0; j < this.width; j++) {
-//        listOfPixelsDestImage[i][j].colorComponent.redComponent
-//                = listOfPixelsDestImage[i][j].intensityComponent;
-//        listOfPixelsDestImage[i][j].colorComponent.greenComponent
-//                = listOfPixelsDestImage[i][j].intensityComponent;
-//        listOfPixelsDestImage[i][j].colorComponent.blueComponent
-//                = listOfPixelsDestImage[i][j].intensityComponent;
+        listOfPixelsDestImage[i][j].colorComponent.redComponent
+                = (int) listOfPixelsDestImage[i][j].intensityComponent;
+        listOfPixelsDestImage[i][j].colorComponent.greenComponent
+                = (int) listOfPixelsDestImage[i][j].intensityComponent;
+        listOfPixelsDestImage[i][j].colorComponent.blueComponent
+                = (int) listOfPixelsDestImage[i][j].intensityComponent;
       }
     }
     destImage.setPixels(listOfPixelsDestImage);
@@ -106,12 +104,12 @@ public class ImageProcessingImpl implements ImageProcessingModel {
     Pixel[][] listOfPixelsDestImage = this.listOfPixels;
     for (int i = 0; i < this.height; i++) {
       for (int j = 0; j < this.width; j++) {
-//        listOfPixelsDestImage[i][j].colorComponent.redComponent
-//                = listOfPixelsDestImage[i][j].lumaComponent;
-//        listOfPixelsDestImage[i][j].colorComponent.greenComponent
-//                = listOfPixelsDestImage[i][j].lumaComponent;
-//        listOfPixelsDestImage[i][j].colorComponent.blueComponent
-//                = listOfPixelsDestImage[i][j].lumaComponent;
+        listOfPixelsDestImage[i][j].colorComponent.redComponent
+                = (int) listOfPixelsDestImage[i][j].lumaComponent;
+        listOfPixelsDestImage[i][j].colorComponent.greenComponent
+                = (int) listOfPixelsDestImage[i][j].lumaComponent;
+        listOfPixelsDestImage[i][j].colorComponent.blueComponent
+                = (int) listOfPixelsDestImage[i][j].lumaComponent;
       }
     }
     destImage.setPixels(listOfPixelsDestImage);
@@ -150,9 +148,21 @@ public class ImageProcessingImpl implements ImageProcessingModel {
     Pixel[][] listOfPixelsDestImage = this.listOfPixels;
     for (int i = 0; i < this.height; i++) {
       for (int j = 0; j < this.width; j++) {
-        listOfPixelsDestImage[i][j].colorComponent.redComponent += increment;
-        listOfPixelsDestImage[i][j].colorComponent.greenComponent += increment;
-        listOfPixelsDestImage[i][j].colorComponent.blueComponent += increment;
+        if (listOfPixelsDestImage[i][j].colorComponent.redComponent + increment > maxValueOfColor) {
+          listOfPixelsDestImage[i][j].colorComponent.redComponent = maxValueOfColor;
+        } else {
+          listOfPixelsDestImage[i][j].colorComponent.redComponent += increment;
+        }
+        if (listOfPixelsDestImage[i][j].colorComponent.greenComponent + increment > maxValueOfColor) {
+          listOfPixelsDestImage[i][j].colorComponent.greenComponent = maxValueOfColor;
+        } else {
+          listOfPixelsDestImage[i][j].colorComponent.greenComponent += increment;
+        }
+        if (listOfPixelsDestImage[i][j].colorComponent.blueComponent + increment > maxValueOfColor) {
+          listOfPixelsDestImage[i][j].colorComponent.blueComponent = maxValueOfColor;
+        } else {
+          listOfPixelsDestImage[i][j].colorComponent.blueComponent += increment;
+        }
       }
     }
     destImage.setPixels(listOfPixelsDestImage);
@@ -227,23 +237,4 @@ public class ImageProcessingImpl implements ImageProcessingModel {
   public int getMaxValue() {
     return maxValueOfColor;
   }
-
-  @Override
-  public void RunScriptFile(String filePath) {
-    try {
-      BufferedReader reader = new BufferedReader(new FileReader(filePath)); // create a new reader to read the file
-      String line = reader.readLine();
-      while (line != null) {
-        // execute each line of the script
-        System.out.println("Executing line: " + line);
-        // replace this line with your own code to execute each line of the script
-        line = reader.readLine();
-      }
-      reader.close(); // close the reader after finishing the script
-    } catch (Exception e) {
-      System.err.println("Error while running script file: " + e.getMessage());
-    }
-  }
-
-
 }
