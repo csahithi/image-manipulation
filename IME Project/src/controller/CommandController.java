@@ -30,9 +30,12 @@ public class CommandController {
     while (scan.hasNext()) {
       String in = scan.nextLine();
       inputArray = in.split(" ");
-      inputArray = Arrays.stream(inputArray).filter(Predicate.not(String::isEmpty))
+      inputArray = Arrays.stream(inputArray)
+              .filter(Predicate.not(String::isEmpty))
               .toArray(String[]::new);
-      readCommands(inputArray, in);
+      if (inputArray.length > 0) {
+        readCommands(inputArray, in);
+      }
     }
   }
 
@@ -98,18 +101,17 @@ public class CommandController {
               break;
             default:
               System.out.println(String.format("Unknown command %s", command));
-              cmd = null;
               break;
           }
         } catch (NumberFormatException e) {
-          throw new UnsupportedOperationException();
+          System.out.println(String.format("Unknown command %s", command));
         }
       }
     }
     if (cmd != null && m != null) {
       cmd.go(m);
     } else {
-      throw new UnsupportedOperationException();
+      System.out.println(String.format("Unknown command %s", command));
     }
   }
 }

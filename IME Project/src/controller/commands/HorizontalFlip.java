@@ -13,8 +13,7 @@ public class HorizontalFlip implements IController {
 
   @Override
   public void go(ImageProcessingModel m) {
-    ImageProcessingModel destImageModel = m;
-    m.horizontalFlip(destImageModel);
-    CommandController.listOfImages.put(destImage, destImageModel);
+    ImageProcessingModel resultImage = m.horizontalFlip();
+    CommandController.listOfImages.put(destImage, resultImage);
   }
 }

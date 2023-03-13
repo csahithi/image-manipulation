@@ -18,12 +18,9 @@ public class RGBSplit implements IController {
 
   @Override
   public void go(ImageProcessingModel m) {
-    ImageProcessingModel redImageModel = m;
-    ImageProcessingModel greenImageModel = m;
-    ImageProcessingModel blueImageModel = m;
-    m.rgbSplit(redImageModel, greenImageModel, blueImageModel);
-    CommandController.listOfImages.put(redImage, redImageModel);
-    CommandController.listOfImages.put(greenImage, greenImageModel);
-    CommandController.listOfImages.put(blueImage, blueImageModel);
+    ImageProcessingModel[] rgbSplitModels=m.rgbSplit();
+    CommandController.listOfImages.put(redImage, rgbSplitModels[0]);
+    CommandController.listOfImages.put(greenImage, rgbSplitModels[1]);
+    CommandController.listOfImages.put(blueImage, rgbSplitModels[2]);
   }
 }

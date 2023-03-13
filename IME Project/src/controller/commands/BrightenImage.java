@@ -15,8 +15,7 @@ public class BrightenImage implements IController {
 
   @Override
   public void go(ImageProcessingModel m) {
-    ImageProcessingModel destImageModel = m;
-    m.brighten(increment, destImageModel);
-    CommandController.listOfImages.put(destImage, destImageModel);
+    ImageProcessingModel resultImage = m.brighten(increment);
+    CommandController.listOfImages.put(destImage, resultImage);
   }
 }

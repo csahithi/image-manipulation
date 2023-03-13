@@ -7,31 +7,28 @@ public interface ImageProcessingModel {
 
   void saveImage(String imagePath) throws IOException;
 
-  void greyscaleRedComponent(ImageProcessingModel destImage);
+  ImageProcessingModel greyscaleRedComponent();
 
-  void greyscaleGreenComponent(ImageProcessingModel destImage);
+  ImageProcessingModel greyscaleGreenComponent();
 
-  void greyscaleBlueComponent(ImageProcessingModel destImage);
+  ImageProcessingModel greyscaleBlueComponent();
 
-  void greyscaleValueComponent(ImageProcessingModel destImage);
+  ImageProcessingModel greyscaleValueComponent();
 
-  void greyscaleIntensityComponent(ImageProcessingModel destImage);
+  ImageProcessingModel greyscaleIntensityComponent();
 
-  void greyscaleLumaComponent(ImageProcessingModel destImage);
+  ImageProcessingModel greyscaleLumaComponent();
 
-  void horizontalFlip(ImageProcessingModel destImage);
+  ImageProcessingModel horizontalFlip();
 
-  void verticalFlip(ImageProcessingModel destImage);
+  ImageProcessingModel verticalFlip();
 
-  void brighten(int increment, ImageProcessingModel destImage);
+  ImageProcessingModel brighten(int increment);
 
-  void rgbSplit(ImageProcessingModel redDestImage, ImageProcessingModel greenDestImage,
-                ImageProcessingModel blueDestImage);
+  ImageProcessingModel[] rgbSplit();
 
-  void rgbCombine(ImageProcessingModel destImage, ImageProcessingModel redImage,
-                  ImageProcessingModel greenImage, ImageProcessingModel blueImage);
-
-  void setPixels(Pixel[][] listOfPixels);
+  ImageProcessingModel rgbCombine(ImageProcessingModel redImage,
+                                  ImageProcessingModel greenImage, ImageProcessingModel blueImage);
 
   Pixel[][] getPixels();
 

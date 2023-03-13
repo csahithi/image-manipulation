@@ -21,8 +21,7 @@ public class RGBCombine implements IController {
 
   @Override
   public void go(ImageProcessingModel m) {
-    ImageProcessingModel destImageModel = m;
-    m.rgbCombine(destImageModel, redImage, greenImage, blueImage);
-    CommandController.listOfImages.put(destImage, destImageModel);
+    ImageProcessingModel resultImage = m.rgbCombine(redImage, greenImage, blueImage);
+    CommandController.listOfImages.put(destImage, resultImage);
   }
 }

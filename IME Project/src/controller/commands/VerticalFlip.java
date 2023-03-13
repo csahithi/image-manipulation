@@ -14,9 +14,8 @@ public class VerticalFlip implements IController {
 
   @Override
   public void go(ImageProcessingModel m) {
-    ImageProcessingModel destImageModel = m;
-    m.verticalFlip(destImageModel);
-    CommandController.listOfImages.put(destImage, destImageModel);
+    ImageProcessingModel resultImage = m.verticalFlip();
+    CommandController.listOfImages.put(destImage, resultImage);
   }
 
 }

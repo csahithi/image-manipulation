@@ -15,21 +15,30 @@ public class GreyScale implements IController {
 
   @Override
   public void go(ImageProcessingModel m) {
-    ImageProcessingModel destImageModel = m;
+    ImageProcessingModel resultImage = null;
     switch (factor) {
       case "red-component":
-        m.greyscaleRedComponent(destImageModel);
+        resultImage = m.greyscaleRedComponent();
+        break;
       case "green-component":
-        m.greyscaleGreenComponent(destImageModel);
+        resultImage = m.greyscaleGreenComponent();
+        break;
       case "blue-component":
-        m.greyscaleBlueComponent(destImageModel);
+        resultImage = m.greyscaleBlueComponent();
+        break;
       case "value-component":
-        m.greyscaleValueComponent(destImageModel);
+        resultImage = m.greyscaleValueComponent();
+        break;
       case "intensity-component":
-        m.greyscaleIntensityComponent(destImageModel);
+        resultImage = m.greyscaleIntensityComponent();
+        break;
       case "luma-component":
-        m.greyscaleLumaComponent(destImageModel);
+        resultImage = m.greyscaleLumaComponent();
+        break;
+      default:
+        System.out.println(String.format("Unknown GreyScale Component %s", factor));
+        return;
     }
-    CommandController.listOfImages.put(destImage, destImageModel);
+    CommandController.listOfImages.put(destImage, resultImage);
   }
 }
