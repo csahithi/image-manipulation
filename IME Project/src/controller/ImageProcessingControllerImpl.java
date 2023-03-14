@@ -120,7 +120,10 @@ public class ImageProcessingControllerImpl implements ImageProcessingController 
       }
     }
     if (cmd != null) {
-      cmd.go(model);
+      Image m = cmd.go(model);
+      if(m == null){
+        System.out.println(String.format("Invalid command %s", command));
+      }
     } else {
       System.out.println(String.format("Unknown command %s", command));
     }
