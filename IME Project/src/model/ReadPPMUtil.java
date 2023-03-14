@@ -16,9 +16,9 @@ public class ReadPPMUtil {
    *
    * @param filename the path of the file.
    */
-  public static ImageProcessingModel readPPM(String filename) {
+  public static Image readPPM(String filename) {
     Scanner sc;
-    ImageProcessingModel m;
+    Image m;
     Pixel[][] listOfPixels;
 
     try {
@@ -52,7 +52,7 @@ public class ReadPPMUtil {
         listOfPixels[i][j]= new Pixel(j,i,sc.nextInt(),sc.nextInt(),sc.nextInt());
       }
     }
-    m = new ImageProcessingImpl(width, height, maxValue, listOfPixels);
+    m = new Image(width, height, maxValue, listOfPixels);
     return m;
   }
 }

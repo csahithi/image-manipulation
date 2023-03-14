@@ -5,7 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class CreatePPMUtil {
-  public static void createPPM(String filepath, ImageProcessingModel m) {
+  public static void createPPM(String filepath, Image m) {
     try {
       File myObj = new File(filepath);
       if (myObj.createNewFile()) {
@@ -21,7 +21,7 @@ public class CreatePPMUtil {
       FileWriter myWriter = new FileWriter(filepath, false);
       myWriter.write("P3\n" +
               "# Created by GIMP version 2.10.20 PNM plug-in\n");
-      myWriter.write(m.getWidth() + " " + m.getHeight() + "\n" + m.getMaxValue() + "\n");
+      myWriter.write(m.getWidth() + " " + m.getHeight() + "\n" + m.getMaxValueOfColor() + "\n");
       Pixel[][] listOfPixels = m.getPixels();
       for (int i = 0; i < m.getHeight(); i++) {
         for (int j = 0; j < m.getWidth(); j++) {

@@ -2,18 +2,20 @@ package controller.commands;
 
 import java.io.IOException;
 
-import controller.IController;
+import model.Image;
 import model.ImageProcessingModel;
 
-public class SaveImage implements IController {
+public class SaveImage implements ImageCommandController {
   String imagePath;
+  String imageName;
 
-  public SaveImage(String imagePath) {
+  public SaveImage(String imagePath, String imageName) {
     this.imagePath = imagePath;
+    this.imageName = imageName;
   }
 
   @Override
-  public void go(ImageProcessingModel m) throws IOException {
-    m.saveImage(imagePath);
+  public Image go(ImageProcessingModel m) throws IOException {
+    return m.saveImage(imagePath, imageName);
   }
 }

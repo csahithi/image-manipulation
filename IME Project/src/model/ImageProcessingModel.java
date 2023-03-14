@@ -3,38 +3,31 @@ package model;
 import java.io.IOException;
 
 public interface ImageProcessingModel {
-  ImageProcessingModel loadImage(String imagePath);
+  Image loadImage(String imagePath, String imageName);
 
-  void saveImage(String imagePath) throws IOException;
+  Image saveImage(String imagePath, String imageName) throws IOException;
 
-  ImageProcessingModel greyscaleRedComponent();
+  Image greyscale(String component, String sourceImageName, String destImageName);
 
-  ImageProcessingModel greyscaleGreenComponent();
+//  Image greyscaleRedComponent(String sourceImageName, String destImageName);
+//
+//  Image greyscaleGreenComponent(String sourceImageName, String destImageName);
+//
+//  Image greyscaleBlueComponent(String sourceImageName, String destImageName);
+//
+//  Image greyscaleValueComponent(String sourceImageName, String destImageName);
+//
+//  Image greyscaleIntensityComponent(String sourceImageName, String destImageName);
+//
+//  Image greyscaleLumaComponent(String sourceImageName, String destImageName);
 
-  ImageProcessingModel greyscaleBlueComponent();
+  Image horizontalFlip(String sourceImageName, String destImageName);
 
-  ImageProcessingModel greyscaleValueComponent();
+  Image verticalFlip(String sourceImageName, String destImageName);
 
-  ImageProcessingModel greyscaleIntensityComponent();
+  Image brighten(int increment, String sourceImageName, String destImageName);
 
-  ImageProcessingModel greyscaleLumaComponent();
+  Image rgbSplit(String sourceImageName, String redImageName, String greenImageName, String blueImageName);
 
-  ImageProcessingModel horizontalFlip();
-
-  ImageProcessingModel verticalFlip();
-
-  ImageProcessingModel brighten(int increment);
-
-  ImageProcessingModel[] rgbSplit();
-
-  ImageProcessingModel rgbCombine(ImageProcessingModel redImage,
-                                  ImageProcessingModel greenImage, ImageProcessingModel blueImage);
-
-  Pixel[][] getPixels();
-
-  int getWidth();
-
-  int getHeight();
-
-  int getMaxValue();
+  Image rgbCombine(String destImageName, String redImageName, String greenImageName, String blueImageName);
 }

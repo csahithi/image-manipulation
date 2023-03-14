@@ -1,21 +1,23 @@
 package controller.commands;
 
-import controller.CommandController;
-import controller.IController;
+import controller.ImageProcessingControllerImpl;
+import controller.ImageProcessingController;
+import model.Image;
 import model.ImageProcessingModel;
 
-public class BrightenImage implements IController {
+public class BrightenImage implements ImageCommandController {
   int increment;
-  String destImage;
+  String sourceImageName;
+  String destImageName;
 
-  public BrightenImage(int increment, String destImage) {
-    this.destImage = destImage;
+  public BrightenImage(int increment, String sourceImageName, String destImageName) {
     this.increment = increment;
+    this.sourceImageName = sourceImageName;
+    this.destImageName = destImageName;
   }
 
   @Override
-  public void go(ImageProcessingModel m) {
-    ImageProcessingModel resultImage = m.brighten(increment);
-    CommandController.listOfImages.put(destImage, resultImage);
+  public Image go(ImageProcessingModel m) {
+    return m.brighten(increment, sourceImageName, destImageName);
   }
 }
