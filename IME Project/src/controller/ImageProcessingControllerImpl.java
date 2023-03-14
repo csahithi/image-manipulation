@@ -108,13 +108,15 @@ public class ImageProcessingControllerImpl implements ImageProcessingController 
               break;
             default:
               outStream.println(String.format("Unknown command %s", command));
-              break;
+              return;
           }
         } catch (NumberFormatException e) {
           outStream.println(String.format("Unknown command %s", command));
+          return;
         }
       } else {
         outStream.println(String.format("Unknown command %s", command));
+        return;
       }
     }
     if (cmd != null) {
