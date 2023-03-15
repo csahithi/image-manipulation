@@ -1,9 +1,9 @@
 import java.io.IOException;
 
-import controller.ImageProcessingControllerImpl;
 import controller.ImageProcessingController;
-import model.ImageProcessingModelImpl;
+import controller.ImageProcessingControllerImpl;
 import model.ImageProcessingModel;
+import model.ImageProcessingModelImpl;
 
 public class ImageManipulator {
   public static void main(String[] args) throws IOException {

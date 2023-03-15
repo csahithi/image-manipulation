@@ -9,7 +9,7 @@ public class ImageProcessingModelImpl implements ImageProcessingModel {
   @Override
   public Image loadImage(String imagePath, String imageName) {
     Image image = ReadPPMUtil.readPPM(imagePath);
-    if(image == null){
+    if (image == null) {
       return null;
     }
     listOfImages.put(imageName, image);
@@ -19,7 +19,7 @@ public class ImageProcessingModelImpl implements ImageProcessingModel {
   @Override
   public Image saveImage(String imagePath, String imageName) {
     Image image = listOfImages.getOrDefault(imageName, null);
-    if(image == null){
+    if (image == null) {
       return null;
     }
     CreatePPMUtil.createPPM(imagePath, image);
@@ -29,7 +29,7 @@ public class ImageProcessingModelImpl implements ImageProcessingModel {
   @Override
   public Image greyscale(String component, String sourceImageName, String destImageName) {
     Image sourceImage = listOfImages.getOrDefault(sourceImageName, null);
-    if(sourceImage==null){
+    if (sourceImage == null) {
       return null;
     }
     Image resultImage = null;
@@ -60,12 +60,12 @@ public class ImageProcessingModelImpl implements ImageProcessingModel {
   @Override
   public Image horizontalFlip(String sourceImageName, String destImageName) {
     Image image = listOfImages.getOrDefault(sourceImageName, null);
-    if(image == null){
+    if (image == null) {
       return null;
     }
     Pixel[][] listOfPixelsDestImage = new Pixel[image.getHeight()][image.getWidth()];
     for (int i = 0; i < image.getHeight(); i++) {
-      for (int j = 0; j < image.getWidth() / 2; j++) {
+      for (int j = 0; j <= image.getWidth() / 2; j++) {
         listOfPixelsDestImage[i][j] = new Pixel(i, j, 0, 0
                 , 0);
         listOfPixelsDestImage[i][j] = image.getPixels()[i][image.getWidth() - j - 1];
@@ -81,11 +81,11 @@ public class ImageProcessingModelImpl implements ImageProcessingModel {
   @Override
   public Image verticalFlip(String sourceImageName, String destImageName) {
     Image image = listOfImages.getOrDefault(sourceImageName, null);
-    if(image == null){
+    if (image == null) {
       return null;
     }
     Pixel[][] listOfPixelsDestImage = new Pixel[image.getHeight()][image.getWidth()];
-    for (int i = 0; i < image.getHeight() / 2; i++) {
+    for (int i = 0; i <= image.getHeight() / 2; i++) {
       for (int j = 0; j < image.getWidth(); j++) {
         listOfPixelsDestImage[i][j] = new Pixel(i, j, 0, 0
                 , 0);
@@ -102,7 +102,7 @@ public class ImageProcessingModelImpl implements ImageProcessingModel {
   @Override
   public Image brighten(int increment, String sourceImageName, String destImageName) {
     Image image = listOfImages.getOrDefault(sourceImageName, null);
-    if(image == null){
+    if (image == null) {
       return null;
     }
     Pixel[][] listOfPixelsDestImage = new Pixel[image.getHeight()][image.getWidth()];
@@ -110,12 +110,12 @@ public class ImageProcessingModelImpl implements ImageProcessingModel {
       for (int j = 0; j < image.getWidth(); j++) {
         listOfPixelsDestImage[i][j] = new Pixel(i, j, 0, 0
                 , 0);
-        listOfPixelsDestImage[i][j].colorComponent.redComponent = Math.min(image.getPixels()[i][j]
-                .colorComponent.redComponent + increment, image.getMaxValueOfColor());
-        listOfPixelsDestImage[i][j].colorComponent.greenComponent = Math.min(image.getPixels()[i][j]
-                .colorComponent.greenComponent + increment, image.getMaxValueOfColor());
-        listOfPixelsDestImage[i][j].colorComponent.blueComponent = Math.min(image.getPixels()[i][j]
-                .colorComponent.blueComponent + increment, image.getMaxValueOfColor());
+        listOfPixelsDestImage[i][j].colorComponent.redComponent = Math.max(0, (Math.min(image.getPixels()[i][j]
+                .colorComponent.redComponent + increment, 255)));
+        listOfPixelsDestImage[i][j].colorComponent.greenComponent = Math.max(0, (Math.min(image.getPixels()[i][j]
+                .colorComponent.greenComponent + increment, 255)));
+        listOfPixelsDestImage[i][j].colorComponent.blueComponent = Math.max(0, (Math.min(image.getPixels()[i][j]
+                .colorComponent.blueComponent + increment, 255)));
       }
     }
     Image destImage = new Image(image.getWidth(), image.getHeight(), image.getMaxValueOfColor(),
@@ -126,9 +126,9 @@ public class ImageProcessingModelImpl implements ImageProcessingModel {
 
   @Override
   public Image rgbSplit(String sourceImageName, String redImageName, String greenImageName,
-                          String blueImageName) {
+                        String blueImageName) {
     Image image = listOfImages.getOrDefault(sourceImageName, null);
-    if(image == null){
+    if (image == null) {
       return null;
     }
 //    Pixel[][] listOfPixelsRedDestImage = new Pixel[image.getHeight()][image.getWidth()];
@@ -177,7 +177,7 @@ public class ImageProcessingModelImpl implements ImageProcessingModel {
     Image redImage = listOfImages.getOrDefault(redImageName, null);
     Image greenImage = listOfImages.getOrDefault(greenImageName, null);
     Image blueImage = listOfImages.getOrDefault(blueImageName, null);
-    if(redImage==null || greenImage==null || blueImage==null){
+    if (redImage == null || greenImage == null || blueImage == null) {
       return null;
     }
     Pixel[][] listOfPixelsDestImage = new Pixel[redImage.getHeight()][redImage.getWidth()];

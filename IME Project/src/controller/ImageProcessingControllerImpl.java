@@ -7,10 +7,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
-import java.util.function.Function;
 import java.util.function.Predicate;
 
 import controller.commands.BrightenImage;
@@ -24,12 +21,11 @@ import controller.commands.SaveImage;
 import controller.commands.VerticalFlip;
 import model.Image;
 import model.ImageProcessingModel;
-import model.Pixel;
 
 public class ImageProcessingControllerImpl implements ImageProcessingController {
-  private ImageProcessingModel model;
-  private InputStream in;
-  private OutputStream out;
+  private final ImageProcessingModel model;
+  private final InputStream in;
+  private final OutputStream out;
 
   public ImageProcessingControllerImpl(ImageProcessingModel model, InputStream in, OutputStream out) {
     this.model = model;
@@ -65,7 +61,7 @@ public class ImageProcessingControllerImpl implements ImageProcessingController 
           switch (inputArray[0]) {
             case "load":
               cmd = new LoadImage(inputArray[1], inputArray[2]);
-              //model.loadImage(inputArray[1], inputArray[2]);
+              //model.loadImage(inputArray[1], inputlArray[2]);
               //m = new Image(0, 0, 0, new Pixel[0][0]);
               break;
             case "save":

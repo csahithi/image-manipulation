@@ -13,7 +13,6 @@ public class Pixel {
   }
 
 
-
   public int getValueComponent() {
     return Math.max(this.colorComponent.redComponent, Math.max(this.colorComponent.greenComponent, this.colorComponent.blueComponent));
   }
@@ -23,6 +22,8 @@ public class Pixel {
   }
 
   public int getLumaComponent() {
-    return (int) ((0.2126 * this.colorComponent.redComponent) + (0.7152 * this.colorComponent.greenComponent) + (0.0722 * this.colorComponent.blueComponent));
+    return (int) Math.round((0.2126 * this.colorComponent.redComponent)
+            + (0.7152 * this.colorComponent.greenComponent)
+            + (0.0722 * this.colorComponent.blueComponent));
   }
 }

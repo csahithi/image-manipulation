@@ -1,0 +1,25 @@
+load res/dog.ppm d
+vertical-flip d dv
+save res/dv.ppm dv
+horizontal-flip d dog-horizontal
+save res/dog-horizontal.ppm dog-horizontal
+save res/dog-vertical.ppm dv
+brighten 50 d dog-brighter-by-50
+save res/dog-brighter-by-50.ppm dog-brighter-by-50
+save res/dog-brighter-by-50.ppm dog-brighter-by-50
+greyscale value-component d dvalue
+save rex/dog-value-greyscale.ppm dvalue
+save res/dog-value-greyscale.ppm dvalue
+greyscale red-component d dred
+greyscale green-component d dgreen
+greyscale blue-component d dblue
+greyscale intensity-component d dintensity
+greyscale luma-component d dluma
+save res/dog-luma-greyscale.ppm dluma
+save res/dog-intensity-greyscale.ppm dintensity
+save res/dog-red-greyscale.ppm dred
+save res/dog-green-greyscale.ppm dgreen
+save res/dog-blue-greyscale.ppm dblue
+save res/dog-blue-greyscale.ppm dblue
+rgb-split d dred dgreen dblue
+rgb-combine d1 dred dgreen dblue

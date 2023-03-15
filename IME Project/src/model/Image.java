@@ -1,4 +1,5 @@
 package model;
+
 public class Image {
   private final int width;
   private final int height;

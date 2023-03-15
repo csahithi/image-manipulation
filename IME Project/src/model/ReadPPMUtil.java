@@ -49,7 +49,7 @@ public class ReadPPMUtil {
     listOfPixels = new Pixel[height][width];
     for (int i = 0; i < height; i++) {
       for (int j = 0; j < width; j++) {
-        listOfPixels[i][j]= new Pixel(j,i,sc.nextInt(),sc.nextInt(),sc.nextInt());
+        listOfPixels[i][j] = new Pixel(j, i, sc.nextInt(), sc.nextInt(), sc.nextInt());
       }
     }
     m = new Image(width, height, maxValue, listOfPixels);

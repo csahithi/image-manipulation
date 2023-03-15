@@ -25,6 +25,9 @@ public class CreatePPMUtil {
       Pixel[][] listOfPixels = m.getPixels();
       for (int i = 0; i < m.getHeight(); i++) {
         for (int j = 0; j < m.getWidth(); j++) {
+          if (listOfPixels[i][j] == null || listOfPixels[i][j].colorComponent == null) {
+            return;
+          }
           myWriter.write(listOfPixels[i][j].colorComponent.redComponent + "\n"
                   + listOfPixels[i][j].colorComponent.greenComponent + "\n"
                   + listOfPixels[i][j].colorComponent.blueComponent + "\n");
