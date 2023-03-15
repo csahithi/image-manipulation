@@ -1,13 +1,11 @@
 package controller.commands;
 
-import java.io.IOException;
-
 import model.Image;
 import model.ImageProcessingModel;
 
 /**
- * This command class saves the image with the given name to the specified path which should include the
- * name of the file.
+ * This command class saves the image with the given name to the specified path
+ * which should include the name of the file.
  */
 public class SaveImage implements ImageCommandController {
   String imagePath;
@@ -25,7 +23,7 @@ public class SaveImage implements ImageCommandController {
   }
 
   @Override
-  public Image execute(ImageProcessingModel m) throws IOException {
+  public Image execute(ImageProcessingModel m) {
     return m.saveImage(imagePath, imageName);
   }
 }

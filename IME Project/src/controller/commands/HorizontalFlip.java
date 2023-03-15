@@ -4,8 +4,8 @@ import model.Image;
 import model.ImageProcessingModel;
 
 /**
- * This command class flips image horizontally to create a new image, referred to henceforth by the given
- * destination name.
+ * This command class flips image horizontally to create a new image,
+ * referred to henceforth by the given destination name.
  */
 public class HorizontalFlip implements ImageCommandController {
   String sourceImageName;

@@ -8,7 +8,6 @@ public class Pixel {
   public int column;
   public Color colorComponent;
 
-
   /**
    * Constructor to initialize values of pixel properties/attributes.
    *
@@ -24,9 +23,8 @@ public class Pixel {
     this.colorComponent = new Color(redComponent, greenComponent, blueComponent);
   }
 
-
   /**
-   * This method returns the value component of RGB-color
+   * Returns the value component of Pixel.
    *
    * @return integer value of value-component.
    */
@@ -36,7 +34,7 @@ public class Pixel {
   }
 
   /**
-   * This method returns the Intensity component of RGB-color
+   * Returns the Intensity component of Pixel.
    *
    * @return integer value of Intensity-component.
    */
@@ -46,7 +44,7 @@ public class Pixel {
   }
 
   /**
-   * This method returns the Luma component of RGB-color
+   * Returns the Luma component of Pixel.
    *
    * @return integer value of Luma-component.
    */

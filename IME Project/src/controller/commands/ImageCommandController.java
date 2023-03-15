@@ -1,13 +1,18 @@
 package controller.commands;
 
-import java.io.IOException;
-
 import model.Image;
 import model.ImageProcessingModel;
 
 /**
- *Command interface for the command classes.
+ * Command interface for the classes representing user commands.
  */
 public interface ImageCommandController {
-  Image execute(ImageProcessingModel m) throws IOException;
+
+  /**
+   * Executes the operation which represents the command entered.
+   *
+   * @param m the model of the program
+   * @return the image after processing
+   */
+  Image execute(ImageProcessingModel m);
 }

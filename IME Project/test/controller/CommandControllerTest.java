@@ -28,10 +28,9 @@ public class CommandControllerTest {
   public class MockModel implements ImageProcessingModel {
     private StringBuilder sb;
     private Image image = new Image(0, 0, 0, new Pixel[0][0]);
-    ;
 
     /**
-     * Constructs Mockmodel with the given Slog data to be logged.
+     * Constructs Mockmodel with the log data to be set.
      *
      * @param sb input data.
      */
@@ -46,7 +45,7 @@ public class CommandControllerTest {
     }
 
     @Override
-    public Image saveImage(String imagePath, String imageName) throws IOException {
+    public Image saveImage(String imagePath, String imageName) {
       sb.append("Received inputs " + imagePath + " and " + imageName);
       return image;
     }
@@ -76,14 +75,18 @@ public class CommandControllerTest {
     }
 
     @Override
-    public Image rgbSplit(String sourceImageName, String redImageName, String greenImageName, String blueImageName) {
-      sb.append("Received inputs " + sourceImageName + ", " + redImageName + ", " + greenImageName + " and " + blueImageName);
+    public Image rgbSplit(String sourceImageName, String redImageName, String greenImageName,
+                          String blueImageName) {
+      sb.append("Received inputs " + sourceImageName + ", " + redImageName + ", " + greenImageName
+              + " and " + blueImageName);
       return image;
     }
 
     @Override
-    public Image rgbCombine(String destImageName, String redImageName, String greenImageName, String blueImageName) {
-      sb.append("Received inputs " + destImageName + ", " + redImageName + ", " + greenImageName + " and " + blueImageName);
+    public Image rgbCombine(String destImageName, String redImageName, String greenImageName,
+                            String blueImageName) {
+      sb.append("Received inputs " + destImageName + ", " + redImageName + ", " + greenImageName
+              + " and " + blueImageName);
       return image;
     }
   }
@@ -195,7 +198,8 @@ public class CommandControllerTest {
     ImageProcessingModel model = new MockModel(mocklog);
     ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, out);
     controller.execute();
-    assertEquals("Received inputs " + a + ", " + b + ", " + c + " and " + d, mocklog.toString());
+    assertEquals("Received inputs " + a + ", " + b + ", "
+            + c + " and " + d, mocklog.toString());
   }
 
   @Test
@@ -310,9 +314,9 @@ public class CommandControllerTest {
     ImageProcessingModel model = new MockModel(mocklog);
     ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, out);
     controller.execute();
-    assertEquals("Received inputs res/koala.ppm and koala" +
-            "Received inputs koala and koala-vertical" +
-            "Received inputs res/koala-vertical.ppm and koala-vertical", mocklog.toString());
+    assertEquals("Received inputs res/koala.ppm and koala"
+            + "Received inputs koala and koala-vertical"
+            + "Received inputs res/koala-vertical.ppm and koala-vertical", mocklog.toString());
   }
 
   @Test

@@ -2,7 +2,6 @@ package controller;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
@@ -24,7 +23,7 @@ import model.ImageProcessingModel;
 
 /**
  * This class implements ImageProcessingController class.
- * The user inputs i.e commands are processed at the controller level in this class.
+ * The user inputs/commands are processed at the controller level in this class.
  */
 public class ImageProcessingControllerImpl implements ImageProcessingController {
   private final ImageProcessingModel model;
@@ -38,22 +37,14 @@ public class ImageProcessingControllerImpl implements ImageProcessingController 
    * @param in    input of the InputStream.
    * @param out   output of the InputStream.
    */
-  public ImageProcessingControllerImpl(ImageProcessingModel model, InputStream in
-          , OutputStream out) {
+  public ImageProcessingControllerImpl(ImageProcessingModel model, InputStream in,
+                                       OutputStream out) {
     this.model = model;
     this.in = in;
     this.out = out;
   }
 
-  /**
-   * readCommands is the method where controller processes the commands from InputStream
-   * and sends the calls to respective command classes.
-   *
-   * @param inputArray input of the InputStream to processes user input commands.
-   * @param command    the command the current command to process.
-   * @throws IOException when invalid trying to open/read/write invalid file.
-   */
-  public void readCommands(String[] inputArray, String command) throws IOException {
+  private void readCommands(String[] inputArray, String command) {
     //Image m = null;
     ImageCommandController cmd = null;
     PrintStream outStream = new PrintStream(this.out);
@@ -90,38 +81,38 @@ public class ImageProcessingControllerImpl implements ImageProcessingController 
               //m = listOfImages.getOrDefault(inputArray[2], null);
               break;
             case "brighten":
-              cmd = new BrightenImage(Integer.parseInt(inputArray[1]), inputArray[2]
-                      , inputArray[3]);
+              cmd = new BrightenImage(Integer.parseInt(inputArray[1]), inputArray[2],
+                      inputArray[3]);
               //model.brighten(Integer.parseInt(inputArray[1]), inputArray[2], inputArray[3]);
               //m = listOfImages.getOrDefault(inputArray[2], null);
               break;
             case "horizontal-flip":
               cmd = new HorizontalFlip(inputArray[1], inputArray[2]);
-//              m = listOfImages.getOrDefault(inputArray[1], null);
+              //              m = listOfImages.getOrDefault(inputArray[1], null);
               //model.horizontalFlip(inputArray[1], inputArray[2]);
               break;
             case "vertical-flip":
               cmd = new VerticalFlip(inputArray[1], inputArray[2]);
-//              m = listOfImages.getOrDefault(inputArray[1], null);
+              //              m = listOfImages.getOrDefault(inputArray[1], null);
               //model.verticalFlip(inputArray[1], inputArray[2]);
               break;
             case "greyscale":
               cmd = new Greyscale(inputArray[1], inputArray[2], inputArray[3]);
-//              m = listOfImages.getOrDefault(inputArray[2], null);
+              //              m = listOfImages.getOrDefault(inputArray[2], null);
               // model.greyscale(inputArray[1], inputArray[2], inputArray[3]);
               break;
             case "rgb-split":
               cmd = new RGBSplit(inputArray[1], inputArray[2], inputArray[3], inputArray[4]);
-//              m = listOfImages.getOrDefault(inputArray[1], null);
+              //              m = listOfImages.getOrDefault(inputArray[1], null);
               //  model.rgbSplit(inputArray[1], inputArray[2], inputArray[3], inputArray[4]);
               break;
             case "rgb-combine":
-//              Image mRed = listOfImages.getOrDefault(inputArray[2], null);
-//              Image mGreen = listOfImages.getOrDefault(inputArray[3], null);
-//              Image mBlue = listOfImages.getOrDefault(inputArray[4], null);
+              //              Image mRed = listOfImages.getOrDefault(inputArray[2], null);
+              //              Image mGreen = listOfImages.getOrDefault(inputArray[3], null);
+              //              Image mBlue = listOfImages.getOrDefault(inputArray[4], null);
               cmd = new RGBCombine(inputArray[1], inputArray[2], inputArray[3], inputArray[4]);
-//              m = new Image(0, 0, 0, new Pixel[0][0]);
-//              model.rgbSplit(inputArray[1], inputArray[2], inputArray[3], inputArray[4]);
+              //              m = new Image(0, 0, 0, new Pixel[0][0]);
+              //      model.rgbSplit(inputArray[1], inputArray[2], inputArray[3], inputArray[4]);
               break;
             default:
               outStream.println(String.format("Unknown command %s", command));
@@ -147,78 +138,83 @@ public class ImageProcessingControllerImpl implements ImageProcessingController 
   }
 
   @Override
-  public void execute() throws IOException {
+  public void execute() {
     String[] inputArray;
     Scanner scan = new Scanner(this.in);
-//    Map<String, Function<Scanner, ImageCommandController>> knownCommands = new HashMap<>();
-//    knownCommands.put("load", s -> new LoadImage(s.next(), s.next()));
-//    knownCommands.put("save", s -> new SaveImage(s.next(), s.next()));
-//    knownCommands.put("brighten", s -> new BrightenImage(s.nextInt(), s.next(), s.next()));
-//    knownCommands.put("horizontal-flip", s -> new HorizontalFlip(s.next(), s.next()));
-//    knownCommands.put("vertical-flip", s -> new VerticalFlip(s.next(), s.next()));
-//    knownCommands.put("greyscale", s -> new Greyscale(s.next(), s.next(), s.next()));
-//    knownCommands.put("rgb-split", s -> new RGBSplit(s.next(), s.next(), s.next(), s.next()));
-//    knownCommands.put("rgb-combine", s -> new RGBCombine(s.next(), s.next(), s.next(), s.next()));
-//    while (scan.hasNext()) {
-//      try {
-//        ImageCommandController c;
-//        String in = scan.next();
-//        if (in.equalsIgnoreCase("q") || in.equalsIgnoreCase("quit"))
-//          return;
-//        if (in.equalsIgnoreCase("run")){
-//         // BufferedReader reader = new BufferedReader(new FileReader(scan.next()));
-//          try {
-//            knownCommands.put("load", (BufferedReader reader) -> {
-//              try {
-//                return new LoadImage(reader.readLine());
-//              } catch (IOException e) {
-//                return null;
-//              }
-//            });
-//            knownCommands.put("save", s -> {
-//              try {
-//                return new SaveImage(reader.readLine());
-//              } catch (IOException e) {
-//                return null;              }
-//            });
-//            knownCommands.put("brighten", s -> new BrightenImage(s.nextInt(), s.next(), s.next()));
-//            knownCommands.put("horizontal-flip", s -> new HorizontalFlip(s.next(), s.next()));
-//            knownCommands.put("vertical-flip", s -> new VerticalFlip(s.next(), s.next()));
-//            knownCommands.put("greyscale", s -> new Greyscale(s.next(), s.next(), s.next()));
-//            knownCommands.put("rgb-split", s -> new RGBSplit(s.next(), s.next(), s.next(), s.next()));
-//            knownCommands.put("rgb-combine", s -> new RGBCombine(s.next(), s.next(), s.next(), s.next()));
-//          }
-//          catch (IOException e){
-//
-//          }
-//          String line = reader.readLine();
-//          while (line != null) {
-//            System.out.println("Executing line: " + line);
-//            String[] runScriptInputArray = line.split(" ");
-//            runScriptInputArray = Arrays.stream(runScriptInputArray)
-//                    .filter(Predicate.not(String::isEmpty))
-//                    .toArray(String[]::new);
-//            readCommands(runScriptInputArray, line);
-//            line = reader.readLine();
-//          }
-//        reader.close();
-//        }
-//        Function<Scanner, ImageCommandController> cmd = knownCommands.getOrDefault(in, null);
-//        if (cmd == null) {
-//          //throw new IllegalArgumentException();
-//          System.out.println(String.format("Invalid command"));
-//        } else {
-//          c = cmd.apply(scan);
-//          if(c==null){
-//            System.out.println(String.format("Invalid command"));
-//          }
-//          if(c.go(model)==null){
-//            System.out.println(String.format("Invalid command"));
-//          };
-//        }
-//      } catch (Exception e) {
-//        System.out.println(String.format("Invalid command"));
-//      }
+    //    Map<String, Function<Scanner, ImageCommandController>> knownCommands = new HashMap<>();
+    //    knownCommands.put("load", s -> new LoadImage(s.next(), s.next()));
+    //    knownCommands.put("save", s -> new SaveImage(s.next(), s.next()));
+    //    knownCommands.put("brighten", s -> new BrightenImage(s.nextInt(), s.next(), s.next()));
+    //    knownCommands.put("horizontal-flip", s -> new HorizontalFlip(s.next(), s.next()));
+    //    knownCommands.put("vertical-flip", s -> new VerticalFlip(s.next(), s.next()));
+    //    knownCommands.put("greyscale", s -> new Greyscale(s.next(), s.next(), s.next()));
+    //    knownCommands.put("rgb-split", s -> new RGBSplit(s.next(), s.next(), s.next(), s.next()));
+    //    knownCommands.put("rgb-combine", s ->
+    //    new RGBCombine(s.next(), s.next(), s.next(), s.next()));
+    //    while (scan.hasNext()) {
+    //      try {
+    //        ImageCommandController c;
+    //        String in = scan.next();
+    //        if (in.equalsIgnoreCase("q") || in.equalsIgnoreCase("quit"))
+    //          return;
+    //        if (in.equalsIgnoreCase("run")){
+    //         // BufferedReader reader = new BufferedReader(new FileReader(scan.next()));
+    //          try {
+    //            knownCommands.put("load", (BufferedReader reader) -> {
+    //              try {
+    //                return new LoadImage(reader.readLine());
+    //              } catch (IOException e) {
+    //                return null;
+    //              }
+    //            });
+    //            knownCommands.put("save", s -> {
+    //              try {
+    //                return new SaveImage(reader.readLine());
+    //              } catch (IOException e) {
+    //                return null;              }
+    //            });
+    //            knownCommands.put("brighten", s ->
+    //            new BrightenImage(s.nextInt(), s.next(), s.next()));
+    //            knownCommands.put("horizontal-flip", s ->
+    //            new HorizontalFlip(s.next(), s.next()));
+    //            knownCommands.put("vertical-flip", s -> new VerticalFlip(s.next(), s.next()));
+    //            knownCommands.put("greyscale", s -> new Greyscale(s.next(), s.next(), s.next()));
+    //            knownCommands.put("rgb-split", s ->
+    //            new RGBSplit(s.next(), s.next(), s.next(), s.next()));
+    //            knownCommands.put("rgb-combine", s ->
+    //            new RGBCombine(s.next(), s.next(), s.next(), s.next()));
+    //          }
+    //          catch (IOException e){
+    //
+    //          }
+    //          String line = reader.readLine();
+    //          while (line != null) {
+    //            System.out.println("Executing line: " + line);
+    //            String[] runScriptInputArray = line.split(" ");
+    //            runScriptInputArray = Arrays.stream(runScriptInputArray)
+    //                    .filter(Predicate.not(String::isEmpty))
+    //                    .toArray(String[]::new);
+    //            readCommands(runScriptInputArray, line);
+    //            line = reader.readLine();
+    //          }
+    //        reader.close();
+    //        }
+    //        Function<Scanner, ImageCommandController> cmd = knownCommands.getOrDefault(in, null);
+    //        if (cmd == null) {
+    //          //throw new IllegalArgumentException();
+    //          System.out.println(String.format("Invalid command"));
+    //        } else {
+    //          c = cmd.apply(scan);
+    //          if(c==null){
+    //            System.out.println(String.format("Invalid command"));
+    //          }
+    //          if(c.go(model)==null){
+    //            System.out.println(String.format("Invalid command"));
+    //          };
+    //        }
+    //      } catch (Exception e) {
+    //        System.out.println(String.format("Invalid command"));
+    //      }
     while (scan.hasNext()) {
       String input = scan.nextLine();
       inputArray = input.split(" ");

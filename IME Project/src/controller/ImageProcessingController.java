@@ -1,11 +1,12 @@
 package controller;
 
-
-import java.io.IOException;
-
 /**
- * This interface contains execute method, which starts the controller.
+ * This interface represents the main controller of the program.
  */
 public interface ImageProcessingController {
-  void execute() throws IOException;
+
+  /**
+   * Executes the controller program.
+   */
+  void execute();
 }

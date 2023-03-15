@@ -167,9 +167,8 @@ public class ImageProcessingModelImpl implements ImageProcessingModel {
                 = blueImage.getPixels()[i][j].colorComponent.blueComponent;
       }
     }
-    Image destImage = new Image(redImage.getWidth(), redImage.getHeight()
-            , redImage.getMaxValueOfColor(),
-            listOfPixelsDestImage);
+    Image destImage = new Image(redImage.getWidth(), redImage.getHeight(),
+            redImage.getMaxValueOfColor(), listOfPixelsDestImage);
     LIST_OF_IMAGES.put(destImageName, destImage);
     return destImage;
   }

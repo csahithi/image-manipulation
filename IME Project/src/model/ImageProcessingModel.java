@@ -1,13 +1,12 @@
 package model;
 
-import java.io.IOException;
-
 /**
  * This interface specifies the operations on image.
- * <p>
- * An image is characterized by its width,height,its pixels representing its respective RGB-color.
- * <p>
- * It can be asked to produce an image using on of the commands below.
+ *
+ * <p>An image is characterized by its width,height,
+ * its pixels representing its respective RGB-color.
+ *
+ * <p>It can be asked to produce an image using on of the commands below.
  * Another command can be used to save this image locally in ppm file format.
  */
 public interface ImageProcessingModel {
@@ -15,27 +14,27 @@ public interface ImageProcessingModel {
   /**
    * Method to initialize the values passed from controller.
    *
-   * @param imagePath     the sting which contains source ppm image path.
+   * @param imagePath the sting which contains source ppm image path.
    * @param imageName the sting which contains destination image name.
    */
   Image loadImage(String imagePath, String imageName);
 
-
   /**
-   *This method saves the image with the given name to the specified path which should include the
-   *  name of the file.
+   * This method saves the image with the given name to the specified path which should
+   * include the name of the file.
+   *
    * @param imagePath the string which contains destination ppm image path.
-    * @param imageName the string which contains source image name.
+   * @param imageName the string which contains source image name.
    * @return destination Image.
-   * @throws IOException
    */
 
-  Image saveImage(String imagePath, String imageName) throws IOException;
+  Image saveImage(String imagePath, String imageName);
 
   /**
-   *This method creates a greyscale image with the component of the image with the given name,
-   *   and refer to it henceforth in the program by the given destination name.
-   *  Red, green, blue, value, luma and intensity are the components that are supported.
+   * This method creates a greyscale image with the component of the image with the given name,
+   * and refer to it henceforth in the program by the given destination name.
+   * Red, green, blue, value, luma and intensity are the components that are supported.
+   *
    * @param component       the component value on which the image needs to grey-scaled.
    * @param sourceImageName the string which contains source image name.
    * @param destImageName   the string which contains destination image name.
@@ -43,21 +42,10 @@ public interface ImageProcessingModel {
    */
   Image greyscale(String component, String sourceImageName, String destImageName);
 
-//  Image greyscaleRedComponent(String sourceImageName, String destImageName);
-//
-//  Image greyscaleGreenComponent(String sourceImageName, String destImageName);
-//
-//  Image greyscaleBlueComponent(String sourceImageName, String destImageName);
-//
-//  Image greyscaleValueComponent(String sourceImageName, String destImageName);
-//
-//  Image greyscaleIntensityComponent(String sourceImageName, String destImageName);
-//
-//  Image greyscaleLumaComponent(String sourceImageName, String destImageName);
-
   /**
-   *This method flips image horizontally to create a new image, referred to henceforth by the given
-   *  destination name.
+   * This method flips image horizontally to create a new image,
+   * referred to henceforth by the given destination name.
+   *
    * @param sourceImageName the string which contains source image name.
    * @param destImageName   the string which contains destination image name.
    * @return destination Image.
@@ -65,8 +53,9 @@ public interface ImageProcessingModel {
   Image horizontalFlip(String sourceImageName, String destImageName);
 
   /**
-   *This method flips image vertically to create a new image, referred to henceforth by the given
-   *  destination name.
+   * This method flips image vertically to create a new image,
+   * referred to henceforth by the given destination name.
+   *
    * @param sourceImageName the string which contains source image name.
    * @param destImageName   the string which contains destination image name.
    * @return destination Image.
@@ -75,6 +64,7 @@ public interface ImageProcessingModel {
 
   /**
    * This method brightens the image by the given increment.
+   *
    * @param increment       takes in integer value with which the image is brightened or darkened
    *                        based on its sign.
    * @param sourceImageName the string which contains source image name.
@@ -85,25 +75,27 @@ public interface ImageProcessingModel {
 
   /**
    * This method splits the given image into three greyscale images containing its red,
-   *  green and blue components respectively.
+   * green and blue components respectively.
+   *
    * @param sourceImageName the string which contains source image name.
-   * @param redImageName        the string which contains destination red image name.
-   * @param greenImageName      the string which contains destination green image name.
-   * @param blueImageName       the string which contains destination blue image name.
+   * @param redImageName    the string which contains destination red image name.
+   * @param greenImageName  the string which contains destination green image name.
+   * @param blueImageName   the string which contains destination blue image name.
    * @return destination Image.
    */
-  Image rgbSplit(String sourceImageName, String redImageName, String greenImageName
-          , String blueImageName);
+  Image rgbSplit(String sourceImageName, String redImageName, String greenImageName,
+                 String blueImageName);
 
   /**
-   *This command class combines the three greyscale images into a single image that gets its red,
-   *  green and blue components from the three images respectively.
-   * @param destImageName the string which contains destination image name.
-   * @param redImageName      the string which contains source red image name.
-   * @param greenImageName    the string which contains source green image name.
-   * @param blueImageName     the string which contains source blue image name.
+   * This command class combines the three greyscale images into a single image that gets its red,
+   * green and blue components from the three images respectively.
+   *
+   * @param destImageName  the string which contains destination image name.
+   * @param redImageName   the string which contains source red image name.
+   * @param greenImageName the string which contains source green image name.
+   * @param blueImageName  the string which contains source blue image name.
    * @return destination Image.
    */
-  Image rgbCombine(String destImageName, String redImageName, String greenImageName
-          , String blueImageName);
+  Image rgbCombine(String destImageName, String redImageName, String greenImageName,
+                   String blueImageName);
 }
