@@ -1,25 +1,26 @@
-load res/dog.ppm d
-vertical-flip d dv
-save res/dv.ppm dv
-horizontal-flip d dog-horizontal
-save res/dog-horizontal.ppm dog-horizontal
-save res/dog-vertical.ppm dv
-brighten 50 d dog-brighter-by-50
-save res/dog-brighter-by-50.ppm dog-brighter-by-50
-save res/dog-brighter-by-50.ppm dog-brighter-by-50
-greyscale value-component d dvalue
-save rex/dog-value-greyscale.ppm dvalue
-save res/dog-value-greyscale.ppm dvalue
-greyscale red-component d dred
-greyscale green-component d dgreen
-greyscale blue-component d dblue
-greyscale intensity-component d dintensity
-greyscale luma-component d dluma
-save res/dog-luma-greyscale.ppm dluma
-save res/dog-intensity-greyscale.ppm dintensity
-save res/dog-red-greyscale.ppm dred
-save res/dog-green-greyscale.ppm dgreen
-save res/dog-blue-greyscale.ppm dblue
-save res/dog-blue-greyscale.ppm dblue
-rgb-split d dred dgreen dblue
-rgb-combine d1 dred dgreen dblue
+load res/nature.ppm nature
+vertical-flip nature naturev
+save res/naturev.ppm naturev
+horizontal-flip nature nature-horizontal
+save res/nature-horizontal.ppm nature-horizontal
+save res/nature-vertical.ppm naturev
+brighten 50 nature nature-brighter-by-50
+save res/nature-brighter-by-50.ppm nature-brighter-by-50
+save res/nature-brighter-by-50.ppm nature-brighter-by-50
+greyscale value-component nature naturevalue
+save rex/nature-value-greyscale.ppm naturevalue
+save res/nature-value-greyscale.ppm naturevalue
+greyscale red-component nature naturered
+greyscale green-component nature naturegreen
+greyscale blue-component nature natureblue
+greyscale intensity-component nature natureintensity
+greyscale luma-component nature natureluma
+save res/nature-luma-greyscale.ppm natureluma
+save res/nature-intensity-greyscale.ppm natureintensity
+save res/nature-red-greyscale.ppm naturered
+save res/nature-green-greyscale.ppm naturegreen
+save res/nature-blue-greyscale.ppm natureblue
+save res/nature-blue-greyscale.ppm natureblue
+rgb-split nature naturered naturegreen natureblue
+rgb-combine nature1 naturered naturegreen natureblue
+run res/Script1.txt

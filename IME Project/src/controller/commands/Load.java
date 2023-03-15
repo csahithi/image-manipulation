@@ -7,7 +7,7 @@ import model.ImageProcessingModel;
  * This command class load an image from the specified path and refers it  in the program
  * by the given image name.
  */
-public class LoadImage implements ImageCommandController {
+public class Load implements ImageCommandController {
   String imagePath;
   String destImageName;
 
@@ -17,7 +17,7 @@ public class LoadImage implements ImageCommandController {
    * @param imagePath     the string which contains source ppm image path.
    * @param destImageName the string which contains destination image name.
    */
-  public LoadImage(String imagePath, String destImageName) {
+  public Load(String imagePath, String destImageName) {
     this.imagePath = imagePath;
     this.destImageName = destImageName;
   }

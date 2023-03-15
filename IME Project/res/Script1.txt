@@ -1,0 +1,10 @@
+load res/nature.ppm nature
+vertical-flip nature naturev
+save res/naturev.ppm naturev
+horizontal-flip nature nature-horizontal
+save res/nature-horizontal.ppm nature-horizontal
+save res/nature-vertical.ppm naturev
+brighten 50 nature nature-brighter-by-50
+save res/nature-brighter-by-50.ppm nature-brighter-by-50
+greyscale value-component nature naturevalue
+save res/nature-value-greyscale.ppm naturevalue

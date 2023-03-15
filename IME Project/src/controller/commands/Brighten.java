@@ -6,7 +6,7 @@ import model.ImageProcessingModel;
 /**
  * This command class brightens the image by the given increment.
  */
-public class BrightenImage implements ImageCommandController {
+public class Brighten implements ImageCommandController {
   int increment;
   String sourceImageName;
   String destImageName;
@@ -19,7 +19,7 @@ public class BrightenImage implements ImageCommandController {
    * @param sourceImageName the string which contains source image name.
    * @param destImageName   the string which contains destination image name.
    */
-  public BrightenImage(int increment, String sourceImageName, String destImageName) {
+  public Brighten(int increment, String sourceImageName, String destImageName) {
     this.increment = increment;
     this.sourceImageName = sourceImageName;
     this.destImageName = destImageName;

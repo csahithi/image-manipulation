@@ -9,14 +9,14 @@ import java.util.Arrays;
 import java.util.Scanner;
 import java.util.function.Predicate;
 
-import controller.commands.BrightenImage;
+import controller.commands.Brighten;
 import controller.commands.Greyscale;
 import controller.commands.HorizontalFlip;
 import controller.commands.ImageCommandController;
-import controller.commands.LoadImage;
+import controller.commands.Load;
 import controller.commands.RGBCombine;
 import controller.commands.RGBSplit;
-import controller.commands.SaveImage;
+import controller.commands.Save;
 import controller.commands.VerticalFlip;
 import model.Image;
 import model.ImageProcessingModel;
@@ -71,18 +71,18 @@ public class ImageProcessingControllerImpl implements ImageProcessingController 
         try {
           switch (inputArray[0]) {
             case "load":
-              cmd = new LoadImage(inputArray[1], inputArray[2]);
+              cmd = new Load(inputArray[1], inputArray[2]);
               //model.loadImage(inputArray[1], inputlArray[2]);
               //m = new Image(0, 0, 0, new Pixel[0][0]);
               break;
             case "save":
-              cmd = new SaveImage(inputArray[1], inputArray[2]);
+              cmd = new Save(inputArray[1], inputArray[2]);
               //model.saveImage(inputArray[1], inputArray[2]);
               //m = listOfImages.getOrDefault(inputArray[2], null);
               break;
             case "brighten":
-              cmd = new BrightenImage(Integer.parseInt(inputArray[1]), inputArray[2],
-                      inputArray[3]);
+              cmd = new Brighten(Integer.parseInt(inputArray[1]), inputArray[2]
+                      , inputArray[3]);
               //model.brighten(Integer.parseInt(inputArray[1]), inputArray[2], inputArray[3]);
               //m = listOfImages.getOrDefault(inputArray[2], null);
               break;

@@ -7,7 +7,7 @@ import model.ImageProcessingModel;
  * This command class saves the image with the given name to the specified path
  * which should include the name of the file.
  */
-public class SaveImage implements ImageCommandController {
+public class Save implements ImageCommandController {
   String imagePath;
   String imageName;
 
@@ -17,7 +17,7 @@ public class SaveImage implements ImageCommandController {
    * @param imagePath the string which contains destination ppm image path.
    * @param imageName the string which contains source image name.
    */
-  public SaveImage(String imagePath, String imageName) {
+  public Save(String imagePath, String imageName) {
     this.imagePath = imagePath;
     this.imageName = imageName;
   }
