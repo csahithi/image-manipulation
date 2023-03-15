@@ -6,7 +6,6 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
@@ -92,7 +91,7 @@ public class CommandControllerTest {
   }
 
   @Test
-  public void testLoadCommand() throws IOException {
+  public void testLoadCommand() {
     InputStream in = null;
     String a = "res/image.ppm";
     String b = "image";
@@ -107,7 +106,7 @@ public class CommandControllerTest {
   }
 
   @Test
-  public void testSaveCommand() throws IOException {
+  public void testSaveCommand() {
     InputStream in = null;
     String a = "res/image.ppm";
     String b = "image";
@@ -122,7 +121,7 @@ public class CommandControllerTest {
   }
 
   @Test
-  public void testHorizontalFlipCommand() throws IOException {
+  public void testHorizontalFlipCommand() {
     InputStream in = null;
     String a = "image";
     String b = "image-horizontal";
@@ -137,7 +136,7 @@ public class CommandControllerTest {
   }
 
   @Test
-  public void testVerticalFlipCommand() throws IOException {
+  public void testVerticalFlipCommand() {
     InputStream in = null;
     String a = "image";
     String b = "image-vertical";
@@ -152,7 +151,7 @@ public class CommandControllerTest {
   }
 
   @Test
-  public void testBrightenCommand() throws IOException {
+  public void testBrightenCommand() {
     InputStream in = null;
     int a = 10;
     String b = "image";
@@ -168,7 +167,7 @@ public class CommandControllerTest {
   }
 
   @Test
-  public void testRGBSplitCommand() throws IOException {
+  public void testRGBSplitCommand() {
     InputStream in = null;
     String a = "image";
     String b = "red-image";
@@ -185,7 +184,7 @@ public class CommandControllerTest {
   }
 
   @Test
-  public void testRGBCombineCommand() throws IOException {
+  public void testRGBCombineCommand() {
     InputStream in = null;
     String a = "image";
     String b = "red-image";
@@ -203,7 +202,7 @@ public class CommandControllerTest {
   }
 
   @Test
-  public void testRedGreyscaleCommand() throws IOException {
+  public void testRedGreyscaleCommand() {
     InputStream in = null;
     String a = "red-component";
     String b = "image";
@@ -219,7 +218,7 @@ public class CommandControllerTest {
   }
 
   @Test
-  public void testGreenGreyscaleCommand() throws IOException {
+  public void testGreenGreyscaleCommand() {
     InputStream in = null;
     String a = "green-component";
     String b = "image";
@@ -235,7 +234,7 @@ public class CommandControllerTest {
   }
 
   @Test
-  public void testBlueGreyscaleCommand() throws IOException {
+  public void testBlueGreyscaleCommand() {
     InputStream in = null;
     String a = "blue-component";
     String b = "image";
@@ -251,7 +250,7 @@ public class CommandControllerTest {
   }
 
   @Test
-  public void testValueGreyscaleCommand() throws IOException {
+  public void testValueGreyscaleCommand() {
     InputStream in = null;
     String a = "value-component";
     String b = "image";
@@ -267,7 +266,7 @@ public class CommandControllerTest {
   }
 
   @Test
-  public void testIntensityGreyscaleCommand() throws IOException {
+  public void testIntensityGreyscaleCommand() {
     InputStream in = null;
     String a = "intensity-component";
     String b = "image";
@@ -283,7 +282,7 @@ public class CommandControllerTest {
   }
 
   @Test
-  public void testLumaGreyscaleCommand() throws IOException {
+  public void testLumaGreyscaleCommand() {
     InputStream in = null;
     String a = "luma-component";
     String b = "image";
@@ -299,7 +298,7 @@ public class CommandControllerTest {
   }
 
   @Test
-  public void testRunScriptCommand() throws IOException {
+  public void testRunScriptCommand() {
     InputStream in = null;
     String a = "test/controller/script.txt";
     String input = "run " + a;
@@ -320,7 +319,7 @@ public class CommandControllerTest {
   }
 
   @Test
-  public void testWrongCommandInput() throws IOException {
+  public void testWrongCommandInput() {
     InputStream in = null;
     String input = "dummy a b";
     in = new ByteArrayInputStream(input.getBytes());
@@ -333,7 +332,7 @@ public class CommandControllerTest {
   }
 
   @Test
-  public void testWrongGreyscaleComponentCommandInput() throws IOException {
+  public void testWrongGreyscaleComponentCommandInput() {
     InputStream in = null;
     String input = "greyscale dummy-component a b";
     in = new ByteArrayInputStream(input.getBytes());
@@ -343,5 +342,24 @@ public class CommandControllerTest {
     ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, out);
     controller.execute();
     assertEquals("", out.toString().stripTrailing());
+  }
+
+  @Test
+  public void testWrongNumberOfInputsForLoad() {
+    InputStream in = null;
+    String input = "load res/image.ppm";
+    in = new ByteArrayInputStream(input.getBytes());
+    OutputStream out = new ByteArrayOutputStream();
+    StringBuilder mocklog = new StringBuilder();
+    ImageProcessingModel model = new MockModel(mocklog);
+    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, out);
+    controller.execute();
+    assertEquals("", mocklog.toString());
+
+    input = "load res/image.ppm a b c";
+    in = new ByteArrayInputStream(input.getBytes());
+    controller = new ImageProcessingControllerImpl(model, in, out);
+    controller.execute();
+    assertEquals("", mocklog.toString());
   }
 }

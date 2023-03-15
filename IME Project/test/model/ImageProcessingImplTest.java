@@ -4,7 +4,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
-import java.io.IOException;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -51,7 +50,7 @@ public class ImageProcessingImplTest {
   }
 
   @Test
-  public void testSaveImage() throws IOException {
+  public void testSaveImage() {
     Image original = model.loadImage("res/nature.ppm", "original");
     File f = new File("res/Original.ppm");
     assertFalse(f.exists());
@@ -59,8 +58,7 @@ public class ImageProcessingImplTest {
     assertTrue(f.exists());
     f.delete();
   }
-
-
+  
   @Test
   public void testBrightenImage() {
     Image original = model.loadImage("res/nature.ppm", "original");
