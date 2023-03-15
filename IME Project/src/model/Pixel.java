@@ -29,8 +29,8 @@ public class Pixel {
    * @return integer value of value-component.
    */
   public int getValueComponent() {
-    return Math.max(this.colorComponent.redComponent, Math.max(this.colorComponent.greenComponent
-            , this.colorComponent.blueComponent));
+    return Math.max(this.colorComponent.redComponent, Math.max(this.colorComponent.greenComponent,
+            this.colorComponent.blueComponent));
   }
 
   /**

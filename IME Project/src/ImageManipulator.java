@@ -1,5 +1,3 @@
-import java.io.IOException;
-
 import controller.ImageProcessingController;
 import controller.ImageProcessingControllerImpl;
 import model.ImageProcessingModel;
@@ -18,8 +16,8 @@ public class ImageManipulator {
    */
   public static void main(String[] args) {
     ImageProcessingModel model = new ImageProcessingModelImpl();
-    ImageProcessingController controller = new ImageProcessingControllerImpl(model, System.in
-            , System.out);
+    ImageProcessingController controller = new ImageProcessingControllerImpl(model, System.in,
+            System.out);
     controller.execute();
 
   }

@@ -116,7 +116,8 @@ VerticalFlip : This command class flips an image vertically to create a new imag
 henceforth by the given destination name.
 
 Model-Related Classes and Interfaces:
-______________________________________ImageProcessingImplTest
+______________________________________
+
 
 Color : This class represents RGB color factor for each pixel.
 

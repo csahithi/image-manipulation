@@ -24,16 +24,16 @@ public class ImageProcessingImplTest {
 
   @Test
   public void testLoadSamePPMFileInImagesCreateDifferentObjects() {
-    Image original = model.loadImage("res/nature.ppm", "original");
-    Image another = model.loadImage("res/nature.ppm", "another");
+    Image original = model.loadImage("res/dog.ppm", "original");
+    Image another = model.loadImage("res/dog.ppm", "another");
     assertNotEquals(original, another);
   }
 
   @Test
   public void testLoadImageFromExistingPPMFile() {
-    Image original = model.loadImage("res/nature.ppm", "original");
-    assertEquals(original.getWidth(), 413);
-    assertEquals(original.getHeight(), 550);
+    Image original = model.loadImage("res/dog.ppm", "original");
+    assertEquals(original.getWidth(), 200);
+    assertEquals(original.getHeight(), 201);
     assertEquals(original.getMaxValueOfColor(), 255);
   }
 
@@ -51,7 +51,7 @@ public class ImageProcessingImplTest {
 
   @Test
   public void testSaveImage() {
-    Image original = model.loadImage("res/nature.ppm", "original");
+    Image original = model.loadImage("res/dog.ppm", "original");
     File f = new File("res/Original.ppm");
     assertFalse(f.exists());
     original = model.saveImage("res/Original.ppm", "original");
@@ -61,7 +61,7 @@ public class ImageProcessingImplTest {
   
   @Test
   public void testBrightenImage() {
-    Image original = model.loadImage("res/nature.ppm", "original");
+    Image original = model.loadImage("res/dog.ppm", "original");
     int increment = 50;
     Image brightenedImage = model.brighten(increment, "original",
             "brightenedImage");
@@ -87,7 +87,7 @@ public class ImageProcessingImplTest {
 
   @Test
   public void testBrightenImageDoesNotExceedMaxValue() {
-    Image original = model.loadImage("res/nature.ppm", "original");
+    Image original = model.loadImage("res/dog.ppm", "original");
     int increment = 50;
     Image brightenedImage = model.brighten(increment, "original",
             "brightenedImage");
@@ -105,7 +105,7 @@ public class ImageProcessingImplTest {
 
   @Test
   public void testBrightenImageIncrementMaxValue() {
-    Image original = model.loadImage("res/nature.ppm", "original");
+    Image original = model.loadImage("res/dog.ppm", "original");
     int increment = 1000;
     Image maxBrightenedImage = model.brighten(increment, "original",
             "brightenedImage");
@@ -123,7 +123,7 @@ public class ImageProcessingImplTest {
 
   @Test
   public void testBrightenImageIncrementByMaxNegativeValue() {
-    Image original = model.loadImage("res/nature.ppm", "original");
+    Image original = model.loadImage("res/dog.ppm", "original");
     int increment = -1000;
     Image brightenedImage = model.brighten(increment, "original",
             "brightenedImage");
@@ -138,7 +138,7 @@ public class ImageProcessingImplTest {
 
   @Test
   public void testBrightenImageIncrementByNegativeValue() {
-    Image original = model.loadImage("res/nature.ppm", "original");
+    Image original = model.loadImage("res/dog.ppm", "original");
     int increment = -25;
     Image brightenedImage = model.brighten(increment, "original",
             "brightenedImage");
@@ -381,7 +381,7 @@ public class ImageProcessingImplTest {
 
   @Test
   public void testRGBCombineOnNullRedImage() {
-    Image original = model.loadImage("res/nature.ppm", "original");
+    Image original = model.loadImage("res/dog.ppm", "original");
     Image redImage = null;
     Image greenImage = model.greyscale("green-component",
             "original", "greenImage");
@@ -394,7 +394,7 @@ public class ImageProcessingImplTest {
 
   @Test
   public void testRGBCombineOnNullGreenImage() {
-    Image original = model.loadImage("res/nature.ppm", "original");
+    Image original = model.loadImage("res/dog.ppm", "original");
     Image redImage = model.greyscale("red-component",
             "original", "redImage");
     Image greenImage = null;
@@ -420,7 +420,7 @@ public class ImageProcessingImplTest {
 
   @Test
   public void testRGBCombine() {
-    Image original = model.loadImage("res/nature.ppm", "original");
+    Image original = model.loadImage("res/dog.ppm", "original");
     Image redImage = model.greyscale("red-component",
             "original", "redImage");
     Image greenImage = model.greyscale("green-component",

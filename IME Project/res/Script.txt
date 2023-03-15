@@ -1,24 +1,24 @@
-load res/nature.ppm nature
-vertical-flip nature naturev
-horizontal-flip nature nature-horizontal
-save res/nature-horizontal.ppm nature-horizontal
-save res/nature-vertical.ppm naturev
-brighten 50 nature nature-brighter-by-50
-save res/nature-brighter-by-50.ppm nature-brighter-by-50
-save res/nature-brighter-by-50.ppm nature-brighter-by-50
-greyscale value-component nature naturevalue
-save res/nature-value-greyscale.ppm naturevalue
-greyscale red-component nature naturered
-greyscale green-component nature naturegreen
-greyscale blue-component nature natureblue
-greyscale intensity-component nature natureintensity
-greyscale luma-component nature natureluma
-save res/nature-luma-greyscale.ppm natureluma
-save res/nature-intensity-greyscale.ppm natureintensity
-save res/nature-red-greyscale.ppm naturered
-save res/nature-green-greyscale.ppm naturegreen
-save res/nature-blue-greyscale.ppm natureblue
-save res/nature-blue-greyscale.ppm natureblue
-rgb-split nature naturered naturegreen natureblue
-rgb-combine nature1 naturered naturegreen natureblue
+load res/dog.ppm dog
+vertical-flip dog dogv
+horizontal-flip dog dog-horizontal
+save res/dog-horizontal.ppm dog-horizontal
+save res/dog-vertical.ppm dogv
+brighten 50 dog dog-brighter-by-50
+save res/dog-brighter-by-50.ppm dog-brighter-by-50
+save res/dog-brighter-by-50.ppm dog-brighter-by-50
+greyscale value-component dog dogvalue
+save res/dog-value-greyscale.ppm dogvalue
+greyscale red-component dog dogred
+greyscale green-component dog doggreen
+greyscale blue-component dog dogblue
+greyscale intensity-component dog dogintensity
+greyscale luma-component dog dogluma
+save res/dog-luma-greyscale.ppm dogluma
+save res/dog-intensity-greyscale.ppm dogintensity
+save res/dog-red-greyscale.ppm dogred
+save res/dog-green-greyscale.ppm doggreen
+save res/dog-blue-greyscale.ppm dogblue
+save res/dog-blue-greyscale.ppm dogblue
+rgb-split dog dogred doggreen dogblue
+rgb-combine dog1 dogred doggreen dogblue
 run res/Script1.txt
