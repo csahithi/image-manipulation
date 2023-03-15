@@ -22,17 +22,37 @@ import controller.commands.VerticalFlip;
 import model.Image;
 import model.ImageProcessingModel;
 
+/**
+ * This class implements ImageProcessingController class.
+ * The user inputs i.e commands are processed at the controller level in this class.
+ */
 public class ImageProcessingControllerImpl implements ImageProcessingController {
   private final ImageProcessingModel model;
   private final InputStream in;
   private final OutputStream out;
 
-  public ImageProcessingControllerImpl(ImageProcessingModel model, InputStream in, OutputStream out) {
+  /**
+   * This method is the constructor to the ImageProcessingControllerImpl class.
+   *
+   * @param model takes in model object.
+   * @param in    input of the InputStream.
+   * @param out   output of the InputStream.
+   */
+  public ImageProcessingControllerImpl(ImageProcessingModel model, InputStream in
+          , OutputStream out) {
     this.model = model;
     this.in = in;
     this.out = out;
   }
 
+  /**
+   * readCommands is the method where controller processes the commands from InputStream
+   * and sends the calls to respective command classes.
+   *
+   * @param inputArray input of the InputStream to processes user input commands.
+   * @param command    the command the current command to process.
+   * @throws IOException when invalid trying to open/read/write invalid file.
+   */
   public void readCommands(String[] inputArray, String command) throws IOException {
     //Image m = null;
     ImageCommandController cmd = null;
@@ -70,7 +90,8 @@ public class ImageProcessingControllerImpl implements ImageProcessingController 
               //m = listOfImages.getOrDefault(inputArray[2], null);
               break;
             case "brighten":
-              cmd = new BrightenImage(Integer.parseInt(inputArray[1]), inputArray[2], inputArray[3]);
+              cmd = new BrightenImage(Integer.parseInt(inputArray[1]), inputArray[2]
+                      , inputArray[3]);
               //model.brighten(Integer.parseInt(inputArray[1]), inputArray[2], inputArray[3]);
               //m = listOfImages.getOrDefault(inputArray[2], null);
               break;
@@ -87,12 +108,12 @@ public class ImageProcessingControllerImpl implements ImageProcessingController 
             case "greyscale":
               cmd = new Greyscale(inputArray[1], inputArray[2], inputArray[3]);
 //              m = listOfImages.getOrDefault(inputArray[2], null);
-             // model.greyscale(inputArray[1], inputArray[2], inputArray[3]);
+              // model.greyscale(inputArray[1], inputArray[2], inputArray[3]);
               break;
             case "rgb-split":
               cmd = new RGBSplit(inputArray[1], inputArray[2], inputArray[3], inputArray[4]);
 //              m = listOfImages.getOrDefault(inputArray[1], null);
-            //  model.rgbSplit(inputArray[1], inputArray[2], inputArray[3], inputArray[4]);
+              //  model.rgbSplit(inputArray[1], inputArray[2], inputArray[3], inputArray[4]);
               break;
             case "rgb-combine":
 //              Image mRed = listOfImages.getOrDefault(inputArray[2], null);
@@ -117,7 +138,7 @@ public class ImageProcessingControllerImpl implements ImageProcessingController 
     }
     if (cmd != null) {
       Image m = cmd.execute(model);
-      if(m == null){
+      if (m == null) {
         System.out.println(String.format("Invalid command %s", command));
       }
     } else {
@@ -198,14 +219,14 @@ public class ImageProcessingControllerImpl implements ImageProcessingController 
 //      } catch (Exception e) {
 //        System.out.println(String.format("Invalid command"));
 //      }
-      while (scan.hasNext()) {
-        String input = scan.nextLine();
-        inputArray = input.split(" ");
-        inputArray = Arrays.stream(inputArray)
-                .filter(Predicate.not(String::isEmpty))
-                .toArray(String[]::new);
-        if (inputArray.length > 0) {
-          readCommands(inputArray, input);
+    while (scan.hasNext()) {
+      String input = scan.nextLine();
+      inputArray = input.split(" ");
+      inputArray = Arrays.stream(inputArray)
+              .filter(Predicate.not(String::isEmpty))
+              .toArray(String[]::new);
+      if (inputArray.length > 0) {
+        readCommands(inputArray, input);
       }
     }
   }

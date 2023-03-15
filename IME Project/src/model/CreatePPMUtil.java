@@ -4,7 +4,17 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * This class contains utility methods to create a PPM image file from image object
+ * and saves it in the specified file path .
+ */
 public class CreatePPMUtil {
+  /**
+   * Creates and saves an image file in the PPM format.
+   *
+   * @param filepath the path of the file where the file needs to be saved.
+   * @param m        Image object which needs to be saved as image ppm file.
+   */
   public static void createPPM(String filepath, Image m) {
     try {
       File myObj = new File(filepath);
@@ -19,8 +29,8 @@ public class CreatePPMUtil {
     }
     try {
       FileWriter myWriter = new FileWriter(filepath, false);
-      myWriter.write("P3\n" +
-              "# Created by GIMP version 2.10.20 PNM plug-in\n");
+      myWriter.write("P3\n"
+              + "# Created by GIMP version 2.10.20 PNM plug-in\n");
       myWriter.write(m.getWidth() + " " + m.getHeight() + "\n" + m.getMaxValueOfColor() + "\n");
       Pixel[][] listOfPixels = m.getPixels();
       for (int i = 0; i < m.getHeight(); i++) {

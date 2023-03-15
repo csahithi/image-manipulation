@@ -17,13 +17,24 @@ import model.Pixel;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+/**
+ * This class contains tests for ImageProcessing Controller class.
+ */
 public class CommandControllerTest {
 
+  /**
+   * Mockmodel class to test Controller.
+   */
   public class MockModel implements ImageProcessingModel {
     private StringBuilder sb;
     private Image image = new Image(0, 0, 0, new Pixel[0][0]);
     ;
 
+    /**
+     * Constructs Mockmodel with the given Slog data to be logged.
+     *
+     * @param sb input data.
+     */
     public MockModel(StringBuilder sb) {
       this.sb = sb;
     }
@@ -289,10 +300,9 @@ public class CommandControllerTest {
     String a = "test/controller/script.txt";
     String input = "run " + a;
     //in = new ByteArrayInputStream(input.getBytes());
-    try{
+    try {
       in = new FileInputStream("test/controller/script.txt");
-    }
-    catch(FileNotFoundException e){
+    } catch (FileNotFoundException e) {
       fail("Input file not present");
     }
     OutputStream out = new ByteArrayOutputStream();

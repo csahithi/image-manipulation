@@ -12,6 +12,9 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+/**
+ * This class contains tests for ImageProcessing model class.
+ */
 public class ImageProcessingImplTest {
   private ImageProcessingModel model;
 
@@ -62,8 +65,8 @@ public class ImageProcessingImplTest {
   public void testBrightenImage() {
     Image original = model.loadImage("res/dog.ppm", "original");
     int increment = 50;
-    Image brightenedImage = model.brighten(increment, "original"
-            , "brightenedImage");
+    Image brightenedImage = model.brighten(increment, "original",
+            "brightenedImage");
     for (int i = 0; i < original.getHeight(); i++) {
       for (int j = 0; j < original.getWidth(); j++) {
         assertTrue(brightenedImage.getPixels()[i][j].colorComponent.redComponent
@@ -79,8 +82,8 @@ public class ImageProcessingImplTest {
   @Test
   public void testBrightenNullImage() {
     int increment = 50;
-    Image brightenedImage = model.brighten(increment, null
-            , "brightenedImage");
+    Image brightenedImage = model.brighten(increment, null,
+            "brightenedImage");
     assertNull(brightenedImage);
   }
 
@@ -88,8 +91,8 @@ public class ImageProcessingImplTest {
   public void testBrightenImageDoesNotExceedMaxValue() {
     Image original = model.loadImage("res/dog.ppm", "original");
     int increment = 50;
-    Image brightenedImage = model.brighten(increment, "original"
-            , "brightenedImage");
+    Image brightenedImage = model.brighten(increment, "original",
+            "brightenedImage");
     for (int i = 0; i < original.getHeight(); i++) {
       for (int j = 0; j < original.getWidth(); j++) {
         assertTrue(brightenedImage.getPixels()[i][j].colorComponent.redComponent
@@ -106,16 +109,16 @@ public class ImageProcessingImplTest {
   public void testBrightenImageIncrementMaxValue() {
     Image original = model.loadImage("res/dog.ppm", "original");
     int increment = 1000;
-    Image maxBrightenedImage = model.brighten(increment, "original"
-            , "brightenedImage");
+    Image maxBrightenedImage = model.brighten(increment, "original",
+            "brightenedImage");
     for (int i = 0; i < original.getHeight(); i++) {
       for (int j = 0; j < original.getWidth(); j++) {
-        assertEquals(255
-                , maxBrightenedImage.getPixels()[i][j].colorComponent.redComponent);
-        assertEquals(255
-                , maxBrightenedImage.getPixels()[i][j].colorComponent.greenComponent);
-        assertEquals(255
-                , maxBrightenedImage.getPixels()[i][j].colorComponent.blueComponent);
+        assertEquals(255,
+                maxBrightenedImage.getPixels()[i][j].colorComponent.redComponent);
+        assertEquals(255,
+                maxBrightenedImage.getPixels()[i][j].colorComponent.greenComponent);
+        assertEquals(255,
+                maxBrightenedImage.getPixels()[i][j].colorComponent.blueComponent);
       }
     }
   }
@@ -124,8 +127,8 @@ public class ImageProcessingImplTest {
   public void testBrightenImageIncrementByMaxNegativeValue() {
     Image original = model.loadImage("res/dog.ppm", "original");
     int increment = -1000;
-    Image brightenedImage = model.brighten(increment, "original"
-            , "brightenedImage");
+    Image brightenedImage = model.brighten(increment, "original",
+            "brightenedImage");
     for (int i = 0; i < original.getHeight(); i++) {
       for (int j = 0; j < original.getWidth(); j++) {
         assertEquals(0, brightenedImage.getPixels()[i][j].colorComponent.redComponent);
@@ -139,8 +142,8 @@ public class ImageProcessingImplTest {
   public void testBrightenImageIncrementByNegativeValue() {
     Image original = model.loadImage("res/dog.ppm", "original");
     int increment = -25;
-    Image brightenedImage = model.brighten(increment, "original"
-            , "brightenedImage");
+    Image brightenedImage = model.brighten(increment, "original",
+            "brightenedImage");
     for (int i = 0; i < original.getHeight(); i++) {
       for (int j = 0; j < original.getWidth(); j++) {
         assertTrue(Math.abs(brightenedImage.getPixels()[i][j].colorComponent.redComponent
@@ -155,43 +158,46 @@ public class ImageProcessingImplTest {
 
   @Test
   public void testVerticalFlipNullImage() {
-    Image VerticalFlipImage = model.verticalFlip(null, "VerticalFlipImage");
-    assertNull(VerticalFlipImage);
+    Image verticalFlipImage = model.verticalFlip(null, "verticalFlipImage");
+    assertNull(verticalFlipImage);
   }
 
   @Test
   public void testVerticalFlip() {
     Image original = model.loadImage("res/dog.ppm", "original");
-    Image VerticalFlipFirstTime = model.verticalFlip("original"
-            , "VerticalFlipFirstTime");
-    Image VerticalFlipSecondTime = model.verticalFlip("VerticalFlipFirstTime"
-            , "VerticalSecondTime");
+    Image verticalFlipFirstTime = model.verticalFlip("original"
+            , "verticalFlipFirstTime");
+    Image verticalFlipSecondTime = model.verticalFlip("verticalFlipFirstTime"
+            , "verticalFlipSecondTime");
     for (int i = 0; i < original.getHeight(); i++) {
       for (int j = 0; j < original.getWidth(); j++) {
-        assertEquals(VerticalFlipFirstTime.getPixels()[i][j].colorComponent.redComponent
-                , original.getPixels()[original.getHeight() - i - 1][j].colorComponent.redComponent);
-        assertEquals(VerticalFlipFirstTime.getPixels()[i][j].colorComponent.greenComponent
-                , original.getPixels()[original.getHeight() - i - 1][j].colorComponent.greenComponent);
-        assertEquals(VerticalFlipFirstTime.getPixels()[i][j].colorComponent.blueComponent
-                , original.getPixels()[original.getHeight() - i - 1][j].colorComponent.blueComponent);
+        assertEquals(verticalFlipFirstTime.getPixels()[i][j].colorComponent.redComponent,
+                original.getPixels()[original.getHeight() - i - 1][j].colorComponent.redComponent);
+        assertEquals(verticalFlipFirstTime.getPixels()[i][j].colorComponent.greenComponent,
+                original.getPixels()[original.getHeight() - i - 1][j].
+                        colorComponent.greenComponent);
+        assertEquals(verticalFlipFirstTime.getPixels()[i][j].colorComponent.blueComponent,
+                original.getPixels()[original.getHeight() - i - 1][j].
+                        colorComponent.blueComponent);
       }
     }
     for (int i = 0; i < original.getHeight(); i++) {
       for (int j = 0; j < original.getWidth(); j++) {
-        assertEquals(VerticalFlipSecondTime.getPixels()[i][j].colorComponent.redComponent
-                , original.getPixels()[i][j].colorComponent.redComponent);
-        assertEquals(VerticalFlipSecondTime.getPixels()[i][j].colorComponent.greenComponent
-                , original.getPixels()[i][j].colorComponent.greenComponent);
-        assertEquals(VerticalFlipSecondTime.getPixels()[i][j].colorComponent.blueComponent
-                , original.getPixels()[i][j].colorComponent.blueComponent);
+        assertEquals(verticalFlipSecondTime.getPixels()[i][j].colorComponent.redComponent,
+                original.getPixels()[i][j].colorComponent.redComponent);
+        assertEquals(verticalFlipSecondTime.getPixels()[i][j].colorComponent.greenComponent,
+                original.getPixels()[i][j].colorComponent.greenComponent);
+        assertEquals(verticalFlipSecondTime.getPixels()[i][j].colorComponent.blueComponent,
+                original.getPixels()[i][j].colorComponent.blueComponent);
       }
     }
   }
 
   @Test
   public void testHorizontalFlipNullImage() {
-    Image HorizontalFlipImage = model.horizontalFlip(null, "HorizontalFlipImage");
-    assertNull(HorizontalFlipImage);
+    Image horizontalFlipImage = model.horizontalFlip(null,
+            "horizontalFlipImage");
+    assertNull(horizontalFlipImage);
   }
 
   @Test
@@ -203,22 +209,22 @@ public class ImageProcessingImplTest {
             , "horizontalFlipSecondTime");
     for (int i = 0; i < original.getHeight(); i++) {
       for (int j = 0; j < original.getWidth(); j++) {
-        assertEquals(horizontalFlipFirstTime.getPixels()[i][j].colorComponent.redComponent
-                , original.getPixels()[i][original.getWidth() - 1 - j].colorComponent.redComponent);
-        assertEquals(horizontalFlipFirstTime.getPixels()[i][j].colorComponent.greenComponent
-                , original.getPixels()[i][original.getWidth() - 1 - j].colorComponent.greenComponent);
-        assertEquals(horizontalFlipFirstTime.getPixels()[i][j].colorComponent.blueComponent
-                , original.getPixels()[i][original.getWidth() - 1 - j].colorComponent.blueComponent);
+        assertEquals(horizontalFlipFirstTime.getPixels()[i][j].colorComponent.redComponent,
+                original.getPixels()[i][original.getWidth() - 1 - j].colorComponent.redComponent);
+        assertEquals(horizontalFlipFirstTime.getPixels()[i][j].colorComponent.greenComponent,
+                original.getPixels()[i][original.getWidth() - 1 - j].colorComponent.greenComponent);
+        assertEquals(horizontalFlipFirstTime.getPixels()[i][j].colorComponent.blueComponent,
+                original.getPixels()[i][original.getWidth() - 1 - j].colorComponent.blueComponent);
       }
     }
     for (int i = 0; i < original.getHeight(); i++) {
       for (int j = 0; j < original.getWidth(); j++) {
-        assertEquals(horizontalFlipSecondTime.getPixels()[i][j].colorComponent.redComponent
-                , original.getPixels()[i][j].colorComponent.redComponent);
-        assertEquals(horizontalFlipSecondTime.getPixels()[i][j].colorComponent.greenComponent
-                , original.getPixels()[i][j].colorComponent.greenComponent);
-        assertEquals(horizontalFlipSecondTime.getPixels()[i][j].colorComponent.blueComponent
-                , original.getPixels()[i][j].colorComponent.blueComponent);
+        assertEquals(horizontalFlipSecondTime.getPixels()[i][j].colorComponent.redComponent,
+                original.getPixels()[i][j].colorComponent.redComponent);
+        assertEquals(horizontalFlipSecondTime.getPixels()[i][j].colorComponent.greenComponent,
+                original.getPixels()[i][j].colorComponent.greenComponent);
+        assertEquals(horizontalFlipSecondTime.getPixels()[i][j].colorComponent.blueComponent,
+                original.getPixels()[i][j].colorComponent.blueComponent);
       }
     }
   }
@@ -237,18 +243,18 @@ public class ImageProcessingImplTest {
             , "original", "GreyScaleOnRedComponent");
     for (int i = 0; i < original.getHeight(); i++) {
       for (int j = 0; j < original.getWidth(); j++) {
-        assertEquals(original.getPixels()[i][j].colorComponent.redComponent
-                , GreyScaleOnRedComponent.getPixels()[i][j].colorComponent.blueComponent);
-        assertEquals(original.getPixels()[i][j].colorComponent.redComponent
-                , GreyScaleOnRedComponent.getPixels()[i][j].colorComponent.greenComponent);
+        assertEquals(original.getPixels()[i][j].colorComponent.redComponent,
+                GreyScaleOnRedComponent.getPixels()[i][j].colorComponent.blueComponent);
+        assertEquals(original.getPixels()[i][j].colorComponent.redComponent,
+                GreyScaleOnRedComponent.getPixels()[i][j].colorComponent.greenComponent);
       }
     }
   }
 
   @Test
   public void testGreyScaleOnGreenComponentNullImage() {
-    Image GreyScaleOnGreenComponent = model.greyscale("green-component"
-            , null, "GreyScaleOnGreenComponent");
+    Image GreyScaleOnGreenComponent = model.greyscale("green-component",
+            null, "GreyScaleOnGreenComponent");
     assertNull(GreyScaleOnGreenComponent);
   }
 
@@ -259,18 +265,18 @@ public class ImageProcessingImplTest {
             , "original", "GreyScaleOnGreenComponent");
     for (int i = 0; i < original.getHeight(); i++) {
       for (int j = 0; j < original.getWidth(); j++) {
-        assertEquals(original.getPixels()[i][j].colorComponent.greenComponent
-                , GreyScaleOnGreenComponent.getPixels()[i][j].colorComponent.blueComponent);
-        assertEquals(original.getPixels()[i][j].colorComponent.greenComponent
-                , GreyScaleOnGreenComponent.getPixels()[i][j].colorComponent.redComponent);
+        assertEquals(original.getPixels()[i][j].colorComponent.greenComponent,
+                GreyScaleOnGreenComponent.getPixels()[i][j].colorComponent.blueComponent);
+        assertEquals(original.getPixels()[i][j].colorComponent.greenComponent,
+                GreyScaleOnGreenComponent.getPixels()[i][j].colorComponent.redComponent);
       }
     }
   }
 
   @Test
   public void testGreyScaleOnBlueComponentNullImage() {
-    Image GreyScaleOnBlueComponent = model.greyscale("blue-component"
-            , null, "GreyScaleOnBlueComponent");
+    Image GreyScaleOnBlueComponent = model.greyscale("blue-component",
+            null, "GreyScaleOnBlueComponent");
     assertNull(GreyScaleOnBlueComponent);
   }
 
@@ -281,82 +287,82 @@ public class ImageProcessingImplTest {
             , "original", "GreyScaleOnBlueComponent");
     for (int i = 0; i < original.getHeight(); i++) {
       for (int j = 0; j < original.getWidth(); j++) {
-        assertEquals(original.getPixels()[i][j].colorComponent.blueComponent
-                , GreyScaleOnBlueComponent.getPixels()[i][j].colorComponent.redComponent);
-        assertEquals(original.getPixels()[i][j].colorComponent.blueComponent
-                , GreyScaleOnBlueComponent.getPixels()[i][j].colorComponent.greenComponent);
+        assertEquals(original.getPixels()[i][j].colorComponent.blueComponent,
+                GreyScaleOnBlueComponent.getPixels()[i][j].colorComponent.redComponent);
+        assertEquals(original.getPixels()[i][j].colorComponent.blueComponent,
+                GreyScaleOnBlueComponent.getPixels()[i][j].colorComponent.greenComponent);
       }
     }
   }
 
   @Test
   public void testGreyScaleOnLumaComponentOnNullImage() {
-    Image GreyScaleOnLumaComponent = model.greyscale("luma-component"
-            , null, "GreyScaleOnLumaComponent");
+    Image GreyScaleOnLumaComponent = model.greyscale("luma-component",
+            null, "GreyScaleOnLumaComponent");
     assertNull(GreyScaleOnLumaComponent);
   }
 
   @Test
   public void testGreyScaleOnLumaComponent() {
     Image original = model.loadImage("res/dog.ppm", "original");
-    Image GreyScaleOnLumaComponent = model.greyscale("luma-component"
-            , "original", "GreyScaleOnLumaComponent");
+    Image GreyScaleOnLumaComponent = model.greyscale("luma-component",
+            "original", "GreyScaleOnLumaComponent");
     for (int i = 0; i < original.getHeight(); i++) {
       for (int j = 0; j < original.getWidth(); j++) {
-        assertEquals(original.getPixels()[i][j].getLumaComponent()
-                , GreyScaleOnLumaComponent.getPixels()[i][j].colorComponent.redComponent);
-        assertEquals(original.getPixels()[i][j].getLumaComponent()
-                , GreyScaleOnLumaComponent.getPixels()[i][j].colorComponent.greenComponent);
-        assertEquals(original.getPixels()[i][j].getLumaComponent()
-                , GreyScaleOnLumaComponent.getPixels()[i][j].colorComponent.blueComponent);
+        assertEquals(original.getPixels()[i][j].getLumaComponent(),
+                GreyScaleOnLumaComponent.getPixels()[i][j].colorComponent.redComponent);
+        assertEquals(original.getPixels()[i][j].getLumaComponent(),
+                GreyScaleOnLumaComponent.getPixels()[i][j].colorComponent.greenComponent);
+        assertEquals(original.getPixels()[i][j].getLumaComponent(),
+                GreyScaleOnLumaComponent.getPixels()[i][j].colorComponent.blueComponent);
       }
     }
   }
 
   @Test
   public void testGreyScaleOnValueComponentOnNullImage() {
-    Image GreyScaleOnValueComponent = model.greyscale("value-component"
-            , null, "GreyScaleOnValueComponent");
+    Image GreyScaleOnValueComponent = model.greyscale("value-component",
+            null, "GreyScaleOnValueComponent");
     assertNull(GreyScaleOnValueComponent);
   }
 
   @Test
   public void testGreyScaleOnValueComponent() {
     Image original = model.loadImage("res/dog.ppm", "original");
-    Image GreyScaleOnValueComponent = model.greyscale("value-component"
-            , "original", "GreyScaleOnValueComponent");
+    Image GreyScaleOnValueComponent = model.greyscale("value-component",
+            "original", "GreyScaleOnValueComponent");
     for (int i = 0; i < original.getHeight(); i++) {
       for (int j = 0; j < original.getWidth(); j++) {
-        assertEquals(original.getPixels()[i][j].getValueComponent()
-                , GreyScaleOnValueComponent.getPixels()[i][j].colorComponent.redComponent);
-        assertEquals(original.getPixels()[i][j].getValueComponent()
-                , GreyScaleOnValueComponent.getPixels()[i][j].colorComponent.greenComponent);
-        assertEquals(original.getPixels()[i][j].getValueComponent()
-                , GreyScaleOnValueComponent.getPixels()[i][j].colorComponent.blueComponent);
+        assertEquals(original.getPixels()[i][j].getValueComponent(),
+                GreyScaleOnValueComponent.getPixels()[i][j].colorComponent.redComponent);
+        assertEquals(original.getPixels()[i][j].getValueComponent(),
+                GreyScaleOnValueComponent.getPixels()[i][j].colorComponent.greenComponent);
+        assertEquals(original.getPixels()[i][j].getValueComponent(),
+                GreyScaleOnValueComponent.getPixels()[i][j].colorComponent.blueComponent);
       }
     }
   }
 
   @Test
   public void testGreyScaleOnIntensityComponentOnNullImage() {
-    Image GreyScaleOnIntensityComponent = model.greyscale("intensity-component"
-            , null, "GreyScaleOnIntensityComponent");
+    Image GreyScaleOnIntensityComponent = model.greyscale("intensity-component",
+            null, "GreyScaleOnIntensityComponent");
     assertNull(GreyScaleOnIntensityComponent);
   }
 
   @Test
   public void testGreyScaleOnIntensityComponent() {
     Image original = model.loadImage("res/dog.ppm", "original");
-    Image GreyScaleOnIntensityComponent = model.greyscale("intensity-component"
-            , "original", "GreyScaleOnIntensityComponent");
+    Image GreyScaleOnIntensityComponent = model.greyscale("intensity-component",
+            "original", "GreyScaleOnIntensityComponent");
     for (int i = 0; i < original.getHeight(); i++) {
       for (int j = 0; j < original.getWidth(); j++) {
-        assertEquals(original.getPixels()[i][j].getIntensityComponent()
-                , GreyScaleOnIntensityComponent.getPixels()[i][j].colorComponent.redComponent);
-        assertEquals(original.getPixels()[i][j].getIntensityComponent()
-                , GreyScaleOnIntensityComponent.getPixels()[i][j].colorComponent.greenComponent);
-        assertEquals(original.getPixels()[i][j].getIntensityComponent()
-                , GreyScaleOnIntensityComponent.getPixels()[i][j].colorComponent.blueComponent);
+        assertEquals(original.getPixels()[i][j].getIntensityComponent(),
+                GreyScaleOnIntensityComponent.getPixels()[i][j].colorComponent.redComponent);
+        assertEquals(original.getPixels()[i][j].getIntensityComponent(),
+                GreyScaleOnIntensityComponent.getPixels()[i][j].colorComponent.greenComponent);
+        assertEquals(original.getPixels()[i][j].getIntensityComponent(),
+                GreyScaleOnIntensityComponent.getPixels()[i][j].colorComponent.blueComponent);
       }
     }
   }
@@ -380,25 +386,25 @@ public class ImageProcessingImplTest {
   public void testRGBCombineOnNullRedImage() {
     Image original = model.loadImage("res/dog.ppm", "original");
     Image redImage = null;
-    Image greenImage = model.greyscale("green-component"
-            , "original", "greenImage");
-    Image blueImage = model.greyscale("blue-component"
-            , "original", "blueImage");
-    Image ResultImageRed = model.rgbCombine("ResultImageRed", "redImage"
-            , "greenImage", "blueImage");
+    Image greenImage = model.greyscale("green-component",
+            "original", "greenImage");
+    Image blueImage = model.greyscale("blue-component",
+            "original", "blueImage");
+    Image ResultImageRed = model.rgbCombine("ResultImageRed", "redImage",
+            "greenImage", "blueImage");
     assertNull(ResultImageRed);
   }
 
   @Test
   public void testRGBCombineOnNullGreenImage() {
     Image original = model.loadImage("res/dog.ppm", "original");
-    Image redImage = model.greyscale("red-component"
-            , "original", "redImage");
+    Image redImage = model.greyscale("red-component",
+            "original", "redImage");
     Image greenImage = null;
-    Image blueImage = model.greyscale("blue-component"
-            , "original", "blueImage");
-    Image ResultImageGreen = model.rgbCombine("ResultImageGreen", "redImage"
-            , "greenImage", "blueImage");
+    Image blueImage = model.greyscale("blue-component",
+            "original", "blueImage");
+    Image ResultImageGreen = model.rgbCombine("ResultImageGreen",
+            "redImage", "greenImage", "blueImage");
     assertNull(ResultImageGreen);
   }
 
@@ -410,30 +416,30 @@ public class ImageProcessingImplTest {
     Image greenImage = model.greyscale("green-component"
             , "original", "greenImage");
     Image blueImage = null;
-    Image ResultImageBlue = model.rgbCombine("ResultImageBlue", "redImage"
-            , "greenImage", "blueImage");
+    Image ResultImageBlue = model.rgbCombine("ResultImageBlue"
+            , "redImage", "greenImage", "blueImage");
     assertEquals(ResultImageBlue, null);
   }
 
   @Test
   public void testRGBCombine() {
     Image original = model.loadImage("res/dog.ppm", "original");
-    Image redImage = model.greyscale("red-component"
-            , "original", "redImage");
-    Image greenImage = model.greyscale("green-component"
-            , "original", "greenImage");
-    Image blueImage = model.greyscale("blue-component"
-            , "original", "blueImage");
-    Image RGBCombinedImage = model.rgbCombine("RGBCombinedImage", "redImage"
-            , "greenImage", "blueImage");
+    Image redImage = model.greyscale("red-component",
+            "original", "redImage");
+    Image greenImage = model.greyscale("green-component",
+            "original", "greenImage");
+    Image blueImage = model.greyscale("blue-component",
+            "original", "blueImage");
+    Image RGBCombinedImage = model.rgbCombine("RGBCombinedImage"
+            , "redImage", "greenImage", "blueImage");
     for (int i = 0; i < original.getHeight(); i++) {
       for (int j = 0; j < original.getWidth(); j++) {
-        assertEquals(original.getPixels()[i][j].colorComponent.redComponent
-                , RGBCombinedImage.getPixels()[i][j].colorComponent.redComponent);
-        assertEquals(original.getPixels()[i][j].colorComponent.greenComponent
-                , RGBCombinedImage.getPixels()[i][j].colorComponent.greenComponent);
-        assertEquals(original.getPixels()[i][j].colorComponent.blueComponent
-                , RGBCombinedImage.getPixels()[i][j].colorComponent.blueComponent);
+        assertEquals(original.getPixels()[i][j].colorComponent.redComponent,
+                RGBCombinedImage.getPixels()[i][j].colorComponent.redComponent);
+        assertEquals(original.getPixels()[i][j].colorComponent.greenComponent,
+                RGBCombinedImage.getPixels()[i][j].colorComponent.greenComponent);
+        assertEquals(original.getPixels()[i][j].colorComponent.blueComponent,
+                RGBCombinedImage.getPixels()[i][j].colorComponent.blueComponent);
       }
     }
   }
