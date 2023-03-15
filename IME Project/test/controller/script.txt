@@ -1,0 +1,3 @@
+load res/koala.ppm koala
+vertical-flip koala koala-vertical
+save res/koala-vertical.ppm koala-vertical

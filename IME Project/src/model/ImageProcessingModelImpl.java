@@ -52,6 +52,8 @@ public class ImageProcessingModelImpl implements ImageProcessingModel {
       case "luma-component":
         resultImage = greyscaleLumaComponent(sourceImage);
         break;
+      default:
+        return null;
     }
     listOfImages.put(destImageName, resultImage);
     return resultImage;
@@ -131,40 +133,9 @@ public class ImageProcessingModelImpl implements ImageProcessingModel {
     if (image == null) {
       return null;
     }
-//    Pixel[][] listOfPixelsRedDestImage = new Pixel[image.getHeight()][image.getWidth()];
-//    Pixel[][] listOfPixelsGreenDestImage = new Pixel[image.getHeight()][image.getWidth()];
-//    Pixel[][] listOfPixelsBlueDestImage = new Pixel[image.getHeight()][image.getWidth()];
-//    for (int i = 0; i < image.getHeight(); i++) {
-//      for (int j = 0; j < image.getWidth(); j++) {
-//        listOfPixelsRedDestImage[i][j] = new Pixel(i, j, 0, 0,
-//                0);
-//        listOfPixelsGreenDestImage[i][j] = new Pixel(i, j, 0, 0,
-//                0);
-//        listOfPixelsBlueDestImage[i][j] = new Pixel(i, j, 0, 0,
-//                0);
-//        listOfPixelsRedDestImage[i][j].colorComponent.greenComponent =
-//                listOfPixelsRedDestImage[i][j].colorComponent.redComponent;
-//        listOfPixelsRedDestImage[i][j].colorComponent.blueComponent
-//                = listOfPixelsRedDestImage[i][j].colorComponent.redComponent;
-//        listOfPixelsGreenDestImage[i][j].colorComponent.redComponent =
-//                listOfPixelsGreenDestImage[i][j].colorComponent.greenComponent;
-//        listOfPixelsGreenDestImage[i][j].colorComponent.blueComponent
-//                = listOfPixelsGreenDestImage[i][j].colorComponent.greenComponent;
-//        listOfPixelsBlueDestImage[i][j].colorComponent.greenComponent =
-//                listOfPixelsBlueDestImage[i][j].colorComponent.blueComponent;
-//        listOfPixelsBlueDestImage[i][j].colorComponent.redComponent
-//                = listOfPixelsBlueDestImage[i][j].colorComponent.blueComponent;
-//      }
-//    }
     Image redDestImage = greyscaleRedComponent(image);
-//            new Image(image.getWidth(), image.getHeight(), image.getMaxValueOfColor(),
-//            listOfPixelsRedDestImage);
     Image greenDestImage = greyscaleGreenComponent(image);
-//            new Image(image.getWidth(), image.getHeight(),
-//            image.getMaxValueOfColor(), listOfPixelsGreenDestImage);
     Image blueDestImage = greyscaleBlueComponent(image);
-//            new Image(image.getWidth(), image.getHeight(), image.getMaxValueOfColor(),
-//            listOfPixelsBlueDestImage);
     listOfImages.put(redImageName, redDestImage);
     listOfImages.put(greenImageName, greenDestImage);
     listOfImages.put(blueImageName, blueDestImage);

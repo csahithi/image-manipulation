@@ -15,7 +15,7 @@ public class BrightenImage implements ImageCommandController {
   }
 
   @Override
-  public Image go(ImageProcessingModel m) {
+  public Image execute(ImageProcessingModel m) {
     return m.brighten(increment, sourceImageName, destImageName);
   }
 }

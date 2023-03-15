@@ -14,7 +14,7 @@ public class VerticalFlip implements ImageCommandController {
   }
 
   @Override
-  public Image go(ImageProcessingModel m) {
+  public Image execute(ImageProcessingModel m) {
     return m.verticalFlip(sourceImageName, destImageName);
   }
 

@@ -15,7 +15,7 @@ public class SaveImage implements ImageCommandController {
   }
 
   @Override
-  public Image go(ImageProcessingModel m) throws IOException {
+  public Image execute(ImageProcessingModel m) throws IOException {
     return m.saveImage(imagePath, imageName);
   }
 }

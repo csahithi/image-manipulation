@@ -116,7 +116,7 @@ public class ImageProcessingControllerImpl implements ImageProcessingController 
       }
     }
     if (cmd != null) {
-      Image m = cmd.go(model);
+      Image m = cmd.execute(model);
       if(m == null){
         System.out.println(String.format("Invalid command %s", command));
       }
@@ -126,7 +126,7 @@ public class ImageProcessingControllerImpl implements ImageProcessingController 
   }
 
   @Override
-  public void go() throws IOException {
+  public void execute() throws IOException {
     String[] inputArray;
     Scanner scan = new Scanner(this.in);
 //    Map<String, Function<Scanner, ImageCommandController>> knownCommands = new HashMap<>();

@@ -17,7 +17,7 @@ public class RGBCombine implements ImageCommandController {
   }
 
   @Override
-  public Image go(ImageProcessingModel m) {
+  public Image execute(ImageProcessingModel m) {
     return m.rgbCombine(destImageName, redImage, greenImage, blueImage);
   }
 }

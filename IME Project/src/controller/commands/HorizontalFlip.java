@@ -13,7 +13,7 @@ public class HorizontalFlip implements ImageCommandController {
   }
 
   @Override
-  public Image go(ImageProcessingModel m) {
+  public Image execute(ImageProcessingModel m) {
     return m.horizontalFlip(sourceImageName, destImageName);
   }
 }

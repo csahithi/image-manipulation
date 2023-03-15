@@ -13,7 +13,7 @@ public class LoadImage implements ImageCommandController {
   }
 
   @Override
-  public Image go(ImageProcessingModel m) {
+  public Image execute(ImageProcessingModel m) {
     return m.loadImage(imagePath, destImageName);
   }
 }
