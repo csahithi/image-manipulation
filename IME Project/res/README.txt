@@ -40,7 +40,6 @@ all command classes are united.
 
 Features supported by project
 ---------------------------------------------------------------------------------------------------
-
 1.Load image: Load an image from the specified path and refer it to henceforth in the program by
 the given image name.
 
@@ -73,13 +72,11 @@ green and blue components from the three images respectively.
 
 Classes and Interfaces in this Project
 ----------------------------------------
-
 ImageManipulator: The entry point of the program where we can create Image Processing Model and run
 some operations on it.
 
 Controller-Related Classes and Interfaces
 ___________________________________________
-
 ImageProcessingController : This interface represents the main controller of the program.
 
 ImageProcessingControllerImpl : This class implements ImageProcessingController class.The user
@@ -89,7 +86,6 @@ ImageCommandController : Command interface for the command classes.
 
 Command Classes
 ___________________________________________
-
 BrightenImage : This command class brightens the image by the given increment.
 
 Greyscale : This command class creates a greyscale image with the component of the image with the
@@ -115,7 +111,6 @@ henceforth by the given destination name.
 
 Model-Related Classes and Interfaces:
 ______________________________________
-
 Color : This class represents RGB color factor for each pixel.
 
 CreatePPMUtil : This class contains utility methods to create a PPM image file from image object
@@ -139,24 +134,23 @@ its contents.
 
 Test-Related Classes and Interfaces:
 ______________________________________
-
 CommandControllerTest : This class contains tests for ImageProcessing Controller class.
 
 ImageProcessingImplTest : This class contains tests for ImageProcessing model class.
-
-
-Citation for the source of our Image
---------------------------------------
-We are the sole owners of the images provided in our project. We authorize the usage of the given
-images in the project.
 
 
 Instructions to run the script file
 --------------------------------------
 Step 1: Run the ImageManipulator class
 Step 2: Type 'run res/script.txt' in the console and press enter. Feel free to run any other script
-file by mentioning the file path after run command.
-Step 3: (Optional)Feel free to run any other commands by giving them as input in console.
+file by mentioning the file path after run command. While running a script, the filepath is provided
+as a command line argument to the 'run' command.
+Step 3: (Optional) Feel free to run any other commands by giving them as input in console.
 
+
+Citation for the source of our Image
+--------------------------------------
+We are the sole owners of the images provided in our project. We authorize the usage of the given
+images in the project.
 
 
