@@ -304,7 +304,7 @@ public class CommandControllerTest {
     String input = "run " + a;
     //in = new ByteArrayInputStream(input.getBytes());
     try {
-      in = new FileInputStream("test/controller/script.txt");
+      in = new FileInputStream(a);
     } catch (FileNotFoundException e) {
       fail("Input file not present");
     }
@@ -354,12 +354,160 @@ public class CommandControllerTest {
     ImageProcessingModel model = new MockModel(mocklog);
     ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, out);
     controller.execute();
-    assertEquals("", mocklog.toString());
+    assertEquals("Unknown command " + input, out.toString().stripTrailing());
 
-    input = "load res/image.ppm a b c";
-    in = new ByteArrayInputStream(input.getBytes());
+    String input1 = "load res/image.ppm a b c";
+    in = new ByteArrayInputStream(input1.getBytes());
     controller = new ImageProcessingControllerImpl(model, in, out);
     controller.execute();
-    assertEquals("", mocklog.toString());
+    assertEquals("Unknown command " + input, out.toString().stripTrailing());
+  }
+
+  @Test
+  public void testWrongNumberOfInputsForBrighten() {
+    InputStream in = null;
+    String input = "brighten 3 image";
+    in = new ByteArrayInputStream(input.getBytes());
+    OutputStream out = new ByteArrayOutputStream();
+    StringBuilder mocklog = new StringBuilder();
+    ImageProcessingModel model = new MockModel(mocklog);
+    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, out);
+    controller.execute();
+    assertEquals("Unknown command " + input, out.toString().stripTrailing());
+
+    String input1 = "brighten 10 a b c";
+    in = new ByteArrayInputStream(input1.getBytes());
+    controller = new ImageProcessingControllerImpl(model, in, out);
+    controller.execute();
+    assertEquals("Unknown command " + input, out.toString().stripTrailing());
+  }
+
+  @Test
+  public void testWrongNumberOfInputsForHorizontalFlip() {
+    InputStream in = null;
+    String input = "horizontal-flip image";
+    in = new ByteArrayInputStream(input.getBytes());
+    OutputStream out = new ByteArrayOutputStream();
+    StringBuilder mocklog = new StringBuilder();
+    ImageProcessingModel model = new MockModel(mocklog);
+    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, out);
+    controller.execute();
+    assertEquals("Unknown command " + input, out.toString().stripTrailing());
+
+    String input1 = "horizontal-flip a b c";
+    in = new ByteArrayInputStream(input1.getBytes());
+    controller = new ImageProcessingControllerImpl(model, in, out);
+    controller.execute();
+    assertEquals("Unknown command " + input, out.toString().stripTrailing());
+  }
+
+  @Test
+  public void testWrongNumberOfInputsForVerticalFlip() {
+    InputStream in = null;
+    String input = "vertical-flip image";
+    in = new ByteArrayInputStream(input.getBytes());
+    OutputStream out = new ByteArrayOutputStream();
+    StringBuilder mocklog = new StringBuilder();
+    ImageProcessingModel model = new MockModel(mocklog);
+    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, out);
+    controller.execute();
+    assertEquals("Unknown command " + input, out.toString().stripTrailing());
+
+    String input1 = "vertical-flip a b c";
+    in = new ByteArrayInputStream(input1.getBytes());
+    controller = new ImageProcessingControllerImpl(model, in, out);
+    controller.execute();
+    assertEquals("Unknown command " + input, out.toString().stripTrailing());
+  }
+
+  @Test
+  public void testWrongNumberOfInputsForSave() {
+    InputStream in = null;
+    String input = "save res/image.ppm";
+    in = new ByteArrayInputStream(input.getBytes());
+    OutputStream out = new ByteArrayOutputStream();
+    StringBuilder mocklog = new StringBuilder();
+    ImageProcessingModel model = new MockModel(mocklog);
+    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, out);
+    controller.execute();
+    assertEquals("Unknown command " + input, out.toString().stripTrailing());
+
+    String input1 = "save res/image.ppm a b c";
+    in = new ByteArrayInputStream(input1.getBytes());
+    controller = new ImageProcessingControllerImpl(model, in, out);
+    controller.execute();
+    assertEquals("Unknown command " + input, out.toString().stripTrailing());
+  }
+
+  @Test
+  public void testWrongNumberOfInputsForGreyscale() {
+    InputStream in = null;
+    String input = "greyscale red-component image";
+    in = new ByteArrayInputStream(input.getBytes());
+    OutputStream out = new ByteArrayOutputStream();
+    StringBuilder mocklog = new StringBuilder();
+    ImageProcessingModel model = new MockModel(mocklog);
+    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, out);
+    controller.execute();
+    assertEquals("Unknown command " + input, out.toString().stripTrailing());
+
+    String input1 = "greyscale red-component a b c";
+    in = new ByteArrayInputStream(input1.getBytes());
+    controller = new ImageProcessingControllerImpl(model, in, out);
+    controller.execute();
+    assertEquals("Unknown command " + input, out.toString().stripTrailing());
+  }
+
+  @Test
+  public void testWrongNumberOfInputsForRGBSplit() {
+    InputStream in = null;
+    String input = "rgb-split image";
+    in = new ByteArrayInputStream(input.getBytes());
+    OutputStream out = new ByteArrayOutputStream();
+    StringBuilder mocklog = new StringBuilder();
+    ImageProcessingModel model = new MockModel(mocklog);
+    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, out);
+    controller.execute();
+    assertEquals("Unknown command " + input, out.toString().stripTrailing());
+
+    input = "rgb-split dest a b c d";
+    InputStream in1 = new ByteArrayInputStream(input.getBytes());
+    OutputStream out1 = new ByteArrayOutputStream();
+    controller = new ImageProcessingControllerImpl(model, in1, out1);
+    controller.execute();
+    assertEquals("Unknown command " + input, out1.toString().stripTrailing());
+  }
+
+  @Test
+  public void testWrongNumberOfInputsForRGBCombine() {
+    InputStream in = null;
+    String input = "rgb-combine image";
+    in = new ByteArrayInputStream(input.getBytes());
+    OutputStream out = new ByteArrayOutputStream();
+    StringBuilder mocklog = new StringBuilder();
+    ImageProcessingModel model = new MockModel(mocklog);
+    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, out);
+    controller.execute();
+    assertEquals("Unknown command " + input, out.toString().stripTrailing());
+
+    input = "rgb-combine dest a b c d";
+    InputStream in1 = new ByteArrayInputStream(input.getBytes());
+    OutputStream out1 = new ByteArrayOutputStream();
+    controller = new ImageProcessingControllerImpl(model, in1, out1);
+    controller.execute();
+    assertEquals("Unknown command " + input, out1.toString().stripTrailing());
+  }
+
+  @Test
+  public void testBrightenWithStringInsteadOfInt() {
+    InputStream in = null;
+    String input = "brighten a image image-brighten";
+    in = new ByteArrayInputStream(input.getBytes());
+    OutputStream out = new ByteArrayOutputStream();
+    StringBuilder mocklog = new StringBuilder();
+    ImageProcessingModel model = new MockModel(mocklog);
+    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, out);
+    controller.execute();
+    assertEquals("Unknown command " + input, out.toString().stripTrailing());
   }
 }
