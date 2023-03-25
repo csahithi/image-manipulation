@@ -7,7 +7,7 @@ import java.util.Map;
  * This class implements all the operations/commands that can applied on image.
  */
 public class ImageProcessingModelImpl implements ImageProcessingModel {
-  public final Map<String, Image> LIST_OF_IMAGES = new HashMap<>();
+  protected final Map<String, Image> LIST_OF_IMAGES = new HashMap<>();
 
   @Override
   public Image loadImage(String imagePath, String imageName) {
