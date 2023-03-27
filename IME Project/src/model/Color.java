@@ -7,6 +7,7 @@ public class Color extends java.awt.Color {
   public int redComponent;
   public int greenComponent;
   public int blueComponent;
+  public int[] color;
 
   /**
    * Constructor to initialize values of components of color object.
