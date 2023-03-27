@@ -3,7 +3,7 @@ package model;
 /**
  * This class represents RGB color factor for each pixel.
  */
-public class Color {
+public class Color extends java.awt.Color {
   public int redComponent;
   public int greenComponent;
   public int blueComponent;
@@ -16,8 +16,13 @@ public class Color {
    * @param blueComponent  is the blue component value of color
    */
   public Color(int redComponent, int greenComponent, int blueComponent) {
+    super(redComponent, greenComponent, blueComponent);
     this.redComponent = redComponent;
     this.greenComponent = greenComponent;
     this.blueComponent = blueComponent;
+  }
+
+  public Color(int rgbValue){
+    super(rgbValue);
   }
 }

@@ -10,6 +10,9 @@ import java.util.Scanner;
 import java.util.function.Predicate;
 
 import controller.commands.Brighten;
+import controller.commands.ColorTransformation;
+import controller.commands.Dither;
+import controller.commands.Filtering;
 import controller.commands.Greyscale;
 import controller.commands.HorizontalFlip;
 import controller.commands.ImageCommandController;
@@ -81,6 +84,21 @@ public class ImageProcessingControllerImpl implements ImageProcessingController 
               break;
             case "vertical-flip":
               cmd = new VerticalFlip(inputArray[1], inputArray[2]);
+              break;
+            case "greyscale":
+              cmd = new Greyscale("luma-component", inputArray[1], inputArray[2]);
+              break;
+            case "sepia":
+              cmd = new ColorTransformation("sepia", inputArray[1], inputArray[2]);
+              break;
+            case "blur":
+              cmd = new Filtering("blur", inputArray[1], inputArray[2]);
+              break;
+            case "sharpen":
+              cmd = new Filtering("sharpen", inputArray[1], inputArray[2]);
+              break;
+            case "dither":
+              cmd = new Dither(inputArray[1], inputArray[2]);
               break;
             default:
               outStream.println(String.format("Unknown command %s", command));

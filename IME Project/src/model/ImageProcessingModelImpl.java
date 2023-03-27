@@ -11,7 +11,17 @@ public class ImageProcessingModelImpl implements ImageProcessingModel {
 
   @Override
   public Image loadImage(String imagePath, String imageName) {
-    Image image = ReadPPMUtil.readPPM(imagePath);
+    String extension = null;
+    Image image;
+    int index = imagePath.lastIndexOf('.');
+    if (index > 0) {
+      extension = imagePath.substring(index + 1);
+    }
+    if (extension.equalsIgnoreCase("PPM")) {
+      image = ImageUtil.readPPM(imagePath);
+    } else {
+      image = ImageUtil.readImage(imagePath);
+    }
     if (image == null) {
       return null;
     }
@@ -25,7 +35,16 @@ public class ImageProcessingModelImpl implements ImageProcessingModel {
     if (image == null) {
       return null;
     }
-    CreatePPMUtil.createPPM(imagePath, image);
+    String extension = null;
+    int index = imagePath.lastIndexOf('.');
+    if (index > 0) {
+      extension = imagePath.substring(index + 1);
+    }
+    if (extension.equalsIgnoreCase("PPM")) {
+      ImageUtil.createPPM(imagePath, image);
+    } else {
+      ImageUtil.createImage(extension, imagePath, image);
+    }
     return image;
   }
 
