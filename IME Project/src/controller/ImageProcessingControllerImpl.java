@@ -32,6 +32,7 @@ public class ImageProcessingControllerImpl implements ImageProcessingController 
   private final ImageProcessingModel model;
   private final InputStream in;
   private final OutputStream out;
+  private boolean exitFlag;
 
   /**
    * This method is the constructor to the ImageProcessingControllerImpl class.
@@ -51,23 +52,17 @@ public class ImageProcessingControllerImpl implements ImageProcessingController 
     //Image m = null;
     ImageCommandController cmd = null;
     PrintStream outStream = new PrintStream(this.out);
-    if (inputArray.length == 2 && inputArray[0].equals("run")) {
-      try {
-        BufferedReader reader = new BufferedReader(new FileReader(inputArray[1]));
-        String line = reader.readLine();
-        while (line != null) {
-          System.out.println("Executing line: " + line);
-          String[] runScriptInputArray = line.split(" ");
-          runScriptInputArray = Arrays.stream(runScriptInputArray)
-                  .filter(Predicate.not(String::isEmpty))
-                  .toArray(String[]::new);
-          readCommands(runScriptInputArray, line);
-          line = reader.readLine();
-        }
-        reader.close();
+    if (inputArray.length == 2) {
+      if (inputArray[0].equals("run")) {
+        readScript(inputArray[1]);
         return;
-      } catch (Exception e) {
-        System.err.println("Error while running script file: " + e.getMessage());
+      }
+      else if(inputArray[0].equals("-file")){
+        if(readScript(inputArray[1])){
+          exitFlag = true;
+          System.out.println("File executed.");
+        }
+        return;
       }
     } else {
       try {
@@ -137,11 +132,33 @@ public class ImageProcessingControllerImpl implements ImageProcessingController 
     }
   }
 
+  private boolean readScript(String filepath){
+    try {
+      BufferedReader reader = new BufferedReader(new FileReader(filepath));
+      String line = reader.readLine();
+      while (line != null) {
+        System.out.println("Executing line: " + line);
+        String[] runScriptInputArray = line.split(" ");
+        runScriptInputArray = Arrays.stream(runScriptInputArray)
+                .filter(Predicate.not(String::isEmpty))
+                .toArray(String[]::new);
+        readCommands(runScriptInputArray, line);
+        line = reader.readLine();
+      }
+      reader.close();
+      return true;
+    } catch (Exception e) {
+      System.err.println("Error while running script file: " + e.getMessage());
+      return false;
+    }
+  }
+
   @Override
   public void execute() {
     String[] inputArray;
     Scanner scan = new Scanner(this.in);
-    while (scan.hasNext()) {
+    exitFlag = false;
+    while (!exitFlag && scan.hasNext()) {
       String input = scan.nextLine();
       inputArray = input.split(" ");
       inputArray = Arrays.stream(inputArray)
