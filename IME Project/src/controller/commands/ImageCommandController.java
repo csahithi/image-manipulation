@@ -1,7 +1,7 @@
 package controller.commands;
 
 import model.Image;
-import model.ImageProcessingModel;
+import model.ImprovedImageProcessing;
 
 /**
  * Command interface for the classes representing user commands.
@@ -14,5 +14,5 @@ public interface ImageCommandController {
    * @param m the model of the program
    * @return the image after processing
    */
-  Image execute(ImageProcessingModel m);
+  Image execute(ImprovedImageProcessing m);
 }

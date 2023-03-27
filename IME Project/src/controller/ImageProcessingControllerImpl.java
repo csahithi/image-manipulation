@@ -22,14 +22,14 @@ import controller.commands.RGBSplit;
 import controller.commands.Save;
 import controller.commands.VerticalFlip;
 import model.Image;
-import model.ImageProcessingModel;
+import model.ImprovedImageProcessing;
 
 /**
  * This class implements ImageProcessingController class.
  * The user inputs/commands are processed at the controller level in this class.
  */
 public class ImageProcessingControllerImpl implements ImageProcessingController {
-  private final ImageProcessingModel model;
+  private final ImprovedImageProcessing model;
   private final InputStream in;
   private final OutputStream out;
   private boolean exitFlag;
@@ -41,7 +41,7 @@ public class ImageProcessingControllerImpl implements ImageProcessingController 
    * @param in    input of the InputStream.
    * @param out   output of the InputStream.
    */
-  public ImageProcessingControllerImpl(ImageProcessingModel model, InputStream in,
+  public ImageProcessingControllerImpl(ImprovedImageProcessing model, InputStream in,
                                        OutputStream out) {
     this.model = model;
     this.in = in;
@@ -56,9 +56,8 @@ public class ImageProcessingControllerImpl implements ImageProcessingController 
       if (inputArray[0].equals("run")) {
         readScript(inputArray[1]);
         return;
-      }
-      else if(inputArray[0].equals("-file")){
-        if(readScript(inputArray[1])){
+      } else if (inputArray[0].equals("-file")) {
+        if (readScript(inputArray[1])) {
           exitFlag = true;
           System.out.println("File executed.");
         }
@@ -132,7 +131,7 @@ public class ImageProcessingControllerImpl implements ImageProcessingController 
     }
   }
 
-  private boolean readScript(String filepath){
+  private boolean readScript(String filepath) {
     try {
       BufferedReader reader = new BufferedReader(new FileReader(filepath));
       String line = reader.readLine();

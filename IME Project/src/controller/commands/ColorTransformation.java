@@ -1,7 +1,7 @@
 package controller.commands;
 
 import model.Image;
-import model.ImageProcessingModel;
+import model.ImprovedImageProcessing;
 
 public class ColorTransformation implements ImageCommandController {
   String operation;
@@ -15,7 +15,8 @@ public class ColorTransformation implements ImageCommandController {
   }
 
   @Override
-  public Image execute(ImageProcessingModel m) {
-    return null;
+  public Image execute(ImprovedImageProcessing m) {
+    return m.colorTransformation(operation, sourceImageName, destImageName);
   }
+
 }

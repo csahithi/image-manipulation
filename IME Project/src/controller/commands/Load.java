@@ -1,7 +1,7 @@
 package controller.commands;
 
 import model.Image;
-import model.ImageProcessingModel;
+import model.ImprovedImageProcessing;
 
 /**
  * This command class load an image from the specified path and refers it  in the program
@@ -23,7 +23,7 @@ public class Load implements ImageCommandController {
   }
 
   @Override
-  public Image execute(ImageProcessingModel m) {
+  public Image execute(ImprovedImageProcessing m) {
     return m.loadImage(imagePath, destImageName);
   }
 }

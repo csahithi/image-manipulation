@@ -1,7 +1,8 @@
 package controller.commands;
 
 import model.Image;
-import model.ImageProcessingModel;
+import model.ImprovedImageProcessing;
+
 
 /**
  * This command class saves the image with the given name to the specified path
@@ -23,7 +24,7 @@ public class Save implements ImageCommandController {
   }
 
   @Override
-  public Image execute(ImageProcessingModel m) {
+  public Image execute(ImprovedImageProcessing m) {
     return m.saveImage(imagePath, imageName);
   }
 }

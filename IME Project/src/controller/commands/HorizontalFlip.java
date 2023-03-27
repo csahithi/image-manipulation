@@ -1,7 +1,7 @@
 package controller.commands;
 
 import model.Image;
-import model.ImageProcessingModel;
+import model.ImprovedImageProcessing;
 
 /**
  * This command class flips image horizontally to create a new image,
@@ -23,7 +23,7 @@ public class HorizontalFlip implements ImageCommandController {
   }
 
   @Override
-  public Image execute(ImageProcessingModel m) {
+  public Image execute(ImprovedImageProcessing m) {
     return m.horizontalFlip(sourceImageName, destImageName);
   }
 }

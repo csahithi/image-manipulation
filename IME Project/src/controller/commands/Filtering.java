@@ -1,7 +1,8 @@
 package controller.commands;
 
 import model.Image;
-import model.ImageProcessingModel;
+import model.ImprovedImageProcessing;
+
 
 public class Filtering implements ImageCommandController {
   String operation;
@@ -15,7 +16,7 @@ public class Filtering implements ImageCommandController {
   }
 
   @Override
-  public Image execute(ImageProcessingModel m) {
-    return null;
+  public Image execute(ImprovedImageProcessing m) {
+    return m.filtering(operation, sourceImageName, destImageName);
   }
 }

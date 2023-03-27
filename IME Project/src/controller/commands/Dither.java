@@ -1,7 +1,7 @@
 package controller.commands;
 
 import model.Image;
-import model.ImageProcessingModel;
+import model.ImprovedImageProcessing;
 
 public class Dither implements ImageCommandController {
   String sourceImageName;
@@ -13,7 +13,7 @@ public class Dither implements ImageCommandController {
   }
 
   @Override
-  public Image execute(ImageProcessingModel m) {
-    return null;
+  public Image execute(ImprovedImageProcessing m) {
+    return m.dither(sourceImageName, destImageName);
   }
 }

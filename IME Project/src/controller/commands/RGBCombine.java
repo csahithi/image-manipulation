@@ -1,7 +1,8 @@
 package controller.commands;
 
 import model.Image;
-import model.ImageProcessingModel;
+import model.ImprovedImageProcessing;
+
 
 /**
  * This command class combines the three greyscale images into a single image that gets its red,
@@ -29,7 +30,7 @@ public class RGBCombine implements ImageCommandController {
   }
 
   @Override
-  public Image execute(ImageProcessingModel m) {
+  public Image execute(ImprovedImageProcessing m) {
     return m.rgbCombine(destImageName, redImage, greenImage, blueImage);
   }
 }

@@ -1,7 +1,7 @@
 package controller.commands;
 
 import model.Image;
-import model.ImageProcessingModel;
+import model.ImprovedImageProcessing;
 
 /**
  * This command class creates a greyscale image with the component of the image with the given name,
@@ -26,8 +26,11 @@ public class Greyscale implements ImageCommandController {
     this.destImageName = destImageName;
   }
 
+
+
   @Override
-  public Image execute(ImageProcessingModel m) {
-    return m.greyscale(component, sourceImageName, destImageName);
+  public Image execute(ImprovedImageProcessing m) {
+      return m.greyscale(component, sourceImageName, destImageName);
+    }
   }
-}
+

@@ -1,7 +1,8 @@
 package controller.commands;
 
 import model.Image;
-import model.ImageProcessingModel;
+import model.ImprovedImageProcessing;
+
 
 /**
  * This command class splits the given image into three greyscale images containing its red,
@@ -28,8 +29,9 @@ public class RGBSplit implements ImageCommandController {
     this.blueImage = blueImage;
   }
 
+
   @Override
-  public Image execute(ImageProcessingModel m) {
+  public Image execute(ImprovedImageProcessing m) {
     return m.rgbSplit(sourceImageName, redImage, greenImage, blueImage);
   }
 }

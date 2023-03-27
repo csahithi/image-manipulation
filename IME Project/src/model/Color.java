@@ -23,7 +23,7 @@ public class Color extends java.awt.Color {
     this.blueComponent = blueComponent;
   }
 
-  public Color(int rgbValue){
+  public Color(int rgbValue) {
     super(rgbValue);
   }
 }
