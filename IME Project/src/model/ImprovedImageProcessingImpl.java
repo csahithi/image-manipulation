@@ -11,10 +11,10 @@ public class ImprovedImageProcessingImpl extends ImageProcessingModelImpl
     }
     Image resultImage;
     switch (operation) {
-      case "blur-image":
+      case "blur":
         resultImage = imageBlurring(sourceImage);
         break;
-      case "sharpen-image":
+      case "sharpen":
         resultImage = imageSharpening(sourceImage);
         break;
       default:
@@ -32,7 +32,7 @@ public class ImprovedImageProcessingImpl extends ImageProcessingModelImpl
       return null;
     }
     Image resultImage = null;
-    if (transformation.equals("sepia tone")) {
+    if (transformation.equals("sepia")) {
       resultImage = sepiaTone(sourceImage);
     }
     LIST_OF_IMAGES.put(destImageName, resultImage);
@@ -75,28 +75,45 @@ public class ImprovedImageProcessingImpl extends ImageProcessingModelImpl
       for (int j = 0; j < c; j++) {
         listOfPixelsDestImage[i][j] = new Pixel(i, j, 0, 0,
                 0);
+      }
+    }
+    for (int i = 0; i < r; i++) {
+      for (int j = 0; j < c; j++) {
         old_color = greyscaleImage.getPixels()[i][j].colorComponent.redComponent;
         new_color = (Math.abs(old_color - 255) < old_color) ? 255 : 0;
         error = old_color - new_color;
         listOfPixelsDestImage[i][j].colorComponent.redComponent = new_color;
         listOfPixelsDestImage[i][j].colorComponent.greenComponent = new_color;
         listOfPixelsDestImage[i][j].colorComponent.blueComponent = new_color;
-        listOfPixelsDestImage = addError(listOfPixelsDestImage, i, j + 1, error, 7 / 16);
-        listOfPixelsDestImage = addError(listOfPixelsDestImage, i + 1, j - 1, error,
-                3 / 16);
-        listOfPixelsDestImage = addError(listOfPixelsDestImage, i + 1, j, error, 5 / 16);
-        listOfPixelsDestImage = addError(listOfPixelsDestImage, i + 1, j + 1, error,
-                1 / 16);
+        if (j + 1 < c) {
+          listOfPixelsDestImage = addError(listOfPixelsDestImage, i, j + 1, error,
+                  7.0 / 16.0);
+        }
+        if (j > 0 && i + 1 < r) {
+          listOfPixelsDestImage = addError(listOfPixelsDestImage, i + 1, j - 1, error,
+                  3.0 / 16.0);
+        }
+        if (i + 1 < r) {
+          listOfPixelsDestImage = addError(listOfPixelsDestImage, i + 1, j, error,
+                  5.0 / 16.0);
+        }
+        if (j + 1 < c && i + 1 < r) {
+          listOfPixelsDestImage = addError(listOfPixelsDestImage, i + 1, j + 1, error,
+                  1.0 / 16.0);
+        }
       }
     }
-    return new Image(image.getWidth(), image.getHeight(), image.getMaxValueOfColor(),
+    Image destImage = new Image(image.getWidth(), image.getHeight(), image.getMaxValueOfColor(),
             listOfPixelsDestImage);
+    LIST_OF_IMAGES.put(destImageName, destImage);
+    return destImage;
+
   }
 
-  private Pixel[][] addError(Pixel[][] pixels, int r, int c, int error, int fraction) {
-    pixels[r][c].colorComponent.redComponent += fraction * error;
-    pixels[r][c].colorComponent.greenComponent += fraction * error;
-    pixels[r][c].colorComponent.blueComponent += fraction * error;
+  private Pixel[][] addError(Pixel[][] pixels, int r, int c, int error, double fraction) {
+    pixels[r][c].colorComponent.redComponent += (int) fraction * error;
+    pixels[r][c].colorComponent.greenComponent += (int) fraction * error;
+    pixels[r][c].colorComponent.blueComponent += (int) fraction * error;
     return pixels;
   }
 
@@ -104,26 +121,14 @@ public class ImprovedImageProcessingImpl extends ImageProcessingModelImpl
     Pixel[][] paddedArray = new Pixel[r + 2 * padding][c + 2 * padding];
     for (int i = 0; i < r + 2 * padding; i++) {
       for (int j = 0; j < c + 2 * padding; j++) {
-        if (i >= 0 && i < padding) {
+        if (i >= padding && i < r + padding && j >= padding && j < c + padding) {
+          paddedArray[i][j] = new Pixel(i, j,
+                  pixels[i - padding][j - padding].colorComponent.redComponent,
+                  pixels[i - padding][j - padding].colorComponent.greenComponent,
+                  pixels[i - padding][j - padding].colorComponent.blueComponent);
+        } else {
           paddedArray[i][j] = new Pixel(i, j, 0, 0, 0);
         }
-        if (i >= r + padding && i < r + 2 * padding) {
-          paddedArray[i][j] = new Pixel(i, j, 0, 0, 0);
-        }
-        if (j >= 0 && j < padding) {
-          paddedArray[i][j] = new Pixel(i, j, 0, 0, 0);
-        }
-        if (j >= c + padding && j < c + 2 * padding) {
-          paddedArray[i][j] = new Pixel(i, j, 0, 0, 0);
-        }
-      }
-    }
-    for (int i = 0; i < r; i++) {
-      for (int j = 0; j < c; j++) {
-        paddedArray[i + 1][j + 1] = new Pixel(i + 1, j + 1,
-                pixels[i][j].colorComponent.redComponent,
-                pixels[i][j].colorComponent.greenComponent,
-                pixels[i][j].colorComponent.blueComponent);
       }
     }
     return paddedArray;
@@ -137,26 +142,27 @@ public class ImprovedImageProcessingImpl extends ImageProcessingModelImpl
     int c = image.getWidth();
     Pixel[][] listOfPixelsDestImage = new Pixel[r][c];
     for (int i = 1; i < r + 1; i++) {
-      for (int j = 1; j <= c + 1; j++) {
-        rSum = (1 / 4) * paddedArray[i][j].colorComponent.redComponent;
-        gSum = (1 / 4) * paddedArray[i][j].colorComponent.greenComponent;
-        bSum = (1 / 4) * paddedArray[i][j].colorComponent.blueComponent;
-        for (int x = i - 1; x <= i + 1; x++) {
-          for (int y = j - 1; y <= j + 1; y++) {
+      for (int j = 1; j < c + 1; j++) {
+        rSum = (int) ((0.25) * paddedArray[i][j].colorComponent.redComponent);
+        gSum = (int) ((0.25) * paddedArray[i][j].colorComponent.greenComponent);
+        bSum = (int) ((0.25) * paddedArray[i][j].colorComponent.blueComponent);
+        for (int x = i - 1; x < i + 2; x++) {
+          for (int y = j - 1; y < j + 2; y++) {
             if ((x == i - 1 && (y == j - 1 || y == j + 1)) || (x == i + 1 && (y == j - 1 ||
                     y == j + 1))) {
-              rSum += (1 / 16) * (paddedArray[x][y].colorComponent.redComponent);
-              gSum += (1 / 16) * (paddedArray[x][y].colorComponent.greenComponent);
-              bSum += (1 / 16) * (paddedArray[x][y].colorComponent.blueComponent);
+              rSum += (0.0625) * (paddedArray[x][y].colorComponent.redComponent);
+              gSum += (0.0625) * (paddedArray[x][y].colorComponent.greenComponent);
+              bSum += (0.0625) * (paddedArray[x][y].colorComponent.blueComponent);
             } else if ((x == i && (y == j - 1 || y == j + 1)) || (y == j && (x == i - 1 ||
                     x == i + 1))) {
-              rSum += (1 / 8) * (paddedArray[x][y].colorComponent.redComponent);
-              gSum += (1 / 8) * (paddedArray[x][y].colorComponent.greenComponent);
-              bSum += (1 / 8) * (paddedArray[x][y].colorComponent.blueComponent);
+              rSum += (0.125) * (paddedArray[x][y].colorComponent.redComponent);
+              gSum += (0.125) * (paddedArray[x][y].colorComponent.greenComponent);
+              bSum += (0.125) * (paddedArray[x][y].colorComponent.blueComponent);
             }
           }
         }
-        listOfPixelsDestImage[i - 1][j - 1] = new Pixel(i - 1, j - 1, rSum, bSum, gSum);
+        listOfPixelsDestImage[i - 1][j - 1] = new Pixel(i - 1, j - 1,
+                (rSum), (gSum), (bSum));
       }
     }
     return new Image(image.getWidth(), image.getHeight(), image.getMaxValueOfColor(),
@@ -178,17 +184,19 @@ public class ImprovedImageProcessingImpl extends ImageProcessingModelImpl
         for (int x = i - 2; x < i + 3; x++) {
           for (int y = j - 2; y < j + 3; y++) {
             if (x == i - 2 || x == i + 2 || y == j - 2 || y == j + 2) {
-              rSum += (-1 / 8) * (paddedArray[x][y].colorComponent.redComponent);
-              gSum += (-1 / 8) * (paddedArray[x][y].colorComponent.greenComponent);
-              bSum += (-1 / 8) * (paddedArray[x][y].colorComponent.blueComponent);
+              rSum += (-0.125) * (paddedArray[x][y].colorComponent.redComponent);
+              gSum += (-0.125) * (paddedArray[x][y].colorComponent.greenComponent);
+              bSum += (-0.125) * (paddedArray[x][y].colorComponent.blueComponent);
             } else if (x == i - 1 || x == i + 1 || y == j - 1 || y == j + 1) {
-              rSum += (1 / 4) * (paddedArray[x][y].colorComponent.redComponent);
-              gSum += (1 / 4) * (paddedArray[x][y].colorComponent.greenComponent);
-              bSum += (1 / 4) * (paddedArray[x][y].colorComponent.blueComponent);
+              rSum += (0.25) * (paddedArray[x][y].colorComponent.redComponent);
+              gSum += (0.25) * (paddedArray[x][y].colorComponent.greenComponent);
+              bSum += (0.25) * (paddedArray[x][y].colorComponent.blueComponent);
             }
           }
         }
-        listOfPixelsDestImage[i - 2][j - 2] = new Pixel(i - 2, j - 2, rSum, bSum, gSum);
+        listOfPixelsDestImage[i - 2][j - 2] = new Pixel(i - 2, j - 2,
+                Math.max(0, Math.min(rSum, 255)), Math.max(0, Math.min(gSum, 255)),
+                Math.max(0, Math.min(bSum, 255)));
       }
     }
     return new Image(image.getWidth(), image.getHeight(), image.getMaxValueOfColor(),
