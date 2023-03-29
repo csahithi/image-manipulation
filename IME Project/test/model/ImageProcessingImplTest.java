@@ -69,7 +69,20 @@ public class ImageProcessingImplTest {
     assertTrue(f.exists());
     f.delete();
   }
-  
+
+  @Test
+  public void testCheckPPMFormat() {
+    ImageCommandController controller = new Load("res/dog.ppm", "original");
+    Image original = controller.execute(model);
+    File f = new File("res/Original.ppm");
+    assertFalse(f.exists());
+    controller = new Save("res/Original.ppm", "original");
+    original = controller.execute(model);
+    assertTrue(f.exists());
+    f.delete();
+  }
+
+
   @Test
   public void testBrightenImage() {
     ImageCommandController controller = new Load("res/dog.ppm", "original");
@@ -157,7 +170,7 @@ public class ImageProcessingImplTest {
   }
 
   @Test
-  public void testBrightenImageIncrementByNegativeValue(){
+  public void testBrightenImageIncrementByNegativeValue() {
     ImageCommandController controller = new Load("res/dog.ppm", "original");
     Image original = controller.execute(model);
     int increment = -25;
@@ -196,10 +209,10 @@ public class ImageProcessingImplTest {
     for (int i = 0; i < original.getHeight(); i++) {
       for (int j = 0; j < original.getWidth(); j++) {
         assertEquals(verticalFlipFirstTime.getPixels()[i][j].getColorComponent()
-                        .getRedComponent(), original.getPixels()[original.getHeight() - i - 1][j]
+                .getRedComponent(), original.getPixels()[original.getHeight() - i - 1][j]
                 .getColorComponent().getRedComponent());
         assertEquals(verticalFlipFirstTime.getPixels()[i][j].getColorComponent()
-                        .getGreenComponent(), original.getPixels()[original.getHeight() - i - 1][j]
+                .getGreenComponent(), original.getPixels()[original.getHeight() - i - 1][j]
                 .getColorComponent().getGreenComponent());
         assertEquals(verticalFlipFirstTime.getPixels()[i][j].getColorComponent().getBlueComponent(),
                 original.getPixels()[original.getHeight() - i - 1][j].getColorComponent()
@@ -238,26 +251,26 @@ public class ImageProcessingImplTest {
     for (int i = 0; i < original.getHeight(); i++) {
       for (int j = 0; j < original.getWidth(); j++) {
         assertEquals(horizontalFlipFirstTime.getPixels()[i][j].getColorComponent()
-                        .getRedComponent(), original.getPixels()[i][original.getWidth() - 1 - j]
+                .getRedComponent(), original.getPixels()[i][original.getWidth() - 1 - j]
                 .getColorComponent().getRedComponent());
         assertEquals(horizontalFlipFirstTime.getPixels()[i][j].getColorComponent()
-                        .getGreenComponent(), original.getPixels()[i][original.getWidth() - 1 - j]
+                .getGreenComponent(), original.getPixels()[i][original.getWidth() - 1 - j]
                 .getColorComponent().getGreenComponent());
         assertEquals(horizontalFlipFirstTime.getPixels()[i][j].getColorComponent()
-                        .getBlueComponent(), original.getPixels()[i][original.getWidth() - 1 - j]
+                .getBlueComponent(), original.getPixels()[i][original.getWidth() - 1 - j]
                 .getColorComponent().getBlueComponent());
       }
     }
     for (int i = 0; i < original.getHeight(); i++) {
       for (int j = 0; j < original.getWidth(); j++) {
         assertEquals(horizontalFlipSecondTime.getPixels()[i][j].getColorComponent()
-                        .getRedComponent(), original.getPixels()[i][j].getColorComponent()
+                .getRedComponent(), original.getPixels()[i][j].getColorComponent()
                 .getRedComponent());
         assertEquals(horizontalFlipSecondTime.getPixels()[i][j].getColorComponent()
                 .getGreenComponent(), original.getPixels()[i][j].getColorComponent()
                 .getGreenComponent());
         assertEquals(horizontalFlipSecondTime.getPixels()[i][j].getColorComponent()
-                        .getBlueComponent(), original.getPixels()[i][j].getColorComponent()
+                .getBlueComponent(), original.getPixels()[i][j].getColorComponent()
                 .getBlueComponent());
       }
     }

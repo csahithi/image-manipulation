@@ -27,10 +27,9 @@ public class Greyscale implements ImageCommandController {
   }
 
 
-
   @Override
   public Image execute(ImprovedImageProcessing m) {
-      return m.greyscale(component, sourceImageName, destImageName);
-    }
+    return m.greyscale(component, sourceImageName, destImageName);
   }
+}
 

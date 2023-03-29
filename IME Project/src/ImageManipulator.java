@@ -21,16 +21,14 @@ public class ImageManipulator {
   public static void main(String[] args) {
     ImprovedImageProcessing model = new ImprovedImageProcessingImpl();
     InputStream in;
-    if(args.length==2 && args[0].equalsIgnoreCase("-file")){
-      try{
+    if (args.length == 2 && args[0].equalsIgnoreCase("-file")) {
+      try {
         in = new FileInputStream(args[1]);
-      }
-      catch (FileNotFoundException e){
+      } catch (FileNotFoundException e) {
         System.out.println("File Not Found");
         return;
       }
-    }
-    else{
+    } else {
       in = System.in;
     }
     ImageProcessingController controller = new ImageProcessingControllerImpl(model, in,

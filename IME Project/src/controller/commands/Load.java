@@ -1,7 +1,7 @@
 package controller.commands;
 
-import model.Image;
 import controller.ImageUtil;
+import model.Image;
 import model.ImprovedImageProcessing;
 
 /**
