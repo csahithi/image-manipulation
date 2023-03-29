@@ -45,15 +45,28 @@ public class ImprovedImageProcessingImpl extends ImageProcessingModelImpl
       for (int j = 0; j < image.getWidth(); j++) {
         listOfPixelsDestImage[i][j] = new Pixel(i, j, 0, 0,
                 0);
-        int r = image.getPixels()[i][j].colorComponent.redComponent;
-        int g = image.getPixels()[i][j].colorComponent.greenComponent;
-        int b = image.getPixels()[i][j].colorComponent.blueComponent;
-        listOfPixelsDestImage[i][j].colorComponent.redComponent = (int) ((0.393 * r) + (0.769 * g)
-                + (0.189 * b));
-        listOfPixelsDestImage[i][j].colorComponent.greenComponent = (int) ((0.349 * r) + (0.686 * g)
-                + (0.168 * b));
-        listOfPixelsDestImage[i][j].colorComponent.blueComponent = (int) ((0.272 * r) + (0.534 * g)
-                + (0.131 * b));
+        int r = image.getPixels()[i][j].colorComponent.getRedComponent();
+        int g = image.getPixels()[i][j].colorComponent.getGreenComponent();
+        int b = image.getPixels()[i][j].colorComponent.getBlueComponent();
+        listOfPixelsDestImage[i][j].colorComponent.setRedComponent(Math.max(0, Math.min(255,
+                (int) ((0.393 * r) + (0.769 * g) + (0.189 * b)))));
+        listOfPixelsDestImage[i][j].colorComponent.setGreenComponent(Math.max(0, Math.min(255,
+                (int) ((0.349 * r) + (0.686 * g) + (0.168 * b)))));
+        listOfPixelsDestImage[i][j].colorComponent.setBlueComponent(Math.max(0, Math.min(255,
+                (int) ((0.272 * r) + (0.534 * g) + (0.131 * b)))));
+        if(listOfPixelsDestImage[i][j].colorComponent.getRedComponent() >255
+                || listOfPixelsDestImage[i][j].colorComponent.getRedComponent() <0){
+          System.out.println(listOfPixelsDestImage[i][j].colorComponent.getRedComponent());
+        }
+        if(listOfPixelsDestImage[i][j].colorComponent.getGreenComponent() >255
+                || listOfPixelsDestImage[i][j].colorComponent.getGreenComponent() <0){
+          System.out.println(listOfPixelsDestImage[i][j].colorComponent.getGreenComponent());
+        }
+        if(listOfPixelsDestImage[i][j].colorComponent.getBlueComponent() >255
+                || listOfPixelsDestImage[i][j].colorComponent.getBlueComponent() <0){
+          System.out.println(listOfPixelsDestImage[i][j].colorComponent.getBlueComponent());
+        }
+
       }
     }
     return new Image(image.getWidth(), image.getHeight(), image.getMaxValueOfColor(),
@@ -79,12 +92,12 @@ public class ImprovedImageProcessingImpl extends ImageProcessingModelImpl
     }
     for (int i = 0; i < r; i++) {
       for (int j = 0; j < c; j++) {
-        old_color = greyscaleImage.getPixels()[i][j].colorComponent.redComponent;
+        old_color = greyscaleImage.getPixels()[i][j].colorComponent.getRedComponent();
         new_color = (Math.abs(old_color - 255) < old_color) ? 255 : 0;
         error = old_color - new_color;
-        listOfPixelsDestImage[i][j].colorComponent.redComponent = new_color;
-        listOfPixelsDestImage[i][j].colorComponent.greenComponent = new_color;
-        listOfPixelsDestImage[i][j].colorComponent.blueComponent = new_color;
+        listOfPixelsDestImage[i][j].colorComponent.setRedComponent(new_color);
+        listOfPixelsDestImage[i][j].colorComponent.setGreenComponent(new_color);
+        listOfPixelsDestImage[i][j].colorComponent.setBlueComponent(new_color);
         if (j + 1 < c) {
           listOfPixelsDestImage = addError(listOfPixelsDestImage, i, j + 1, error,
                   7.0 / 16.0);
@@ -162,7 +175,8 @@ public class ImprovedImageProcessingImpl extends ImageProcessingModelImpl
           }
         }
         listOfPixelsDestImage[i - 1][j - 1] = new Pixel(i - 1, j - 1,
-                (rSum), (gSum), (bSum));
+                Math.max(0, Math.min(rSum, 255)), Math.max(0, Math.min(gSum, 255)),
+                Math.max(0, Math.min(bSum, 255)));
       }
     }
     return new Image(image.getWidth(), image.getHeight(), image.getMaxValueOfColor(),

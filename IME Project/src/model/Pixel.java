@@ -29,8 +29,8 @@ public class Pixel {
    * @return integer value of value-component.
    */
   public int getValueComponent() {
-    return Math.max(this.colorComponent.redComponent, Math.max(this.colorComponent.greenComponent,
-            this.colorComponent.blueComponent));
+    return Math.max(this.colorComponent.getRedComponent(), Math.max(this.colorComponent.getGreenComponent(),
+            this.colorComponent.getBlueComponent()));
   }
 
   /**
@@ -39,8 +39,8 @@ public class Pixel {
    * @return integer value of Intensity-component.
    */
   public int getIntensityComponent() {
-    return (this.colorComponent.redComponent + this.colorComponent.greenComponent
-            + this.colorComponent.blueComponent) / 3;
+    return (this.colorComponent.getRedComponent() + this.colorComponent.getGreenComponent()
+            + this.colorComponent.getBlueComponent()) / 3;
   }
 
   /**
@@ -49,8 +49,8 @@ public class Pixel {
    * @return integer value of Luma-component.
    */
   public int getLumaComponent() {
-    return (int) Math.round((0.2126 * this.colorComponent.redComponent)
-            + (0.7152 * this.colorComponent.greenComponent)
-            + (0.0722 * this.colorComponent.blueComponent));
+    return (int) Math.round((0.2126 * this.colorComponent.getRedComponent())
+            + (0.7152 * this.colorComponent.getGreenComponent())
+            + (0.0722 * this.colorComponent.getBlueComponent()));
   }
 }
