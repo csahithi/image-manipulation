@@ -505,4 +505,60 @@ public class ImageProcessingImplTest {
       }
     }
   }
+
+  @Test
+  public void testSaveJPEG(){
+    ImageCommandController controller = new Load("res/dog.ppm", "original");
+    Image original = controller.execute(model);
+    File f = new File("res/Original.jpg");
+    assertFalse(f.exists());
+    controller = new Save("res/Original.jpg", "original");
+    original = controller.execute(model);
+    assertTrue(f.exists());
+    f.delete();
+  }
+
+  @Test
+  public void testSaveBMP(){
+    ImageCommandController controller = new Load("res/dog.ppm", "original");
+    Image original = controller.execute(model);
+    File f = new File("res/Original.bmp");
+    assertFalse(f.exists());
+    controller = new Save("res/Original.bmp", "original");
+    original = controller.execute(model);
+    assertTrue(f.exists());
+    f.delete();
+  }
+
+  @Test
+  public void testSavePNG(){
+    ImageCommandController controller = new Load("res/dog.ppm", "original");
+    Image original = controller.execute(model);
+    File f = new File("res/Original.png");
+    assertFalse(f.exists());
+    controller = new Save("res/Original.png", "original");
+    original = controller.execute(model);
+    assertTrue(f.exists());
+    f.delete();
+  }
+
+  @Test
+  public void testSaveMultipleFormats(){
+    ImageCommandController controller = new Load("res/dog.ppm", "original");
+    Image original = controller.execute(model);
+    File f = new File("res/Original.jpg");
+    assertFalse(f.exists());
+    controller = new Save("res/Original.jpg", "original");
+    original = controller.execute(model);
+    assertTrue(f.exists());
+    controller = new Load("res/Original.jpg", "originaljpg");
+    Image originaljpg = controller.execute(model);
+    File f1 = new File("res/Original.png");
+    assertFalse(f1.exists());
+    controller = new Save("res/Original.png", "original");
+    originaljpg = controller.execute(model);
+    assertTrue(f1.exists());
+    f.delete();
+    f1.delete();
+  }
 }

@@ -4,16 +4,22 @@ import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import controller.commands.ImageCommandController;
+import controller.commands.Load;
+import controller.commands.Save;
 import model.Image;
 import model.ImprovedImageProcessing;
 import model.Pixel;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 /**
@@ -91,17 +97,21 @@ public class CommandControllerTest {
 
     @Override
     public Image filtering(String operation, String sourceImageName, String destImageName) {
-      return null;
+      sb.append("Received inputs " + sourceImageName + " and " + destImageName);
+      return image;
     }
 
     @Override
-    public Image colorTransformation(String transformation, String sourceImageName, String destImageName) {
-      return null;
+    public Image colorTransformation(String transformation, String sourceImageName,
+                                     String destImageName) {
+      sb.append("Received inputs " + sourceImageName + " and " + destImageName);
+      return image;
     }
 
     @Override
     public Image dither(String sourceImageName, String destImageName) {
-      return null;
+      sb.append("Received inputs " +  sourceImageName + " and " + destImageName);
+      return image;
     }
   }
 
@@ -117,7 +127,7 @@ public class CommandControllerTest {
     ImprovedImageProcessing model = new MockModel(mockLog);
     ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, out);
     controller.execute();
-    assertEquals("Received inputs " + a + " and " + b, mockLog.toString());
+    assertEquals("Received inputs " + b, mockLog.toString());
   }
 
   @Test
@@ -132,7 +142,7 @@ public class CommandControllerTest {
     ImprovedImageProcessing model = new MockModel(mockLog);
     ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, out);
     controller.execute();
-    assertEquals("Received inputs " + a + " and " + b, mockLog.toString());
+    assertEquals("Received inputs " + b, mockLog.toString());
   }
 
   @Test
@@ -328,9 +338,9 @@ public class CommandControllerTest {
     ImprovedImageProcessing model = new MockModel(mockLog);
     ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, out);
     controller.execute();
-    assertEquals("Received inputs res/koala.ppm and koala"
-            + "Received inputs koala and koala-vertical"
-            + "Received inputs res/koala-vertical.ppm and koala-vertical", mockLog.toString());
+    assertEquals("Received inputs dog"
+            + "Received inputs dog and dog-vertical"
+            + "Received inputs dog-vertical", mockLog.toString());
   }
 
   @Test
@@ -455,25 +465,6 @@ public class CommandControllerTest {
   }
 
   @Test
-  public void testWrongNumberOfInputsForGreyscale() {
-    InputStream in = null;
-    String input = "greyscale red-component image";
-    in = new ByteArrayInputStream(input.getBytes());
-    OutputStream out = new ByteArrayOutputStream();
-    StringBuilder mockLog = new StringBuilder();
-    ImprovedImageProcessing model = new MockModel(mockLog);
-    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, out);
-    controller.execute();
-    assertEquals("Unknown command " + input, out.toString().stripTrailing());
-
-    String input1 = "greyscale red-component a b c";
-    in = new ByteArrayInputStream(input1.getBytes());
-    controller = new ImageProcessingControllerImpl(model, in, out);
-    controller.execute();
-    assertEquals("Unknown command " + input, out.toString().stripTrailing());
-  }
-
-  @Test
   public void testWrongNumberOfInputsForRGBSplit() {
     InputStream in = null;
     String input = "rgb-split image";
@@ -524,5 +515,80 @@ public class CommandControllerTest {
     ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, out);
     controller.execute();
     assertEquals("Unknown command " + input, out.toString().stripTrailing());
+  }
+
+  @Test
+  public void testDitherCommand() {
+    InputStream in = null;
+    String a = "image";
+    String b = "image-dither";
+    String input = "dither " + a + " " + b;
+    in = new ByteArrayInputStream(input.getBytes());
+    OutputStream out = new ByteArrayOutputStream();
+    StringBuilder mockLog = new StringBuilder();
+    ImprovedImageProcessing model = new MockModel(mockLog);
+    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, out);
+    controller.execute();
+    assertEquals("Received inputs " + a + " and " + b, mockLog.toString());
+  }
+
+  @Test
+  public void testBlurCommand() {
+    InputStream in = null;
+    String a = "image";
+    String b = "image-blur";
+    String input = "blur " + a + " " + b;
+    in = new ByteArrayInputStream(input.getBytes());
+    OutputStream out = new ByteArrayOutputStream();
+    StringBuilder mockLog = new StringBuilder();
+    ImprovedImageProcessing model = new MockModel(mockLog);
+    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, out);
+    controller.execute();
+    assertEquals("Received inputs " + a + " and " + b, mockLog.toString());
+  }
+
+  @Test
+  public void testSharpenCommand() {
+    InputStream in = null;
+    String a = "image";
+    String b = "image-sharpen";
+    String input = "sharpen " + a + " " + b;
+    in = new ByteArrayInputStream(input.getBytes());
+    OutputStream out = new ByteArrayOutputStream();
+    StringBuilder mockLog = new StringBuilder();
+    ImprovedImageProcessing model = new MockModel(mockLog);
+    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, out);
+    controller.execute();
+    assertEquals("Received inputs " + a + " and " + b, mockLog.toString());
+  }
+
+  @Test
+  public void testSepiaCommand() {
+    InputStream in = null;
+    String a = "image";
+    String b = "image-sepia";
+    String input = "sepia " + a + " " + b;
+    in = new ByteArrayInputStream(input.getBytes());
+    OutputStream out = new ByteArrayOutputStream();
+    StringBuilder mockLog = new StringBuilder();
+    ImprovedImageProcessing model = new MockModel(mockLog);
+    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, out);
+    controller.execute();
+    assertEquals("Received inputs " + a + " and " + b, mockLog.toString());
+  }
+
+  @Test
+  public void testImprovedGreyscaleCommand() {
+    InputStream in = null;
+    String a = "image";
+    String b = "image-greyscale";
+    String input = "greyscale " + a + " " + b;
+    in = new ByteArrayInputStream(input.getBytes());
+    OutputStream out = new ByteArrayOutputStream();
+    StringBuilder mockLog = new StringBuilder();
+    ImprovedImageProcessing model = new MockModel(mockLog);
+    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, out);
+    controller.execute();
+    assertEquals("Received inputs luma-component, " + a + " and " + b, mockLog.toString());
   }
 }
