@@ -4,10 +4,9 @@ package model;
  * This class represents RGB color factor for each pixel.
  */
 public class Color extends java.awt.Color {
-  int redComponent;
-  int greenComponent;
-  int blueComponent;
-  public int[] color;
+  private int redComponent;
+  private int greenComponent;
+  private int blueComponent;
 
   /**
    * Constructor to initialize values of components of color object.

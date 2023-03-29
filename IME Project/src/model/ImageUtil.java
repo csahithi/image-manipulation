@@ -43,9 +43,9 @@ public class ImageUtil {
       Pixel[][] listOfPixels = m.getPixels();
       for (int y = 0; y < image.getHeight(); y++) {
         for (int x = 0; x < image.getWidth(); x++) {
-          java.awt.Color rgb = new Color(listOfPixels[y][x].colorComponent.redComponent,
-                  listOfPixels[y][x].colorComponent.greenComponent,
-                  listOfPixels[y][x].colorComponent.blueComponent);
+          java.awt.Color rgb = new Color(listOfPixels[y][x].colorComponent.getRedComponent(),
+                  listOfPixels[y][x].colorComponent.getGreenComponent(),
+                  listOfPixels[y][x].colorComponent.getBlueComponent());
           try {
             image.setRGB(x, y, rgb.getRGB());
           } catch (NullPointerException e) {
@@ -122,9 +122,9 @@ public class ImageUtil {
           if (listOfPixels[i][j] == null || listOfPixels[i][j].colorComponent == null) {
             return;
           }
-          myWriter.write(listOfPixels[i][j].colorComponent.redComponent + "\n"
-                  + listOfPixels[i][j].colorComponent.greenComponent + "\n"
-                  + listOfPixels[i][j].colorComponent.blueComponent + "\n");
+          myWriter.write(listOfPixels[i][j].colorComponent.getRedComponent() + "\n"
+                  + listOfPixels[i][j].colorComponent.getGreenComponent() + "\n"
+                  + listOfPixels[i][j].colorComponent.getBlueComponent() + "\n");
         }
       }
       myWriter.close();
