@@ -5,6 +5,10 @@ import org.junit.Test;
 
 import java.io.File;
 
+import controller.commands.ImageCommandController;
+import controller.commands.Load;
+import controller.commands.Save;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
@@ -15,23 +19,26 @@ import static org.junit.Assert.assertTrue;
  * This class contains tests for ImageProcessing model class.
  */
 public class ImageProcessingImplTest {
-  private ImageProcessingModel model;
+  private ImprovedImageProcessing model;
 
   @Before
   public void setup() {
-    model = new ImageProcessingModelImpl();
+    model = new ImprovedImageProcessingImpl();
   }
 
   @Test
   public void testLoadSamePPMFileInImagesCreateDifferentObjects() {
-    Image original = model.loadImage("res/dog.ppm", "original");
-    Image another = model.loadImage("res/dog.ppm", "another");
+    ImageCommandController controller = new Load("res/dog.ppm", "original");
+    Image original = controller.execute(model);
+    controller = new Load("res/dog.ppm", "another");
+    Image another = controller.execute(model);
     assertNotEquals(original, another);
   }
 
   @Test
   public void testLoadImageFromExistingPPMFile() {
-    Image original = model.loadImage("res/dog.ppm", "original");
+    ImageCommandController controller = new Load("res/dog.ppm", "original");
+    Image original = controller.execute(model);
     assertEquals(original.getWidth(), 200);
     assertEquals(original.getHeight(), 201);
     assertEquals(original.getMaxValueOfColor(), 255);
@@ -39,29 +46,34 @@ public class ImageProcessingImplTest {
 
   @Test
   public void testLoadImageFromNonExistingPPMFile() {
-    Image original = model.loadImage("images/k.ppm", "original");
+    ImageCommandController controller = new Load("images/k.ppm", "original");
+    Image original = controller.execute(model);
     assertNull(original);
   }
 
   @Test
   public void testLoadImageFromNonExistingImage() {
-    Image original = model.loadImage("images/k.ppm", "original");
+    ImageCommandController controller = new Load("images/k.ppm", "original");
+    Image original = controller.execute(model);
     assertNull(original);
   }
 
   @Test
   public void testSaveImage() {
-    Image original = model.loadImage("res/dog.ppm", "original");
+    ImageCommandController controller = new Load("res/dog.ppm", "original");
+    Image original = controller.execute(model);
     File f = new File("res/Original.ppm");
     assertFalse(f.exists());
-    original = model.saveImage("res/Original.ppm", "original");
+    controller = new Save("res/Original.ppm", "original");
+    original = controller.execute(model);
     assertTrue(f.exists());
     f.delete();
   }
   
   @Test
   public void testBrightenImage() {
-    Image original = model.loadImage("res/dog.ppm", "original");
+    ImageCommandController controller = new Load("res/dog.ppm", "original");
+    Image original = controller.execute(model);
     int increment = 50;
     Image brightenedImage = model.brighten(increment, "original",
             "brightenedImage");
@@ -89,7 +101,8 @@ public class ImageProcessingImplTest {
 
   @Test
   public void testBrightenImageDoesNotExceedMaxValue() {
-    Image original = model.loadImage("res/dog.ppm", "original");
+    ImageCommandController controller = new Load("res/dog.ppm", "original");
+    Image original = controller.execute(model);
     int increment = 50;
     Image brightenedImage = model.brighten(increment, "original",
             "brightenedImage");
@@ -107,7 +120,8 @@ public class ImageProcessingImplTest {
 
   @Test
   public void testBrightenImageIncrementMaxValue() {
-    Image original = model.loadImage("res/dog.ppm", "original");
+    ImageCommandController controller = new Load("res/dog.ppm", "original");
+    Image original = controller.execute(model);
     int increment = 1000;
     Image maxBrightenedImage = model.brighten(increment, "original",
             "brightenedImage");
@@ -125,7 +139,8 @@ public class ImageProcessingImplTest {
 
   @Test
   public void testBrightenImageIncrementByMaxNegativeValue() {
-    Image original = model.loadImage("res/dog.ppm", "original");
+    ImageCommandController controller = new Load("res/dog.ppm", "original");
+    Image original = controller.execute(model);
     int increment = -1000;
     Image brightenedImage = model.brighten(increment, "original",
             "brightenedImage");
@@ -142,8 +157,9 @@ public class ImageProcessingImplTest {
   }
 
   @Test
-  public void testBrightenImageIncrementByNegativeValue() {
-    Image original = model.loadImage("res/dog.ppm", "original");
+  public void testBrightenImageIncrementByNegativeValue(){
+    ImageCommandController controller = new Load("res/dog.ppm", "original");
+    Image original = controller.execute(model);
     int increment = -25;
     Image brightenedImage = model.brighten(increment, "original",
             "brightenedImage");
@@ -171,7 +187,8 @@ public class ImageProcessingImplTest {
 
   @Test
   public void testVerticalFlip() {
-    Image original = model.loadImage("res/dog.ppm", "original");
+    ImageCommandController controller = new Load("res/dog.ppm", "original");
+    Image original = controller.execute(model);
     Image verticalFlipFirstTime = model.verticalFlip("original",
             "verticalFlipFirstTime");
     Image verticalFlipSecondTime = model.verticalFlip("verticalFlipFirstTime",
@@ -212,7 +229,8 @@ public class ImageProcessingImplTest {
 
   @Test
   public void testHorizontalFlip() {
-    Image original = model.loadImage("res/dog.ppm", "original");
+    ImageCommandController controller = new Load("res/dog.ppm", "original");
+    Image original = controller.execute(model);
     Image horizontalFlipFirstTime = model.horizontalFlip("original",
             "horizontalFlipFirstTime");
     Image horizontalFlipSecondTime = model.horizontalFlip("horizontalFlipFirstTime",
@@ -254,7 +272,8 @@ public class ImageProcessingImplTest {
 
   @Test
   public void testGreyScaleOnRedComponent() {
-    Image original = model.loadImage("res/dog.ppm", "original");
+    ImageCommandController controller = new Load("res/dog.ppm", "original");
+    Image original = controller.execute(model);
     Image greyscaleOnRedComponent = model.greyscale("red-component",
             "original", "greyscaleOnRedComponent");
     for (int i = 0; i < original.getHeight(); i++) {
@@ -276,7 +295,8 @@ public class ImageProcessingImplTest {
 
   @Test
   public void testGreyScaleOnGreenComponent() {
-    Image original = model.loadImage("res/dog.ppm", "original");
+    ImageCommandController controller = new Load("res/dog.ppm", "original");
+    Image original = controller.execute(model);
     Image greyscaleOnGreenComponent = model.greyscale("green-component",
             "original", "greyscaleOnGreenComponent");
     for (int i = 0; i < original.getHeight(); i++) {
@@ -298,7 +318,8 @@ public class ImageProcessingImplTest {
 
   @Test
   public void testGreyScaleOnBlueComponent() {
-    Image original = model.loadImage("res/dog.ppm", "original");
+    ImageCommandController controller = new Load("res/dog.ppm", "original");
+    Image original = controller.execute(model);
     Image greyscaleOnBlueComponent = model.greyscale("blue-component",
             "original", "greyscaleOnBlueComponent");
     for (int i = 0; i < original.getHeight(); i++) {
@@ -320,7 +341,8 @@ public class ImageProcessingImplTest {
 
   @Test
   public void testGreyScaleOnLumaComponent() {
-    Image original = model.loadImage("res/dog.ppm", "original");
+    ImageCommandController controller = new Load("res/dog.ppm", "original");
+    Image original = controller.execute(model);
     Image greyscaleOnLumaComponent = model.greyscale("luma-component",
             "original", "greyscaleOnLumaComponent");
     for (int i = 0; i < original.getHeight(); i++) {
@@ -344,7 +366,8 @@ public class ImageProcessingImplTest {
 
   @Test
   public void testGreyScaleOnValueComponent() {
-    Image original = model.loadImage("res/dog.ppm", "original");
+    ImageCommandController controller = new Load("res/dog.ppm", "original");
+    Image original = controller.execute(model);
     Image greyscaleOnValueComponent = model.greyscale("value-component",
             "original", "greyscaleOnValueComponent");
     for (int i = 0; i < original.getHeight(); i++) {
@@ -369,7 +392,8 @@ public class ImageProcessingImplTest {
 
   @Test
   public void testGreyScaleOnIntensityComponent() {
-    Image original = model.loadImage("res/dog.ppm", "original");
+    ImageCommandController controller = new Load("res/dog.ppm", "original");
+    Image original = controller.execute(model);
     Image greyscaleOnIntensityComponent = model.greyscale("intensity-component",
             "original", "greyscaleOnIntensityComponent");
     for (int i = 0; i < original.getHeight(); i++) {
@@ -389,7 +413,8 @@ public class ImageProcessingImplTest {
 
   @Test
   public void testRGBSplit() {
-    Image original = model.loadImage("res/dog.ppm", "original");
+    ImageCommandController controller = new Load("res/dog.ppm", "original");
+    Image original = controller.execute(model);
     Image redImage = model.rgbSplit("original", "redImage",
             "greenImage", "blueImage");
     for (int i = 0; i < original.getHeight(); i++) {
@@ -404,7 +429,8 @@ public class ImageProcessingImplTest {
 
   @Test
   public void testRGBCombineOnNullRedImage() {
-    Image original = model.loadImage("res/dog.ppm", "original");
+    ImageCommandController controller = new Load("res/dog.ppm", "original");
+    Image original = controller.execute(model);
     Image redImage = null;
     Image greenImage = model.greyscale("green-component",
             "original", "greenImage");
@@ -417,7 +443,8 @@ public class ImageProcessingImplTest {
 
   @Test
   public void testRGBCombineOnNullGreenImage() {
-    Image original = model.loadImage("res/dog.ppm", "original");
+    ImageCommandController controller = new Load("res/dog.ppm", "original");
+    Image original = controller.execute(model);
     Image redImage = model.greyscale("red-component",
             "original", "redImage");
     Image greenImage = null;
@@ -430,7 +457,8 @@ public class ImageProcessingImplTest {
 
   @Test
   public void testRGBCombineOnNullBlueImage() {
-    Image original = model.loadImage("res/dog.ppm", "original");
+    ImageCommandController controller = new Load("res/dog.ppm", "original");
+    Image original = controller.execute(model);
     Image redImage = model.greyscale("red-component",
             "original", "redImage");
     Image greenImage = model.greyscale("green-component",
@@ -443,7 +471,8 @@ public class ImageProcessingImplTest {
 
   @Test
   public void testRGBCombine() {
-    Image original = model.loadImage("res/dog.ppm", "original");
+    ImageCommandController controller = new Load("res/dog.ppm", "original");
+    Image original = controller.execute(model);
     Image redImage = model.greyscale("red-component",
             "original", "redImage");
     Image greenImage = model.greyscale("green-component",

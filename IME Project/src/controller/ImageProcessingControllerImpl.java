@@ -32,7 +32,6 @@ public class ImageProcessingControllerImpl implements ImageProcessingController 
   private final ImprovedImageProcessing model;
   private final InputStream in;
   private final OutputStream out;
-  private boolean exitFlag;
 
   /**
    * This method is the constructor to the ImageProcessingControllerImpl class.
@@ -52,17 +51,9 @@ public class ImageProcessingControllerImpl implements ImageProcessingController 
     //Image m = null;
     ImageCommandController cmd = null;
     PrintStream outStream = new PrintStream(this.out);
-    if (inputArray.length == 2) {
-      if (inputArray[0].equals("run")) {
-        readScript(inputArray[1]);
-        return;
-      } else if (inputArray[0].equals("-file")) {
-        if (readScript(inputArray[1])) {
-          exitFlag = true;
-          System.out.println("File executed.");
-        }
-        return;
-      }
+    if ((inputArray.length == 2) && (inputArray[0].equals("run"))) {
+      readScript(inputArray[1]);
+      return;
     } else {
       try {
         if (inputArray.length == 3) {
@@ -156,8 +147,7 @@ public class ImageProcessingControllerImpl implements ImageProcessingController 
   public void execute() {
     String[] inputArray;
     Scanner scan = new Scanner(this.in);
-    exitFlag = false;
-    while (!exitFlag && scan.hasNext()) {
+    while (scan.hasNext()) {
       String input = scan.nextLine();
       inputArray = input.split(" ");
       inputArray = Arrays.stream(inputArray)

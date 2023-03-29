@@ -38,14 +38,14 @@ public class CommandControllerTest {
     }
 
     @Override
-    public Image loadImage(String imagePath, String imageName) {
-      sb.append("Received inputs " + imagePath + " and " + imageName);
+    public Image loadImage(Image image, String imageName) {
+      sb.append("Received inputs " + imageName);
       return image;
     }
 
     @Override
-    public Image saveImage(String imagePath, String imageName) {
-      sb.append("Received inputs " + imagePath + " and " + imageName);
+    public Image saveImage(String imageName) {
+      sb.append("Received inputs " + imageName);
       return image;
     }
 

@@ -1,6 +1,7 @@
 package controller.commands;
 
 import model.Image;
+import controller.ImageUtil;
 import model.ImprovedImageProcessing;
 
 /**
@@ -24,6 +25,20 @@ public class Load implements ImageCommandController {
 
   @Override
   public Image execute(ImprovedImageProcessing m) {
-    return m.loadImage(imagePath, destImageName);
+    String extension = null;
+    Image image;
+    int index = imagePath.lastIndexOf('.');
+    if (index > 0) {
+      extension = imagePath.substring(index + 1);
+    }
+    if (extension.equalsIgnoreCase("PPM")) {
+      image = ImageUtil.readPPM(imagePath);
+    } else {
+      image = ImageUtil.readImage(imagePath);
+    }
+    if (image == null) {
+      return null;
+    }
+    return m.loadImage(image, destImageName);
   }
 }

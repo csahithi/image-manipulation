@@ -24,6 +24,9 @@ public class Color extends java.awt.Color {
 
   public Color(int rgbValue) {
     super(rgbValue);
+    this.redComponent = this.getRed();
+    this.greenComponent = this.getGreen();
+    this.blueComponent = this.getBlue();
   }
 
   public int getRedComponent() {

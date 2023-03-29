@@ -1,3 +1,7 @@
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+
 import controller.ImageProcessingController;
 import controller.ImageProcessingControllerImpl;
 import model.ImprovedImageProcessing;
@@ -16,7 +20,20 @@ public class ImageManipulator {
    */
   public static void main(String[] args) {
     ImprovedImageProcessing model = new ImprovedImageProcessingImpl();
-    ImageProcessingController controller = new ImageProcessingControllerImpl(model, System.in,
+    InputStream in;
+    if(args.length==2 && args[0].equalsIgnoreCase("-file")){
+      try{
+        in = new FileInputStream(args[1]);
+      }
+      catch (FileNotFoundException e){
+        System.out.println("File Not Found");
+        return;
+      }
+    }
+    else{
+      in = System.in;
+    }
+    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in,
             System.out);
     controller.execute();
 

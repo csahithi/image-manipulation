@@ -1,6 +1,7 @@
 package controller.commands;
 
 import model.Image;
+import controller.ImageUtil;
 import model.ImprovedImageProcessing;
 
 
@@ -25,6 +26,20 @@ public class Save implements ImageCommandController {
 
   @Override
   public Image execute(ImprovedImageProcessing m) {
-    return m.saveImage(imagePath, imageName);
+    Image image = m.saveImage(imageName);
+    if (image == null) {
+      return null;
+    }
+    String extension = null;
+    int index = imagePath.lastIndexOf('.');
+    if (index > 0) {
+      extension = imagePath.substring(index + 1);
+    }
+    if (extension.equalsIgnoreCase("PPM")) {
+      ImageUtil.createPPM(imagePath, image);
+    } else {
+      ImageUtil.createImage(extension, imagePath, image);
+    }
+    return image;
   }
 }

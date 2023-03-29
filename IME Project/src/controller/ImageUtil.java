@@ -1,6 +1,5 @@
-package model;
+package controller;
 
-import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
@@ -11,6 +10,10 @@ import java.util.Scanner;
 
 import javax.imageio.ImageIO;
 
+import model.Color;
+import model.Image;
+import model.Pixel;
+
 public class ImageUtil {
   public static Image readImage(String filepath) {
     try {
@@ -20,7 +23,7 @@ public class ImageUtil {
               listOfPixels);
       for (int y = 0; y < image.getHeight(); y++) {
         for (int x = 0; x < image.getWidth(); x++) {
-          java.awt.Color rgb = new java.awt.Color(image.getRGB(x, y));
+          Color rgb = new Color(image.getRGB(x, y));
           try {
             listOfPixels[y][x] = new Pixel(y, x, rgb.getRed(), rgb.getGreen(), rgb.getBlue());
           } catch (NullPointerException e) {
@@ -45,7 +48,7 @@ public class ImageUtil {
       Pixel[][] listOfPixels = m.getPixels();
       for (int y = 0; y < image.getHeight(); y++) {
         for (int x = 0; x < image.getWidth(); x++) {
-          java.awt.Color rgb = new Color(listOfPixels[y][x].getColorComponent().getRedComponent(),
+          Color rgb = new Color(listOfPixels[y][x].getColorComponent().getRedComponent(),
                   listOfPixels[y][x].getColorComponent().getGreenComponent(),
                   listOfPixels[y][x].getColorComponent().getBlueComponent());
           try {
@@ -55,7 +58,14 @@ public class ImageUtil {
           }
         }
       }
+      File myObj = new File(filepath);
+      if (myObj.createNewFile()) {
+        System.out.println("File created: " + myObj.getName());
+      } else {
+        System.out.println("File already exists.");
+      }
       ImageIO.write(image, imageExtension, new File(filepath));
+      System.out.println("Image saved successfully.");
     } catch (IOException e) {
       System.out.println("Unable to create file " + filepath);
     }

@@ -14,21 +14,20 @@ public interface ImageProcessingModel {
   /**
    * Method to initialize the values passed from controller.
    *
-   * @param imagePath the sting which contains source ppm image path.
+   * @param image the image to be loaded.
    * @param imageName the sting which contains destination image name.
    */
-  Image loadImage(String imagePath, String imageName);
+  Image loadImage(Image image, String imageName);
 
   /**
    * This method saves the image with the given name to the specified path which should
    * include the name of the file.
    *
-   * @param imagePath the string which contains destination ppm image path.
    * @param imageName the string which contains source image name.
    * @return destination Image.
    */
 
-  Image saveImage(String imagePath, String imageName);
+  Image saveImage(String imageName);
 
   /**
    * This method creates a greyscale image with the component of the image with the given name,
