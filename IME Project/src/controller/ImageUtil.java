@@ -14,7 +14,17 @@ import model.Color;
 import model.Image;
 import model.Pixel;
 
+/**
+ * This utility class supports I/O operations to load and save image files of different formats.
+ */
 public class ImageUtil {
+
+  /**
+   * Reads an image from a file into an Image object.
+   *
+   * @param filepath the filepath of the image
+   * @return the Image object after reading the image file
+   */
   public static Image readImage(String filepath) {
     try {
       BufferedImage image = ImageIO.read(new File(filepath));
@@ -41,6 +51,13 @@ public class ImageUtil {
     }
   }
 
+  /**
+   * Creates a file from an Image object.
+   *
+   * @param imageExtension the format in which image must be saved
+   * @param filepath       the filepath where the image file is created
+   * @param m              the Image object which is saved
+   */
   public static void createImage(String imageExtension, String filepath, Image m) {
     try {
       BufferedImage image = new BufferedImage(m.getWidth(), m.getHeight(),
@@ -71,6 +88,12 @@ public class ImageUtil {
     }
   }
 
+  /**
+   * Reads an image from a PPM file into an Image object.
+   *
+   * @param filename the filepath of PPM file
+   * @return the Image object after reading the image file
+   */
   public static Image readPPM(String filename) {
     Scanner sc;
     Image m;
@@ -111,6 +134,12 @@ public class ImageUtil {
     return m;
   }
 
+  /**
+   * Creates a PPM file from an Image object.
+   *
+   * @param filepath the filepath where the image file is created
+   * @param m        the Image object which is saved
+   */
   public static void createPPM(String filepath, Image m) {
     try {
       File myObj = new File(filepath);
