@@ -8,3 +8,17 @@ brighten 50 dog dog-brighter-by-50
 save res/dog-brighter-by-50.ppm dog-brighter-by-50
 greyscale value-component dog dogvalue
 save res/dog-value-greyscale.ppm dogvalue
+load res/dog.ppm d
+blur d db
+sharpen d ds
+sepia d dsepia
+greyscale d dg
+dither d dd
+save res/dog-blur.ppm db
+save res/dog-sharpen.ppm ds
+save res/dog-sepia.jpg dsepia
+save res/dog-greyscale.png dg
+save res/dog-dither.bmp dd
+load res/dog-sepia.jpg dog-sepia
+load res/dog-greyscale.png dog-greyscale
+load res/dog-dither.bmp dog-dither

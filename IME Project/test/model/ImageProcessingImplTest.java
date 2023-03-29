@@ -4,6 +4,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 import controller.commands.ImageCommandController;
 import controller.commands.Load;
@@ -71,17 +74,31 @@ public class ImageProcessingImplTest {
   }
 
   @Test
-  public void testCheckPPMFormat() {
-    ImageCommandController controller = new Load("res/dog.ppm", "original");
+  public void testCheckPPMFormat() throws FileNotFoundException {
+    ImageCommandController controller = new Load("res/testFile.ppm",
+            "original");
     Image original = controller.execute(model);
     File f = new File("res/Original.ppm");
+    f.delete();
     assertFalse(f.exists());
     controller = new Save("res/Original.ppm", "original");
     original = controller.execute(model);
     assertTrue(f.exists());
-    f.delete();
+    String filename = "res/Original.ppm";
+    Scanner sc = new Scanner(new FileInputStream(filename));
+    StringBuilder builder = new StringBuilder();
+    assertEquals("P3", sc.nextLine());
+    assertEquals("# Created by GIMP version 2.10.20 PNM plug-in", sc.nextLine());
+    assertEquals(sc.nextInt(), original.getWidth());
+    assertEquals(sc.nextInt(), original.getHeight());
+    assertEquals(sc.nextInt(), original.getMaxValueOfColor());
+    assertEquals(sc.nextInt(), original.getPixels()[0][0].getColorComponent().getRedComponent());
+    assertEquals(sc.nextInt(), original.getPixels()[0][0].getColorComponent().getGreenComponent());
+    assertEquals(sc.nextInt(), original.getPixels()[0][0].getColorComponent().getBlueComponent());
+    assertEquals(sc.nextInt(), original.getPixels()[0][1].getColorComponent().getRedComponent());
+    assertEquals(sc.nextInt(), original.getPixels()[0][1].getColorComponent().getGreenComponent());
+    assertEquals(sc.nextInt(), original.getPixels()[0][1].getColorComponent().getBlueComponent());
   }
-
 
   @Test
   public void testBrightenImage() {

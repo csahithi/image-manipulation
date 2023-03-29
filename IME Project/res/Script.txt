@@ -22,3 +22,20 @@ save res/dog-blue-greyscale.ppm dogblue
 rgb-split dog dogred doggreen dogblue
 rgb-combine dog1 dogred doggreen dogblue
 run res/Script1.txt
+load res/dog.ppm d
+blur d db
+sharpen d ds
+sepia d dsepia
+greyscale d dg
+dither d dd
+save res/dog-blur.ppm db
+save res/dog-sharpen.ppm ds
+save res/dog-sepia.jpg dsepia
+save res/dog-greyscale.png dg
+save res/dog-dither.bmp dd
+load res/dog-sepia.jpg dog-sepia
+load res/dog-greyscale.png dog-greyscale
+load res/dog-dither.bmp dog-dither
+
+
+
