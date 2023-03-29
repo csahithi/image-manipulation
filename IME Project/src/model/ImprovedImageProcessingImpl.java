@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Objects;
+
 public class ImprovedImageProcessingImpl extends ImageProcessingModelImpl
         implements ImprovedImageProcessing {
 
@@ -31,15 +33,22 @@ public class ImprovedImageProcessingImpl extends ImageProcessingModelImpl
     if (sourceImage == null) {
       return null;
     }
-    Image resultImage = null;
-    if (transformation.equals("sepia")) {
-      resultImage = sepiaTone(sourceImage);
-    }
+    Image resultImage;
+    resultImage = helperColorTransformation(sourceImage, getMatrix(transformation));
     LIST_OF_IMAGES.put(destImageName, resultImage);
     return resultImage;
   }
 
-  private Image sepiaTone(Image image) {
+  private double[][] getMatrix(String operation) {
+    if (Objects.equals(operation, "sepia")) {
+      return new double[][]{{0.393, 0.769, 0.189}, {0.349, 0.686, 0.168}, {0.272, 0.534, 0.131}};
+    } else if (operation.equals("greyscale")) {
+      return new double[][]{{0.2126, 0.7152, 0.0722}, {0.2126, 0.7152, 0.0722}, {0.2126, 0.7152, 0.0722}};
+    }
+    return null;
+  }
+
+  private Image helperColorTransformation(Image image, double[][] values) {
     Pixel[][] listOfPixelsDestImage = new Pixel[image.getHeight()][image.getWidth()];
     for (int i = 0; i < image.getHeight(); i++) {
       for (int j = 0; j < image.getWidth(); j++) {
@@ -49,24 +58,11 @@ public class ImprovedImageProcessingImpl extends ImageProcessingModelImpl
         int g = image.getPixels()[i][j].getColorComponent().getGreenComponent();
         int b = image.getPixels()[i][j].getColorComponent().getBlueComponent();
         listOfPixelsDestImage[i][j].getColorComponent().setRedComponent(Math.max(0, Math.min(255,
-                (int) ((0.393 * r) + (0.769 * g) + (0.189 * b)))));
+                (int) ((values[0][0] * r) + (values[0][1] * g) + (values[0][2] * b)))));
         listOfPixelsDestImage[i][j].getColorComponent().setGreenComponent(Math.max(0, Math.min(255,
-                (int) ((0.349 * r) + (0.686 * g) + (0.168 * b)))));
+                (int) ((values[1][0] * r) + (values[1][1] * g) + (values[1][2] * b)))));
         listOfPixelsDestImage[i][j].getColorComponent().setBlueComponent(Math.max(0, Math.min(255,
-                (int) ((0.272 * r) + (0.534 * g) + (0.131 * b)))));
-        if (listOfPixelsDestImage[i][j].getColorComponent().getRedComponent() > 255
-                || listOfPixelsDestImage[i][j].getColorComponent().getRedComponent() < 0) {
-          System.out.println(listOfPixelsDestImage[i][j].getColorComponent().getRedComponent());
-        }
-        if (listOfPixelsDestImage[i][j].getColorComponent().getGreenComponent() > 255
-                || listOfPixelsDestImage[i][j].getColorComponent().getGreenComponent() < 0) {
-          System.out.println(listOfPixelsDestImage[i][j].getColorComponent().getGreenComponent());
-        }
-        if (listOfPixelsDestImage[i][j].getColorComponent().getBlueComponent() > 255
-                || listOfPixelsDestImage[i][j].getColorComponent().getBlueComponent() < 0) {
-          System.out.println(listOfPixelsDestImage[i][j].getColorComponent().getBlueComponent());
-        }
-
+                (int) ((values[2][0] * r) + (values[2][1] * g) + (values[2][2] * b)))));
       }
     }
     return new Image(image.getWidth(), image.getHeight(), image.getMaxValueOfColor(),
@@ -76,6 +72,9 @@ public class ImprovedImageProcessingImpl extends ImageProcessingModelImpl
   @Override
   public Image dither(String sourceImageName, String destImageName) {
     Image image = LIST_OF_IMAGES.getOrDefault(sourceImageName, null);
+    if (image == null) {
+      return null;
+    }
     Image greyscaleImage = super.greyscale("luma-component", sourceImageName,
             "greyscaleImage");
     Pixel[][] listOfPixelsDestImage = new Pixel[image.getHeight()][image.getWidth()];
