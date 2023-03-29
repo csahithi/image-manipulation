@@ -4,22 +4,16 @@ import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import controller.commands.ImageCommandController;
-import controller.commands.Load;
-import controller.commands.Save;
 import model.Image;
 import model.ImprovedImageProcessing;
 import model.Pixel;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 /**
@@ -110,7 +104,7 @@ public class CommandControllerTest {
 
     @Override
     public Image dither(String sourceImageName, String destImageName) {
-      sb.append("Received inputs " +  sourceImageName + " and " + destImageName);
+      sb.append("Received inputs " + sourceImageName + " and " + destImageName);
       return image;
     }
   }
@@ -205,7 +199,8 @@ public class CommandControllerTest {
     ImprovedImageProcessing model = new MockModel(mockLog);
     ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, out);
     controller.execute();
-    assertEquals("Received inputs " + a + ", " + b + ", " + c + " and " + d, mockLog.toString());
+    assertEquals("Received inputs " + a + ", " + b + ", " + c + " and " + d,
+            mockLog.toString());
   }
 
   @Test

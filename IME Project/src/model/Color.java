@@ -22,6 +22,11 @@ public class Color extends java.awt.Color {
     this.blueComponent = blueComponent;
   }
 
+  /**
+   * Constructor to initialize values of components of color object using rgb value.
+   *
+   * @param rgbValue the rgb value of color component.
+   */
   public Color(int rgbValue) {
     super(rgbValue);
     this.redComponent = this.getRed();
@@ -29,26 +34,56 @@ public class Color extends java.awt.Color {
     this.blueComponent = this.getBlue();
   }
 
+  /**
+   * Returns the red component of Color.
+   *
+   * @return integer value of red component
+   */
   public int getRedComponent() {
     return redComponent;
   }
 
+  /**
+   * Sets the red component of Color.
+   *
+   * @param redComponent integer value of red component
+   */
   public void setRedComponent(int redComponent) {
     this.redComponent = redComponent;
   }
 
+  /**
+   * Returns the green component of Color.
+   *
+   * @return integer value of green component
+   */
   public int getGreenComponent() {
     return greenComponent;
   }
 
+  /**
+   * Sets the red component of Color.
+   *
+   * @param greenComponent integer value of red component
+   */
   public void setGreenComponent(int greenComponent) {
     this.greenComponent = greenComponent;
   }
 
+  /**
+   * Returns the blue component of Color.
+   *
+   * @return integer value of blue component
+   */
   public int getBlueComponent() {
     return blueComponent;
   }
 
+  /**
+   * Sets the blue component of Color.
+   *
+   * @param blueComponent integer value of blue component
+   */
   public void setBlueComponent(int blueComponent) {
     this.blueComponent = blueComponent;
   }

@@ -15,7 +15,7 @@ public interface ImageProcessingModel {
    * Method to initialize the values passed from controller.
    *
    * @param image     the image to be loaded.
-   * @param imageName the sting which contains destination image name.
+   * @param imageName the string which contains destination image name.
    */
   Image loadImage(Image image, String imageName);
 

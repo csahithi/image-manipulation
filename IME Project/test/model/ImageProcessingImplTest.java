@@ -524,7 +524,7 @@ public class ImageProcessingImplTest {
   }
 
   @Test
-  public void testSaveJPEG(){
+  public void testSaveJPEG() {
     ImageCommandController controller = new Load("res/dog.ppm", "original");
     Image original = controller.execute(model);
     File f = new File("res/Original.jpg");
@@ -536,7 +536,7 @@ public class ImageProcessingImplTest {
   }
 
   @Test
-  public void testSaveBMP(){
+  public void testSaveBMP() {
     ImageCommandController controller = new Load("res/dog.ppm", "original");
     Image original = controller.execute(model);
     File f = new File("res/Original.bmp");
@@ -548,7 +548,7 @@ public class ImageProcessingImplTest {
   }
 
   @Test
-  public void testSavePNG(){
+  public void testSavePNG() {
     ImageCommandController controller = new Load("res/dog.ppm", "original");
     Image original = controller.execute(model);
     File f = new File("res/Original.png");
@@ -560,7 +560,7 @@ public class ImageProcessingImplTest {
   }
 
   @Test
-  public void testSaveMultipleFormats(){
+  public void testSaveMultipleFormats() {
     ImageCommandController controller = new Load("res/dog.ppm", "original");
     Image original = controller.execute(model);
     File f = new File("res/Original.jpg");

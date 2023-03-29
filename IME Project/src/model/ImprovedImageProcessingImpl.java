@@ -2,6 +2,9 @@ package model;
 
 import java.util.Objects;
 
+/**
+ * This class implements advanced operations on image.
+ */
 public class ImprovedImageProcessingImpl extends ImageProcessingModelImpl
         implements ImprovedImageProcessing {
 
@@ -43,7 +46,8 @@ public class ImprovedImageProcessingImpl extends ImageProcessingModelImpl
     if (Objects.equals(operation, "sepia")) {
       return new double[][]{{0.393, 0.769, 0.189}, {0.349, 0.686, 0.168}, {0.272, 0.534, 0.131}};
     } else if (operation.equals("greyscale")) {
-      return new double[][]{{0.2126, 0.7152, 0.0722}, {0.2126, 0.7152, 0.0722}, {0.2126, 0.7152, 0.0722}};
+      return new double[][]{{0.2126, 0.7152, 0.0722}, {0.2126, 0.7152, 0.0722},
+              {0.2126, 0.7152, 0.0722}};
     }
     return null;
   }

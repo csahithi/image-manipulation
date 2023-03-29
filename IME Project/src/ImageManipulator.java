@@ -34,6 +34,5 @@ public class ImageManipulator {
     ImageProcessingController controller = new ImageProcessingControllerImpl(model, in,
             System.out);
     controller.execute();
-
   }
 }

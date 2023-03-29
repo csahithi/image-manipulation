@@ -48,7 +48,6 @@ public class ImageProcessingControllerImpl implements ImageProcessingController 
   }
 
   private void readCommands(String[] inputArray, String command) {
-    //Image m = null;
     ImageCommandController cmd = null;
     PrintStream outStream = new PrintStream(this.out);
     if ((inputArray.length == 2) && (inputArray[0].equals("run"))) {

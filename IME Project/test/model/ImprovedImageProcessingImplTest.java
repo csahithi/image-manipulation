@@ -9,6 +9,9 @@ import controller.commands.Load;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
+/**
+ * This class contains tests for ImprovedImageProcessing model class.
+ */
 public class ImprovedImageProcessingImplTest {
   private ImprovedImageProcessing model;
 
@@ -24,10 +27,12 @@ public class ImprovedImageProcessingImplTest {
     Image blurredImage = model.filtering("blur", "test",
             "blurredImage");
     assertEquals(21, blurredImage.getPixels()[0][0].getColorComponent().getRedComponent());
-    assertEquals(32, blurredImage.getPixels()[0][1].getColorComponent().getGreenComponent());
+    assertEquals(32, blurredImage.getPixels()[0][1].getColorComponent().
+            getGreenComponent());
     assertEquals(72, blurredImage.getPixels()[1][0].getColorComponent().getBlueComponent());
     assertEquals(66, blurredImage.getPixels()[1][1].getColorComponent().getRedComponent());
-    assertEquals(72, blurredImage.getPixels()[2][0].getColorComponent().getGreenComponent());
+    assertEquals(72, blurredImage.getPixels()[2][0].getColorComponent().
+            getGreenComponent());
     assertEquals(83, blurredImage.getPixels()[2][1].getColorComponent().getBlueComponent());
   }
 
@@ -38,11 +43,15 @@ public class ImprovedImageProcessingImplTest {
     Image sharpenImage = model.filtering("sharpen", "test",
             "sharpenImage");
     assertEquals(25, sharpenImage.getPixels()[0][0].getColorComponent().getRedComponent());
-    assertEquals(62, sharpenImage.getPixels()[0][1].getColorComponent().getGreenComponent());
-    assertEquals(224, sharpenImage.getPixels()[1][0].getColorComponent().getBlueComponent());
+    assertEquals(62, sharpenImage.getPixels()[0][1].getColorComponent().
+            getGreenComponent());
+    assertEquals(224, sharpenImage.getPixels()[1][0].getColorComponent().
+            getBlueComponent());
     assertEquals(201, sharpenImage.getPixels()[1][1].getColorComponent().getRedComponent());
-    assertEquals(219, sharpenImage.getPixels()[2][0].getColorComponent().getGreenComponent());
-    assertEquals(255, sharpenImage.getPixels()[2][1].getColorComponent().getBlueComponent());
+    assertEquals(219, sharpenImage.getPixels()[2][0].getColorComponent().
+            getGreenComponent());
+    assertEquals(255, sharpenImage.getPixels()[2][1].getColorComponent().
+            getBlueComponent());
   }
 
   @Test
@@ -65,12 +74,18 @@ public class ImprovedImageProcessingImplTest {
     Image original = controller.execute(model);
     Image greyscaleImage = model.colorTransformation("greyscale", "test",
             "greyscaleImage");
-    assertEquals(18, greyscaleImage.getPixels()[0][0].getColorComponent().getRedComponent());
-    assertEquals(48, greyscaleImage.getPixels()[0][1].getColorComponent().getGreenComponent());
-    assertEquals(78, greyscaleImage.getPixels()[1][0].getColorComponent().getBlueComponent());
-    assertEquals(108, greyscaleImage.getPixels()[1][1].getColorComponent().getRedComponent());
-    assertEquals(138, greyscaleImage.getPixels()[2][0].getColorComponent().getGreenComponent());
-    assertEquals(168, greyscaleImage.getPixels()[2][1].getColorComponent().getBlueComponent());
+    assertEquals(18, greyscaleImage.getPixels()[0][0].getColorComponent().
+            getRedComponent());
+    assertEquals(48, greyscaleImage.getPixels()[0][1].getColorComponent().
+            getGreenComponent());
+    assertEquals(78, greyscaleImage.getPixels()[1][0].getColorComponent().
+            getBlueComponent());
+    assertEquals(108, greyscaleImage.getPixels()[1][1].getColorComponent().
+            getRedComponent());
+    assertEquals(138, greyscaleImage.getPixels()[2][0].getColorComponent().
+            getGreenComponent());
+    assertEquals(168, greyscaleImage.getPixels()[2][1].getColorComponent().
+            getBlueComponent());
   }
 
   @Test
@@ -82,7 +97,8 @@ public class ImprovedImageProcessingImplTest {
     assertEquals(0, ditherImage.getPixels()[0][1].getColorComponent().getGreenComponent());
     assertEquals(0, ditherImage.getPixels()[1][0].getColorComponent().getBlueComponent());
     assertEquals(0, ditherImage.getPixels()[1][1].getColorComponent().getRedComponent());
-    assertEquals(255, ditherImage.getPixels()[2][0].getColorComponent().getGreenComponent());
+    assertEquals(255, ditherImage.getPixels()[2][0].getColorComponent().
+            getGreenComponent());
     assertEquals(255, ditherImage.getPixels()[2][1].getColorComponent().getBlueComponent());
   }
 
