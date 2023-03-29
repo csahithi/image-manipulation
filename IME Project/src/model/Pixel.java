@@ -4,9 +4,9 @@ package model;
  * This class represents a pixel.
  */
 public class Pixel {
-  public int row;
-  public int column;
-  public Color colorComponent;
+  private final int row;
+  private final int column;
+  private final Color colorComponent;
 
   /**
    * Constructor to initialize values of pixel properties/attributes.
@@ -21,6 +21,10 @@ public class Pixel {
     this.row = row;
     this.column = column;
     this.colorComponent = new Color(redComponent, greenComponent, blueComponent);
+  }
+
+  public Color getColorComponent() {
+    return colorComponent;
   }
 
   /**

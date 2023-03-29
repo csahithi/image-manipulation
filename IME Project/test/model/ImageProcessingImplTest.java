@@ -67,12 +67,14 @@ public class ImageProcessingImplTest {
             "brightenedImage");
     for (int i = 0; i < original.getHeight(); i++) {
       for (int j = 0; j < original.getWidth(); j++) {
-        assertTrue(brightenedImage.getPixels()[i][j].colorComponent.redComponent
-                - original.getPixels()[i][j].colorComponent.redComponent <= increment);
-        assertTrue(brightenedImage.getPixels()[i][j].colorComponent.greenComponent
-                - original.getPixels()[i][j].colorComponent.greenComponent <= increment);
-        assertTrue(brightenedImage.getPixels()[i][j].colorComponent.blueComponent
-                - original.getPixels()[i][j].colorComponent.blueComponent <= increment);
+        assertTrue(brightenedImage.getPixels()[i][j].getColorComponent().getRedComponent()
+                - original.getPixels()[i][j].getColorComponent().getRedComponent() <= increment);
+        assertTrue(brightenedImage.getPixels()[i][j].getColorComponent()
+                .getGreenComponent()
+                - original.getPixels()[i][j].getColorComponent().getGreenComponent() <= increment);
+        assertTrue(brightenedImage.getPixels()[i][j].getColorComponent()
+                .getBlueComponent()
+                - original.getPixels()[i][j].getColorComponent().getBlueComponent() <= increment);
       }
     }
   }
@@ -93,11 +95,11 @@ public class ImageProcessingImplTest {
             "brightenedImage");
     for (int i = 0; i < original.getHeight(); i++) {
       for (int j = 0; j < original.getWidth(); j++) {
-        assertTrue(brightenedImage.getPixels()[i][j].colorComponent.redComponent
+        assertTrue(brightenedImage.getPixels()[i][j].getColorComponent().getRedComponent()
                 <= brightenedImage.getMaxValueOfColor());
-        assertTrue(brightenedImage.getPixels()[i][j].colorComponent.greenComponent
-                <= brightenedImage.getMaxValueOfColor());
-        assertTrue(brightenedImage.getPixels()[i][j].colorComponent.blueComponent
+        assertTrue(brightenedImage.getPixels()[i][j].getColorComponent()
+                .getGreenComponent() <= brightenedImage.getMaxValueOfColor());
+        assertTrue(brightenedImage.getPixels()[i][j].getColorComponent().getBlueComponent()
                 <= brightenedImage.getMaxValueOfColor());
       }
     }
@@ -112,11 +114,11 @@ public class ImageProcessingImplTest {
     for (int i = 0; i < original.getHeight(); i++) {
       for (int j = 0; j < original.getWidth(); j++) {
         assertEquals(255,
-                maxBrightenedImage.getPixels()[i][j].colorComponent.redComponent);
+                maxBrightenedImage.getPixels()[i][j].getColorComponent().getRedComponent());
         assertEquals(255,
-                maxBrightenedImage.getPixels()[i][j].colorComponent.greenComponent);
+                maxBrightenedImage.getPixels()[i][j].getColorComponent().getGreenComponent());
         assertEquals(255,
-                maxBrightenedImage.getPixels()[i][j].colorComponent.blueComponent);
+                maxBrightenedImage.getPixels()[i][j].getColorComponent().getBlueComponent());
       }
     }
   }
@@ -129,9 +131,12 @@ public class ImageProcessingImplTest {
             "brightenedImage");
     for (int i = 0; i < original.getHeight(); i++) {
       for (int j = 0; j < original.getWidth(); j++) {
-        assertEquals(0, brightenedImage.getPixels()[i][j].colorComponent.redComponent);
-        assertEquals(0, brightenedImage.getPixels()[i][j].colorComponent.greenComponent);
-        assertEquals(0, brightenedImage.getPixels()[i][j].colorComponent.blueComponent);
+        assertEquals(0, brightenedImage.getPixels()[i][j].getColorComponent()
+                .getRedComponent());
+        assertEquals(0, brightenedImage.getPixels()[i][j].getColorComponent()
+                .getGreenComponent());
+        assertEquals(0, brightenedImage.getPixels()[i][j].getColorComponent()
+                .getBlueComponent());
       }
     }
   }
@@ -144,19 +149,23 @@ public class ImageProcessingImplTest {
             "brightenedImage");
     for (int i = 0; i < original.getHeight(); i++) {
       for (int j = 0; j < original.getWidth(); j++) {
-        assertTrue(Math.abs(brightenedImage.getPixels()[i][j].colorComponent.redComponent
-                - original.getPixels()[i][j].colorComponent.redComponent) <= Math.abs(increment));
-        assertTrue(Math.abs(brightenedImage.getPixels()[i][j].colorComponent.greenComponent
-                - original.getPixels()[i][j].colorComponent.greenComponent) <= Math.abs(increment));
-        assertTrue(Math.abs(brightenedImage.getPixels()[i][j].colorComponent.blueComponent
-                - original.getPixels()[i][j].colorComponent.blueComponent) <= Math.abs(increment));
+        assertTrue(Math.abs(brightenedImage.getPixels()[i][j].getColorComponent()
+                .getRedComponent() - original.getPixels()[i][j].getColorComponent()
+                .getRedComponent()) <= Math.abs(increment));
+        assertTrue(Math.abs(brightenedImage.getPixels()[i][j].getColorComponent()
+                .getGreenComponent() - original.getPixels()[i][j].getColorComponent()
+                .getGreenComponent()) <= Math.abs(increment));
+        assertTrue(Math.abs(brightenedImage.getPixels()[i][j].getColorComponent()
+                .getBlueComponent() - original.getPixels()[i][j].getColorComponent()
+                .getBlueComponent()) <= Math.abs(increment));
       }
     }
   }
 
   @Test
   public void testVerticalFlipNullImage() {
-    Image verticalFlipImage = model.verticalFlip(null, "verticalFlipImage");
+    Image verticalFlipImage = model.verticalFlip(null,
+            "verticalFlipImage");
     assertNull(verticalFlipImage);
   }
 
@@ -169,23 +178,27 @@ public class ImageProcessingImplTest {
             "verticalFlipSecondTime");
     for (int i = 0; i < original.getHeight(); i++) {
       for (int j = 0; j < original.getWidth(); j++) {
-        assertEquals(verticalFlipFirstTime.getPixels()[i][j].colorComponent.redComponent,
-                original.getPixels()[original.getHeight() - i - 1][j].colorComponent.redComponent);
-        assertEquals(verticalFlipFirstTime.getPixels()[i][j].colorComponent.greenComponent,
-                original.getPixels()[original.getHeight() - i - 1][j]
-                        .colorComponent.greenComponent);
-        assertEquals(verticalFlipFirstTime.getPixels()[i][j].colorComponent.blueComponent,
-                original.getPixels()[original.getHeight() - i - 1][j].colorComponent.blueComponent);
+        assertEquals(verticalFlipFirstTime.getPixels()[i][j].getColorComponent()
+                        .getRedComponent(), original.getPixels()[original.getHeight() - i - 1][j]
+                .getColorComponent().getRedComponent());
+        assertEquals(verticalFlipFirstTime.getPixels()[i][j].getColorComponent()
+                        .getGreenComponent(), original.getPixels()[original.getHeight() - i - 1][j]
+                .getColorComponent().getGreenComponent());
+        assertEquals(verticalFlipFirstTime.getPixels()[i][j].getColorComponent().getBlueComponent(),
+                original.getPixels()[original.getHeight() - i - 1][j].getColorComponent()
+                        .getBlueComponent());
       }
     }
     for (int i = 0; i < original.getHeight(); i++) {
       for (int j = 0; j < original.getWidth(); j++) {
-        assertEquals(verticalFlipSecondTime.getPixels()[i][j].colorComponent.redComponent,
-                original.getPixels()[i][j].colorComponent.redComponent);
-        assertEquals(verticalFlipSecondTime.getPixels()[i][j].colorComponent.greenComponent,
-                original.getPixels()[i][j].colorComponent.greenComponent);
-        assertEquals(verticalFlipSecondTime.getPixels()[i][j].colorComponent.blueComponent,
-                original.getPixels()[i][j].colorComponent.blueComponent);
+        assertEquals(verticalFlipSecondTime.getPixels()[i][j].getColorComponent().getRedComponent(),
+                original.getPixels()[i][j].getColorComponent().getRedComponent());
+        assertEquals(verticalFlipSecondTime.getPixels()[i][j].getColorComponent()
+                        .getGreenComponent(),
+                original.getPixels()[i][j].getColorComponent().getGreenComponent());
+        assertEquals(verticalFlipSecondTime.getPixels()[i][j].getColorComponent()
+                        .getBlueComponent(),
+                original.getPixels()[i][j].getColorComponent().getBlueComponent());
       }
     }
   }
@@ -206,22 +219,28 @@ public class ImageProcessingImplTest {
             "horizontalFlipSecondTime");
     for (int i = 0; i < original.getHeight(); i++) {
       for (int j = 0; j < original.getWidth(); j++) {
-        assertEquals(horizontalFlipFirstTime.getPixels()[i][j].colorComponent.redComponent,
-                original.getPixels()[i][original.getWidth() - 1 - j].colorComponent.redComponent);
-        assertEquals(horizontalFlipFirstTime.getPixels()[i][j].colorComponent.greenComponent,
-                original.getPixels()[i][original.getWidth() - 1 - j].colorComponent.greenComponent);
-        assertEquals(horizontalFlipFirstTime.getPixels()[i][j].colorComponent.blueComponent,
-                original.getPixels()[i][original.getWidth() - 1 - j].colorComponent.blueComponent);
+        assertEquals(horizontalFlipFirstTime.getPixels()[i][j].getColorComponent()
+                        .getRedComponent(), original.getPixels()[i][original.getWidth() - 1 - j]
+                .getColorComponent().getRedComponent());
+        assertEquals(horizontalFlipFirstTime.getPixels()[i][j].getColorComponent()
+                        .getGreenComponent(), original.getPixels()[i][original.getWidth() - 1 - j]
+                .getColorComponent().getGreenComponent());
+        assertEquals(horizontalFlipFirstTime.getPixels()[i][j].getColorComponent()
+                        .getBlueComponent(), original.getPixels()[i][original.getWidth() - 1 - j]
+                .getColorComponent().getBlueComponent());
       }
     }
     for (int i = 0; i < original.getHeight(); i++) {
       for (int j = 0; j < original.getWidth(); j++) {
-        assertEquals(horizontalFlipSecondTime.getPixels()[i][j].colorComponent.redComponent,
-                original.getPixels()[i][j].colorComponent.redComponent);
-        assertEquals(horizontalFlipSecondTime.getPixels()[i][j].colorComponent.greenComponent,
-                original.getPixels()[i][j].colorComponent.greenComponent);
-        assertEquals(horizontalFlipSecondTime.getPixels()[i][j].colorComponent.blueComponent,
-                original.getPixels()[i][j].colorComponent.blueComponent);
+        assertEquals(horizontalFlipSecondTime.getPixels()[i][j].getColorComponent()
+                        .getRedComponent(), original.getPixels()[i][j].getColorComponent()
+                .getRedComponent());
+        assertEquals(horizontalFlipSecondTime.getPixels()[i][j].getColorComponent()
+                .getGreenComponent(), original.getPixels()[i][j].getColorComponent()
+                .getGreenComponent());
+        assertEquals(horizontalFlipSecondTime.getPixels()[i][j].getColorComponent()
+                        .getBlueComponent(), original.getPixels()[i][j].getColorComponent()
+                .getBlueComponent());
       }
     }
   }
@@ -240,10 +259,10 @@ public class ImageProcessingImplTest {
             "original", "greyscaleOnRedComponent");
     for (int i = 0; i < original.getHeight(); i++) {
       for (int j = 0; j < original.getWidth(); j++) {
-        assertEquals(original.getPixels()[i][j].colorComponent.redComponent,
-                greyscaleOnRedComponent.getPixels()[i][j].colorComponent.blueComponent);
-        assertEquals(original.getPixels()[i][j].colorComponent.redComponent,
-                greyscaleOnRedComponent.getPixels()[i][j].colorComponent.greenComponent);
+        assertEquals(original.getPixels()[i][j].getColorComponent().getRedComponent(),
+                greyscaleOnRedComponent.getPixels()[i][j].getColorComponent().getBlueComponent());
+        assertEquals(original.getPixels()[i][j].getColorComponent().getRedComponent(),
+                greyscaleOnRedComponent.getPixels()[i][j].getColorComponent().getGreenComponent());
       }
     }
   }
@@ -262,10 +281,10 @@ public class ImageProcessingImplTest {
             "original", "greyscaleOnGreenComponent");
     for (int i = 0; i < original.getHeight(); i++) {
       for (int j = 0; j < original.getWidth(); j++) {
-        assertEquals(original.getPixels()[i][j].colorComponent.greenComponent,
-                greyscaleOnGreenComponent.getPixels()[i][j].colorComponent.blueComponent);
-        assertEquals(original.getPixels()[i][j].colorComponent.greenComponent,
-                greyscaleOnGreenComponent.getPixels()[i][j].colorComponent.redComponent);
+        assertEquals(original.getPixels()[i][j].getColorComponent().getGreenComponent(),
+                greyscaleOnGreenComponent.getPixels()[i][j].getColorComponent().getBlueComponent());
+        assertEquals(original.getPixels()[i][j].getColorComponent().getGreenComponent(),
+                greyscaleOnGreenComponent.getPixels()[i][j].getColorComponent().getRedComponent());
       }
     }
   }
@@ -284,10 +303,10 @@ public class ImageProcessingImplTest {
             "original", "greyscaleOnBlueComponent");
     for (int i = 0; i < original.getHeight(); i++) {
       for (int j = 0; j < original.getWidth(); j++) {
-        assertEquals(original.getPixels()[i][j].colorComponent.blueComponent,
-                greyscaleOnBlueComponent.getPixels()[i][j].colorComponent.redComponent);
-        assertEquals(original.getPixels()[i][j].colorComponent.blueComponent,
-                greyscaleOnBlueComponent.getPixels()[i][j].colorComponent.greenComponent);
+        assertEquals(original.getPixels()[i][j].getColorComponent().getBlueComponent(),
+                greyscaleOnBlueComponent.getPixels()[i][j].getColorComponent().getRedComponent());
+        assertEquals(original.getPixels()[i][j].getColorComponent().getBlueComponent(),
+                greyscaleOnBlueComponent.getPixels()[i][j].getColorComponent().getGreenComponent());
       }
     }
   }
@@ -307,11 +326,11 @@ public class ImageProcessingImplTest {
     for (int i = 0; i < original.getHeight(); i++) {
       for (int j = 0; j < original.getWidth(); j++) {
         assertEquals(original.getPixels()[i][j].getLumaComponent(),
-                greyscaleOnLumaComponent.getPixels()[i][j].colorComponent.redComponent);
+                greyscaleOnLumaComponent.getPixels()[i][j].getColorComponent().getRedComponent());
         assertEquals(original.getPixels()[i][j].getLumaComponent(),
-                greyscaleOnLumaComponent.getPixels()[i][j].colorComponent.greenComponent);
+                greyscaleOnLumaComponent.getPixels()[i][j].getColorComponent().getGreenComponent());
         assertEquals(original.getPixels()[i][j].getLumaComponent(),
-                greyscaleOnLumaComponent.getPixels()[i][j].colorComponent.blueComponent);
+                greyscaleOnLumaComponent.getPixels()[i][j].getColorComponent().getBlueComponent());
       }
     }
   }
@@ -331,11 +350,12 @@ public class ImageProcessingImplTest {
     for (int i = 0; i < original.getHeight(); i++) {
       for (int j = 0; j < original.getWidth(); j++) {
         assertEquals(original.getPixels()[i][j].getValueComponent(),
-                greyscaleOnValueComponent.getPixels()[i][j].colorComponent.redComponent);
+                greyscaleOnValueComponent.getPixels()[i][j].getColorComponent().getRedComponent());
         assertEquals(original.getPixels()[i][j].getValueComponent(),
-                greyscaleOnValueComponent.getPixels()[i][j].colorComponent.greenComponent);
+                greyscaleOnValueComponent.getPixels()[i][j].getColorComponent()
+                        .getGreenComponent());
         assertEquals(original.getPixels()[i][j].getValueComponent(),
-                greyscaleOnValueComponent.getPixels()[i][j].colorComponent.blueComponent);
+                greyscaleOnValueComponent.getPixels()[i][j].getColorComponent().getBlueComponent());
       }
     }
   }
@@ -355,11 +375,14 @@ public class ImageProcessingImplTest {
     for (int i = 0; i < original.getHeight(); i++) {
       for (int j = 0; j < original.getWidth(); j++) {
         assertEquals(original.getPixels()[i][j].getIntensityComponent(),
-                greyscaleOnIntensityComponent.getPixels()[i][j].colorComponent.redComponent);
+                greyscaleOnIntensityComponent.getPixels()[i][j].getColorComponent()
+                        .getRedComponent());
         assertEquals(original.getPixels()[i][j].getIntensityComponent(),
-                greyscaleOnIntensityComponent.getPixels()[i][j].colorComponent.greenComponent);
+                greyscaleOnIntensityComponent.getPixels()[i][j].getColorComponent()
+                        .getGreenComponent());
         assertEquals(original.getPixels()[i][j].getIntensityComponent(),
-                greyscaleOnIntensityComponent.getPixels()[i][j].colorComponent.blueComponent);
+                greyscaleOnIntensityComponent.getPixels()[i][j].getColorComponent()
+                        .getBlueComponent());
       }
     }
   }
@@ -371,10 +394,10 @@ public class ImageProcessingImplTest {
             "greenImage", "blueImage");
     for (int i = 0; i < original.getHeight(); i++) {
       for (int j = 0; j < original.getWidth(); j++) {
-        assertEquals(original.getPixels()[i][j].colorComponent.redComponent,
-                redImage.getPixels()[i][j].colorComponent.blueComponent);
-        assertEquals(original.getPixels()[i][j].colorComponent.redComponent,
-                redImage.getPixels()[i][j].colorComponent.greenComponent);
+        assertEquals(original.getPixels()[i][j].getColorComponent().getRedComponent(),
+                redImage.getPixels()[i][j].getColorComponent().getBlueComponent());
+        assertEquals(original.getPixels()[i][j].getColorComponent().getRedComponent(),
+                redImage.getPixels()[i][j].getColorComponent().getGreenComponent());
       }
     }
   }
@@ -415,7 +438,7 @@ public class ImageProcessingImplTest {
     Image blueImage = null;
     Image resultImageBlue = model.rgbCombine("resultImageBlue",
             "redImage", "greenImage", "blueImage");
-    assertEquals(resultImageBlue, null);
+    assertNull(resultImageBlue);
   }
 
   @Test
@@ -431,12 +454,12 @@ public class ImageProcessingImplTest {
             "redImage", "greenImage", "blueImage");
     for (int i = 0; i < original.getHeight(); i++) {
       for (int j = 0; j < original.getWidth(); j++) {
-        assertEquals(original.getPixels()[i][j].colorComponent.redComponent,
-                rgbCombinedImage.getPixels()[i][j].colorComponent.redComponent);
-        assertEquals(original.getPixels()[i][j].colorComponent.greenComponent,
-                rgbCombinedImage.getPixels()[i][j].colorComponent.greenComponent);
-        assertEquals(original.getPixels()[i][j].colorComponent.blueComponent,
-                rgbCombinedImage.getPixels()[i][j].colorComponent.blueComponent);
+        assertEquals(original.getPixels()[i][j].getColorComponent().getRedComponent(),
+                rgbCombinedImage.getPixels()[i][j].getColorComponent().getRedComponent());
+        assertEquals(original.getPixels()[i][j].getColorComponent().getGreenComponent(),
+                rgbCombinedImage.getPixels()[i][j].getColorComponent().getGreenComponent());
+        assertEquals(original.getPixels()[i][j].getColorComponent().getBlueComponent(),
+                rgbCombinedImage.getPixels()[i][j].getColorComponent().getBlueComponent());
       }
     }
   }

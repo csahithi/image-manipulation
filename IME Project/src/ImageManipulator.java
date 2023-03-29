@@ -1,7 +1,5 @@
 import controller.ImageProcessingController;
 import controller.ImageProcessingControllerImpl;
-import model.ImageProcessingModel;
-import model.ImageProcessingModelImpl;
 import model.ImprovedImageProcessing;
 import model.ImprovedImageProcessingImpl;
 

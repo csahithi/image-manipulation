@@ -16,7 +16,8 @@ public class ImageUtil {
     try {
       BufferedImage image = ImageIO.read(new File(filepath));
       Pixel[][] listOfPixels = new Pixel[image.getHeight()][image.getWidth()];
-      Image finalImage = new Image(image.getWidth(), image.getHeight(), 255, listOfPixels);
+      Image finalImage = new Image(image.getWidth(), image.getHeight(), 255,
+              listOfPixels);
       for (int y = 0; y < image.getHeight(); y++) {
         for (int x = 0; x < image.getWidth(); x++) {
           java.awt.Color rgb = new java.awt.Color(image.getRGB(x, y));
@@ -39,13 +40,14 @@ public class ImageUtil {
 
   public static void createImage(String imageExtension, String filepath, Image m) {
     try {
-      BufferedImage image = new BufferedImage(m.getWidth(), m.getHeight(), BufferedImage.TYPE_INT_RGB);
+      BufferedImage image = new BufferedImage(m.getWidth(), m.getHeight(),
+              BufferedImage.TYPE_INT_RGB);
       Pixel[][] listOfPixels = m.getPixels();
       for (int y = 0; y < image.getHeight(); y++) {
         for (int x = 0; x < image.getWidth(); x++) {
-          java.awt.Color rgb = new Color(listOfPixels[y][x].colorComponent.getRedComponent(),
-                  listOfPixels[y][x].colorComponent.getGreenComponent(),
-                  listOfPixels[y][x].colorComponent.getBlueComponent());
+          java.awt.Color rgb = new Color(listOfPixels[y][x].getColorComponent().getRedComponent(),
+                  listOfPixels[y][x].getColorComponent().getGreenComponent(),
+                  listOfPixels[y][x].getColorComponent().getBlueComponent());
           try {
             image.setRGB(x, y, rgb.getRGB());
           } catch (NullPointerException e) {
@@ -119,12 +121,12 @@ public class ImageUtil {
       Pixel[][] listOfPixels = m.getPixels();
       for (int i = 0; i < m.getHeight(); i++) {
         for (int j = 0; j < m.getWidth(); j++) {
-          if (listOfPixels[i][j] == null || listOfPixels[i][j].colorComponent == null) {
+          if (listOfPixels[i][j] == null || listOfPixels[i][j].getColorComponent() == null) {
             return;
           }
-          myWriter.write(listOfPixels[i][j].colorComponent.getRedComponent() + "\n"
-                  + listOfPixels[i][j].colorComponent.getGreenComponent() + "\n"
-                  + listOfPixels[i][j].colorComponent.getBlueComponent() + "\n");
+          myWriter.write(listOfPixels[i][j].getColorComponent().getRedComponent() + "\n"
+                  + listOfPixels[i][j].getColorComponent().getGreenComponent() + "\n"
+                  + listOfPixels[i][j].getColorComponent().getBlueComponent() + "\n");
         }
       }
       myWriter.close();

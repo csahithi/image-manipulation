@@ -10,7 +10,7 @@ public class Image {
   private final Pixel[][] listOfPixels;
 
   /**
-   * Constructor to intialize the attributes of Image class.
+   * Constructor to initialize the attributes of Image class.
    *
    * @param width           is width of image.
    * @param height          is height of image.
