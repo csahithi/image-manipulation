@@ -16,20 +16,6 @@ public class ImageProcessingModelImpl implements ImageProcessingModel {
 
   @Override
   public Image loadImage(Image image, String imageName) {
-//    String extension = null;
-//    Image image;
-//    int index = imagePath.lastIndexOf('.');
-//    if (index > 0) {
-//      extension = imagePath.substring(index + 1);
-//    }
-//    if (extension.equalsIgnoreCase("PPM")) {
-//      image = ImageUtil.readPPM(imagePath);
-//    } else {
-//      image = ImageUtil.readImage(imagePath);
-//    }
-//    if (image == null) {
-//      return null;
-//    }
     LIST_OF_IMAGES.put(imageName, image);
     return image;
   }
@@ -37,19 +23,6 @@ public class ImageProcessingModelImpl implements ImageProcessingModel {
   @Override
   public Image saveImage(String imageName) {
     Image image = LIST_OF_IMAGES.getOrDefault(imageName, null);
-//    if (image == null) {
-//      return null;
-//    }
-//    String extension = null;
-//    int index = imagePath.lastIndexOf('.');
-//    if (index > 0) {
-//      extension = imagePath.substring(index + 1);
-//    }
-//    if (extension.equalsIgnoreCase("PPM")) {
-//      ImageUtil.createPPM(imagePath, image);
-//    } else {
-//      ImageUtil.createImage(extension, imagePath, image);
-//    }
     return image;
   }
 
@@ -198,114 +171,6 @@ public class ImageProcessingModelImpl implements ImageProcessingModel {
     LIST_OF_IMAGES.put(destImageName, destImage);
     return destImage;
   }
-
-//  private Image greyscaleRedComponent(Image image) {
-//    Pixel[][] listOfPixelsDestImage = new Pixel[image.getHeight()][image.getWidth()];
-//    for (int i = 0; i < image.getHeight(); i++) {
-//      for (int j = 0; j < image.getWidth(); j++) {
-//        listOfPixelsDestImage[i][j] = new Pixel(i, j, 0, 0,
-//                0);
-//        listOfPixelsDestImage[i][j].getColorComponent().setRedComponent(image.getPixels()[i][j]
-//                .getColorComponent().getRedComponent());
-//        listOfPixelsDestImage[i][j].getColorComponent().setGreenComponent(image.getPixels()[i][j]
-//                .getColorComponent().getRedComponent());
-//        listOfPixelsDestImage[i][j].getColorComponent().setBlueComponent(image.getPixels()[i][j]
-//                .getColorComponent().getRedComponent());
-//      }
-//    }
-//    return new Image(image.getWidth(), image.getHeight(), image.getMaxValueOfColor(),
-//            listOfPixelsDestImage);
-//  }
-//
-//  private Image greyscaleGreenComponent(Image image) {
-//    Pixel[][] listOfPixelsDestImage = new Pixel[image.getHeight()][image.getWidth()];
-//    for (int i = 0; i < image.getHeight(); i++) {
-//      for (int j = 0; j < image.getWidth(); j++) {
-//        listOfPixelsDestImage[i][j] = new Pixel(i, j, 0, 0,
-//                0);
-//        listOfPixelsDestImage[i][j].getColorComponent().setRedComponent(image.getPixels()[i][j]
-//                .getColorComponent().getGreenComponent());
-//        listOfPixelsDestImage[i][j].getColorComponent().setGreenComponent(image.getPixels()[i][j]
-//                .getColorComponent().getGreenComponent());
-//        listOfPixelsDestImage[i][j].getColorComponent().setBlueComponent(image.getPixels()[i][j]
-//                .getColorComponent().getGreenComponent());
-//      }
-//    }
-//    return new Image(image.getWidth(), image.getHeight(), image.getMaxValueOfColor(),
-//            listOfPixelsDestImage);
-//  }
-//
-//  private Image greyscaleBlueComponent(Image image) {
-//    Pixel[][] listOfPixelsDestImage = new Pixel[image.getHeight()][image.getWidth()];
-//    for (int i = 0; i < image.getHeight(); i++) {
-//      for (int j = 0; j < image.getWidth(); j++) {
-//        listOfPixelsDestImage[i][j] = new Pixel(i, j, 0, 0,
-//                0);
-//        listOfPixelsDestImage[i][j].getColorComponent().setRedComponent(image.getPixels()[i][j]
-//                .getColorComponent().getBlueComponent());
-//        listOfPixelsDestImage[i][j].getColorComponent().setGreenComponent(image.getPixels()[i][j]
-//                .getColorComponent().getBlueComponent());
-//        listOfPixelsDestImage[i][j].getColorComponent().setBlueComponent(image.getPixels()[i][j]
-//                .getColorComponent().getBlueComponent());
-//      }
-//    }
-//    return new Image(image.getWidth(), image.getHeight(), image.getMaxValueOfColor(),
-//            listOfPixelsDestImage);
-//  }
-
-//  private Image greyscaleValueComponent(Image image) {
-//    Pixel[][] listOfPixelsDestImage = new Pixel[image.getHeight()][image.getWidth()];
-//    for (int i = 0; i < image.getHeight(); i++) {
-//      for (int j = 0; j < image.getWidth(); j++) {
-//        listOfPixelsDestImage[i][j]
-//                = new Pixel(i, j, 0, 0, 0);
-//        listOfPixelsDestImage[i][j].getColorComponent().setRedComponent(image.getPixels()[i][j]
-//                .getValueComponent());
-//        listOfPixelsDestImage[i][j].getColorComponent().setGreenComponent(image.getPixels()[i][j]
-//                .getValueComponent());
-//        listOfPixelsDestImage[i][j].getColorComponent().setBlueComponent(image.getPixels()[i][j]
-//                .getValueComponent());
-//      }
-//    }
-//    return new Image(image.getWidth(), image.getHeight(), image.getMaxValueOfColor(),
-//            listOfPixelsDestImage);
-//  }
-//
-//  private Image greyscaleIntensityComponent(Image image) {
-//    Pixel[][] listOfPixelsDestImage = new Pixel[image.getHeight()][image.getWidth()];
-//    for (int i = 0; i < image.getHeight(); i++) {
-//      for (int j = 0; j < image.getWidth(); j++) {
-//        listOfPixelsDestImage[i][j] = new Pixel(i, j, 0, 0,
-//                0);
-//        listOfPixelsDestImage[i][j].getColorComponent().setRedComponent(image.getPixels()[i][j]
-//                .getIntensityComponent());
-//        listOfPixelsDestImage[i][j].getColorComponent().setGreenComponent(image.getPixels()[i][j]
-//                .getIntensityComponent());
-//        listOfPixelsDestImage[i][j].getColorComponent().setBlueComponent(image.getPixels()[i][j]
-//                .getIntensityComponent());
-//      }
-//    }
-//    return new Image(image.getWidth(), image.getHeight(), image.getMaxValueOfColor(),
-//            listOfPixelsDestImage);
-//  }
-//
-//  private Image greyscaleLumaComponent(Image image) {
-//    Pixel[][] listOfPixelsDestImage = new Pixel[image.getHeight()][image.getWidth()];
-//    for (int i = 0; i < image.getHeight(); i++) {
-//      for (int j = 0; j < image.getWidth(); j++) {
-//        listOfPixelsDestImage[i][j] = new Pixel(i, j, 0, 0,
-//                0);
-//        listOfPixelsDestImage[i][j].getColorComponent().setRedComponent(image.getPixels()[i][j]
-//                .getLumaComponent());
-//        listOfPixelsDestImage[i][j].getColorComponent().setGreenComponent(image.getPixels()[i][j]
-//                .getLumaComponent());
-//        listOfPixelsDestImage[i][j].getColorComponent().setBlueComponent(image.getPixels()[i][j]
-//                .getLumaComponent());
-//      }
-//    }
-//    return new Image(image.getWidth(), image.getHeight(), image.getMaxValueOfColor(),
-//            listOfPixelsDestImage);
-//  }
 
   private Image greyscalePixelHelper(Image image, Function<Pixel, Integer> getComponent) {
     Pixel[][] listOfPixelsDestImage = new Pixel[image.getHeight()][image.getWidth()];
