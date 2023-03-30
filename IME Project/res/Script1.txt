@@ -1,26 +1,26 @@
-load res/dog.ppm dog
+load dog.ppm dog
 vertical-flip dog dogv
-save res/dogv.ppm dogv
+save dogv.ppm dogv
 horizontal-flip dog dog-horizontal
-save res/dog-horizontal.ppm dog-horizontal
-save res/dog-vertical.ppm dogv
+save dog-horizontal.ppm dog-horizontal
+save dog-vertical.ppm dogv
 brighten 50 dog dog-brighter-by-50
-save res/dog-brighter-by-50.ppm dog-brighter-by-50
+save dog-brighter-by-50.ppm dog-brighter-by-50
 brighten -50 dog ddarken
-save res/dog-darken.ppm
+save dog-darken.ppm ddarken
 greyscale value-component dog dogvalue
-save res/dog-value-greyscale.ppm dogvalue
-load res/dog.ppm d
+save dog-value-greyscale.ppm dogvalue
+load dog.ppm d
 blur d db
 sharpen d ds
 sepia d dsepia
 greyscale d dg
 dither d dd
-save res/dog-blur.ppm db
-save res/dog-sharpen.ppm ds
-save res/dog-sepia.jpg dsepia
-save res/dog-greyscale.png dg
-save res/dog-dither.bmp dd
-load res/dog-sepia.jpg dog-sepia
-load res/dog-greyscale.png dog-greyscale
-load res/dog-dither.bmp dog-dither
+save dog-blur.ppm db
+save dog-sharpen.ppm ds
+save dog-sepia.jpg dsepia
+save dog-greyscale.png dg
+save dog-dither.bmp dd
+load dog-sepia.jpg dog-sepia
+load dog-greyscale.png dog-greyscale
+load dog-dither.bmp dog-dither
