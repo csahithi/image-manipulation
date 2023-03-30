@@ -4,7 +4,7 @@ import model.Image;
 import model.ImprovedImageProcessing;
 
 /**
- * This command class performs color transformations such as sepia on an image.
+ * This command class performs color transformations such as sepia and greyscale on an image.
  */
 public class ColorTransformation implements ImageCommandController {
   String operation;

@@ -1,0 +1,82 @@
+Script commands are supported by your application
+--------------------------------------------------------------------------------------------------
+1.Load image: Load an image from the specified path and refer it to henceforth in the program by
+the given image name.
+Command Syntax: load image-path image-name
+Example: load res/dog.ppm dog
+
+2.Save image: Save the image with the given name to the specified path which should include the
+name of the file.
+Command Syntax: save image-path image-name
+Example: save res/dog-horizontal.ppm dog-horizontal
+
+3.Greyscale image on Component: Create a greyscale image with a component of the image with
+the given name, and refer to it henceforth in the program by the given destination name. Similar
+commands for green, blue, value, luma, intensity components should be supported. Red, green, blue,
+value, luma and intensity are the components that are supported.
+Command Syntax: greyscale component image-name dest-image-name
+Example: greyscale value-component dog dogvalue
+
+4.Horizontal-flip image: Flip an image horizontally to create a new image,
+referred to henceforth by the given destination name.
+Command Syntax: horizontal-flip image-name dest-image-name
+Example: horizontal-flip dog dog-horizontal
+
+5.Vertical-flip image: Flip an image vertically to create a new image,
+referred to henceforth by the given destination name.
+Command Syntax: vertical-flip image-name dest-image-name
+Example: vertical-flip dog dogv
+
+6.Brighten image by increment value : brighten the image by the given increment to create a new
+image, referred to henceforth by the given destination name. The increment may be positive
+(brightening) or negative (darkening).
+Command Syntax: brighten increment image-name dest-image-name
+Example: brighten 50 dog dog-brighter-by-50
+
+7.Rgb-split image: split the given image into three greyscale images containing its red, green and
+blue components respectively.
+Command Syntax: rgb-split image-name dest-image-name-red dest-image-name-green dest-image-name-blue
+Example: rgb-split dog dogred doggreen dogblue
+
+8.Rgb-combine image: Combine the three greyscale images into a single image that gets its red,
+green and blue components from the three images respectively.
+Command Syntax: rgb-combine image-name red-image green-image blue-image
+Example: rgb-combine dog1 dogred doggreen dogblue
+
+9.Run script-file: Load and run the script commands in the specified file.
+Command Syntax: run script-file
+Example: run res/Script1.txt
+
+10.Blur Image : An operation to blur an image to create a new image,referred to henceforth by the
+given destination name.
+Command Syntax: blur image-name dest-image-name
+Example: blur dog dog-blur
+
+11.Dither Image : An operation to dither an image,referred to henceforth by the given destination
+                                   name.
+Command Syntax: dither image-name dest-image-name
+Example: dither dog dog-dither
+
+12.Sharpen Image : An operation to sharpen an image to create a new image,
+                  referred to henceforth by the given destination name.
+Command Syntax: sharpen image-name dest-image-name
+Example: sharpen dog dog-sharpen
+
+13.Greyscale Image : A simple operation is to convert a color image into a greyscale image,
+                    referred to henceforth by the given destination name.
+Command Syntax: greyscale image-name dest-image-name
+Example: greyscale dog dog-greyscale
+
+14.Sepia Image : An operation to convert a normal color image into a sepia-toned image,
+                referred to henceforth by the given destination name.
+Command Syntax: sepia image-name dest-image-name
+Example: sepia dog dog-sepia
+
+15.Command line JAR file: On running the jar file, a file containing image processing commands
+can be passed as a command-line argument. This would run the commands in the script and exit the
+application.
+Command Syntax: java -jar jar-file -file file-path
+Example: java -jar project.jar -file res/script.txt
+
+Conditions:
+- Image needs to be loaded first before running any operations on it.

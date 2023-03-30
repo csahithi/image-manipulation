@@ -84,6 +84,8 @@ inputs/commands are processed at the controller level in this class.
 
 ImageCommandController : Command interface for the command classes.
 
+ImageUtil : This class contains utility methods to load and save a PPM image file.
+
 Command Classes
 ___________________________________________
 BrightenImage : This command class brightens the image by the given increment.
@@ -113,9 +115,6 @@ Model-Related Classes and Interfaces:
 ______________________________________
 Color : This class represents RGB color factor for each pixel.
 
-CreatePPMUtil : This class contains utility methods to create a PPM image file from image object
-and saves it in the specified file path .
-
 Image : This class represents Image.
 
 ImageProcessingModel : This interface specifies the operations on image.An image is characterized
@@ -127,10 +126,6 @@ ImageProcessingModelImpl : This class implements all the operations/commands tha
 image.
 
 Pixel : This class represents a pixel.
-
-ReadPPMUtil : This class contains utility methods to read a PPM image from file and simply print
-its contents.
-
 
 Test-Related Classes and Interfaces:
 ______________________________________
@@ -153,4 +148,72 @@ Citation for the source of our Image
 We are the sole owners of the images provided in our project. We authorize the usage of the given
 images in the project.
 
+______________________________________
+--------------------------------------
+Version 2:Release on 29th March 2023
+______________________________________
+---------------------------------------
 
+We have added some new features to this project in addition to the details given above.
+We've also updated the project to support images other than ppm files, such as png, jpg, and bmp.
+
+New Features supported in version 2
+-------------------------------------
+1.Blur Image : An operation to blur an image to create a new image,
+               referred to henceforth by the given destination name.
+
+2.Sharpen Image : An operation to sharpen an image to create a new image,
+                  referred to henceforth by the given destination name.
+
+3.Greyscale Image : A simple operation is to convert a color image into a greyscale image,
+                    referred to henceforth by the given destination name.
+
+4.Sepia Image : An operation to convert a normal color image into a sepia-toned image,
+                referred to henceforth by the given destination name.
+
+5.Dither Image : An operation to dither an image,referred to henceforth by the given destination
+                    name.
+
+Model
+------------
+We have added new Interface 'ImprovedImageProcessing.class' which extends 'ImageProcessingModel'
+interface. The new interface is implemented in a new class 'ImprovedImageProcessingImpl'.
+This class extends the older model class 'ImageProcessingModelImpl'. The new interface is
+created to support new features like blur ,sharpen, greyscale, sepia and dither.
+
+Controller
+------------
+In addition to reading and writing ppm files,in this version our controller supports reading and
+writing images with other file formats like png,bmp and jpg.
+
+Classes and Interfaces in this Project Version
+-----------------------------------------------
+
+Controller-Related Classes and Interfaces
+___________________________________________
+
+ImageUtil : This class contains utility methods to load and save a image files.
+
+Command Classes
+___________________________________________
+
+ColorTransformation:This command class performs color transformations such as sepia and greyscale
+                        on an image.
+
+Dither:This command class performs dithering operation on an image.
+
+Filtering:This command class performs filtering operations such as blur and sharpen on an image.
+
+
+Model-Related Classes and Interfaces:
+______________________________________
+
+ImprovedImageProcessing : This interface has new advanced operations on image.
+
+ImprovedImageProcessingImpl : This class implements all  new advanced operations from
+ImprovedImageProcessing that can applied on image.
+
+Test-Related Classes and Interfaces:
+______________________________________
+
+ImprovedImageProcessingImplTest: This class contains tests for ImprovedImageProcessing model class.

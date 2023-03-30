@@ -103,16 +103,6 @@ public class ImprovedImageProcessingImplTest {
   }
 
   @Test
-  public void testSepiaImage() {
-    ImageCommandController controller = new Load("res/dog.ppm", "dog");
-    Image original = controller.execute(model);
-    Image sepiaImage = model.colorTransformation("sepia", "dog",
-            "blurredImage");
-
-
-  }
-
-  @Test
   public void testBlurNullImage() {
     ImageCommandController controller = new Load("res/dog.ppm", "dog");
     Image original = controller.execute(model);
