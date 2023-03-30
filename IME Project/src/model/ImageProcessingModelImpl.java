@@ -35,22 +35,22 @@ public class ImageProcessingModelImpl implements ImageProcessingModel {
     Image resultImage;
     switch (component) {
       case "red-component":
-        resultImage = greyscaleColorHelper(sourceImage, Color::getRedComponent);//greyscaleRedComponent(sourceImage);
+        resultImage = greyscaleColorHelper(sourceImage, Color::getRedComponent);
         break;
       case "green-component":
-        resultImage = greyscaleColorHelper(sourceImage, Color::getGreenComponent);//greyscaleGreenComponent(sourceImage);
+        resultImage = greyscaleColorHelper(sourceImage, Color::getGreenComponent);
         break;
       case "blue-component":
-        resultImage = greyscaleColorHelper(sourceImage, Color::getBlueComponent);//greyscaleBlueComponent(sourceImage);
+        resultImage = greyscaleColorHelper(sourceImage, Color::getBlueComponent);
         break;
       case "value-component":
-        resultImage = greyscalePixelHelper(sourceImage, Pixel::getValueComponent);//greyscaleValueComponent(sourceImage);
+        resultImage = greyscalePixelHelper(sourceImage, Pixel::getValueComponent);
         break;
       case "intensity-component":
-        resultImage = greyscalePixelHelper(sourceImage, Pixel::getIntensityComponent);//greyscaleIntensityComponent(sourceImage);
+        resultImage = greyscalePixelHelper(sourceImage, Pixel::getIntensityComponent);
         break;
       case "luma-component":
-        resultImage = greyscalePixelHelper(sourceImage, Pixel::getLumaComponent);//greyscaleLumaComponent(sourceImage);
+        resultImage = greyscalePixelHelper(sourceImage, Pixel::getLumaComponent);
         break;
       default:
         return null;
@@ -112,13 +112,13 @@ public class ImageProcessingModelImpl implements ImageProcessingModel {
       for (int j = 0; j < image.getWidth(); j++) {
         listOfPixelsDestImage[i][j] = new Pixel(i, j, 0, 0,
                 0);
-        listOfPixelsDestImage[i][j].getColorComponent().setRedComponent(Math.max(0, (Math.min
-                (image.getPixels()[i][j].getColorComponent().getRedComponent() + increment, 255))));
-        listOfPixelsDestImage[i][j].getColorComponent().setGreenComponent(Math.max(0, (Math.min
-                (image.getPixels()[i][j].getColorComponent().getGreenComponent() + increment,
-                        255))));
-        listOfPixelsDestImage[i][j].getColorComponent().setBlueComponent(Math.max(0, (Math.min
-                (image.getPixels()[i][j].getColorComponent().getBlueComponent()
+        listOfPixelsDestImage[i][j].getColorComponent().setRedComponent(Math.max(0, (Math.min(
+                image.getPixels()[i][j].getColorComponent().getRedComponent() + increment, 255))));
+        listOfPixelsDestImage[i][j].getColorComponent().setGreenComponent(Math.max(0, (Math.min(
+                image.getPixels()[i][j].getColorComponent().getGreenComponent() + increment,
+                255))));
+        listOfPixelsDestImage[i][j].getColorComponent().setBlueComponent(Math.max(0, (Math.min(
+                image.getPixels()[i][j].getColorComponent().getBlueComponent()
                         + increment, 255))));
       }
     }
@@ -135,9 +135,9 @@ public class ImageProcessingModelImpl implements ImageProcessingModel {
     if (image == null) {
       return null;
     }
-    Image redDestImage = greyscaleColorHelper(image, Color::getRedComponent);//greyscaleRedComponent(image);
-    Image greenDestImage = greyscaleColorHelper(image, Color::getGreenComponent);//greyscaleGreenComponent(image);
-    Image blueDestImage = greyscaleColorHelper(image, Color::getBlueComponent);//greyscaleBlueComponent(image);
+    Image redDestImage = greyscaleColorHelper(image, Color::getRedComponent);
+    Image greenDestImage = greyscaleColorHelper(image, Color::getGreenComponent);
+    Image blueDestImage = greyscaleColorHelper(image, Color::getBlueComponent);
     LIST_OF_IMAGES.put(redImageName, redDestImage);
     LIST_OF_IMAGES.put(greenImageName, greenDestImage);
     LIST_OF_IMAGES.put(blueImageName, blueDestImage);

@@ -6,6 +6,8 @@ save res/dog-horizontal.ppm dog-horizontal
 save res/dog-vertical.ppm dogv
 brighten 50 dog dog-brighter-by-50
 save res/dog-brighter-by-50.ppm dog-brighter-by-50
+brighten -50 dog ddarken
+save res/dog-darken.ppm
 greyscale value-component dog dogvalue
 save res/dog-value-greyscale.ppm dogvalue
 load res/dog.ppm d

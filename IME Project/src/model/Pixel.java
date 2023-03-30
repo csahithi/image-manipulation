@@ -4,8 +4,6 @@ package model;
  * This class represents a pixel.
  */
 public class Pixel {
-  private final int row;
-  private final int column;
   private final Color colorComponent;
 
   /**
@@ -18,8 +16,8 @@ public class Pixel {
    * @param blueComponent  is the blue component value of colorComponent of pixel.
    */
   public Pixel(int row, int column, int redComponent, int greenComponent, int blueComponent) {
-    this.row = row;
-    this.column = column;
+    int pixelRow = row;
+    int pixelColumn = column;
     this.colorComponent = new Color(redComponent, greenComponent, blueComponent);
   }
 
@@ -33,7 +31,8 @@ public class Pixel {
    * @return integer value of value-component.
    */
   public int getValueComponent() {
-    return Math.max(this.colorComponent.getRedComponent(), Math.max(this.colorComponent.getGreenComponent(),
+    return Math.max(this.colorComponent.getRedComponent(), Math.max(
+            this.colorComponent.getGreenComponent(),
             this.colorComponent.getBlueComponent()));
   }
 

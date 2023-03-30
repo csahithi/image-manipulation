@@ -47,7 +47,7 @@ public class ImprovedImageProcessingImpl extends ImageProcessingModelImpl
       return new double[][]{{0.393, 0.769, 0.189}, {0.349, 0.686, 0.168}, {0.272, 0.534, 0.131}};
     } else if (operation.equals("greyscale")) {
       return new double[][]{{0.2126, 0.7152, 0.0722}, {0.2126, 0.7152, 0.0722},
-              {0.2126, 0.7152, 0.0722}};
+                            {0.2126, 0.7152, 0.0722}};
     }
     return null;
   }
@@ -154,9 +154,11 @@ public class ImprovedImageProcessingImpl extends ImageProcessingModelImpl
   }
 
   private Image imageBlurring(Image image) {
-    Pixel[][] paddedArray = createPaddedArray(image.getPixels(), image.getHeight()
-            , image.getWidth(), 1);
-    int rSum, gSum, bSum;
+    Pixel[][] paddedArray = createPaddedArray(image.getPixels(), image.getHeight(),
+            image.getWidth(), 1);
+    int rSum;
+    int gSum;
+    int bSum;
     int r = image.getHeight();
     int c = image.getWidth();
     Pixel[][] listOfPixelsDestImage = new Pixel[r][c];
@@ -167,13 +169,13 @@ public class ImprovedImageProcessingImpl extends ImageProcessingModelImpl
         bSum = (int) ((0.25) * paddedArray[i][j].getColorComponent().getBlueComponent());
         for (int x = i - 1; x < i + 2; x++) {
           for (int y = j - 1; y < j + 2; y++) {
-            if ((x == i - 1 && (y == j - 1 || y == j + 1)) || (x == i + 1 && (y == j - 1 ||
-                    y == j + 1))) {
+            if ((x == i - 1 && (y == j - 1 || y == j + 1)) || (x == i + 1 && (y == j - 1
+                    || y == j + 1))) {
               rSum += (0.0625) * (paddedArray[x][y].getColorComponent().getRedComponent());
               gSum += (0.0625) * (paddedArray[x][y].getColorComponent().getGreenComponent());
               bSum += (0.0625) * (paddedArray[x][y].getColorComponent().getBlueComponent());
-            } else if ((x == i && (y == j - 1 || y == j + 1)) || (y == j && (x == i - 1 ||
-                    x == i + 1))) {
+            } else if ((x == i && (y == j - 1 || y == j + 1)) || (y == j && (x == i - 1
+                    || x == i + 1))) {
               rSum += (0.125) * (paddedArray[x][y].getColorComponent().getRedComponent());
               gSum += (0.125) * (paddedArray[x][y].getColorComponent().getGreenComponent());
               bSum += (0.125) * (paddedArray[x][y].getColorComponent().getBlueComponent());
@@ -192,7 +194,9 @@ public class ImprovedImageProcessingImpl extends ImageProcessingModelImpl
   private Image imageSharpening(Image image) {
     Pixel[][] paddedArray = createPaddedArray(image.getPixels(), image.getHeight(),
             image.getWidth(), 2);
-    int rSum, gSum, bSum;
+    int rSum;
+    int gSum;
+    int bSum;
     int r = image.getHeight();
     int c = image.getWidth();
     Pixel[][] listOfPixelsDestImage = new Pixel[r][c];
