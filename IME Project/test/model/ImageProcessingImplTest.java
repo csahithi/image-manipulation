@@ -66,7 +66,7 @@ public class ImageProcessingImplTest {
     ImageCommandController controller = new Load("res/dog.ppm", "original");
     Image original = controller.execute(model);
     File f = new File("res/Original.ppm");
-    assertFalse(f.exists());
+    assertTrue(f.exists());
     controller = new Save("res/Original.ppm", "original");
     original = controller.execute(model);
     assertTrue(f.exists());

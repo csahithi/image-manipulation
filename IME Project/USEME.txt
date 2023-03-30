@@ -76,7 +76,7 @@ Example: sepia dog dog-sepia
 can be passed as a command-line argument. This would run the commands in the script and exit the
 application.
 Command Syntax: java -jar jar-file -file file-path
-Example: java -jar project.jar -file res/script.txt
+Example: java -jar IMEProject.jar -file script.txt
 
 Conditions:
 - Image needs to be loaded first before running any operations on it.
