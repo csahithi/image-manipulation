@@ -1,6 +1,7 @@
 package model;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
@@ -129,8 +130,8 @@ public class ImageProcessingModelImpl implements ImageProcessingModel {
   }
 
   @Override
-  public Image rgbSplit(String sourceImageName, String redImageName, String greenImageName,
-                        String blueImageName) {
+  public List<Image> rgbSplit(String sourceImageName, String redImageName, String greenImageName,
+                              String blueImageName) {
     Image image = LIST_OF_IMAGES.getOrDefault(sourceImageName, null);
     if (image == null) {
       return null;
@@ -141,7 +142,7 @@ public class ImageProcessingModelImpl implements ImageProcessingModel {
     LIST_OF_IMAGES.put(redImageName, redDestImage);
     LIST_OF_IMAGES.put(greenImageName, greenDestImage);
     LIST_OF_IMAGES.put(blueImageName, blueDestImage);
-    return redDestImage;
+    return List.of(new Image[]{redDestImage, greenDestImage, blueDestImage});
   }
 
   @Override

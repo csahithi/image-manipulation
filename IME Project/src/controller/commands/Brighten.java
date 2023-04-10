@@ -1,5 +1,7 @@
 package controller.commands;
 
+import java.util.List;
+
 import model.Image;
 import model.ImprovedImageProcessing;
 
@@ -26,7 +28,7 @@ public class Brighten implements ImageCommandController {
   }
 
   @Override
-  public Image execute(ImprovedImageProcessing m) {
-    return m.brighten(increment, sourceImageName, destImageName);
+  public List<Image> execute(ImprovedImageProcessing m) {
+    return List.of(new Image[]{m.brighten(increment, sourceImageName, destImageName)});
   }
 }

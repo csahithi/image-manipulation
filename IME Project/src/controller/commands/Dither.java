@@ -1,5 +1,7 @@
 package controller.commands;
 
+import java.util.List;
+
 import model.Image;
 import model.ImprovedImageProcessing;
 
@@ -22,7 +24,7 @@ public class Dither implements ImageCommandController {
   }
 
   @Override
-  public Image execute(ImprovedImageProcessing m) {
-    return m.dither(sourceImageName, destImageName);
+  public List<Image> execute(ImprovedImageProcessing m) {
+    return List.of(new Image[]{m.dither(sourceImageName, destImageName)});
   }
 }

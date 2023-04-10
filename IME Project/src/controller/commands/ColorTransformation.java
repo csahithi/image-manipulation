@@ -1,5 +1,7 @@
 package controller.commands;
 
+import java.util.List;
+
 import model.Image;
 import model.ImprovedImageProcessing;
 
@@ -25,8 +27,8 @@ public class ColorTransformation implements ImageCommandController {
   }
 
   @Override
-  public Image execute(ImprovedImageProcessing m) {
-    return m.colorTransformation(operation, sourceImageName, destImageName);
+  public List<Image> execute(ImprovedImageProcessing m) {
+    return List.of(new Image[]{m.colorTransformation(operation, sourceImageName, destImageName)});
   }
 
 }

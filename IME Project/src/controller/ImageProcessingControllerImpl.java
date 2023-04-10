@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 import java.util.function.Predicate;
 
@@ -47,7 +48,7 @@ public class ImageProcessingControllerImpl implements ImageProcessingController 
     this.out = out;
   }
 
-  private void readCommands(String[] inputArray, String command) {
+  private void readCommands(String[] inputArray) {
     ImageCommandController cmd = null;
     PrintStream outStream = new PrintStream(this.out);
     if ((inputArray.length == 2) && (inputArray[0].equals("run"))) {
@@ -85,7 +86,8 @@ public class ImageProcessingControllerImpl implements ImageProcessingController 
               cmd = new Dither(inputArray[1], inputArray[2]);
               break;
             default:
-              outStream.println(String.format("Unknown command %s", command));
+              //outStream.println(String.format("Unknown command %s", command));
+              outStream.println("Unknown command");
               return;
           }
         } else if (inputArray.length == 4) {
@@ -103,21 +105,25 @@ public class ImageProcessingControllerImpl implements ImageProcessingController 
             cmd = new RGBCombine(inputArray[1], inputArray[2], inputArray[3], inputArray[4]);
           }
         } else {
-          outStream.println(String.format("Unknown command %s", command));
+          //outStream.println(String.format("Unknown command %s", command));
+          outStream.println("Unknown command");
           return;
         }
       } catch (NumberFormatException e) {
-        outStream.println(String.format("Unknown command %s", command));
+        //outStream.println(String.format("Unknown command %s", command));
+        outStream.println("Unknown command");
         return;
       }
     }
     if (cmd != null) {
-      Image m = cmd.execute(model);
-      if (m == null) {
-        System.out.println(String.format("Invalid command %s", command));
+      List<Image> m = cmd.execute(model);
+      if (m == null || m.size()==0) {
+        //System.out.println(String.format("Invalid command %s", command));
+        outStream.println("Invalid command");
       }
     } else {
-      System.out.println(String.format("Unknown command %s", command));
+      //System.out.println(String.format("Unknown command %s", command));
+      outStream.println("Unknown command");
     }
   }
 
@@ -131,7 +137,7 @@ public class ImageProcessingControllerImpl implements ImageProcessingController 
         runScriptInputArray = Arrays.stream(runScriptInputArray)
                 .filter(Predicate.not(String::isEmpty))
                 .toArray(String[]::new);
-        readCommands(runScriptInputArray, line);
+        readCommands(runScriptInputArray);
         line = reader.readLine();
       }
       reader.close();
@@ -153,7 +159,7 @@ public class ImageProcessingControllerImpl implements ImageProcessingController 
               .filter(Predicate.not(String::isEmpty))
               .toArray(String[]::new);
       if (inputArray.length > 0) {
-        readCommands(inputArray, input);
+        readCommands(inputArray);
       }
     }
   }

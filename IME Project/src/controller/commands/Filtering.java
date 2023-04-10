@@ -1,5 +1,7 @@
 package controller.commands;
 
+import java.util.List;
+
 import model.Image;
 import model.ImprovedImageProcessing;
 
@@ -25,7 +27,7 @@ public class Filtering implements ImageCommandController {
   }
 
   @Override
-  public Image execute(ImprovedImageProcessing m) {
-    return m.filtering(operation, sourceImageName, destImageName);
+  public List<Image> execute(ImprovedImageProcessing m) {
+    return List.of(new Image[]{m.filtering(operation, sourceImageName, destImageName)});
   }
 }

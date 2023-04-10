@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 /**
  * This interface specifies the operations on image.
  *
@@ -82,8 +84,8 @@ public interface ImageProcessingModel {
    * @param blueImageName   the string which contains destination blue image name.
    * @return destination Image.
    */
-  Image rgbSplit(String sourceImageName, String redImageName, String greenImageName,
-                 String blueImageName);
+  List<Image> rgbSplit(String sourceImageName, String redImageName, String greenImageName,
+                       String blueImageName);
 
   /**
    * This command class combines the three greyscale images into a single image that gets its red,

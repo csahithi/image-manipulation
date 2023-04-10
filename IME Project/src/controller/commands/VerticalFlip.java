@@ -1,5 +1,7 @@
 package controller.commands;
 
+import java.util.List;
+
 import model.Image;
 import model.ImprovedImageProcessing;
 
@@ -24,7 +26,7 @@ public class VerticalFlip implements ImageCommandController {
   }
 
   @Override
-  public Image execute(ImprovedImageProcessing m) {
-    return m.verticalFlip(sourceImageName, destImageName);
+  public List<Image> execute(ImprovedImageProcessing m) {
+    return List.of(new Image[]{m.verticalFlip(sourceImageName, destImageName)});
   }
 }

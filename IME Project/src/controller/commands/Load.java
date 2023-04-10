@@ -1,5 +1,7 @@
 package controller.commands;
 
+import java.util.List;
+
 import controller.ImageUtil;
 import model.Image;
 import model.ImprovedImageProcessing;
@@ -24,7 +26,7 @@ public class Load implements ImageCommandController {
   }
 
   @Override
-  public Image execute(ImprovedImageProcessing m) {
+  public List<Image> execute(ImprovedImageProcessing m) {
     String extension = null;
     Image image;
     int index = imagePath.lastIndexOf('.');
@@ -39,6 +41,6 @@ public class Load implements ImageCommandController {
     if (image == null) {
       return null;
     }
-    return m.loadImage(image, destImageName);
+    return List.of(new Image[]{m.loadImage(image, destImageName)});
   }
 }

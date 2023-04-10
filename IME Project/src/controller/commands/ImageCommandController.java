@@ -1,5 +1,7 @@
 package controller.commands;
 
+import java.util.List;
+
 import model.Image;
 import model.ImprovedImageProcessing;
 
@@ -14,5 +16,5 @@ public interface ImageCommandController {
    * @param m the model of the program
    * @return the image after processing
    */
-  Image execute(ImprovedImageProcessing m);
+  List<Image> execute(ImprovedImageProcessing m);
 }

@@ -23,7 +23,7 @@ public class ImprovedImageProcessingImplTest {
   @Test
   public void testManualBlurImage() {
     ImageCommandController controller = new Load("res/testFile.ppm", "test");
-    Image original = controller.execute(model);
+    Image original = controller.execute(model).get(0);
     Image blurredImage = model.filtering("blur", "test",
             "blurredImage");
     assertEquals(21, blurredImage.getPixels()[0][0].getColorComponent().getRedComponent());
@@ -39,7 +39,7 @@ public class ImprovedImageProcessingImplTest {
   @Test
   public void testManualSharpenImage() {
     ImageCommandController controller = new Load("res/testFile.ppm", "test");
-    Image original = controller.execute(model);
+    Image original = controller.execute(model).get(0);
     Image sharpenImage = model.filtering("sharpen", "test",
             "sharpenImage");
     assertEquals(25, sharpenImage.getPixels()[0][0].getColorComponent().getRedComponent());
@@ -57,7 +57,7 @@ public class ImprovedImageProcessingImplTest {
   @Test
   public void testManualSepiaImage() {
     ImageCommandController controller = new Load("res/testFile.ppm", "test");
-    Image original = controller.execute(model);
+    Image original = controller.execute(model).get(0);
     Image sepiaImage = model.colorTransformation("sepia", "test",
             "sepiaImage");
     assertEquals(24, sepiaImage.getPixels()[0][0].getColorComponent().getRedComponent());
@@ -71,7 +71,7 @@ public class ImprovedImageProcessingImplTest {
   @Test
   public void testManualGreyscaleImage() {
     ImageCommandController controller = new Load("res/testFile.ppm", "test");
-    Image original = controller.execute(model);
+    Image original = controller.execute(model).get(0);
     Image greyscaleImage = model.colorTransformation("greyscale", "test",
             "greyscaleImage");
     assertEquals(18, greyscaleImage.getPixels()[0][0].getColorComponent()
@@ -91,7 +91,7 @@ public class ImprovedImageProcessingImplTest {
   @Test
   public void testManualDitherImage() {
     ImageCommandController controller = new Load("res/testFile.ppm", "test");
-    Image original = controller.execute(model);
+    Image original = controller.execute(model).get(0);
     Image ditherImage = model.dither("test", "ditherImage");
     assertEquals(0, ditherImage.getPixels()[0][0].getColorComponent().getRedComponent());
     assertEquals(0, ditherImage.getPixels()[0][1].getColorComponent().getGreenComponent());
@@ -105,7 +105,7 @@ public class ImprovedImageProcessingImplTest {
   @Test
   public void testBlurNullImage() {
     ImageCommandController controller = new Load("res/dog.ppm", "dog");
-    Image original = controller.execute(model);
+    Image original = controller.execute(model).get(0);
     Image blurredImage = model.filtering("blur", "NullImage",
             "blurredImage");
     assertNull(blurredImage);
@@ -114,7 +114,7 @@ public class ImprovedImageProcessingImplTest {
   @Test
   public void testSharpenNullImage() {
     ImageCommandController controller = new Load("res/dog.ppm", "dog");
-    Image original = controller.execute(model);
+    Image original = controller.execute(model).get(0);
     Image sharpenedImage = model.filtering("sharpen", "NullImage",
             "SharpenedImage");
     assertNull(sharpenedImage);
@@ -123,7 +123,7 @@ public class ImprovedImageProcessingImplTest {
   @Test
   public void testDitherNullImage() {
     ImageCommandController controller = new Load("res/dog.ppm", "dog");
-    Image original = controller.execute(model);
+    Image original = controller.execute(model).get(0);
     Image ditheredImage = model.dither("NullImage",
             "DitheredImage");
     assertNull(ditheredImage);

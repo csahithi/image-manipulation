@@ -1,5 +1,7 @@
 package controller.commands;
 
+import java.util.List;
+
 import controller.ImageUtil;
 import model.Image;
 import model.ImprovedImageProcessing;
@@ -25,7 +27,7 @@ public class Save implements ImageCommandController {
   }
 
   @Override
-  public Image execute(ImprovedImageProcessing m) {
+  public List<Image> execute(ImprovedImageProcessing m) {
     Image image = m.saveImage(imageName);
     if (image == null) {
       return null;
@@ -40,6 +42,6 @@ public class Save implements ImageCommandController {
     } else {
       ImageUtil.createImage(extension, imagePath, image);
     }
-    return image;
+    return List.of(new Image[]{image});
   }
 }

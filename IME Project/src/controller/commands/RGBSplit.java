@@ -1,5 +1,7 @@
 package controller.commands;
 
+import java.util.List;
+
 import model.Image;
 import model.ImprovedImageProcessing;
 
@@ -31,7 +33,7 @@ public class RGBSplit implements ImageCommandController {
 
 
   @Override
-  public Image execute(ImprovedImageProcessing m) {
+  public List<Image> execute(ImprovedImageProcessing m) {
     return m.rgbSplit(sourceImageName, redImage, greenImage, blueImage);
   }
 }

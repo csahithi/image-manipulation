@@ -8,6 +8,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.List;
 
 import model.Image;
 import model.ImprovedImageProcessing;
@@ -74,11 +75,11 @@ public class CommandControllerTest {
     }
 
     @Override
-    public Image rgbSplit(String sourceImageName, String redImageName, String greenImageName,
-                          String blueImageName) {
+    public List<Image> rgbSplit(String sourceImageName, String redImageName, String greenImageName,
+                                String blueImageName) {
       sb.append("Received inputs " + sourceImageName + ", " + redImageName + ", " + greenImageName
               + " and " + blueImageName);
-      return image;
+      return List.of(new Image[]{image});
     }
 
     @Override

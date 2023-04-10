@@ -1,5 +1,7 @@
 package controller.commands;
 
+import java.util.List;
+
 import model.Image;
 import model.ImprovedImageProcessing;
 
@@ -30,7 +32,7 @@ public class RGBCombine implements ImageCommandController {
   }
 
   @Override
-  public Image execute(ImprovedImageProcessing m) {
-    return m.rgbCombine(destImageName, redImage, greenImage, blueImage);
+  public List<Image> execute(ImprovedImageProcessing m) {
+    return List.of(new Image[]{m.rgbCombine(destImageName, redImage, greenImage, blueImage)});
   }
 }
