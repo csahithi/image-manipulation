@@ -175,18 +175,20 @@ public class ImageProcessingViewImpl extends JFrame implements ImageProcessingVi
   @Override
   public List<String> getParameters(String command) {
     switch(command){
-
-    }
-    if(command=="load"){
-      String filePath = showLoadImageDialog();
-      if(filePath!=null){
-        List<String> params = new ArrayList<>();
-        params.add("load");
-        params.add(filePath);
-        params.add("image");
-        return params;
-      }
-      return null;
+      case "load":
+        String filePath = showLoadImageDialog();
+        if(filePath!=null) {
+          return List.of(new String[]{"load", filePath, "image"});
+        }
+        else{
+          return null;
+        }
+      case "save":
+      case "brighten":
+      case "greyscale":
+        return List.of(new String[]{"greyscale", "luma-component", "image", "image"});
+      case "rgb-split":
+      case "rgb-combine":
     }
     return imageParameters;
   }
