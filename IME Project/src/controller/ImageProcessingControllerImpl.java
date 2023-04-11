@@ -51,10 +51,6 @@ public class ImageProcessingControllerImpl implements ImageProcessingController 
   private void readCommands(String[] inputArray) {
     ImageCommandController cmd = null;
     PrintStream outStream = new PrintStream(this.out);
-    if ((inputArray.length == 2) && (inputArray[0].equals("run"))) {
-      readScript(inputArray[1]);
-      return;
-    } else {
       try {
         if (inputArray.length == 3) {
           switch (inputArray[0]) {
@@ -114,7 +110,6 @@ public class ImageProcessingControllerImpl implements ImageProcessingController 
         outStream.println("Unknown command");
         return;
       }
-    }
     if (cmd != null) {
       List<Image> m = cmd.execute(model);
       if (m == null || m.size()==0) {
@@ -127,7 +122,7 @@ public class ImageProcessingControllerImpl implements ImageProcessingController 
     }
   }
 
-  private boolean readScript(String filepath) {
+  private void readScript(String filepath) {
     try {
       BufferedReader reader = new BufferedReader(new FileReader(filepath));
       String line = reader.readLine();
@@ -141,10 +136,8 @@ public class ImageProcessingControllerImpl implements ImageProcessingController 
         line = reader.readLine();
       }
       reader.close();
-      return true;
     } catch (Exception e) {
       System.err.println("Error while running script file: " + e.getMessage());
-      return false;
     }
   }
 
@@ -159,7 +152,12 @@ public class ImageProcessingControllerImpl implements ImageProcessingController 
               .filter(Predicate.not(String::isEmpty))
               .toArray(String[]::new);
       if (inputArray.length > 0) {
-        readCommands(inputArray);
+        if ((inputArray.length == 2) && (inputArray[0].equals("run"))) {
+          readScript(inputArray[1]);
+        }
+        else{
+          readCommands(inputArray);
+        }
       }
     }
   }

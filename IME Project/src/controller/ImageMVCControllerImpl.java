@@ -39,13 +39,12 @@ public class ImageMVCControllerImpl implements ImageMVCController, ActionListene
   public void actionPerformed(ActionEvent e) {
     //String command = e.getActionCommand();
     List<String> commands = this.view.getParameters(e.getActionCommand());
-    if(commands!=null){
+    if (commands != null) {
       try {
         List<Image> m = readCommands(commands);
-        if(m==null){
+        if (m == null) {
           this.view.displayErrorDialog();
-        }
-        else{
+        } else {
           this.view.displayCurrentImage(m);
         }
       } catch (Exception ex) {
@@ -56,61 +55,53 @@ public class ImageMVCControllerImpl implements ImageMVCController, ActionListene
 
   private List<Image> readCommands(List<String> inputArray) {
     ImageCommandController cmd = null;
-      try {
-        if (inputArray.size() == 3) {
-          switch (inputArray.get(0)) {
-            case "load":
-              cmd = new Load(inputArray.get(1), inputArray.get(2));
-              break;
-            case "save":
-              cmd = new Save(inputArray.get(1), inputArray.get(2));
-              break;
-            case "horizontal-flip":
-              cmd = new HorizontalFlip(inputArray.get(1), inputArray.get(2));
-              break;
-            case "vertical-flip":
-              cmd = new VerticalFlip(inputArray.get(1), inputArray.get(2));
-              break;
-            case "greyscale":
-              cmd = new Greyscale("luma-component", inputArray.get(1), inputArray.get(2));
-              break;
-            case "sepia":
-              cmd = new ColorTransformation("sepia", inputArray.get(1), inputArray.get(2));
-              break;
-            case "blur":
-              cmd = new Filtering("blur", inputArray.get(1), inputArray.get(2));
-              break;
-            case "sharpen":
-              cmd = new Filtering("sharpen", inputArray.get(1), inputArray.get(2));
-              break;
-            case "dither":
-              cmd = new Dither(inputArray.get(1), inputArray.get(2));
-              break;
-            default:
-              return null;
-          }
-        } else if (inputArray.size() == 4) {
-          if (inputArray.get(0).equalsIgnoreCase("brighten")) {
+    try {
+        switch (inputArray.get(0)) {
+          case "load":
+            cmd = new Load(inputArray.get(1), inputArray.get(2));
+            break;
+          case "save":
+            cmd = new Save(inputArray.get(1), inputArray.get(2));
+            break;
+          case "horizontal-flip":
+            cmd = new HorizontalFlip(inputArray.get(1), inputArray.get(2));
+            break;
+          case "vertical-flip":
+            cmd = new VerticalFlip(inputArray.get(1), inputArray.get(2));
+            break;
+          case "greyscale":
+            cmd = new Greyscale(inputArray.get(1), inputArray.get(2), inputArray.get(3));
+            break;
+          case "sepia":
+            cmd = new ColorTransformation("sepia", inputArray.get(1), inputArray.get(2));
+            break;
+          case "blur":
+            cmd = new Filtering("blur", inputArray.get(1), inputArray.get(2));
+            break;
+          case "sharpen":
+            cmd = new Filtering("sharpen", inputArray.get(1), inputArray.get(2));
+            break;
+          case "dither":
+            cmd = new Dither(inputArray.get(1), inputArray.get(2));
+            break;
+          case "brighten":
             cmd = new Brighten(Integer.parseInt(inputArray.get(1)), inputArray.get(2),
                     inputArray.get(3));
-          }
-          if (inputArray.get(0).equalsIgnoreCase("greyscale")) {
-            cmd = new Greyscale(inputArray.get(1), inputArray.get(2), inputArray.get(3));
-          }
-        } else if (inputArray.size() == 5) {
-          if (inputArray.get(0).equalsIgnoreCase("rgb-split")) {
+            break;
+          case "rgb-split":
             cmd = new RGBSplit(inputArray.get(1), inputArray.get(2), inputArray.get(3),
                     inputArray.get(4));
-          } else if (inputArray.get(0).equalsIgnoreCase("rgb-combine")) {
+            break;
+          case "rgb-combine":
             cmd = new RGBCombine(inputArray.get(1), inputArray.get(2), inputArray.get(3),
                     inputArray.get(4));
-          }
-        } else {
-          return null;
+            break;
+          default:
+            return null;
         }
-      } catch (NumberFormatException e) {
-        return null;
-      }
+    } catch (NumberFormatException e) {
+      return null;
+    }
     if (cmd != null) {
       return cmd.execute(model);
     } else {
