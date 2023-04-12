@@ -1,3 +1,0 @@
-load res/dog.ppm dog
-vertical-flip dog dog-vertical
-save res/dog-vertical.ppm dog-vertical

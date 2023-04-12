@@ -22,7 +22,6 @@ save dog-blue-greyscale.ppm dogblue
 save dog-blue-greyscale.ppm dogblue
 rgb-split dog dogred doggreen dogblue
 rgb-combine dog1 dogred doggreen dogblue
-run Script1.txt
 load dog.ppm d
 blur d db
 sharpen d ds
@@ -37,6 +36,3 @@ save dog-dither.bmp dd
 load dog-sepia.jpg dog-sepia
 load dog-greyscale.png dog-greyscale
 load dog-dither.bmp dog-dither
-
-
-
