@@ -1,5 +1,6 @@
 package controller;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
@@ -8,11 +9,14 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PrintStream;
 import java.util.List;
 
 import model.Image;
 import model.ImprovedImageProcessing;
 import model.Pixel;
+import view.ImageProcessingTextView;
+import view.ImageProcessingTextViewImpl;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -22,12 +26,24 @@ import static org.junit.Assert.fail;
  */
 public class CommandControllerTest {
 
+  private OutputStream out;
+
+  /**
+   * Sets data for the PortfolioViewImplTest.
+   */
+  @Before
+  public void setup() {
+    out = new ByteArrayOutputStream();
+
+  }
+
   /**
    * MockModel class to test Controller.
    */
   public class MockModel implements ImprovedImageProcessing {
     private StringBuilder sb;
     private Image image = new Image(0, 0, 0, new Pixel[0][0]);
+    private List<Image> list = List.of(new Image[]{image});
 
     /**
      * Constructs MockModel with the log data to be set.
@@ -79,7 +95,7 @@ public class CommandControllerTest {
                                 String blueImageName) {
       sb.append("Received inputs " + sourceImageName + ", " + redImageName + ", " + greenImageName
               + " and " + blueImageName);
-      return List.of(new Image[]{image});
+      return list;
     }
 
     @Override
@@ -110,6 +126,7 @@ public class CommandControllerTest {
     }
   }
 
+
   @Test
   public void testLoadCommand() {
     InputStream in = null;
@@ -117,13 +134,14 @@ public class CommandControllerTest {
     String b = "image";
     String input = "load " + a + " " + b;
     in = new ByteArrayInputStream(input.getBytes());
-    OutputStream out = new ByteArrayOutputStream();
     StringBuilder mockLog = new StringBuilder();
     ImprovedImageProcessing model = new MockModel(mockLog);
-    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, out);
+    ImageProcessingTextView view = new ImageProcessingTextViewImpl(new PrintStream(out));
+    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, view);
     controller.execute();
     assertEquals("Received inputs " + b, mockLog.toString());
   }
+
 
   @Test
   public void testSaveCommand() {
@@ -132,10 +150,10 @@ public class CommandControllerTest {
     String b = "image";
     String input = "save " + a + " " + b;
     in = new ByteArrayInputStream(input.getBytes());
-    OutputStream out = new ByteArrayOutputStream();
     StringBuilder mockLog = new StringBuilder();
     ImprovedImageProcessing model = new MockModel(mockLog);
-    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, out);
+    ImageProcessingTextView view = new ImageProcessingTextViewImpl(new PrintStream(out));
+    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, view);
     controller.execute();
     assertEquals("Received inputs " + b, mockLog.toString());
   }
@@ -147,10 +165,10 @@ public class CommandControllerTest {
     String b = "image-horizontal";
     String input = "horizontal-flip " + a + " " + b;
     in = new ByteArrayInputStream(input.getBytes());
-    OutputStream out = new ByteArrayOutputStream();
     StringBuilder mockLog = new StringBuilder();
     ImprovedImageProcessing model = new MockModel(mockLog);
-    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, out);
+    ImageProcessingTextView view = new ImageProcessingTextViewImpl(new PrintStream(out));
+    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, view);
     controller.execute();
     assertEquals("Received inputs " + a + " and " + b, mockLog.toString());
   }
@@ -162,10 +180,10 @@ public class CommandControllerTest {
     String b = "image-vertical";
     String input = "vertical-flip " + a + " " + b;
     in = new ByteArrayInputStream(input.getBytes());
-    OutputStream out = new ByteArrayOutputStream();
     StringBuilder mockLog = new StringBuilder();
     ImprovedImageProcessing model = new MockModel(mockLog);
-    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, out);
+    ImageProcessingTextView view = new ImageProcessingTextViewImpl(new PrintStream(out));
+    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, view);
     controller.execute();
     assertEquals("Received inputs " + a + " and " + b, mockLog.toString());
   }
@@ -178,10 +196,10 @@ public class CommandControllerTest {
     String c = "image-brighten";
     String input = "brighten " + a + " " + b + " " + c;
     in = new ByteArrayInputStream(input.getBytes());
-    OutputStream out = new ByteArrayOutputStream();
     StringBuilder mockLog = new StringBuilder();
     ImprovedImageProcessing model = new MockModel(mockLog);
-    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, out);
+    ImageProcessingTextView view = new ImageProcessingTextViewImpl(new PrintStream(out));
+    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, view);
     controller.execute();
     assertEquals("Received inputs " + a + ", " + b + " and " + c, mockLog.toString());
   }
@@ -195,10 +213,10 @@ public class CommandControllerTest {
     String d = "blue-image";
     String input = "rgb-split " + a + " " + b + " " + c + " " + d;
     in = new ByteArrayInputStream(input.getBytes());
-    OutputStream out = new ByteArrayOutputStream();
     StringBuilder mockLog = new StringBuilder();
     ImprovedImageProcessing model = new MockModel(mockLog);
-    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, out);
+    ImageProcessingTextView view = new ImageProcessingTextViewImpl(new PrintStream(out));
+    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, view);
     controller.execute();
     assertEquals("Received inputs " + a + ", " + b + ", " + c + " and " + d,
             mockLog.toString());
@@ -213,10 +231,10 @@ public class CommandControllerTest {
     String d = "blue-image";
     String input = "rgb-combine " + a + " " + b + " " + c + " " + d;
     in = new ByteArrayInputStream(input.getBytes());
-    OutputStream out = new ByteArrayOutputStream();
     StringBuilder mockLog = new StringBuilder();
     ImprovedImageProcessing model = new MockModel(mockLog);
-    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, out);
+    ImageProcessingTextView view = new ImageProcessingTextViewImpl(new PrintStream(out));
+    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, view);
     controller.execute();
     assertEquals("Received inputs " + a + ", " + b + ", "
             + c + " and " + d, mockLog.toString());
@@ -230,10 +248,10 @@ public class CommandControllerTest {
     String c = "red-image";
     String input = "greyscale " + a + " " + b + " " + c;
     in = new ByteArrayInputStream(input.getBytes());
-    OutputStream out = new ByteArrayOutputStream();
     StringBuilder mockLog = new StringBuilder();
     ImprovedImageProcessing model = new MockModel(mockLog);
-    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, out);
+    ImageProcessingTextView view = new ImageProcessingTextViewImpl(new PrintStream(out));
+    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, view);
     controller.execute();
     assertEquals("Received inputs " + a + ", " + b + " and " + c, mockLog.toString());
   }
@@ -246,10 +264,10 @@ public class CommandControllerTest {
     String c = "green-image";
     String input = "greyscale " + a + " " + b + " " + c;
     in = new ByteArrayInputStream(input.getBytes());
-    OutputStream out = new ByteArrayOutputStream();
     StringBuilder mockLog = new StringBuilder();
     ImprovedImageProcessing model = new MockModel(mockLog);
-    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, out);
+    ImageProcessingTextView view = new ImageProcessingTextViewImpl(new PrintStream(out));
+    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, view);
     controller.execute();
     assertEquals("Received inputs " + a + ", " + b + " and " + c, mockLog.toString());
   }
@@ -262,10 +280,10 @@ public class CommandControllerTest {
     String c = "blue-image";
     String input = "greyscale " + a + " " + b + " " + c;
     in = new ByteArrayInputStream(input.getBytes());
-    OutputStream out = new ByteArrayOutputStream();
     StringBuilder mockLog = new StringBuilder();
     ImprovedImageProcessing model = new MockModel(mockLog);
-    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, out);
+    ImageProcessingTextView view = new ImageProcessingTextViewImpl(new PrintStream(out));
+    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, view);
     controller.execute();
     assertEquals("Received inputs " + a + ", " + b + " and " + c, mockLog.toString());
   }
@@ -278,10 +296,10 @@ public class CommandControllerTest {
     String c = "value-image";
     String input = "greyscale " + a + " " + b + " " + c;
     in = new ByteArrayInputStream(input.getBytes());
-    OutputStream out = new ByteArrayOutputStream();
     StringBuilder mockLog = new StringBuilder();
     ImprovedImageProcessing model = new MockModel(mockLog);
-    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, out);
+    ImageProcessingTextView view = new ImageProcessingTextViewImpl(new PrintStream(out));
+    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, view);
     controller.execute();
     assertEquals("Received inputs " + a + ", " + b + " and " + c, mockLog.toString());
   }
@@ -294,10 +312,10 @@ public class CommandControllerTest {
     String c = "intensity-image";
     String input = "greyscale " + a + " " + b + " " + c;
     in = new ByteArrayInputStream(input.getBytes());
-    OutputStream out = new ByteArrayOutputStream();
     StringBuilder mockLog = new StringBuilder();
     ImprovedImageProcessing model = new MockModel(mockLog);
-    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, out);
+    ImageProcessingTextView view = new ImageProcessingTextViewImpl(new PrintStream(out));
+    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, view);
     controller.execute();
     assertEquals("Received inputs " + a + ", " + b + " and " + c, mockLog.toString());
   }
@@ -310,10 +328,10 @@ public class CommandControllerTest {
     String c = "luma-image";
     String input = "greyscale " + a + " " + b + " " + c;
     in = new ByteArrayInputStream(input.getBytes());
-    OutputStream out = new ByteArrayOutputStream();
     StringBuilder mockLog = new StringBuilder();
     ImprovedImageProcessing model = new MockModel(mockLog);
-    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, out);
+    ImageProcessingTextView view = new ImageProcessingTextViewImpl(new PrintStream(out));
+    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, view);
     controller.execute();
     assertEquals("Received inputs " + a + ", " + b + " and " + c, mockLog.toString());
   }
@@ -329,10 +347,10 @@ public class CommandControllerTest {
     } catch (FileNotFoundException e) {
       fail("Input file not present");
     }
-    OutputStream out = new ByteArrayOutputStream();
     StringBuilder mockLog = new StringBuilder();
     ImprovedImageProcessing model = new MockModel(mockLog);
-    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, out);
+    ImageProcessingTextView view = new ImageProcessingTextViewImpl(new PrintStream(out));
+    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, view);
     controller.execute();
     assertEquals("Received inputs dog"
             + "Received inputs dog and dog-vertical"
@@ -344,12 +362,26 @@ public class CommandControllerTest {
     InputStream in = null;
     String input = "dummy a b";
     in = new ByteArrayInputStream(input.getBytes());
-    OutputStream out = new ByteArrayOutputStream();
     StringBuilder mockLog = new StringBuilder();
     ImprovedImageProcessing model = new MockModel(mockLog);
-    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, out);
+    ImageProcessingTextView view = new ImageProcessingTextViewImpl(new PrintStream(out));
+    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, view);
     controller.execute();
-    assertEquals("Unknown command " + input, out.toString().stripTrailing());
+    assertEquals("Please enter your choice: \n" +
+            " 1.Load Image \n" +
+            " 2.Save Image\n" +
+            " 3.Brighten Image\n" +
+            " 4.Horizontal-flip Image\n" +
+            " 5.Vertical-flip Image\n" +
+            " 6.RGB-Combine Image\n" +
+            " 7.RGB Split\n" +
+            " 8.Greyscale \n" +
+            " 9.Blur Image\n" +
+            " 10.Dither Image\n" +
+            " 11.Sepia Image\n" +
+            " 12 Sharpen Image\n" +
+            " 0.Exit\n" +
+            "Unknown Command Entered " + input, out.toString().stripTrailing());
   }
 
   @Test
@@ -360,9 +392,23 @@ public class CommandControllerTest {
     OutputStream out = new ByteArrayOutputStream();
     StringBuilder mockLog = new StringBuilder();
     ImprovedImageProcessing model = new MockModel(mockLog);
-    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, out);
+    ImageProcessingTextView view = new ImageProcessingTextViewImpl(new PrintStream(out));
+    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, view);
     controller.execute();
-    assertEquals("", out.toString().stripTrailing());
+    assertEquals("Please enter your choice: \n" +
+            " 1.Load Image \n" +
+            " 2.Save Image\n" +
+            " 3.Brighten Image\n" +
+            " 4.Horizontal-flip Image\n" +
+            " 5.Vertical-flip Image\n" +
+            " 6.RGB-Combine Image\n" +
+            " 7.RGB Split\n" +
+            " 8.Greyscale \n" +
+            " 9.Blur Image\n" +
+            " 10.Dither Image\n" +
+            " 11.Sepia Image\n" +
+            " 12 Sharpen Image\n" +
+            " 0.Exit", out.toString().stripTrailing());
   }
 
   @Test
@@ -370,18 +416,62 @@ public class CommandControllerTest {
     InputStream in = null;
     String input = "load res/image.ppm";
     in = new ByteArrayInputStream(input.getBytes());
-    OutputStream out = new ByteArrayOutputStream();
+
     StringBuilder mockLog = new StringBuilder();
     ImprovedImageProcessing model = new MockModel(mockLog);
-    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, out);
+    ImageProcessingTextView view = new ImageProcessingTextViewImpl(new PrintStream(out));
+    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, view);
     controller.execute();
-    assertEquals("Unknown command " + input, out.toString().stripTrailing());
+    assertEquals("Please enter your choice: \n" +
+            " 1.Load Image \n" +
+            " 2.Save Image\n" +
+            " 3.Brighten Image\n" +
+            " 4.Horizontal-flip Image\n" +
+            " 5.Vertical-flip Image\n" +
+            " 6.RGB-Combine Image\n" +
+            " 7.RGB Split\n" +
+            " 8.Greyscale \n" +
+            " 9.Blur Image\n" +
+            " 10.Dither Image\n" +
+            " 11.Sepia Image\n" +
+            " 12 Sharpen Image\n" +
+            " 0.Exit\n" +
+            "Unknown Command Entered " + input, out.toString().stripTrailing());
 
     String input1 = "load res/image.ppm a b c";
     in = new ByteArrayInputStream(input1.getBytes());
-    controller = new ImageProcessingControllerImpl(model, in, out);
+    controller = new ImageProcessingControllerImpl(model, in, view);
     controller.execute();
-    assertEquals("Unknown command " + input, out.toString().stripTrailing());
+    assertEquals("Please enter your choice: \n" +
+            " 1.Load Image \n" +
+            " 2.Save Image\n" +
+            " 3.Brighten Image\n" +
+            " 4.Horizontal-flip Image\n" +
+            " 5.Vertical-flip Image\n" +
+            " 6.RGB-Combine Image\n" +
+            " 7.RGB Split\n" +
+            " 8.Greyscale \n" +
+            " 9.Blur Image\n" +
+            " 10.Dither Image\n" +
+            " 11.Sepia Image\n" +
+            " 12 Sharpen Image\n" +
+            " 0.Exit\n" +
+            "Unknown Command Entered load res/image.ppm \n" +
+            "Please enter your choice: \n" +
+            " 1.Load Image \n" +
+            " 2.Save Image\n" +
+            " 3.Brighten Image\n" +
+            " 4.Horizontal-flip Image\n" +
+            " 5.Vertical-flip Image\n" +
+            " 6.RGB-Combine Image\n" +
+            " 7.RGB Split\n" +
+            " 8.Greyscale \n" +
+            " 9.Blur Image\n" +
+            " 10.Dither Image\n" +
+            " 11.Sepia Image\n" +
+            " 12 Sharpen Image\n" +
+            " 0.Exit\n" +
+            "Unknown Command Entered " + input1, out.toString().stripTrailing());
   }
 
   @Test
@@ -389,18 +479,62 @@ public class CommandControllerTest {
     InputStream in = null;
     String input = "brighten 3 image";
     in = new ByteArrayInputStream(input.getBytes());
-    OutputStream out = new ByteArrayOutputStream();
+
     StringBuilder mockLog = new StringBuilder();
     ImprovedImageProcessing model = new MockModel(mockLog);
-    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, out);
+    ImageProcessingTextView view = new ImageProcessingTextViewImpl(new PrintStream(out));
+    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, view);
     controller.execute();
-    assertEquals("Unknown command " + input, out.toString().stripTrailing());
+    assertEquals("Please enter your choice: \n" +
+            " 1.Load Image \n" +
+            " 2.Save Image\n" +
+            " 3.Brighten Image\n" +
+            " 4.Horizontal-flip Image\n" +
+            " 5.Vertical-flip Image\n" +
+            " 6.RGB-Combine Image\n" +
+            " 7.RGB Split\n" +
+            " 8.Greyscale \n" +
+            " 9.Blur Image\n" +
+            " 10.Dither Image\n" +
+            " 11.Sepia Image\n" +
+            " 12 Sharpen Image\n" +
+            " 0.Exit\n" +
+            "Unknown Command Entered " + input, out.toString().stripTrailing());
 
     String input1 = "brighten 10 a b c";
     in = new ByteArrayInputStream(input1.getBytes());
-    controller = new ImageProcessingControllerImpl(model, in, out);
+    controller = new ImageProcessingControllerImpl(model, in, view);
     controller.execute();
-    assertEquals("Unknown command " + input, out.toString().stripTrailing());
+    assertEquals("Please enter your choice: \n" +
+            " 1.Load Image \n" +
+            " 2.Save Image\n" +
+            " 3.Brighten Image\n" +
+            " 4.Horizontal-flip Image\n" +
+            " 5.Vertical-flip Image\n" +
+            " 6.RGB-Combine Image\n" +
+            " 7.RGB Split\n" +
+            " 8.Greyscale \n" +
+            " 9.Blur Image\n" +
+            " 10.Dither Image\n" +
+            " 11.Sepia Image\n" +
+            " 12 Sharpen Image\n" +
+            " 0.Exit\n" +
+            "Unknown Command Entered brighten 3 image \n" +
+            "Please enter your choice: \n" +
+            " 1.Load Image \n" +
+            " 2.Save Image\n" +
+            " 3.Brighten Image\n" +
+            " 4.Horizontal-flip Image\n" +
+            " 5.Vertical-flip Image\n" +
+            " 6.RGB-Combine Image\n" +
+            " 7.RGB Split\n" +
+            " 8.Greyscale \n" +
+            " 9.Blur Image\n" +
+            " 10.Dither Image\n" +
+            " 11.Sepia Image\n" +
+            " 12 Sharpen Image\n" +
+            " 0.Exit\n" +
+            "Unknown Command Entered " + input1, out.toString().stripTrailing());
   }
 
   @Test
@@ -408,18 +542,62 @@ public class CommandControllerTest {
     InputStream in = null;
     String input = "horizontal-flip image";
     in = new ByteArrayInputStream(input.getBytes());
-    OutputStream out = new ByteArrayOutputStream();
+
     StringBuilder mockLog = new StringBuilder();
     ImprovedImageProcessing model = new MockModel(mockLog);
-    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, out);
+    ImageProcessingTextView view = new ImageProcessingTextViewImpl(new PrintStream(out));
+    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, view);
     controller.execute();
-    assertEquals("Unknown command " + input, out.toString().stripTrailing());
+    assertEquals("Please enter your choice: \n" +
+            " 1.Load Image \n" +
+            " 2.Save Image\n" +
+            " 3.Brighten Image\n" +
+            " 4.Horizontal-flip Image\n" +
+            " 5.Vertical-flip Image\n" +
+            " 6.RGB-Combine Image\n" +
+            " 7.RGB Split\n" +
+            " 8.Greyscale \n" +
+            " 9.Blur Image\n" +
+            " 10.Dither Image\n" +
+            " 11.Sepia Image\n" +
+            " 12 Sharpen Image\n" +
+            " 0.Exit\n" +
+            "Unknown Command Entered " + input, out.toString().stripTrailing());
 
     String input1 = "horizontal-flip a b c";
     in = new ByteArrayInputStream(input1.getBytes());
-    controller = new ImageProcessingControllerImpl(model, in, out);
+    controller = new ImageProcessingControllerImpl(model, in, view);
     controller.execute();
-    assertEquals("Unknown command " + input, out.toString().stripTrailing());
+    assertEquals("Please enter your choice: \n" +
+            " 1.Load Image \n" +
+            " 2.Save Image\n" +
+            " 3.Brighten Image\n" +
+            " 4.Horizontal-flip Image\n" +
+            " 5.Vertical-flip Image\n" +
+            " 6.RGB-Combine Image\n" +
+            " 7.RGB Split\n" +
+            " 8.Greyscale \n" +
+            " 9.Blur Image\n" +
+            " 10.Dither Image\n" +
+            " 11.Sepia Image\n" +
+            " 12 Sharpen Image\n" +
+            " 0.Exit\n" +
+            "Unknown Command Entered horizontal-flip image \n" +
+            "Please enter your choice: \n" +
+            " 1.Load Image \n" +
+            " 2.Save Image\n" +
+            " 3.Brighten Image\n" +
+            " 4.Horizontal-flip Image\n" +
+            " 5.Vertical-flip Image\n" +
+            " 6.RGB-Combine Image\n" +
+            " 7.RGB Split\n" +
+            " 8.Greyscale \n" +
+            " 9.Blur Image\n" +
+            " 10.Dither Image\n" +
+            " 11.Sepia Image\n" +
+            " 12 Sharpen Image\n" +
+            " 0.Exit\n" +
+            "Unknown Command Entered " + input1, out.toString().stripTrailing());
   }
 
   @Test
@@ -427,18 +605,62 @@ public class CommandControllerTest {
     InputStream in = null;
     String input = "vertical-flip image";
     in = new ByteArrayInputStream(input.getBytes());
-    OutputStream out = new ByteArrayOutputStream();
+
     StringBuilder mockLog = new StringBuilder();
     ImprovedImageProcessing model = new MockModel(mockLog);
-    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, out);
+    ImageProcessingTextView view = new ImageProcessingTextViewImpl(new PrintStream(out));
+    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, view);
     controller.execute();
-    assertEquals("Unknown command " + input, out.toString().stripTrailing());
+    assertEquals("Please enter your choice: \n" +
+            " 1.Load Image \n" +
+            " 2.Save Image\n" +
+            " 3.Brighten Image\n" +
+            " 4.Horizontal-flip Image\n" +
+            " 5.Vertical-flip Image\n" +
+            " 6.RGB-Combine Image\n" +
+            " 7.RGB Split\n" +
+            " 8.Greyscale \n" +
+            " 9.Blur Image\n" +
+            " 10.Dither Image\n" +
+            " 11.Sepia Image\n" +
+            " 12 Sharpen Image\n" +
+            " 0.Exit\n" +
+            "Unknown Command Entered " + input, out.toString().stripTrailing());
 
     String input1 = "vertical-flip a b c";
     in = new ByteArrayInputStream(input1.getBytes());
-    controller = new ImageProcessingControllerImpl(model, in, out);
+    controller = new ImageProcessingControllerImpl(model, in, view);
     controller.execute();
-    assertEquals("Unknown command " + input, out.toString().stripTrailing());
+    assertEquals("Please enter your choice: \n" +
+            " 1.Load Image \n" +
+            " 2.Save Image\n" +
+            " 3.Brighten Image\n" +
+            " 4.Horizontal-flip Image\n" +
+            " 5.Vertical-flip Image\n" +
+            " 6.RGB-Combine Image\n" +
+            " 7.RGB Split\n" +
+            " 8.Greyscale \n" +
+            " 9.Blur Image\n" +
+            " 10.Dither Image\n" +
+            " 11.Sepia Image\n" +
+            " 12 Sharpen Image\n" +
+            " 0.Exit\n" +
+            "Unknown Command Entered vertical-flip image \n" +
+            "Please enter your choice: \n" +
+            " 1.Load Image \n" +
+            " 2.Save Image\n" +
+            " 3.Brighten Image\n" +
+            " 4.Horizontal-flip Image\n" +
+            " 5.Vertical-flip Image\n" +
+            " 6.RGB-Combine Image\n" +
+            " 7.RGB Split\n" +
+            " 8.Greyscale \n" +
+            " 9.Blur Image\n" +
+            " 10.Dither Image\n" +
+            " 11.Sepia Image\n" +
+            " 12 Sharpen Image\n" +
+            " 0.Exit\n" +
+            "Unknown Command Entered " + input1, out.toString().stripTrailing());
   }
 
   @Test
@@ -446,18 +668,62 @@ public class CommandControllerTest {
     InputStream in = null;
     String input = "save res/image.ppm";
     in = new ByteArrayInputStream(input.getBytes());
-    OutputStream out = new ByteArrayOutputStream();
+
     StringBuilder mockLog = new StringBuilder();
     ImprovedImageProcessing model = new MockModel(mockLog);
-    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, out);
+    ImageProcessingTextView view = new ImageProcessingTextViewImpl(new PrintStream(out));
+    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, view);
     controller.execute();
-    assertEquals("Unknown command " + input, out.toString().stripTrailing());
+    assertEquals("Please enter your choice: \n" +
+            " 1.Load Image \n" +
+            " 2.Save Image\n" +
+            " 3.Brighten Image\n" +
+            " 4.Horizontal-flip Image\n" +
+            " 5.Vertical-flip Image\n" +
+            " 6.RGB-Combine Image\n" +
+            " 7.RGB Split\n" +
+            " 8.Greyscale \n" +
+            " 9.Blur Image\n" +
+            " 10.Dither Image\n" +
+            " 11.Sepia Image\n" +
+            " 12 Sharpen Image\n" +
+            " 0.Exit\n" +
+            "Unknown Command Entered " + input, out.toString().stripTrailing());
 
     String input1 = "save res/image.ppm a b c";
     in = new ByteArrayInputStream(input1.getBytes());
-    controller = new ImageProcessingControllerImpl(model, in, out);
+    controller = new ImageProcessingControllerImpl(model, in, view);
     controller.execute();
-    assertEquals("Unknown command " + input, out.toString().stripTrailing());
+    assertEquals("Please enter your choice: \n" +
+            " 1.Load Image \n" +
+            " 2.Save Image\n" +
+            " 3.Brighten Image\n" +
+            " 4.Horizontal-flip Image\n" +
+            " 5.Vertical-flip Image\n" +
+            " 6.RGB-Combine Image\n" +
+            " 7.RGB Split\n" +
+            " 8.Greyscale \n" +
+            " 9.Blur Image\n" +
+            " 10.Dither Image\n" +
+            " 11.Sepia Image\n" +
+            " 12 Sharpen Image\n" +
+            " 0.Exit\n" +
+            "Unknown Command Entered save res/image.ppm \n" +
+            "Please enter your choice: \n" +
+            " 1.Load Image \n" +
+            " 2.Save Image\n" +
+            " 3.Brighten Image\n" +
+            " 4.Horizontal-flip Image\n" +
+            " 5.Vertical-flip Image\n" +
+            " 6.RGB-Combine Image\n" +
+            " 7.RGB Split\n" +
+            " 8.Greyscale \n" +
+            " 9.Blur Image\n" +
+            " 10.Dither Image\n" +
+            " 11.Sepia Image\n" +
+            " 12 Sharpen Image\n" +
+            " 0.Exit\n" +
+            "Unknown Command Entered " + input1, out.toString().stripTrailing());
   }
 
   @Test
@@ -465,19 +731,49 @@ public class CommandControllerTest {
     InputStream in = null;
     String input = "rgb-split image";
     in = new ByteArrayInputStream(input.getBytes());
-    OutputStream out = new ByteArrayOutputStream();
+
     StringBuilder mockLog = new StringBuilder();
     ImprovedImageProcessing model = new MockModel(mockLog);
-    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, out);
+    ImageProcessingTextView view = new ImageProcessingTextViewImpl(new PrintStream(out));
+    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, view);
     controller.execute();
-    assertEquals("Unknown command " + input, out.toString().stripTrailing());
+    assertEquals("Please enter your choice: \n" +
+            " 1.Load Image \n" +
+            " 2.Save Image\n" +
+            " 3.Brighten Image\n" +
+            " 4.Horizontal-flip Image\n" +
+            " 5.Vertical-flip Image\n" +
+            " 6.RGB-Combine Image\n" +
+            " 7.RGB Split\n" +
+            " 8.Greyscale \n" +
+            " 9.Blur Image\n" +
+            " 10.Dither Image\n" +
+            " 11.Sepia Image\n" +
+            " 12 Sharpen Image\n" +
+            " 0.Exit\n" +
+            "Unknown Command Entered " + input, out.toString().stripTrailing());
 
     input = "rgb-split dest a b c d";
     InputStream in1 = new ByteArrayInputStream(input.getBytes());
     OutputStream out1 = new ByteArrayOutputStream();
-    controller = new ImageProcessingControllerImpl(model, in1, out1);
+    ImageProcessingTextView view1 = new ImageProcessingTextViewImpl(new PrintStream(out1));
+    controller = new ImageProcessingControllerImpl(model, in1, view1);
     controller.execute();
-    assertEquals("Unknown command " + input, out1.toString().stripTrailing());
+    assertEquals("Please enter your choice: \n" +
+            " 1.Load Image \n" +
+            " 2.Save Image\n" +
+            " 3.Brighten Image\n" +
+            " 4.Horizontal-flip Image\n" +
+            " 5.Vertical-flip Image\n" +
+            " 6.RGB-Combine Image\n" +
+            " 7.RGB Split\n" +
+            " 8.Greyscale \n" +
+            " 9.Blur Image\n" +
+            " 10.Dither Image\n" +
+            " 11.Sepia Image\n" +
+            " 12 Sharpen Image\n" +
+            " 0.Exit\n" +
+            "Unknown Command Entered " + input, out1.toString().stripTrailing());
   }
 
   @Test
@@ -485,19 +781,49 @@ public class CommandControllerTest {
     InputStream in = null;
     String input = "rgb-combine image";
     in = new ByteArrayInputStream(input.getBytes());
-    OutputStream out = new ByteArrayOutputStream();
+
     StringBuilder mockLog = new StringBuilder();
     ImprovedImageProcessing model = new MockModel(mockLog);
-    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, out);
+    ImageProcessingTextView view = new ImageProcessingTextViewImpl(new PrintStream(out));
+    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, view);
     controller.execute();
-    assertEquals("Unknown command " + input, out.toString().stripTrailing());
+    assertEquals("Please enter your choice: \n" +
+            " 1.Load Image \n" +
+            " 2.Save Image\n" +
+            " 3.Brighten Image\n" +
+            " 4.Horizontal-flip Image\n" +
+            " 5.Vertical-flip Image\n" +
+            " 6.RGB-Combine Image\n" +
+            " 7.RGB Split\n" +
+            " 8.Greyscale \n" +
+            " 9.Blur Image\n" +
+            " 10.Dither Image\n" +
+            " 11.Sepia Image\n" +
+            " 12 Sharpen Image\n" +
+            " 0.Exit\n" +
+            "Unknown Command Entered " + input, out.toString().stripTrailing());
 
     input = "rgb-combine dest a b c d";
     InputStream in1 = new ByteArrayInputStream(input.getBytes());
     OutputStream out1 = new ByteArrayOutputStream();
-    controller = new ImageProcessingControllerImpl(model, in1, out1);
+    ImageProcessingTextView view1 = new ImageProcessingTextViewImpl(new PrintStream(out1));
+    controller = new ImageProcessingControllerImpl(model, in1, view1);
     controller.execute();
-    assertEquals("Unknown command " + input, out1.toString().stripTrailing());
+    assertEquals("Please enter your choice: \n" +
+            " 1.Load Image \n" +
+            " 2.Save Image\n" +
+            " 3.Brighten Image\n" +
+            " 4.Horizontal-flip Image\n" +
+            " 5.Vertical-flip Image\n" +
+            " 6.RGB-Combine Image\n" +
+            " 7.RGB Split\n" +
+            " 8.Greyscale \n" +
+            " 9.Blur Image\n" +
+            " 10.Dither Image\n" +
+            " 11.Sepia Image\n" +
+            " 12 Sharpen Image\n" +
+            " 0.Exit\n" +
+            "Unknown Command Entered " + input, out1.toString().stripTrailing());
   }
 
   @Test
@@ -505,12 +831,27 @@ public class CommandControllerTest {
     InputStream in = null;
     String input = "brighten a image image-brighten";
     in = new ByteArrayInputStream(input.getBytes());
-    OutputStream out = new ByteArrayOutputStream();
+
     StringBuilder mockLog = new StringBuilder();
     ImprovedImageProcessing model = new MockModel(mockLog);
-    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, out);
+    ImageProcessingTextView view = new ImageProcessingTextViewImpl(new PrintStream(out));
+    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, view);
     controller.execute();
-    assertEquals("Unknown command " + input, out.toString().stripTrailing());
+    assertEquals("Please enter your choice: \n" +
+            " 1.Load Image \n" +
+            " 2.Save Image\n" +
+            " 3.Brighten Image\n" +
+            " 4.Horizontal-flip Image\n" +
+            " 5.Vertical-flip Image\n" +
+            " 6.RGB-Combine Image\n" +
+            " 7.RGB Split\n" +
+            " 8.Greyscale \n" +
+            " 9.Blur Image\n" +
+            " 10.Dither Image\n" +
+            " 11.Sepia Image\n" +
+            " 12 Sharpen Image\n" +
+            " 0.Exit\n" +
+            "Unknown Command Entered " + input, out.toString().stripTrailing());
   }
 
   @Test
@@ -520,10 +861,11 @@ public class CommandControllerTest {
     String b = "image-dither";
     String input = "dither " + a + " " + b;
     in = new ByteArrayInputStream(input.getBytes());
-    OutputStream out = new ByteArrayOutputStream();
+
     StringBuilder mockLog = new StringBuilder();
     ImprovedImageProcessing model = new MockModel(mockLog);
-    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, out);
+    ImageProcessingTextView view = new ImageProcessingTextViewImpl(new PrintStream(out));
+    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, view);
     controller.execute();
     assertEquals("Received inputs " + a + " and " + b, mockLog.toString());
   }
@@ -535,10 +877,11 @@ public class CommandControllerTest {
     String b = "image-blur";
     String input = "blur " + a + " " + b;
     in = new ByteArrayInputStream(input.getBytes());
-    OutputStream out = new ByteArrayOutputStream();
+
     StringBuilder mockLog = new StringBuilder();
     ImprovedImageProcessing model = new MockModel(mockLog);
-    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, out);
+    ImageProcessingTextView view = new ImageProcessingTextViewImpl(new PrintStream(out));
+    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, view);
     controller.execute();
     assertEquals("Received inputs " + a + " and " + b, mockLog.toString());
   }
@@ -550,10 +893,11 @@ public class CommandControllerTest {
     String b = "image-sharpen";
     String input = "sharpen " + a + " " + b;
     in = new ByteArrayInputStream(input.getBytes());
-    OutputStream out = new ByteArrayOutputStream();
+
     StringBuilder mockLog = new StringBuilder();
     ImprovedImageProcessing model = new MockModel(mockLog);
-    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, out);
+    ImageProcessingTextView view = new ImageProcessingTextViewImpl(new PrintStream(out));
+    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, view);
     controller.execute();
     assertEquals("Received inputs " + a + " and " + b, mockLog.toString());
   }
@@ -565,10 +909,11 @@ public class CommandControllerTest {
     String b = "image-sepia";
     String input = "sepia " + a + " " + b;
     in = new ByteArrayInputStream(input.getBytes());
-    OutputStream out = new ByteArrayOutputStream();
+
     StringBuilder mockLog = new StringBuilder();
     ImprovedImageProcessing model = new MockModel(mockLog);
-    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, out);
+    ImageProcessingTextView view = new ImageProcessingTextViewImpl(new PrintStream(out));
+    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, view);
     controller.execute();
     assertEquals("Received inputs " + a + " and " + b, mockLog.toString());
   }
@@ -580,10 +925,10 @@ public class CommandControllerTest {
     String b = "image-greyscale";
     String input = "greyscale " + a + " " + b;
     in = new ByteArrayInputStream(input.getBytes());
-    OutputStream out = new ByteArrayOutputStream();
     StringBuilder mockLog = new StringBuilder();
     ImprovedImageProcessing model = new MockModel(mockLog);
-    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, out);
+    ImageProcessingTextView view = new ImageProcessingTextViewImpl(new PrintStream(out));
+    ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, view);
     controller.execute();
     assertEquals("Received inputs luma-component, " + a + " and " + b, mockLog.toString());
   }
