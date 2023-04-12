@@ -35,5 +35,5 @@ public interface ImprovedImageProcessing extends ImageProcessingModel {
    * @return destination Image
    */
   Image dither(String sourceImageName, String destImageName);
-  
+
 }

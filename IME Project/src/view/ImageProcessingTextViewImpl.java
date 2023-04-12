@@ -7,13 +7,14 @@ import java.io.PrintStream;
  * interface.It is responsible for displaying the menu, error messages,
  * and executing command entered by the user on the command line.
  */
-public class ImageProcessingTextViewImpl implements ImageProcessingTextView{
+public class ImageProcessingTextViewImpl implements ImageProcessingTextView {
 
   private final PrintStream out;
 
   /**
    * Constructor for the ImageProcessingTextViewImpl class that takes a PrintStream object as a parameter.
    * The PrintStream object is used to write messages to the console.
+   *
    * @param out the PrintStream object used to write messages to the console
    */
   public ImageProcessingTextViewImpl(PrintStream out) {
@@ -44,22 +45,22 @@ public class ImageProcessingTextViewImpl implements ImageProcessingTextView{
 
   @Override
   public void displayErrorWhileInvalidCommand(String command) {
-    this.out.println("Invalid Command Entered"+" "+command);
+    this.out.println("Invalid Command Entered" + " " + command);
   }
 
   @Override
   public void displayErrorWhileUnknownCommand(String command) {
-    this.out.println("Unknown Command Entered"+" "+command);
+    this.out.println("Unknown Command Entered" + " " + command);
   }
 
   @Override
-  public void displayExecutingLine(String line){
+  public void displayExecutingLine(String line) {
     this.out.println("Executing line: " + line);
   }
 
   @Override
   public void displayErrorWhileRunningScriptFile(String error, String command) {
-    this.out.println("Error while running script file: " + error + " "+ command);
+    this.out.println("Error while running script file: " + error + " " + command);
   }
 
 }

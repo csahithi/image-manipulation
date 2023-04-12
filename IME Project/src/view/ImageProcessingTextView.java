@@ -40,7 +40,8 @@ public interface ImageProcessingTextView {
 
   /**
    * Displays an error message for an error that occurred while running a script file.
-   * @param error the error message
+   *
+   * @param error   the error message
    * @param command the command that caused the error
    */
   void displayErrorWhileRunningScriptFile(String error, String command);
