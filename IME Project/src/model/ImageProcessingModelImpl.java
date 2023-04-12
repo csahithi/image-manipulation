@@ -11,6 +11,10 @@ import java.util.function.Function;
 public class ImageProcessingModelImpl implements ImageProcessingModel {
   protected final Map<String, Image> LIST_OF_IMAGES;
 
+  /**
+   * The Pixel class represents a single pixel in an image.
+   * It stores the row and column number of the pixel, as well as the color component of the pixel.
+   */
   public ImageProcessingModelImpl() {
     LIST_OF_IMAGES = new HashMap<>();
   }

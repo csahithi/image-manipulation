@@ -8,6 +8,8 @@ import controller.ImageProcessingController;
 import controller.ImageProcessingControllerImpl;
 import model.ImprovedImageProcessing;
 import model.ImprovedImageProcessingImpl;
+import view.ImageProcessingTextView;
+import view.ImageProcessingTextViewImpl;
 import view.ImageProcessingView;
 import view.ImageProcessingViewImpl;
 
@@ -24,23 +26,20 @@ public class ImageManipulator {
    */
   public static void main(String[] args) {
     ImprovedImageProcessing model = new ImprovedImageProcessingImpl();
+    ImageProcessingTextView tView = new ImageProcessingTextViewImpl(System.out);
     if (args.length == 2 && args[0].equalsIgnoreCase("-file")) {
       try {
         InputStream in = new FileInputStream(args[1]);
-        ImageProcessingController controller = new ImageProcessingControllerImpl(model, in,
-                System.out);
+        ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, tView);
         controller.execute();
       } catch (FileNotFoundException e) {
         System.out.println("File Not Found");
       }
-    }
-    else if(args.length == 1 && args[0].equalsIgnoreCase("-text")){
+    } else if (args.length == 1 && args[0].equalsIgnoreCase("-text")) {
       InputStream in = System.in;
-      ImageProcessingController controller = new ImageProcessingControllerImpl(model, in,
-              System.out);
+      ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, tView);
       controller.execute();
-    }
-    else {
+    } else {
       ImageProcessingView view = new ImageProcessingViewImpl();
       ImageMVCController controller = new ImageMVCControllerImpl(model, view);
       controller.execute();

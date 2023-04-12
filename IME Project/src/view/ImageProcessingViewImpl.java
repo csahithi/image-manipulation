@@ -17,6 +17,13 @@ import model.Color;
 import model.Image;
 import model.Pixel;
 
+/**
+ * The ImageProcessingViewImpl class implements the ImageProcessingView interface and provides a
+ * GUI for image processing.
+ * The GUI includes buttons for loading, saving, flipping, and modifying the colors of images,
+ * as well as panels for displaying images and histograms.
+ * This class extends the JFrame class and uses various Swing components to create the GUI.
+ */
 public class ImageProcessingViewImpl extends JFrame implements ImageProcessingView {
   private JButton loadButton;
   private JButton saveButton;
@@ -51,6 +58,17 @@ public class ImageProcessingViewImpl extends JFrame implements ImageProcessingVi
   private JButton saveGreenButton;
   private JButton saveBlueButton;
 
+  /**
+   * Creates an instance of the ImageProcessingViewImpl class, which is a JFrame that displays the
+   * graphical user interface for the Image Processing application.
+   * Sets the title of the JFrame to "Image Processing" and the size to 1000 x 700 pixels.
+   * Configures the default close operation to exit the application when the JFrame is closed.
+   * Initializes and adds components to the JFrame, including buttons for loading and saving images,
+   * a panel for displaying the loaded image and its histogram, and buttons for applying various
+   * image processing operations.
+   * Also initializes and adds components for selecting RGB color channels,
+   * loading and saving split/composite images, and viewing text commands.
+   */
   public ImageProcessingViewImpl() {
     super();
     this.setTitle("Image Processing");

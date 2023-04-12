@@ -1,10 +1,13 @@
 package model;
 
 /**
- * This class represents Image.
+ * The Image class represents an image and its properties such as width, height,
+ * maximum value of color,and an array of pixels that make up the image.
  */
 public class Image {
+
   private final int width;
+
   private final int height;
   private final int maxValueOfColor;
   private final Pixel[][] listOfPixels;

@@ -1,7 +1,8 @@
 package model;
 
 /**
- * This class represents a pixel.
+ * The Pixel class represents a single pixel in an image.
+ * It stores the row and column number of the pixel, as well as the color component of the pixel.
  */
 public class Pixel {
   private final Color colorComponent;
