@@ -227,7 +227,7 @@ ______________________________________
 We have added view to the application.The new view program features a graphical user interface
 using Java Swing.
 
-New Features supported in version 2
+New Features supported in version 3
 -------------------------------------
 1.Image Histograms
   The program now includes the ability to create and visualize histograms on gui for an image.
@@ -241,27 +241,40 @@ We haven't made any changes in model in this version
 
 Controller
 ------------
-We have added new controller to support the GUI-based view.We have added new interface 'ImageMVCController' which is implemented by class 'ImageMVCControllerImpl', the implementation of the ImageMVCController interface that handles communication between the model, the view, and the user input. It uses the ImageProcessingView and ImprovedImageProcessing model to execute commands on images.. It is the main controller for GUI-based  view.
+We have added new controller to support the GUI-based view.We have added new interface
+'ImageMVCController' which is implemented by class 'ImageMVCControllerImpl', the implementation of
+the ImageMVCController interface that handles communication between the model, the view, and the
+user input. It uses the ImageProcessingView and ImprovedImageProcessing model to execute commands
+on images.. It is the main controller for GUI-based  view.
 
 View
 -----------
 We've introduced two types of views - text-based and GUI-based - in this version. 
-We have create two new interfaces for view each for text-based view and GUI-based view .They are 'ImageProcessingTextView' and ImageProcessingView respectively.
+We have create two new interfaces for view each for text-based view and GUI-based view .They are
+'ImageProcessingTextView' and ImageProcessingView respectively.
 
 The 'ImageProcessingTextViewImpl' class is an implementation of the 'ImageProcessingTextView'
-interface.It is responsible for displaying the menu, error messages, and executing command entered by the user on the command line.
+interface.It is responsible for displaying the menu, error messages, and executing command entered
+by the user on the command line.
 
-The 'ImageProcessingViewImpl' class implements the ImageProcessingView interface and provides a GUI for image processing.The GUI includes buttons for loading, saving, flipping, and modifying the colors of images, as well as panels for displaying images and histograms.This class extends the 'JFrame' class and uses various Swing components to create the GUI.
+The 'ImageProcessingViewImpl' class implements the ImageProcessingView interface and provides a GUI
+for image processing.The GUI includes buttons for loading, saving, flipping, and modifying the
+colors of images, as well as panels for displaying images and histograms.This class extends the
+'JFrame' class and uses various Swing components to create the GUI.
 
 Driver Class
 ------------
-We have modified our driver class 'ImageManipulator.claas' to determine the program's view based on three command-line inputs as follows:
+We have modified our driver class 'ImageManipulator.claas' to determine the program's view based on
+three command-line inputs as follows:
 
-1.If the command "java -jar Program.jar -file path-of-script-file" is used, the program opens the specified script file, executes it, and then closes.
+1.If the command "java -jar Program.jar -file path-of-script-file" is used, the program opens the
+specified script file, executes it, and then closes.
 
-2.If the command "java -jar Program.jar -text" is used, the program opens in an interactive text mode, allowing the user to type the script and execute it line by line.
+2.If the command "java -jar Program.jar -text" is used, the program opens in an interactive text
+mode, allowing the user to type the script and execute it line by line.
 
-3. If the command "java -jar Program.jar" is used or if the jar file is double-clicked, the program opens in the graphical user interface mode.
+3. If the command "java -jar Program.jar" is used or if the jar file is double-clicked, the program
+opens in the graphical user interface mode.
 
 New Classes and Interfaces in this Project Version
 -----------------------------------------------
@@ -269,22 +282,35 @@ New Classes and Interfaces in this Project Version
 Controller-Related Classes and Interfaces
 ___________________________________________
 
-ImageMVCController : Interface for the Image MVC Controller.It is the main controller for GUI-based view.It contains a single method "execute()" which is implemented by the concrete class that controls the Image Processing functionality.
+ImageMVCController : Interface for the Image MVC Controller.It is the main controller for GUI-based
+view.It contains a single method "execute()" which is implemented by the concrete class that
+controls the Image Processing functionality.
 
-ImageMVCControllerImpl : The implementation of the ImageMVCController interface that handles communication between the model, the view, and the user input. It uses the ImageProcessingView and ImprovedImageProcessing model to execute commands on images.
+ImageMVCControllerImpl : The implementation of the ImageMVCController interface that handles
+communication between the model, the view, and the user input. It uses the ImageProcessingView and
+ImprovedImageProcessing model to execute commands on images.
 
 
 View -Related Classes and Interfaces:
 ______________________________________
 
-ImageProcessingTextView : The ImageProcessingTextView interface defines the methods that a view for an image processing application should implement in text-based view . The view is responsible for displaying the menu, error messages, and executing command entered by the user.
+ImageProcessingTextView : The ImageProcessingTextView interface defines the methods that a view for
+an image processing application should implement in text-based view . The view is responsible for
+displaying the menu, error messages, and executing command entered by the user.
 
-ImageProcessingTextViewImpl : The ImageProcessingTextViewImpl class is an implementation of the ImageProcessingTextView interface.It is responsible for displaying the menu, error messages, and executing command entered by the user on the command line.
+ImageProcessingTextViewImpl : The ImageProcessingTextViewImpl class is an implementation of the
+ImageProcessingTextView interface.It is responsible for displaying the menu, error messages, and
+executing command entered by the user on the command line.
 
-ImageProcessingView : This interface defines the methods that must be implemented by a class that serves as the user
- interface for an image processing application. This interface provides methods to make the UI visible, set button listeners, get parameters for a command, display the current image, and display error dialogs.
+ImageProcessingView : This interface defines the methods that must be implemented by a class that
+serves as the user interface for an image processing application. This interface provides methods
+to make the UI visible, set button listeners, get parameters for a command, display the current
+image, and display error dialogs.
 
-ImageProcessingViewImpl : The ImageProcessingViewImpl class implements the ImageProcessingView interface and provides a GUI for image processing. The GUI includes buttons for loading, saving, flipping, and modifying the colors of images, as well as panels for displaying images and histograms.This class extends the JFrame class and uses various Swing components to create the GUI.
+ImageProcessingViewImpl : The ImageProcessingViewImpl class implements the ImageProcessingView
+interface and provides a GUI for image processing. The GUI includes buttons for loading, saving,
+flipping, and modifying the colors of images, as well as panels for displaying images and
+histograms.This class extends the JFrame class and uses various Swing components to create the GUI.
 
 
 

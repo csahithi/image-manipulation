@@ -4,6 +4,24 @@
 Instructions to use commands that are supported by our application:
 --------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------
+We have modified our driver class 'ImageManipulator.claas' to determine the program's view based on
+three command-line inputs as follows:
+
+1.If the command "java -jar Program.jar -file path-of-script-file" is used, the program opens the
+specified script file, executes it, and then closes.
+Example: java -jar IMEProject.jar -file script.txt
+
+2.If the command "java -jar Program.jar -text" is used, the program opens in an interactive text
+mode, allowing the user to type the script and execute it line by line.
+Example: java -jar IMEProject.jar -text
+
+3. If the command "java -jar Program.jar" is used or if the jar file is double-clicked, the program
+opens in the graphical user interface mode.
+Example: java -jar IMEProject.jar
+
+-------------------------------
+Operations supported in GUI:
+---------------------------------
 
 * Load image: Load an image by clicking on 'Load Image' button on top and then select the desired
               file from the file explorer popped up in dialog box and then click open on the
@@ -154,12 +172,6 @@ Example: greyscale dog dog-greyscale
                 referred to henceforth by the given destination name.
 Command Syntax: sepia image-name dest-image-name
 Example: sepia dog dog-sepia
-
-15.Command line JAR file: On running the jar file, a file containing image processing commands
-can be passed as a command-line argument. This would run the commands in the script and exit the
-application.
-Command Syntax: java -jar jar-file -file file-path
-Example: java -jar IMEProject.jar -file script.txt
 
 Conditions:
 - Image needs to be loaded first before running any operations on it.
