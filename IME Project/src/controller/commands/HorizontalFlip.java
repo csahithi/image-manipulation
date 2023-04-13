@@ -26,6 +26,11 @@ public class HorizontalFlip implements ImageCommandController {
 
   @Override
   public List<Image> execute(ImprovedImageProcessing m) {
-    return List.of(new Image[]{m.horizontalFlip(sourceImageName, destImageName)});
+    Image horizontalFlipImage = m.horizontalFlip(sourceImageName, destImageName);
+    if (horizontalFlipImage == null) {
+      return null;
+    } else {
+      return List.of(new Image[]{horizontalFlipImage});
+    }
   }
 }

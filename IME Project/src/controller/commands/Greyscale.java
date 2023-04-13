@@ -31,7 +31,12 @@ public class Greyscale implements ImageCommandController {
 
   @Override
   public List<Image> execute(ImprovedImageProcessing m) {
-    return List.of(new Image[]{m.greyscale(component, sourceImageName, destImageName)});
+    Image greyscaleImage = m.greyscale(component, sourceImageName, destImageName);
+    if (greyscaleImage == null) {
+      return null;
+    } else {
+      return List.of(new Image[]{greyscaleImage});
+    }
   }
 }
 

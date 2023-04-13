@@ -28,7 +28,11 @@ public class ColorTransformation implements ImageCommandController {
 
   @Override
   public List<Image> execute(ImprovedImageProcessing m) {
-    return List.of(new Image[]{m.colorTransformation(operation, sourceImageName, destImageName)});
+    Image transformationImage = m.colorTransformation(operation, sourceImageName, destImageName);
+    if (transformationImage == null) {
+      return null;
+    } else {
+      return List.of(new Image[]{transformationImage});
+    }
   }
-
 }

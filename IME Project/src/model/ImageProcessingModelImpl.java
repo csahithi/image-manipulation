@@ -27,8 +27,7 @@ public class ImageProcessingModelImpl implements ImageProcessingModel {
 
   @Override
   public Image saveImage(String imageName) {
-    Image image = LIST_OF_IMAGES.getOrDefault(imageName, null);
-    return image;
+    return LIST_OF_IMAGES.getOrDefault(imageName, null);
   }
 
   @Override
@@ -70,16 +69,16 @@ public class ImageProcessingModelImpl implements ImageProcessingModel {
     if (image == null) {
       return null;
     }
-    Pixel[][] listOfPixelsDestImage = new Pixel[image.getHeight()][image.getWidth()];
+    Pixel[][] listOfPixelsDestImage = new RGBPixel[image.getHeight()][image.getWidth()];
     for (int i = 0; i < image.getHeight(); i++) {
       for (int j = 0; j <= image.getWidth() / 2; j++) {
-        listOfPixelsDestImage[i][j] = new Pixel(i, j, 0, 0,
+        listOfPixelsDestImage[i][j] = new RGBPixel(i, j, 0, 0,
                 0);
         listOfPixelsDestImage[i][j] = image.getPixels()[i][image.getWidth() - j - 1];
         listOfPixelsDestImage[i][image.getWidth() - j - 1] = image.getPixels()[i][j];
       }
     }
-    Image destImage = new Image(image.getWidth(), image.getHeight(), image.getMaxValueOfColor(),
+    Image destImage = new RGBImage(image.getWidth(), image.getHeight(), image.getMaxValueOfColor(),
             listOfPixelsDestImage);
     LIST_OF_IMAGES.put(destImageName, destImage);
     return destImage;
@@ -91,16 +90,16 @@ public class ImageProcessingModelImpl implements ImageProcessingModel {
     if (image == null) {
       return null;
     }
-    Pixel[][] listOfPixelsDestImage = new Pixel[image.getHeight()][image.getWidth()];
+    Pixel[][] listOfPixelsDestImage = new RGBPixel[image.getHeight()][image.getWidth()];
     for (int i = 0; i <= image.getHeight() / 2; i++) {
       for (int j = 0; j < image.getWidth(); j++) {
-        listOfPixelsDestImage[i][j] = new Pixel(i, j, 0, 0,
+        listOfPixelsDestImage[i][j] = new RGBPixel(i, j, 0, 0,
                 0);
         listOfPixelsDestImage[i][j] = image.getPixels()[image.getHeight() - i - 1][j];
         listOfPixelsDestImage[image.getHeight() - i - 1][j] = image.getPixels()[i][j];
       }
     }
-    Image destImage = new Image(image.getWidth(), image.getHeight(), image.getMaxValueOfColor(),
+    Image destImage = new RGBImage(image.getWidth(), image.getHeight(), image.getMaxValueOfColor(),
             listOfPixelsDestImage);
     LIST_OF_IMAGES.put(destImageName, destImage);
     return destImage;
@@ -112,10 +111,10 @@ public class ImageProcessingModelImpl implements ImageProcessingModel {
     if (image == null) {
       return null;
     }
-    Pixel[][] listOfPixelsDestImage = new Pixel[image.getHeight()][image.getWidth()];
+    Pixel[][] listOfPixelsDestImage = new RGBPixel[image.getHeight()][image.getWidth()];
     for (int i = 0; i < image.getHeight(); i++) {
       for (int j = 0; j < image.getWidth(); j++) {
-        listOfPixelsDestImage[i][j] = new Pixel(i, j, 0, 0,
+        listOfPixelsDestImage[i][j] = new RGBPixel(i, j, 0, 0,
                 0);
         listOfPixelsDestImage[i][j].getColorComponent().setRedComponent(Math.max(0, (Math.min(
                 image.getPixels()[i][j].getColorComponent().getRedComponent() + increment, 255))));
@@ -127,7 +126,7 @@ public class ImageProcessingModelImpl implements ImageProcessingModel {
                         + increment, 255))));
       }
     }
-    Image destImage = new Image(image.getWidth(), image.getHeight(), image.getMaxValueOfColor(),
+    Image destImage = new RGBImage(image.getWidth(), image.getHeight(), image.getMaxValueOfColor(),
             listOfPixelsDestImage);
     LIST_OF_IMAGES.put(destImageName, destImage);
     return destImage;
@@ -158,10 +157,10 @@ public class ImageProcessingModelImpl implements ImageProcessingModel {
     if (redImage == null || greenImage == null || blueImage == null) {
       return null;
     }
-    Pixel[][] listOfPixelsDestImage = new Pixel[redImage.getHeight()][redImage.getWidth()];
+    Pixel[][] listOfPixelsDestImage = new RGBPixel[redImage.getHeight()][redImage.getWidth()];
     for (int i = 0; i < redImage.getHeight(); i++) {
       for (int j = 0; j < redImage.getWidth(); j++) {
-        listOfPixelsDestImage[i][j] = new Pixel(i, j, 0, 0,
+        listOfPixelsDestImage[i][j] = new RGBPixel(i, j, 0, 0,
                 0);
         listOfPixelsDestImage[i][j].getColorComponent().setRedComponent(redImage.getPixels()[i][j]
                 .getColorComponent().getRedComponent());
@@ -171,17 +170,17 @@ public class ImageProcessingModelImpl implements ImageProcessingModel {
                 .getPixels()[i][j].getColorComponent().getBlueComponent());
       }
     }
-    Image destImage = new Image(redImage.getWidth(), redImage.getHeight(),
+    Image destImage = new RGBImage(redImage.getWidth(), redImage.getHeight(),
             redImage.getMaxValueOfColor(), listOfPixelsDestImage);
     LIST_OF_IMAGES.put(destImageName, destImage);
     return destImage;
   }
 
   private Image greyscalePixelHelper(Image image, Function<Pixel, Integer> getComponent) {
-    Pixel[][] listOfPixelsDestImage = new Pixel[image.getHeight()][image.getWidth()];
+    Pixel[][] listOfPixelsDestImage = new RGBPixel[image.getHeight()][image.getWidth()];
     for (int i = 0; i < image.getHeight(); i++) {
       for (int j = 0; j < image.getWidth(); j++) {
-        listOfPixelsDestImage[i][j] = new Pixel(i, j, 0, 0,
+        listOfPixelsDestImage[i][j] = new RGBPixel(i, j, 0, 0,
                 0);
         listOfPixelsDestImage[i][j].getColorComponent().setRedComponent(
                 getComponent.apply(image.getPixels()[i][j]));
@@ -191,15 +190,15 @@ public class ImageProcessingModelImpl implements ImageProcessingModel {
                 getComponent.apply(image.getPixels()[i][j]));
       }
     }
-    return new Image(image.getWidth(), image.getHeight(), image.getMaxValueOfColor(),
+    return new RGBImage(image.getWidth(), image.getHeight(), image.getMaxValueOfColor(),
             listOfPixelsDestImage);
   }
 
   private Image greyscaleColorHelper(Image image, Function<Color, Integer> getComponent) {
-    Pixel[][] listOfPixelsDestImage = new Pixel[image.getHeight()][image.getWidth()];
+    Pixel[][] listOfPixelsDestImage = new RGBPixel[image.getHeight()][image.getWidth()];
     for (int i = 0; i < image.getHeight(); i++) {
       for (int j = 0; j < image.getWidth(); j++) {
-        listOfPixelsDestImage[i][j] = new Pixel(i, j, 0, 0,
+        listOfPixelsDestImage[i][j] = new RGBPixel(i, j, 0, 0,
                 0);
         listOfPixelsDestImage[i][j].getColorComponent().setRedComponent(
                 getComponent.apply(image.getPixels()[i][j].getColorComponent()));
@@ -209,7 +208,7 @@ public class ImageProcessingModelImpl implements ImageProcessingModel {
                 getComponent.apply(image.getPixels()[i][j].getColorComponent()));
       }
     }
-    return new Image(image.getWidth(), image.getHeight(), image.getMaxValueOfColor(),
+    return new RGBImage(image.getWidth(), image.getHeight(), image.getMaxValueOfColor(),
             listOfPixelsDestImage);
   }
 }

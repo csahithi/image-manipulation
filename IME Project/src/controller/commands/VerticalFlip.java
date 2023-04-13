@@ -27,6 +27,11 @@ public class VerticalFlip implements ImageCommandController {
 
   @Override
   public List<Image> execute(ImprovedImageProcessing m) {
-    return List.of(new Image[]{m.verticalFlip(sourceImageName, destImageName)});
+    Image verticalFlipImage = m.verticalFlip(sourceImageName, destImageName);
+    if (verticalFlipImage == null) {
+      return null;
+    } else {
+      return List.of(new Image[]{verticalFlipImage});
+    }
   }
 }

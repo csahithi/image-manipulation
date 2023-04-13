@@ -25,6 +25,11 @@ public class Dither implements ImageCommandController {
 
   @Override
   public List<Image> execute(ImprovedImageProcessing m) {
-    return List.of(new Image[]{m.dither(sourceImageName, destImageName)});
+    Image ditherImage = m.dither(sourceImageName, destImageName);
+    if (ditherImage == null) {
+      return null;
+    } else {
+      return List.of(new Image[]{ditherImage});
+    }
   }
 }

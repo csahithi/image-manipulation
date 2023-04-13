@@ -13,6 +13,8 @@ import javax.imageio.ImageIO;
 import model.Color;
 import model.Image;
 import model.Pixel;
+import model.RGBImage;
+import model.RGBPixel;
 
 /**
  * This utility class supports I/O operations to load and save image files of different formats.
@@ -28,14 +30,14 @@ public class ImageUtil {
   public static Image readImage(String filepath) {
     try {
       BufferedImage image = ImageIO.read(new File(filepath));
-      Pixel[][] listOfPixels = new Pixel[image.getHeight()][image.getWidth()];
-      Image finalImage = new Image(image.getWidth(), image.getHeight(), 255,
+      Pixel[][] listOfPixels = new RGBPixel[image.getHeight()][image.getWidth()];
+      Image finalImage = new RGBImage(image.getWidth(), image.getHeight(), 255,
               listOfPixels);
       for (int y = 0; y < image.getHeight(); y++) {
         for (int x = 0; x < image.getWidth(); x++) {
           Color rgb = new Color(image.getRGB(x, y));
           try {
-            listOfPixels[y][x] = new Pixel(y, x, rgb.getRed(), rgb.getGreen(), rgb.getBlue());
+            listOfPixels[y][x] = new RGBPixel(y, x, rgb.getRed(), rgb.getGreen(), rgb.getBlue());
           } catch (NullPointerException e) {
             System.out.println("y" + y + "x" + x);
           }
@@ -124,13 +126,13 @@ public class ImageUtil {
     int width = sc.nextInt();
     int height = sc.nextInt();
     int maxValue = sc.nextInt();
-    listOfPixels = new Pixel[height][width];
+    listOfPixels = new RGBPixel[height][width];
     for (int i = 0; i < height; i++) {
       for (int j = 0; j < width; j++) {
-        listOfPixels[i][j] = new Pixel(j, i, sc.nextInt(), sc.nextInt(), sc.nextInt());
+        listOfPixels[i][j] = new RGBPixel(j, i, sc.nextInt(), sc.nextInt(), sc.nextInt());
       }
     }
-    m = new Image(width, height, maxValue, listOfPixels);
+    m = new RGBImage(width, height, maxValue, listOfPixels);
     return m;
   }
 

@@ -42,6 +42,10 @@ public class Save implements ImageCommandController {
     } else {
       ImageUtil.createImage(extension, imagePath, image);
     }
-    return List.of(new Image[]{image});
+    if (image == null) {
+      return null;
+    } else {
+      return List.of(new Image[]{image});
+    }
   }
 }

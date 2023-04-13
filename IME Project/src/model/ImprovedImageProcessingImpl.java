@@ -57,7 +57,7 @@ public class ImprovedImageProcessingImpl extends ImageProcessingModelImpl
     Pixel[][] listOfPixelsDestImage = new Pixel[image.getHeight()][image.getWidth()];
     for (int i = 0; i < image.getHeight(); i++) {
       for (int j = 0; j < image.getWidth(); j++) {
-        listOfPixelsDestImage[i][j] = new Pixel(i, j, 0, 0,
+        listOfPixelsDestImage[i][j] = new RGBPixel(i, j, 0, 0,
                 0);
         int r = image.getPixels()[i][j].getColorComponent().getRedComponent();
         int g = image.getPixels()[i][j].getColorComponent().getGreenComponent();
@@ -70,7 +70,7 @@ public class ImprovedImageProcessingImpl extends ImageProcessingModelImpl
                 (int) ((values[2][0] * r) + (values[2][1] * g) + (values[2][2] * b)))));
       }
     }
-    return new Image(image.getWidth(), image.getHeight(), image.getMaxValueOfColor(),
+    return new RGBImage(image.getWidth(), image.getHeight(), image.getMaxValueOfColor(),
             listOfPixelsDestImage);
   }
 
@@ -82,7 +82,7 @@ public class ImprovedImageProcessingImpl extends ImageProcessingModelImpl
     }
     Image greyscaleImage = super.greyscale("luma-component", sourceImageName,
             "greyscaleImage");
-    Pixel[][] listOfPixelsDestImage = new Pixel[image.getHeight()][image.getWidth()];
+    Pixel[][] listOfPixelsDestImage = new RGBPixel[image.getHeight()][image.getWidth()];
     int r = image.getHeight();
     int c = image.getWidth();
     int old_color;
@@ -90,7 +90,7 @@ public class ImprovedImageProcessingImpl extends ImageProcessingModelImpl
     int error;
     for (int i = 0; i < r; i++) {
       for (int j = 0; j < c; j++) {
-        listOfPixelsDestImage[i][j] = new Pixel(i, j, 0, 0,
+        listOfPixelsDestImage[i][j] = new RGBPixel(i, j, 0, 0,
                 0);
       }
     }
@@ -120,7 +120,7 @@ public class ImprovedImageProcessingImpl extends ImageProcessingModelImpl
         }
       }
     }
-    Image destImage = new Image(image.getWidth(), image.getHeight(), image.getMaxValueOfColor(),
+    Image destImage = new RGBImage(image.getWidth(), image.getHeight(), image.getMaxValueOfColor(),
             listOfPixelsDestImage);
     LIST_OF_IMAGES.put(destImageName, destImage);
     return destImage;
@@ -138,16 +138,16 @@ public class ImprovedImageProcessingImpl extends ImageProcessingModelImpl
   }
 
   private Pixel[][] createPaddedArray(Pixel[][] pixels, int r, int c, int padding) {
-    Pixel[][] paddedArray = new Pixel[r + 2 * padding][c + 2 * padding];
+    Pixel[][] paddedArray = new RGBPixel[r + 2 * padding][c + 2 * padding];
     for (int i = 0; i < r + 2 * padding; i++) {
       for (int j = 0; j < c + 2 * padding; j++) {
         if (i >= padding && i < r + padding && j >= padding && j < c + padding) {
-          paddedArray[i][j] = new Pixel(i, j,
+          paddedArray[i][j] = new RGBPixel(i, j,
                   pixels[i - padding][j - padding].getColorComponent().getRedComponent(),
                   pixels[i - padding][j - padding].getColorComponent().getGreenComponent(),
                   pixels[i - padding][j - padding].getColorComponent().getBlueComponent());
         } else {
-          paddedArray[i][j] = new Pixel(i, j, 0, 0, 0);
+          paddedArray[i][j] = new RGBPixel(i, j, 0, 0, 0);
         }
       }
     }
@@ -162,7 +162,7 @@ public class ImprovedImageProcessingImpl extends ImageProcessingModelImpl
     int bSum;
     int r = image.getHeight();
     int c = image.getWidth();
-    Pixel[][] listOfPixelsDestImage = new Pixel[r][c];
+    Pixel[][] listOfPixelsDestImage = new RGBPixel[r][c];
     for (int i = 1; i < r + 1; i++) {
       for (int j = 1; j < c + 1; j++) {
         rSum = (int) ((0.25) * paddedArray[i][j].getColorComponent().getRedComponent());
@@ -183,12 +183,12 @@ public class ImprovedImageProcessingImpl extends ImageProcessingModelImpl
             }
           }
         }
-        listOfPixelsDestImage[i - 1][j - 1] = new Pixel(i - 1, j - 1,
+        listOfPixelsDestImage[i - 1][j - 1] = new RGBPixel(i - 1, j - 1,
                 Math.max(0, Math.min(rSum, 255)), Math.max(0, Math.min(gSum, 255)),
                 Math.max(0, Math.min(bSum, 255)));
       }
     }
-    return new Image(image.getWidth(), image.getHeight(), image.getMaxValueOfColor(),
+    return new RGBImage(image.getWidth(), image.getHeight(), image.getMaxValueOfColor(),
             listOfPixelsDestImage);
   }
 
@@ -200,7 +200,7 @@ public class ImprovedImageProcessingImpl extends ImageProcessingModelImpl
     int bSum;
     int r = image.getHeight();
     int c = image.getWidth();
-    Pixel[][] listOfPixelsDestImage = new Pixel[r][c];
+    Pixel[][] listOfPixelsDestImage = new RGBPixel[r][c];
     for (int i = 2; i < r + 2; i++) {
       for (int j = 2; j < c + 2; j++) {
         rSum = paddedArray[i][j].getColorComponent().getRedComponent();
@@ -219,12 +219,12 @@ public class ImprovedImageProcessingImpl extends ImageProcessingModelImpl
             }
           }
         }
-        listOfPixelsDestImage[i - 2][j - 2] = new Pixel(i - 2, j - 2,
+        listOfPixelsDestImage[i - 2][j - 2] = new RGBPixel(i - 2, j - 2,
                 Math.max(0, Math.min(rSum, 255)), Math.max(0, Math.min(gSum, 255)),
                 Math.max(0, Math.min(bSum, 255)));
       }
     }
-    return new Image(image.getWidth(), image.getHeight(), image.getMaxValueOfColor(),
+    return new RGBImage(image.getWidth(), image.getHeight(), image.getMaxValueOfColor(),
             listOfPixelsDestImage);
   }
 }

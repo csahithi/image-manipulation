@@ -33,6 +33,11 @@ public class RGBCombine implements ImageCommandController {
 
   @Override
   public List<Image> execute(ImprovedImageProcessing m) {
-    return List.of(new Image[]{m.rgbCombine(destImageName, redImage, greenImage, blueImage)});
+    Image rgbCombineImage = m.rgbCombine(destImageName, redImage, greenImage, blueImage);
+    if (rgbCombineImage == null) {
+      return null;
+    } else {
+      return List.of(new Image[]{rgbCombineImage});
+    }
   }
 }

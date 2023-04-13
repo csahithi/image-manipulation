@@ -29,6 +29,11 @@ public class Brighten implements ImageCommandController {
 
   @Override
   public List<Image> execute(ImprovedImageProcessing m) {
-    return List.of(new Image[]{m.brighten(increment, sourceImageName, destImageName)});
+    Image brightenImage = m.brighten(increment, sourceImageName, destImageName);
+    if (brightenImage == null) {
+      return null;
+    } else {
+      return List.of(new Image[]{brightenImage});
+    }
   }
 }
