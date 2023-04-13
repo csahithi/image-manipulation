@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import controller.commands.Brighten;
@@ -112,6 +113,13 @@ public class ImageMVCControllerImpl implements ImageMVCController {
             cmd = new Load(inputArray.get(++i), inputArray.get(++i));
             cmd.execute(model);
             break;
+          case "save-rgbsplit":
+            cmd = new Save(inputArray.get(++i), inputArray.get(++i));
+            Image rgbImage = cmd.execute(model).get(0);
+            List<Image> image = new ArrayList<>();
+            image.add(rgbImage);
+            image.add(null);
+            return image;
           default:
             return null;
         }

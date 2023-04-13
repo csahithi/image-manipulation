@@ -186,11 +186,11 @@ public class ImageProcessingViewImpl extends JFrame implements ImageProcessingVi
     loadBlueButton.setActionCommand("load blueCombineImage");
 
     saveRedButton = new JButton("Save Red Image");
-    saveRedButton.setActionCommand("save redSplitImage");
+    saveRedButton.setActionCommand("save-rgbsplit redSplitImage");
     saveGreenButton = new JButton("Save Green Image");
-    saveGreenButton.setActionCommand("save greenSplitImage");
+    saveGreenButton.setActionCommand("save-rgbsplit greenSplitImage");
     saveBlueButton = new JButton("Save Blue Image");
-    saveBlueButton.setActionCommand("save blueSplitImage");
+    saveBlueButton.setActionCommand("save-rgbsplit blueSplitImage");
   }
 
   @Override
@@ -290,6 +290,13 @@ public class ImageProcessingViewImpl extends JFrame implements ImageProcessingVi
             "load-rgbcombine", filePaths.get(1), "greenCombineImage",
             "load-rgbcombine", filePaths.get(2), "blueCombineImage",
             "rgb-combine", "image", "redCombineImage", "greenCombineImage", "blueCombineImage"});
+      case "save-rgbsplit":
+        String saveRGBSplitFilePath = showSaveImageDialog();
+        if (saveRGBSplitFilePath != null) {
+          return List.of(new String[]{"save-rgbsplit", saveRGBSplitFilePath, imageName});
+        } else {
+          return null;
+        }
       default:
         return null;
     }
@@ -303,7 +310,7 @@ public class ImageProcessingViewImpl extends JFrame implements ImageProcessingVi
       imageLabel.setIcon(new ImageIcon(image));
       histogramLabel.setIcon(new ImageIcon(histogramImage));
       validate();
-    } else {
+    } else if (m.size() != 2) {
       showRGBSplitSaveDialog();
     }
 
