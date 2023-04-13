@@ -13,9 +13,9 @@ import java.io.PrintStream;
 import java.util.List;
 
 import model.Image;
-import model.RGBImage;
 import model.ImprovedImageProcessing;
 import model.Pixel;
+import model.RGBImage;
 import view.ImageProcessingTextView;
 import view.ImageProcessingTextViewImpl;
 
@@ -340,7 +340,7 @@ public class CommandControllerTest {
   @Test
   public void testRunScriptCommand() {
     InputStream in = null;
-    String a = "test/controller/script.txt";
+    String a = "test/controller/testScript.txt";
     String input = "run " + a;
     //in = new ByteArrayInputStream(input.getBytes());
     try {
@@ -353,9 +353,8 @@ public class CommandControllerTest {
     ImageProcessingTextView view = new ImageProcessingTextViewImpl(new PrintStream(out));
     ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, view);
     controller.execute();
-    assertEquals("Received inputs dog"
-            + "Received inputs dog and dog-vertical"
-            + "Received inputs dog-vertical", mockLog.toString());
+    assertEquals("Received inputs dog and dogvReceived inputs dog and "
+            + "dog-horizontalReceived inputs dog-horizontalReceived inputs dogv", mockLog.toString());
   }
 
   @Test
@@ -382,7 +381,7 @@ public class CommandControllerTest {
     ImageProcessingTextView view = new ImageProcessingTextViewImpl(new PrintStream(out));
     ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, view);
     controller.execute();
-    assertEquals("Successfully executed command: "+input,
+    assertEquals("Successfully executed command: " + input,
             out.toString().stripTrailing());
   }
 
@@ -424,7 +423,7 @@ public class CommandControllerTest {
     in = new ByteArrayInputStream(input1.getBytes());
     controller = new ImageProcessingControllerImpl(model, in, view);
     controller.execute();
-    assertEquals("Invalid Command Entered brighten 3 image\n" +"Invalid Command Entered "
+    assertEquals("Invalid Command Entered brighten 3 image\n" + "Invalid Command Entered "
             + input1, out.toString().stripTrailing());
   }
 
@@ -445,7 +444,7 @@ public class CommandControllerTest {
     in = new ByteArrayInputStream(input1.getBytes());
     controller = new ImageProcessingControllerImpl(model, in, view);
     controller.execute();
-    assertEquals("Invalid Command Entered horizontal-flip image\n" +"Invalid Command Entered "
+    assertEquals("Invalid Command Entered horizontal-flip image\n" + "Invalid Command Entered "
             + input1, out.toString().stripTrailing());
   }
 
@@ -466,7 +465,7 @@ public class CommandControllerTest {
     in = new ByteArrayInputStream(input1.getBytes());
     controller = new ImageProcessingControllerImpl(model, in, view);
     controller.execute();
-    assertEquals("Invalid Command Entered vertical-flip image\n" +"Invalid Command Entered "
+    assertEquals("Invalid Command Entered vertical-flip image\n" + "Invalid Command Entered "
             + input1, out.toString().stripTrailing());
   }
 
@@ -487,7 +486,7 @@ public class CommandControllerTest {
     in = new ByteArrayInputStream(input1.getBytes());
     controller = new ImageProcessingControllerImpl(model, in, view);
     controller.execute();
-    assertEquals("Invalid Command Entered save res/image.ppm\n" +"Invalid Command Entered "
+    assertEquals("Invalid Command Entered save res/image.ppm\n" + "Invalid Command Entered "
             + input1, out.toString().stripTrailing());
   }
 
