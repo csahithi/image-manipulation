@@ -26,23 +26,26 @@ public class ImageManipulator {
    */
   public static void main(String[] args) {
     ImprovedImageProcessing model = new ImprovedImageProcessingImpl();
-    ImageProcessingTextView tView = new ImageProcessingTextViewImpl(System.out);
+    ImageProcessingTextView textView = new ImageProcessingTextViewImpl(System.out);
     if (args.length == 2 && args[0].equalsIgnoreCase("-file")) {
       try {
         InputStream in = new FileInputStream(args[1]);
-        ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, tView);
+        ImageProcessingController controller = new ImageProcessingControllerImpl(model, in,
+                textView);
         controller.execute();
       } catch (FileNotFoundException e) {
         System.out.println("File Not Found");
       }
     } else if (args.length == 1 && args[0].equalsIgnoreCase("-text")) {
       InputStream in = System.in;
-      ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, tView);
+      ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, textView);
       controller.execute();
-    } else {
+    } else if (args.length == 0) {
       ImageProcessingView view = new ImageProcessingViewImpl();
       ImageMVCController controller = new ImageMVCControllerImpl(model, view);
       controller.execute();
+    } else {
+      System.out.println("Command Line Argument is invalid. Program exited.");
     }
   }
 }

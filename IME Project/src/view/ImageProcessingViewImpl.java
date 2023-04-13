@@ -245,8 +245,8 @@ public class ImageProcessingViewImpl extends JFrame implements ImageProcessingVi
           return null;
         }
       case "brighten":
-        String brightenValue = JOptionPane.showInputDialog("Please enter numeric value by which " +
-                "the image should be brightened or darkened");
+        String brightenValue = JOptionPane.showInputDialog("Please enter numeric value by which "
+                + "the image should be brightened or darkened");
         if (brightenValue == null) {
           return null;
         }
@@ -270,8 +270,8 @@ public class ImageProcessingViewImpl extends JFrame implements ImageProcessingVi
       case "sharpen":
         return List.of(new String[]{"sharpen", "image", "image"});
       case "rgb-split":
-        return List.of(new String[]
-                {"rgb-split", "image", "redSplitImage", "greenSplitImage", "blueSplitImage"});
+        return List.of(new String[]{"rgb-split", "image",
+            "redSplitImage", "greenSplitImage", "blueSplitImage"});
       case "rgb-combine":
         redImageFilePath = "";
         greenImageFilePath = "";
@@ -287,10 +287,9 @@ public class ImageProcessingViewImpl extends JFrame implements ImageProcessingVi
           }
         }
         return List.of(new String[]{"load-rgbcombine", filePaths.get(0), "redCombineImage",
-                "load-rgbcombine", filePaths.get(1), "greenCombineImage",
-                "load-rgbcombine", filePaths.get(2), "blueCombineImage",
-                "rgb-combine", "image", "redCombineImage", "greenCombineImage",
-                "blueCombineImage"});
+            "load-rgbcombine", filePaths.get(1), "greenCombineImage",
+            "load-rgbcombine", filePaths.get(2), "blueCombineImage",
+            "rgb-combine", "image", "redCombineImage", "greenCombineImage", "blueCombineImage"});
       default:
         return null;
     }

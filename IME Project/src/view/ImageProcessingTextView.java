@@ -7,36 +7,13 @@ package view;
  * by the user.
  */
 public interface ImageProcessingTextView {
-  /**
-   * Displays menu containing all the operations supported by the application.
-   */
-  void displayMenu();
-
-  /**
-   * Displays a message asking the user if they want to exit the application.
-   */
-  void displayExit();
 
   /**
    * Displays an error message for an invalid command entered by the user.
    *
    * @param command the invalid command entered by the user
    */
-  void displayErrorWhileInvalidCommand(String command);
-
-  /**
-   * Displays an error message for an unknown command entered by the user.
-   *
-   * @param command the unknown command entered by the user
-   */
-  void displayErrorWhileUnknownCommand(String command);
-
-  /**
-   * Displays a message indicating that a command entered by the user is being executed.
-   *
-   * @param command the command entered by the user
-   */
-  void displayExecutingLine(String command);
+  void displayErrorMessage(String command);
 
   /**
    * Displays an error message for an error that occurred while running a script file.
@@ -46,4 +23,10 @@ public interface ImageProcessingTextView {
    */
   void displayErrorWhileRunningScriptFile(String error, String command);
 
+  /**
+   * Displays a success message after successfully executing a command.
+   *
+   * @param command the command executed successfully
+   */
+  void displaySuccessMessage(String command);
 }

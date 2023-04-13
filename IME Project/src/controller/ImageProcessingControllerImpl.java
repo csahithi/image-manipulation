@@ -31,9 +31,7 @@ import view.ImageProcessingTextView;
 public class ImageProcessingControllerImpl implements ImageProcessingController {
   private final ImprovedImageProcessing model;
   private final InputStream in;
-  //private final OutputStream out;
   private final ImageProcessingTextView view;
-  private String command;
 
   /**
    * This method is the constructor to the ImageProcessingControllerImpl class.
@@ -45,11 +43,10 @@ public class ImageProcessingControllerImpl implements ImageProcessingController 
                                        ImageProcessingTextView view) {
     this.model = model;
     this.in = in;
-    //this.out = out;
     this.view = view;
   }
 
-  private void readCommands(String[] inputArray) {
+  private void readCommands(String[] inputArray, String command) {
     ImageCommandController cmd = null;
     try {
       if (inputArray.length == 3) {
@@ -82,7 +79,7 @@ public class ImageProcessingControllerImpl implements ImageProcessingController 
             cmd = new Dither(inputArray[1], inputArray[2]);
             break;
           default:
-            view.displayErrorWhileUnknownCommand(command);
+            this.view.displayErrorMessage(command);
             return;
         }
       } else if (inputArray.length == 4) {
@@ -100,46 +97,47 @@ public class ImageProcessingControllerImpl implements ImageProcessingController 
           cmd = new RGBCombine(inputArray[1], inputArray[2], inputArray[3], inputArray[4]);
         }
       } else {
-        view.displayErrorWhileUnknownCommand(command);
+        this.view.displayErrorMessage(command);
         return;
       }
     } catch (NumberFormatException e) {
-      view.displayErrorWhileUnknownCommand(command);
+      this.view.displayErrorMessage(command);
       return;
     }
     if (cmd != null) {
       List<Image> m = cmd.execute(model);
       if (m == null || m.size() == 0) {
-        view.displayErrorWhileInvalidCommand(command);
+        this.view.displayErrorMessage(command);
+      } else {
+        this.view.displaySuccessMessage(command);
       }
     } else {
-      view.displayErrorWhileUnknownCommand(command);
+      this.view.displayErrorMessage(command);
     }
   }
 
   private void readScript(String filepath) {
+    String command = "";
     try {
       BufferedReader reader = new BufferedReader(new FileReader(filepath));
       String line = reader.readLine();
+      command = line;
       while (line != null) {
-        view.displayExecutingLine(line);
         String[] runScriptInputArray = line.split(" ");
         runScriptInputArray = Arrays.stream(runScriptInputArray)
                 .filter(Predicate.not(String::isEmpty))
                 .toArray(String[]::new);
-        readCommands(runScriptInputArray);
+        readCommands(runScriptInputArray, line);
         line = reader.readLine();
       }
       reader.close();
     } catch (Exception e) {
-      view.displayErrorWhileRunningScriptFile(e.getMessage(), command);
+      this.view.displayErrorWhileRunningScriptFile(e.getMessage(), command);
     }
   }
 
   @Override
   public void execute() {
-    command = "";
-    view.displayMenu();
     String[] inputArray;
     Scanner scan = new Scanner(this.in);
     while (scan.hasNext()) {
@@ -148,14 +146,11 @@ public class ImageProcessingControllerImpl implements ImageProcessingController 
       inputArray = Arrays.stream(inputArray)
               .filter(Predicate.not(String::isEmpty))
               .toArray(String[]::new);
-      for (int i = 0; i < inputArray.length; i++) {
-        command += inputArray[i] + " ";
-      }
       if (inputArray.length > 0) {
         if ((inputArray.length == 2) && (inputArray[0].equals("run"))) {
           readScript(inputArray[1]);
         } else {
-          readCommands(inputArray);
+          readCommands(inputArray, input);
         }
       }
     }
