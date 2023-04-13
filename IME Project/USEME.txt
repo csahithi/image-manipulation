@@ -1,5 +1,88 @@
+
+--------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------
+Instructions to use commands that are supported by our application:
+--------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------
+
+* Load image: Load an image by clicking on 'Load Image' button on top and then select the desired
+              file from the file explorer popped up in dialog box and then click open on the
+              bottom of dialog box.
+
+* Save image: Save the image with the desired name and extension at desired filepath by selecting
+              in file explorer from the file explorer popped up in dialog box and then click save
+              on the bottom of dialog box.
+
+* Greyscale image on Component: Convert an image to grey-scaled on desired component.To do this
+                                first load a image (if not loaded )or continue on loaded image if
+                                already loaded.Click on grey-scale button located at the bottom of
+                                the window .On clicking a dialog box pops up asking you to select
+                                an option from 6 radio buttons.The each radio button is for each
+                                component on which the greyscale image needs to be generated.The
+                                six options are red-component, green -component , blue- component ,
+                                luma-component, Intensity-component and Value-component.After
+                                selecting a component we need to press ok button and the grey-scaled
+                                 image is generated.
+
+* Horizontal-flip image: Flip an image horizontally.To do this first load a image (if not loaded )or
+                        continue on loaded image if already loaded.Click on 'Horizontal-Flip' button
+                        located at the bottom of the window.
+
+* Vertical-flip image: Flip an image vertically.To do this first load a image (if not loaded )or
+                      continue on loaded image if already loaded.Click on 'Vertical Flip' button
+                      located at the bottom of the window.
+
+* Brighten image by increment value : brighten the image by the given increment to create a new
+                                      image The increment may be positive (brightening) or negative
+                                      (darkening). To do this first load a image (if not loaded )or
+                                      continue on loaded image if already loaded.Click on 'Brighten'
+                                      button located at the bottom-left of the window.On clicking a
+                                      dialog box pops up asking you to enter a number by which the
+                                      brightening must happen.This number can be positive or
+                                      negative.
+
+
+* Rgb-split image: split the given image into three greyscale images containing its red, green and
+                   blue components respectively.To do this first load a image (if not loaded )or
+                   continue on loaded image if already loaded.Click on 'RGBSplit' button located at
+                    the bottom of the window.On clicking a dialog box pops up giving you the option
+                    of saving red, green and blue images which are produced after performing
+                    rgb-split respectively.
+
+* Rgb-combine image: Combine the three greyscale images into a single image that gets its red,green
+                     and blue components from the three images respectively. To do this first load
+                     a image (if not loaded )or continue on loaded image if already loaded.Click on
+                     'RGBCombine' button located at the bottom of the window.On clicking a dialog
+                     box pops up giving you the option of loading red, green and blue images which
+                     are needed to combine.
+
+* Blur Image :  An operation to blur an image to create a new image.To do this first load a image
+               (if not loaded )or continue on loaded image if already loaded.Click on 'Blur' button
+               located at the bottom of the window.
+
+* Dither Image :   An operation to dither an image.To do this first load a image (if not loaded )or
+                 continue on loaded image if already loaded.Click on 'Dither' button located at the
+                 bottom of the window.
+
+* Sharpen Image : An operation to sharpen an image to create a new image.To do this first load a
+                 image (if not loaded )or continue on loaded image if already loaded.Click on
+                 'Sharpen' button located at the bottom of the window.
+
+* Sepia Image : An operation to convert a normal color image into a sepia-toned image.To do this
+                first load a image (if not loaded )or continue on loaded image if already loaded.
+                Click on 'Sharpen' button located at the bottom of the window.
+
+Conditions:
+                - Image needs to be loaded first before running any operations on it.
+
+
+
+--------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------
 Script commands are supported by your application
 --------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------
+
 1.Load image: Load an image from the specified path and refer it to henceforth in the program by
 the given image name.
 Command Syntax: load image-path image-name
