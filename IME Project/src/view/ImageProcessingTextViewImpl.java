@@ -12,7 +12,8 @@ public class ImageProcessingTextViewImpl implements ImageProcessingTextView {
   private final PrintStream out;
 
   /**
-   * Constructor for the ImageProcessingTextViewImpl class that takes a PrintStream object as a parameter.
+   * Constructor for the ImageProcessingTextViewImpl class that takes a PrintStream object as a
+   * parameter.
    * The PrintStream object is used to write messages to the console.
    *
    * @param out the PrintStream object used to write messages to the console

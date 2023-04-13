@@ -35,7 +35,7 @@ public interface ImageProcessingView {
   /**
    * Displays the current image in the UI.
    *
-   * @param images the list of images to display.
+   * @param m the list of images to display.
    */
   void displayCurrentImage(List<Image> m);
 

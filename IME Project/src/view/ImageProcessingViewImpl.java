@@ -5,13 +5,27 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.List;
 
-import javax.swing.*;
+import javax.swing.BoxLayout;
+import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
 
 import model.Color;
 import model.Image;
@@ -25,38 +39,31 @@ import model.Pixel;
  * This class extends the JFrame class and uses various Swing components to create the GUI.
  */
 public class ImageProcessingViewImpl extends JFrame implements ImageProcessingView {
-  private JButton loadButton;
-  private JButton saveButton;
-  private JButton horizontalFlipButton;
-  private JButton verticalFlipButton;
-  private JButton rgbSplitButton;
-  private JButton rgbCombineButton;
-  private JButton sepiaButton;
-  private JButton greyscaleButton;
-  private JButton ditherButton;
-  private JPanel radioPanel;
-  private JButton blurButton;
-  private JButton sharpenButton;
-  private JButton brightenButton;
-  private JPanel imageProcessingButtonPanel;
-  private JScrollPane imagePane;
-  private JScrollPane histogramPane;
-  private JPanel imagePanel;
-  private JLabel imageLabel;
-  private JLabel histogramLabel;
-  private JPanel loadSaveButtonPanel;
-  private JRadioButton redRadioButton;
-  private JRadioButton greenRadioButton;
-  private JRadioButton blueRadioButton;
-  private JRadioButton lumaRadioButton;
-  private JRadioButton intensityRadioButton;
-  private JRadioButton valueRadioButton;
-  private JButton loadRedButton;
-  private JButton loadGreenButton;
-  private JButton loadBlueButton;
-  private JButton saveRedButton;
-  private JButton saveGreenButton;
-  private JButton saveBlueButton;
+  private final JButton loadButton;
+  private final JButton saveButton;
+  private final JButton horizontalFlipButton;
+  private final JButton verticalFlipButton;
+  private final JButton rgbSplitButton;
+  private final JButton rgbCombineButton;
+  private final JButton sepiaButton;
+  private final JButton greyscaleButton;
+  private final JButton ditherButton;
+  private final JButton blurButton;
+  private final JButton sharpenButton;
+  private final JButton brightenButton;
+  private final JPanel imagePanel;
+  private final JRadioButton redRadioButton;
+  private final JRadioButton greenRadioButton;
+  private final JRadioButton blueRadioButton;
+  private final JRadioButton lumaRadioButton;
+  private final JRadioButton intensityRadioButton;
+  private final JRadioButton valueRadioButton;
+  private final JButton loadRedButton;
+  private final JButton loadGreenButton;
+  private final JButton loadBlueButton;
+  private final JButton saveRedButton;
+  private final JButton saveGreenButton;
+  private final JButton saveBlueButton;
 
   /**
    * Creates an instance of the ImageProcessingViewImpl class, which is a JFrame that displays the
@@ -76,7 +83,7 @@ public class ImageProcessingViewImpl extends JFrame implements ImageProcessingVi
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.setLayout(new BorderLayout());
 
-    loadSaveButtonPanel = new JPanel();
+    JPanel loadSaveButtonPanel = new JPanel();
     loadSaveButtonPanel.setLayout(new FlowLayout());
     this.add(loadSaveButtonPanel, BorderLayout.NORTH);
 
@@ -92,25 +99,21 @@ public class ImageProcessingViewImpl extends JFrame implements ImageProcessingVi
     imagePanel.setLayout(new FlowLayout());
     this.add(imagePanel, BorderLayout.CENTER);
 
-    //todo: scrolling
-    //todo: rgbcombine flaw
-    //todo: text commands view
-
-    imageLabel = new JLabel(new ImageIcon());
-    imagePane = new JScrollPane(imageLabel);
+    JLabel imageLabel = new JLabel(new ImageIcon());
+    JScrollPane imagePane = new JScrollPane(imageLabel);
     imagePane.setSize(500, 500);
     imagePane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
     imagePane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
     imagePanel.add(imagePane);
 
-    histogramLabel = new JLabel(new ImageIcon());
-    histogramPane = new JScrollPane(histogramLabel);
+    JLabel histogramLabel = new JLabel(new ImageIcon());
+    JScrollPane histogramPane = new JScrollPane(histogramLabel);
     histogramPane.setSize(500, 500);
     histogramPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
     histogramPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
     imagePanel.add(histogramPane);
 
-    imageProcessingButtonPanel = new JPanel();
+    JPanel imageProcessingButtonPanel = new JPanel();
     imageProcessingButtonPanel.setLayout(new FlowLayout());
     this.add(imageProcessingButtonPanel, BorderLayout.SOUTH);
 
@@ -255,12 +258,13 @@ public class ImageProcessingViewImpl extends JFrame implements ImageProcessingVi
       case "sharpen":
         return List.of(new String[]{"sharpen", "image", "image"});
       case "rgb-split":
-        return List.of(new String[]{
-                "rgb-split", "image", "redSplitImage", "greenSplitImage", "blueSplitImage"});
+        return List.of(new String[]
+                {"rgb-split", "image", "redSplitImage", "greenSplitImage", "blueSplitImage"});
       case "rgb-combine":
         showRGBCombineLoadDialog();
-        return List.of(new String[]{"rgb-combine", "image", "redCombineImage", "greenCombineImage",
-                "blueCombineImage"});
+        return List.of(new String[]
+                {"rgb-combine", "image", "redCombineImage", "greenCombineImage",
+                        "blueCombineImage"});
       default:
         return null;
     }
@@ -333,7 +337,7 @@ public class ImageProcessingViewImpl extends JFrame implements ImageProcessingVi
 //            "Load RGB Combine Images", JOptionPane.DEFAULT_OPTION,
 //            JOptionPane.PLAIN_MESSAGE, null,
 //            new Object[]{loadRedButton, loadGreenButton, loadBlueButton}, null);
-    JDialog dialog = null;
+    JDialog dialog;
     optionPane.setMessage("Please save RGB Split images");
     optionPane.setMessageType(JOptionPane.PLAIN_MESSAGE);
     optionPane.setOptionType(JOptionPane.DEFAULT_OPTION);
@@ -352,7 +356,7 @@ public class ImageProcessingViewImpl extends JFrame implements ImageProcessingVi
 //            "Load RGB Combine Images", JOptionPane.DEFAULT_OPTION,
 //            JOptionPane.PLAIN_MESSAGE, null,
 //            new Object[]{loadRedButton, loadGreenButton, loadBlueButton}, null);
-    JDialog dialog = null;
+    JDialog dialog;
     optionPane.setMessage("Please load images to combine");
     optionPane.setMessageType(JOptionPane.PLAIN_MESSAGE);
     optionPane.setOptionType(JOptionPane.DEFAULT_OPTION);
@@ -418,7 +422,7 @@ public class ImageProcessingViewImpl extends JFrame implements ImageProcessingVi
   }
 
   private String showOptionsForGreyScale() {
-    radioPanel = new JPanel();
+    JPanel radioPanel = new JPanel();
     radioPanel.setLayout(new BoxLayout(radioPanel, BoxLayout.Y_AXIS));
     JLabel label = new JLabel("Select an option:");
     radioPanel.add(label);
@@ -436,7 +440,7 @@ public class ImageProcessingViewImpl extends JFrame implements ImageProcessingVi
     greyscaleOptions.add(intensityRadioButton);
     greyscaleOptions.add(valueRadioButton);
     JOptionPane optionPaneRB = new JOptionPane();
-    JDialog dialog = null;
+    JDialog dialog;
     optionPaneRB.setMessage("Please select an option");
     optionPaneRB.setMessageType(JOptionPane.PLAIN_MESSAGE);
     optionPaneRB.setOptionType(JOptionPane.DEFAULT_OPTION);

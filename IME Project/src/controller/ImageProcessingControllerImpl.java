@@ -41,7 +41,8 @@ public class ImageProcessingControllerImpl implements ImageProcessingController 
    * @param model takes in model object.
    * @param in    input of the InputStream.
    */
-  public ImageProcessingControllerImpl(ImprovedImageProcessing model, InputStream in, ImageProcessingTextView view) {
+  public ImageProcessingControllerImpl(ImprovedImageProcessing model, InputStream in,
+                                       ImageProcessingTextView view) {
     this.model = model;
     this.in = in;
     //this.out = out;
@@ -147,8 +148,9 @@ public class ImageProcessingControllerImpl implements ImageProcessingController 
       inputArray = Arrays.stream(inputArray)
               .filter(Predicate.not(String::isEmpty))
               .toArray(String[]::new);
-      for (int i = 0; i < inputArray.length; i++)
+      for (int i = 0; i < inputArray.length; i++) {
         command += inputArray[i] + " ";
+      }
       if (inputArray.length > 0) {
         if ((inputArray.length == 2) && (inputArray[0].equals("run"))) {
           readScript(inputArray[1]);

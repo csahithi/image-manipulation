@@ -367,21 +367,11 @@ public class CommandControllerTest {
     ImageProcessingTextView view = new ImageProcessingTextViewImpl(new PrintStream(out));
     ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, view);
     controller.execute();
-    assertEquals("Please enter your choice: \n" +
-            " 1.Load Image \n" +
-            " 2.Save Image\n" +
-            " 3.Brighten Image\n" +
-            " 4.Horizontal-flip Image\n" +
-            " 5.Vertical-flip Image\n" +
-            " 6.RGB-Combine Image\n" +
-            " 7.RGB Split\n" +
-            " 8.Greyscale \n" +
-            " 9.Blur Image\n" +
-            " 10.Dither Image\n" +
-            " 11.Sepia Image\n" +
-            " 12 Sharpen Image\n" +
-            " 0.Exit\n" +
-            "Unknown Command Entered " + input, out.toString().stripTrailing());
+    assertEquals("Please enter your choice: \n" +" 1.Load Image \n" +" 2.Save Image\n"
+            +" 3.Brighten Image\n" +" 4.Horizontal-flip Image\n" +" 5.Vertical-flip Image\n"
+            +" 6.RGB-Combine Image\n" +" 7.RGB Split\n" +" 8.Greyscale \n" +" 9.Blur Image\n"
+            +" 10.Dither Image\n" +" 11.Sepia Image\n" +" 12 Sharpen Image\n" +" 0.Exit\n"
+            +"Unknown Command Entered " + input, out.toString().stripTrailing());
   }
 
   @Test
@@ -395,20 +385,11 @@ public class CommandControllerTest {
     ImageProcessingTextView view = new ImageProcessingTextViewImpl(new PrintStream(out));
     ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, view);
     controller.execute();
-    assertEquals("Please enter your choice: \n" +
-            " 1.Load Image \n" +
-            " 2.Save Image\n" +
-            " 3.Brighten Image\n" +
-            " 4.Horizontal-flip Image\n" +
-            " 5.Vertical-flip Image\n" +
-            " 6.RGB-Combine Image\n" +
-            " 7.RGB Split\n" +
-            " 8.Greyscale \n" +
-            " 9.Blur Image\n" +
-            " 10.Dither Image\n" +
-            " 11.Sepia Image\n" +
-            " 12 Sharpen Image\n" +
-            " 0.Exit", out.toString().stripTrailing());
+    assertEquals("Please enter your choice: \n" +" 1.Load Image \n" +" 2.Save Image\n"
+            +" 3.Brighten Image\n" +" 4.Horizontal-flip Image\n" +" 5.Vertical-flip Image\n"
+            +" 6.RGB-Combine Image\n" +" 7.RGB Split\n" +" 8.Greyscale \n" +" 9.Blur Image\n"
+            +" 10.Dither Image\n" +" 11.Sepia Image\n" +" 12 Sharpen Image\n" +" 0.Exit",
+            out.toString().stripTrailing());
   }
 
   @Test
@@ -422,56 +403,26 @@ public class CommandControllerTest {
     ImageProcessingTextView view = new ImageProcessingTextViewImpl(new PrintStream(out));
     ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, view);
     controller.execute();
-    assertEquals("Please enter your choice: \n" +
-            " 1.Load Image \n" +
-            " 2.Save Image\n" +
-            " 3.Brighten Image\n" +
-            " 4.Horizontal-flip Image\n" +
-            " 5.Vertical-flip Image\n" +
-            " 6.RGB-Combine Image\n" +
-            " 7.RGB Split\n" +
-            " 8.Greyscale \n" +
-            " 9.Blur Image\n" +
-            " 10.Dither Image\n" +
-            " 11.Sepia Image\n" +
-            " 12 Sharpen Image\n" +
-            " 0.Exit\n" +
-            "Unknown Command Entered " + input, out.toString().stripTrailing());
+    assertEquals("Please enter your choice: \n" +" 1.Load Image \n" +" 2.Save Image\n"
+            +" 3.Brighten Image\n" +" 4.Horizontal-flip Image\n" +" 5.Vertical-flip Image\n"
+            +" 6.RGB-Combine Image\n" +" 7.RGB Split\n" +" 8.Greyscale \n" +" 9.Blur Image\n"
+            +" 10.Dither Image\n" +" 11.Sepia Image\n" +" 12 Sharpen Image\n" +" 0.Exit\n"
+            +"Unknown Command Entered " + input, out.toString().stripTrailing());
 
     String input1 = "load res/image.ppm a b c";
     in = new ByteArrayInputStream(input1.getBytes());
     controller = new ImageProcessingControllerImpl(model, in, view);
     controller.execute();
-    assertEquals("Please enter your choice: \n" +
-            " 1.Load Image \n" +
-            " 2.Save Image\n" +
-            " 3.Brighten Image\n" +
-            " 4.Horizontal-flip Image\n" +
-            " 5.Vertical-flip Image\n" +
-            " 6.RGB-Combine Image\n" +
-            " 7.RGB Split\n" +
-            " 8.Greyscale \n" +
-            " 9.Blur Image\n" +
-            " 10.Dither Image\n" +
-            " 11.Sepia Image\n" +
-            " 12 Sharpen Image\n" +
-            " 0.Exit\n" +
-            "Unknown Command Entered load res/image.ppm \n" +
-            "Please enter your choice: \n" +
-            " 1.Load Image \n" +
-            " 2.Save Image\n" +
-            " 3.Brighten Image\n" +
-            " 4.Horizontal-flip Image\n" +
-            " 5.Vertical-flip Image\n" +
-            " 6.RGB-Combine Image\n" +
-            " 7.RGB Split\n" +
-            " 8.Greyscale \n" +
-            " 9.Blur Image\n" +
-            " 10.Dither Image\n" +
-            " 11.Sepia Image\n" +
-            " 12 Sharpen Image\n" +
-            " 0.Exit\n" +
-            "Unknown Command Entered " + input1, out.toString().stripTrailing());
+    assertEquals("Please enter your choice: \n" +" 1.Load Image \n" +" 2.Save Image\n"
+            +" 3.Brighten Image\n" +" 4.Horizontal-flip Image\n" +" 5.Vertical-flip Image\n"
+            +" 6.RGB-Combine Image\n" +" 7.RGB Split\n" +" 8.Greyscale \n" +" 9.Blur Image\n"
+            +" 10.Dither Image\n" +" 11.Sepia Image\n" +" 12 Sharpen Image\n" +" 0.Exit\n"
+            +"Unknown Command Entered load res/image.ppm \n" +"Please enter your choice: \n"
+            +" 1.Load Image \n" +" 2.Save Image\n" +" 3.Brighten Image\n"
+            +" 4.Horizontal-flip Image\n" +" 5.Vertical-flip Image\n" +" 6.RGB-Combine Image\n"
+            +" 7.RGB Split\n" +" 8.Greyscale \n" +" 9.Blur Image\n" +" 10.Dither Image\n"
+            +" 11.Sepia Image\n" +" 12 Sharpen Image\n" +" 0.Exit\n" +"Unknown Command Entered "
+            + input1, out.toString().stripTrailing());
   }
 
   @Test
@@ -485,56 +436,26 @@ public class CommandControllerTest {
     ImageProcessingTextView view = new ImageProcessingTextViewImpl(new PrintStream(out));
     ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, view);
     controller.execute();
-    assertEquals("Please enter your choice: \n" +
-            " 1.Load Image \n" +
-            " 2.Save Image\n" +
-            " 3.Brighten Image\n" +
-            " 4.Horizontal-flip Image\n" +
-            " 5.Vertical-flip Image\n" +
-            " 6.RGB-Combine Image\n" +
-            " 7.RGB Split\n" +
-            " 8.Greyscale \n" +
-            " 9.Blur Image\n" +
-            " 10.Dither Image\n" +
-            " 11.Sepia Image\n" +
-            " 12 Sharpen Image\n" +
-            " 0.Exit\n" +
-            "Unknown Command Entered " + input, out.toString().stripTrailing());
+    assertEquals("Please enter your choice: \n" +" 1.Load Image \n" +" 2.Save Image\n"
+            +" 3.Brighten Image\n" +" 4.Horizontal-flip Image\n" +" 5.Vertical-flip Image\n"
+            +" 6.RGB-Combine Image\n" +" 7.RGB Split\n" +" 8.Greyscale \n" +" 9.Blur Image\n"
+            +" 10.Dither Image\n" +" 11.Sepia Image\n" +" 12 Sharpen Image\n" +" 0.Exit\n"
+            +"Unknown Command Entered " + input, out.toString().stripTrailing());
 
     String input1 = "brighten 10 a b c";
     in = new ByteArrayInputStream(input1.getBytes());
     controller = new ImageProcessingControllerImpl(model, in, view);
     controller.execute();
-    assertEquals("Please enter your choice: \n" +
-            " 1.Load Image \n" +
-            " 2.Save Image\n" +
-            " 3.Brighten Image\n" +
-            " 4.Horizontal-flip Image\n" +
-            " 5.Vertical-flip Image\n" +
-            " 6.RGB-Combine Image\n" +
-            " 7.RGB Split\n" +
-            " 8.Greyscale \n" +
-            " 9.Blur Image\n" +
-            " 10.Dither Image\n" +
-            " 11.Sepia Image\n" +
-            " 12 Sharpen Image\n" +
-            " 0.Exit\n" +
-            "Unknown Command Entered brighten 3 image \n" +
-            "Please enter your choice: \n" +
-            " 1.Load Image \n" +
-            " 2.Save Image\n" +
-            " 3.Brighten Image\n" +
-            " 4.Horizontal-flip Image\n" +
-            " 5.Vertical-flip Image\n" +
-            " 6.RGB-Combine Image\n" +
-            " 7.RGB Split\n" +
-            " 8.Greyscale \n" +
-            " 9.Blur Image\n" +
-            " 10.Dither Image\n" +
-            " 11.Sepia Image\n" +
-            " 12 Sharpen Image\n" +
-            " 0.Exit\n" +
-            "Unknown Command Entered " + input1, out.toString().stripTrailing());
+    assertEquals("Please enter your choice: \n" +" 1.Load Image \n" +" 2.Save Image\n"
+            +" 3.Brighten Image\n" +" 4.Horizontal-flip Image\n" +" 5.Vertical-flip Image\n"
+            +" 6.RGB-Combine Image\n" +" 7.RGB Split\n" +" 8.Greyscale \n" +" 9.Blur Image\n"
+            +" 10.Dither Image\n" +" 11.Sepia Image\n" +" 12 Sharpen Image\n" +" 0.Exit\n"
+            +"Unknown Command Entered brighten 3 image \n" +"Please enter your choice: \n"
+            +" 1.Load Image \n" +" 2.Save Image\n" +" 3.Brighten Image\n"
+            +" 4.Horizontal-flip Image\n" +" 5.Vertical-flip Image\n" +" 6.RGB-Combine Image\n"
+            +" 7.RGB Split\n" +" 8.Greyscale \n" +" 9.Blur Image\n" +" 10.Dither Image\n"
+            +" 11.Sepia Image\n" +" 12 Sharpen Image\n" +" 0.Exit\n" +"Unknown Command Entered "
+            + input1, out.toString().stripTrailing());
   }
 
   @Test
@@ -548,56 +469,26 @@ public class CommandControllerTest {
     ImageProcessingTextView view = new ImageProcessingTextViewImpl(new PrintStream(out));
     ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, view);
     controller.execute();
-    assertEquals("Please enter your choice: \n" +
-            " 1.Load Image \n" +
-            " 2.Save Image\n" +
-            " 3.Brighten Image\n" +
-            " 4.Horizontal-flip Image\n" +
-            " 5.Vertical-flip Image\n" +
-            " 6.RGB-Combine Image\n" +
-            " 7.RGB Split\n" +
-            " 8.Greyscale \n" +
-            " 9.Blur Image\n" +
-            " 10.Dither Image\n" +
-            " 11.Sepia Image\n" +
-            " 12 Sharpen Image\n" +
-            " 0.Exit\n" +
-            "Unknown Command Entered " + input, out.toString().stripTrailing());
+    assertEquals("Please enter your choice: \n" +" 1.Load Image \n" +" 2.Save Image\n"
+            +" 3.Brighten Image\n" +" 4.Horizontal-flip Image\n" +" 5.Vertical-flip Image\n"
+            +" 6.RGB-Combine Image\n" +" 7.RGB Split\n" +" 8.Greyscale \n" +" 9.Blur Image\n"
+            +" 10.Dither Image\n" +" 11.Sepia Image\n" +" 12 Sharpen Image\n" +" 0.Exit\n"
+            +"Unknown Command Entered " + input, out.toString().stripTrailing());
 
     String input1 = "horizontal-flip a b c";
     in = new ByteArrayInputStream(input1.getBytes());
     controller = new ImageProcessingControllerImpl(model, in, view);
     controller.execute();
-    assertEquals("Please enter your choice: \n" +
-            " 1.Load Image \n" +
-            " 2.Save Image\n" +
-            " 3.Brighten Image\n" +
-            " 4.Horizontal-flip Image\n" +
-            " 5.Vertical-flip Image\n" +
-            " 6.RGB-Combine Image\n" +
-            " 7.RGB Split\n" +
-            " 8.Greyscale \n" +
-            " 9.Blur Image\n" +
-            " 10.Dither Image\n" +
-            " 11.Sepia Image\n" +
-            " 12 Sharpen Image\n" +
-            " 0.Exit\n" +
-            "Unknown Command Entered horizontal-flip image \n" +
-            "Please enter your choice: \n" +
-            " 1.Load Image \n" +
-            " 2.Save Image\n" +
-            " 3.Brighten Image\n" +
-            " 4.Horizontal-flip Image\n" +
-            " 5.Vertical-flip Image\n" +
-            " 6.RGB-Combine Image\n" +
-            " 7.RGB Split\n" +
-            " 8.Greyscale \n" +
-            " 9.Blur Image\n" +
-            " 10.Dither Image\n" +
-            " 11.Sepia Image\n" +
-            " 12 Sharpen Image\n" +
-            " 0.Exit\n" +
-            "Unknown Command Entered " + input1, out.toString().stripTrailing());
+    assertEquals("Please enter your choice: \n" +" 1.Load Image \n" +" 2.Save Image\n"
+            +" 3.Brighten Image\n" +" 4.Horizontal-flip Image\n" +" 5.Vertical-flip Image\n"
+            +" 6.RGB-Combine Image\n" +" 7.RGB Split\n" +" 8.Greyscale \n" +" 9.Blur Image\n"
+            +" 10.Dither Image\n" +" 11.Sepia Image\n" +" 12 Sharpen Image\n" +" 0.Exit\n"
+            +"Unknown Command Entered horizontal-flip image \n" +"Please enter your choice: \n"
+            +" 1.Load Image \n" +" 2.Save Image\n" +" 3.Brighten Image\n"
+            +" 4.Horizontal-flip Image\n" +" 5.Vertical-flip Image\n" +" 6.RGB-Combine Image\n"
+            +" 7.RGB Split\n" +" 8.Greyscale \n" +" 9.Blur Image\n" +" 10.Dither Image\n"
+            +" 11.Sepia Image\n" +" 12 Sharpen Image\n" +" 0.Exit\n" +"Unknown Command Entered "
+            + input1, out.toString().stripTrailing());
   }
 
   @Test
@@ -611,56 +502,26 @@ public class CommandControllerTest {
     ImageProcessingTextView view = new ImageProcessingTextViewImpl(new PrintStream(out));
     ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, view);
     controller.execute();
-    assertEquals("Please enter your choice: \n" +
-            " 1.Load Image \n" +
-            " 2.Save Image\n" +
-            " 3.Brighten Image\n" +
-            " 4.Horizontal-flip Image\n" +
-            " 5.Vertical-flip Image\n" +
-            " 6.RGB-Combine Image\n" +
-            " 7.RGB Split\n" +
-            " 8.Greyscale \n" +
-            " 9.Blur Image\n" +
-            " 10.Dither Image\n" +
-            " 11.Sepia Image\n" +
-            " 12 Sharpen Image\n" +
-            " 0.Exit\n" +
-            "Unknown Command Entered " + input, out.toString().stripTrailing());
+    assertEquals("Please enter your choice: \n" +" 1.Load Image \n" +" 2.Save Image\n"
+            +" 3.Brighten Image\n" +" 4.Horizontal-flip Image\n" +" 5.Vertical-flip Image\n"
+            +" 6.RGB-Combine Image\n" +" 7.RGB Split\n" +" 8.Greyscale \n" +" 9.Blur Image\n"
+            +" 10.Dither Image\n" +" 11.Sepia Image\n" +" 12 Sharpen Image\n" +" 0.Exit\n"
+            +"Unknown Command Entered " + input, out.toString().stripTrailing());
 
     String input1 = "vertical-flip a b c";
     in = new ByteArrayInputStream(input1.getBytes());
     controller = new ImageProcessingControllerImpl(model, in, view);
     controller.execute();
-    assertEquals("Please enter your choice: \n" +
-            " 1.Load Image \n" +
-            " 2.Save Image\n" +
-            " 3.Brighten Image\n" +
-            " 4.Horizontal-flip Image\n" +
-            " 5.Vertical-flip Image\n" +
-            " 6.RGB-Combine Image\n" +
-            " 7.RGB Split\n" +
-            " 8.Greyscale \n" +
-            " 9.Blur Image\n" +
-            " 10.Dither Image\n" +
-            " 11.Sepia Image\n" +
-            " 12 Sharpen Image\n" +
-            " 0.Exit\n" +
-            "Unknown Command Entered vertical-flip image \n" +
-            "Please enter your choice: \n" +
-            " 1.Load Image \n" +
-            " 2.Save Image\n" +
-            " 3.Brighten Image\n" +
-            " 4.Horizontal-flip Image\n" +
-            " 5.Vertical-flip Image\n" +
-            " 6.RGB-Combine Image\n" +
-            " 7.RGB Split\n" +
-            " 8.Greyscale \n" +
-            " 9.Blur Image\n" +
-            " 10.Dither Image\n" +
-            " 11.Sepia Image\n" +
-            " 12 Sharpen Image\n" +
-            " 0.Exit\n" +
-            "Unknown Command Entered " + input1, out.toString().stripTrailing());
+    assertEquals("Please enter your choice: \n" +" 1.Load Image \n" +" 2.Save Image\n"
+            +" 3.Brighten Image\n" +" 4.Horizontal-flip Image\n" +" 5.Vertical-flip Image\n"
+            +" 6.RGB-Combine Image\n" +" 7.RGB Split\n" +" 8.Greyscale \n" +" 9.Blur Image\n"
+            +" 10.Dither Image\n" +" 11.Sepia Image\n" +" 12 Sharpen Image\n" +" 0.Exit\n"
+            +"Unknown Command Entered vertical-flip image \n" +"Please enter your choice: \n"
+            +" 1.Load Image \n" +" 2.Save Image\n" +" 3.Brighten Image\n"
+            +" 4.Horizontal-flip Image\n" +" 5.Vertical-flip Image\n" +" 6.RGB-Combine Image\n"
+            +" 7.RGB Split\n" +" 8.Greyscale \n" +" 9.Blur Image\n" +" 10.Dither Image\n"
+            +" 11.Sepia Image\n" +" 12 Sharpen Image\n" +" 0.Exit\n" +"Unknown Command Entered "
+            + input1, out.toString().stripTrailing());
   }
 
   @Test
@@ -674,56 +535,26 @@ public class CommandControllerTest {
     ImageProcessingTextView view = new ImageProcessingTextViewImpl(new PrintStream(out));
     ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, view);
     controller.execute();
-    assertEquals("Please enter your choice: \n" +
-            " 1.Load Image \n" +
-            " 2.Save Image\n" +
-            " 3.Brighten Image\n" +
-            " 4.Horizontal-flip Image\n" +
-            " 5.Vertical-flip Image\n" +
-            " 6.RGB-Combine Image\n" +
-            " 7.RGB Split\n" +
-            " 8.Greyscale \n" +
-            " 9.Blur Image\n" +
-            " 10.Dither Image\n" +
-            " 11.Sepia Image\n" +
-            " 12 Sharpen Image\n" +
-            " 0.Exit\n" +
-            "Unknown Command Entered " + input, out.toString().stripTrailing());
+    assertEquals("Please enter your choice: \n" +" 1.Load Image \n" +" 2.Save Image\n"
+            +" 3.Brighten Image\n" +" 4.Horizontal-flip Image\n" +" 5.Vertical-flip Image\n"
+            +" 6.RGB-Combine Image\n" +" 7.RGB Split\n" +" 8.Greyscale \n" +" 9.Blur Image\n"
+            +" 10.Dither Image\n" +" 11.Sepia Image\n" +" 12 Sharpen Image\n" +" 0.Exit\n"
+            +"Unknown Command Entered " + input, out.toString().stripTrailing());
 
     String input1 = "save res/image.ppm a b c";
     in = new ByteArrayInputStream(input1.getBytes());
     controller = new ImageProcessingControllerImpl(model, in, view);
     controller.execute();
-    assertEquals("Please enter your choice: \n" +
-            " 1.Load Image \n" +
-            " 2.Save Image\n" +
-            " 3.Brighten Image\n" +
-            " 4.Horizontal-flip Image\n" +
-            " 5.Vertical-flip Image\n" +
-            " 6.RGB-Combine Image\n" +
-            " 7.RGB Split\n" +
-            " 8.Greyscale \n" +
-            " 9.Blur Image\n" +
-            " 10.Dither Image\n" +
-            " 11.Sepia Image\n" +
-            " 12 Sharpen Image\n" +
-            " 0.Exit\n" +
-            "Unknown Command Entered save res/image.ppm \n" +
-            "Please enter your choice: \n" +
-            " 1.Load Image \n" +
-            " 2.Save Image\n" +
-            " 3.Brighten Image\n" +
-            " 4.Horizontal-flip Image\n" +
-            " 5.Vertical-flip Image\n" +
-            " 6.RGB-Combine Image\n" +
-            " 7.RGB Split\n" +
-            " 8.Greyscale \n" +
-            " 9.Blur Image\n" +
-            " 10.Dither Image\n" +
-            " 11.Sepia Image\n" +
-            " 12 Sharpen Image\n" +
-            " 0.Exit\n" +
-            "Unknown Command Entered " + input1, out.toString().stripTrailing());
+    assertEquals("Please enter your choice: \n" +" 1.Load Image \n" +" 2.Save Image\n"
+            +" 3.Brighten Image\n" +" 4.Horizontal-flip Image\n" +" 5.Vertical-flip Image\n"
+            +" 6.RGB-Combine Image\n" +" 7.RGB Split\n" +" 8.Greyscale \n" +" 9.Blur Image\n"
+            +" 10.Dither Image\n" +" 11.Sepia Image\n" +" 12 Sharpen Image\n" +" 0.Exit\n"
+            +"Unknown Command Entered save res/image.ppm \n" +"Please enter your choice: \n"
+            +" 1.Load Image \n" +" 2.Save Image\n" +" 3.Brighten Image\n"
+            +" 4.Horizontal-flip Image\n" +" 5.Vertical-flip Image\n" +" 6.RGB-Combine Image\n"
+            +" 7.RGB Split\n" +" 8.Greyscale \n" +" 9.Blur Image\n" +" 10.Dither Image\n"
+            +" 11.Sepia Image\n" +" 12 Sharpen Image\n" +" 0.Exit\n" +"Unknown Command Entered "
+            + input1, out.toString().stripTrailing());
   }
 
   @Test
@@ -737,21 +568,11 @@ public class CommandControllerTest {
     ImageProcessingTextView view = new ImageProcessingTextViewImpl(new PrintStream(out));
     ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, view);
     controller.execute();
-    assertEquals("Please enter your choice: \n" +
-            " 1.Load Image \n" +
-            " 2.Save Image\n" +
-            " 3.Brighten Image\n" +
-            " 4.Horizontal-flip Image\n" +
-            " 5.Vertical-flip Image\n" +
-            " 6.RGB-Combine Image\n" +
-            " 7.RGB Split\n" +
-            " 8.Greyscale \n" +
-            " 9.Blur Image\n" +
-            " 10.Dither Image\n" +
-            " 11.Sepia Image\n" +
-            " 12 Sharpen Image\n" +
-            " 0.Exit\n" +
-            "Unknown Command Entered " + input, out.toString().stripTrailing());
+    assertEquals("Please enter your choice: \n" +" 1.Load Image \n" +" 2.Save Image\n"
+            +" 3.Brighten Image\n" +" 4.Horizontal-flip Image\n" +" 5.Vertical-flip Image\n"
+            +" 6.RGB-Combine Image\n" +" 7.RGB Split\n" +" 8.Greyscale \n" +" 9.Blur Image\n"
+            +" 10.Dither Image\n" +" 11.Sepia Image\n" +" 12 Sharpen Image\n" +" 0.Exit\n"
+            +"Unknown Command Entered " + input, out.toString().stripTrailing());
 
     input = "rgb-split dest a b c d";
     InputStream in1 = new ByteArrayInputStream(input.getBytes());
@@ -759,21 +580,11 @@ public class CommandControllerTest {
     ImageProcessingTextView view1 = new ImageProcessingTextViewImpl(new PrintStream(out1));
     controller = new ImageProcessingControllerImpl(model, in1, view1);
     controller.execute();
-    assertEquals("Please enter your choice: \n" +
-            " 1.Load Image \n" +
-            " 2.Save Image\n" +
-            " 3.Brighten Image\n" +
-            " 4.Horizontal-flip Image\n" +
-            " 5.Vertical-flip Image\n" +
-            " 6.RGB-Combine Image\n" +
-            " 7.RGB Split\n" +
-            " 8.Greyscale \n" +
-            " 9.Blur Image\n" +
-            " 10.Dither Image\n" +
-            " 11.Sepia Image\n" +
-            " 12 Sharpen Image\n" +
-            " 0.Exit\n" +
-            "Unknown Command Entered " + input, out1.toString().stripTrailing());
+    assertEquals("Please enter your choice: \n" +" 1.Load Image \n" +" 2.Save Image\n"
+            +" 3.Brighten Image\n" +" 4.Horizontal-flip Image\n" +" 5.Vertical-flip Image\n"
+            +" 6.RGB-Combine Image\n" +" 7.RGB Split\n" +" 8.Greyscale \n" +" 9.Blur Image\n"
+            +" 10.Dither Image\n" +" 11.Sepia Image\n" +" 12 Sharpen Image\n" +" 0.Exit\n"
+            +"Unknown Command Entered " + input, out1.toString().stripTrailing());
   }
 
   @Test
@@ -787,21 +598,11 @@ public class CommandControllerTest {
     ImageProcessingTextView view = new ImageProcessingTextViewImpl(new PrintStream(out));
     ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, view);
     controller.execute();
-    assertEquals("Please enter your choice: \n" +
-            " 1.Load Image \n" +
-            " 2.Save Image\n" +
-            " 3.Brighten Image\n" +
-            " 4.Horizontal-flip Image\n" +
-            " 5.Vertical-flip Image\n" +
-            " 6.RGB-Combine Image\n" +
-            " 7.RGB Split\n" +
-            " 8.Greyscale \n" +
-            " 9.Blur Image\n" +
-            " 10.Dither Image\n" +
-            " 11.Sepia Image\n" +
-            " 12 Sharpen Image\n" +
-            " 0.Exit\n" +
-            "Unknown Command Entered " + input, out.toString().stripTrailing());
+    assertEquals("Please enter your choice: \n" +" 1.Load Image \n" +" 2.Save Image\n"
+            +" 3.Brighten Image\n" +" 4.Horizontal-flip Image\n" +" 5.Vertical-flip Image\n"
+            +" 6.RGB-Combine Image\n" +" 7.RGB Split\n" +" 8.Greyscale \n" +" 9.Blur Image\n"
+            +" 10.Dither Image\n" +" 11.Sepia Image\n" +" 12 Sharpen Image\n" +" 0.Exit\n"
+            +"Unknown Command Entered " + input, out.toString().stripTrailing());
 
     input = "rgb-combine dest a b c d";
     InputStream in1 = new ByteArrayInputStream(input.getBytes());
@@ -809,21 +610,16 @@ public class CommandControllerTest {
     ImageProcessingTextView view1 = new ImageProcessingTextViewImpl(new PrintStream(out1));
     controller = new ImageProcessingControllerImpl(model, in1, view1);
     controller.execute();
-    assertEquals("Please enter your choice: \n" +
-            " 1.Load Image \n" +
-            " 2.Save Image\n" +
-            " 3.Brighten Image\n" +
-            " 4.Horizontal-flip Image\n" +
-            " 5.Vertical-flip Image\n" +
-            " 6.RGB-Combine Image\n" +
-            " 7.RGB Split\n" +
-            " 8.Greyscale \n" +
-            " 9.Blur Image\n" +
-            " 10.Dither Image\n" +
-            " 11.Sepia Image\n" +
-            " 12 Sharpen Image\n" +
-            " 0.Exit\n" +
-            "Unknown Command Entered " + input, out1.toString().stripTrailing());
+    assertEquals("Please enter your choice: \n" 
+            + " 1.Load Image \n" 
+            + " 2.Save Image\n" 
+            + " 3.Brighten Image\n" 
+            + " 4.Horizontal-flip Image\n" 
+            + " 5.Vertical-flip Image\n" 
+            + " 6.RGB-Combine Image\n" 
+            + " 7.RGB Split\n" +" 8.Greyscale \n" +" 9.Blur Image\n" +" 10.Dither Image\n"
+            +" 11.Sepia Image\n" +" 12 Sharpen Image\n" +" 0.Exit\n" +"Unknown Command Entered "
+            + input, out1.toString().stripTrailing());
   }
 
   @Test
@@ -837,21 +633,11 @@ public class CommandControllerTest {
     ImageProcessingTextView view = new ImageProcessingTextViewImpl(new PrintStream(out));
     ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, view);
     controller.execute();
-    assertEquals("Please enter your choice: \n" +
-            " 1.Load Image \n" +
-            " 2.Save Image\n" +
-            " 3.Brighten Image\n" +
-            " 4.Horizontal-flip Image\n" +
-            " 5.Vertical-flip Image\n" +
-            " 6.RGB-Combine Image\n" +
-            " 7.RGB Split\n" +
-            " 8.Greyscale \n" +
-            " 9.Blur Image\n" +
-            " 10.Dither Image\n" +
-            " 11.Sepia Image\n" +
-            " 12 Sharpen Image\n" +
-            " 0.Exit\n" +
-            "Unknown Command Entered " + input, out.toString().stripTrailing());
+    assertEquals("Please enter your choice: \n" +" 1.Load Image \n" +" 2.Save Image\n"
+            +" 3.Brighten Image\n" +" 4.Horizontal-flip Image\n" +" 5.Vertical-flip Image\n"
+            +" 6.RGB-Combine Image\n" +" 7.RGB Split\n" +" 8.Greyscale \n" +" 9.Blur Image\n"
+            +" 10.Dither Image\n" +" 11.Sepia Image\n" +" 12 Sharpen Image\n" +" 0.Exit\n"
+            +"Unknown Command Entered " + input, out.toString().stripTrailing());
   }
 
   @Test
