@@ -1,7 +1,5 @@
 package controller;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
 
 import controller.commands.Brighten;
@@ -25,7 +23,7 @@ import view.ImageProcessingView;
  * between the model, the view, and the user input. It uses the ImageProcessingView and
  * ImprovedImageProcessing model to execute commands on images.
  */
-public class ImageMVCControllerImpl implements ImageMVCController, ActionListener {
+public class ImageMVCControllerImpl implements ImageMVCController {
   private final ImprovedImageProcessing model;
   private final ImageProcessingView view;
 
@@ -48,9 +46,8 @@ public class ImageMVCControllerImpl implements ImageMVCController, ActionListene
   }
 
   @Override
-  public void actionPerformed(ActionEvent e) {
-    //String command = e.getActionCommand();
-    List<String> commands = this.view.getParameters(e.getActionCommand());
+  public void processImage(String command) {
+    List<String> commands = this.view.getParameters(command);
     if (commands != null) {
       try {
         List<Image> m = readCommands(commands);
@@ -68,48 +65,57 @@ public class ImageMVCControllerImpl implements ImageMVCController, ActionListene
   private List<Image> readCommands(List<String> inputArray) {
     ImageCommandController cmd = null;
     try {
-      switch (inputArray.get(0)) {
-        case "load":
-          cmd = new Load(inputArray.get(1), inputArray.get(2));
-          break;
-        case "save":
-          cmd = new Save(inputArray.get(1), inputArray.get(2));
-          break;
-        case "horizontal-flip":
-          cmd = new HorizontalFlip(inputArray.get(1), inputArray.get(2));
-          break;
-        case "vertical-flip":
-          cmd = new VerticalFlip(inputArray.get(1), inputArray.get(2));
-          break;
-        case "greyscale":
-          cmd = new Greyscale(inputArray.get(1), inputArray.get(2), inputArray.get(3));
-          break;
-        case "sepia":
-          cmd = new ColorTransformation("sepia", inputArray.get(1), inputArray.get(2));
-          break;
-        case "blur":
-          cmd = new Filtering("blur", inputArray.get(1), inputArray.get(2));
-          break;
-        case "sharpen":
-          cmd = new Filtering("sharpen", inputArray.get(1), inputArray.get(2));
-          break;
-        case "dither":
-          cmd = new Dither(inputArray.get(1), inputArray.get(2));
-          break;
-        case "brighten":
-          cmd = new Brighten(Integer.parseInt(inputArray.get(1)), inputArray.get(2),
-                  inputArray.get(3));
-          break;
-        case "rgb-split":
-          cmd = new RGBSplit(inputArray.get(1), inputArray.get(2), inputArray.get(3),
-                  inputArray.get(4));
-          break;
-        case "rgb-combine":
-          cmd = new RGBCombine(inputArray.get(1), inputArray.get(2), inputArray.get(3),
-                  inputArray.get(4));
-          break;
-        default:
-          return null;
+      int i = 0;
+      while (i < inputArray.size()) {
+        switch (inputArray.get(i)) {
+          case "load":
+            cmd = new Load(inputArray.get(++i), inputArray.get(++i));
+            break;
+          case "save":
+            cmd = new Save(inputArray.get(++i), inputArray.get(++i));
+            break;
+          case "horizontal-flip":
+            cmd = new HorizontalFlip(inputArray.get(++i), inputArray.get(++i));
+            break;
+          case "vertical-flip":
+            cmd = new VerticalFlip(inputArray.get(++i), inputArray.get(++i));
+            break;
+          case "greyscale":
+            cmd = new Greyscale(inputArray.get(++i), inputArray.get(++i), inputArray.get(++i));
+            break;
+          case "sepia":
+            cmd = new ColorTransformation("sepia", inputArray.get(++i),
+                    inputArray.get(++i));
+            break;
+          case "blur":
+            cmd = new Filtering("blur", inputArray.get(++i), inputArray.get(++i));
+            break;
+          case "sharpen":
+            cmd = new Filtering("sharpen", inputArray.get(++i), inputArray.get(++i));
+            break;
+          case "dither":
+            cmd = new Dither(inputArray.get(++i), inputArray.get(++i));
+            break;
+          case "brighten":
+            cmd = new Brighten(Integer.parseInt(inputArray.get(++i)), inputArray.get(++i),
+                    inputArray.get(++i));
+            break;
+          case "rgb-split":
+            cmd = new RGBSplit(inputArray.get(++i), inputArray.get(++i), inputArray.get(++i),
+                    inputArray.get(++i));
+            break;
+          case "rgb-combine":
+            cmd = new RGBCombine(inputArray.get(++i), inputArray.get(++i), inputArray.get(++i),
+                    inputArray.get(++i));
+            break;
+          case "load-rgbcombine":
+            cmd = new Load(inputArray.get(++i), inputArray.get(++i));
+            cmd.execute(model);
+            break;
+          default:
+            return null;
+        }
+        i++;
       }
     } catch (NumberFormatException e) {
       return null;

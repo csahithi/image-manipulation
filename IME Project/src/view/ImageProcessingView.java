@@ -1,8 +1,8 @@
 package view;
 
-import java.awt.event.ActionListener;
 import java.util.List;
 
+import controller.ImageMVCController;
 import model.Image;
 
 /**
@@ -12,6 +12,7 @@ import model.Image;
  * and display error dialogs.
  */
 public interface ImageProcessingView {
+
   /**
    * Displays the UI on the screen.
    */
@@ -20,9 +21,9 @@ public interface ImageProcessingView {
   /**
    * Sets the listener for the command buttons.
    *
-   * @param actionEvent the listener to set.
+   * @param controller the controller object to call the methods when action listener is triggered.
    */
-  void setCommandButtonListener(ActionListener actionEvent);
+  void setCommandButtonListener(ImageMVCController controller);
 
   /**
    * Gets the parameters for the given command.

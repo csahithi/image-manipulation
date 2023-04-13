@@ -14,6 +14,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.List;
 
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
@@ -27,6 +28,7 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 
+import controller.ImageMVCController;
 import model.Color;
 import model.Image;
 import model.Pixel;
@@ -51,7 +53,8 @@ public class ImageProcessingViewImpl extends JFrame implements ImageProcessingVi
   private final JButton blurButton;
   private final JButton sharpenButton;
   private final JButton brightenButton;
-  private final JPanel imagePanel;
+  private final JLabel histogramLabel;
+  private final JLabel imageLabel;
   private final JRadioButton redRadioButton;
   private final JRadioButton greenRadioButton;
   private final JRadioButton blueRadioButton;
@@ -64,6 +67,9 @@ public class ImageProcessingViewImpl extends JFrame implements ImageProcessingVi
   private final JButton saveRedButton;
   private final JButton saveGreenButton;
   private final JButton saveBlueButton;
+  private String redImageFilePath;
+  private String greenImageFilePath;
+  private String blueImageFilePath;
 
   /**
    * Creates an instance of the ImageProcessingViewImpl class, which is a JFrame that displays the
@@ -95,23 +101,25 @@ public class ImageProcessingViewImpl extends JFrame implements ImageProcessingVi
     saveButton.setActionCommand("save");
     loadSaveButtonPanel.add(saveButton);
 
-    imagePanel = new JPanel();
+    JPanel imagePanel = new JPanel();
     imagePanel.setLayout(new FlowLayout());
     this.add(imagePanel, BorderLayout.CENTER);
 
-    JLabel imageLabel = new JLabel(new ImageIcon());
+    JPanel imageScrollPanel = new JPanel(new GridLayout(1, 2));
+
+    imageLabel = new JLabel(new ImageIcon());
     JScrollPane imagePane = new JScrollPane(imageLabel);
-    imagePane.setSize(500, 500);
+    imagePane.setPreferredSize(new Dimension(450, 450));
+    imagePane.setBorder(BorderFactory.createEmptyBorder());
     imagePane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
     imagePane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-    imagePanel.add(imagePane);
+    imageScrollPanel.add(imagePane);
 
-    JLabel histogramLabel = new JLabel(new ImageIcon());
-    JScrollPane histogramPane = new JScrollPane(histogramLabel);
-    histogramPane.setSize(500, 500);
-    histogramPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-    histogramPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-    imagePanel.add(histogramPane);
+    histogramLabel = new JLabel(new ImageIcon());
+    histogramLabel.setPreferredSize(new Dimension(300, 450));
+    imageScrollPanel.add(histogramLabel);
+
+    imagePanel.add(imageScrollPanel, BorderLayout.CENTER);
 
     JPanel imageProcessingButtonPanel = new JPanel();
     imageProcessingButtonPanel.setLayout(new FlowLayout());
@@ -191,25 +199,26 @@ public class ImageProcessingViewImpl extends JFrame implements ImageProcessingVi
   }
 
   @Override
-  public void setCommandButtonListener(ActionListener actionEvent) {
-    loadButton.addActionListener(actionEvent);
-    saveButton.addActionListener(actionEvent);
-    horizontalFlipButton.addActionListener(actionEvent);
-    verticalFlipButton.addActionListener(actionEvent);
-    brightenButton.addActionListener(actionEvent);
-    greyscaleButton.addActionListener(actionEvent);
-    rgbSplitButton.addActionListener(actionEvent);
-    rgbCombineButton.addActionListener(actionEvent);
-    sepiaButton.addActionListener(actionEvent);
-    blurButton.addActionListener(actionEvent);
-    sharpenButton.addActionListener(actionEvent);
-    ditherButton.addActionListener(actionEvent);
-    loadRedButton.addActionListener(actionEvent);
-    loadGreenButton.addActionListener(actionEvent);
-    loadBlueButton.addActionListener(actionEvent);
-    saveRedButton.addActionListener(actionEvent);
-    saveGreenButton.addActionListener(actionEvent);
-    saveBlueButton.addActionListener(actionEvent);
+  public void setCommandButtonListener(ImageMVCController controller) {
+    ActionListener listener = evt -> controller.processImage(evt.getActionCommand());
+    loadButton.addActionListener(listener);
+    saveButton.addActionListener(listener);
+    horizontalFlipButton.addActionListener(listener);
+    verticalFlipButton.addActionListener(listener);
+    brightenButton.addActionListener(listener);
+    greyscaleButton.addActionListener(listener);
+    rgbSplitButton.addActionListener(listener);
+    rgbCombineButton.addActionListener(listener);
+    sepiaButton.addActionListener(listener);
+    blurButton.addActionListener(listener);
+    sharpenButton.addActionListener(listener);
+    ditherButton.addActionListener(listener);
+    saveRedButton.addActionListener(listener);
+    saveGreenButton.addActionListener(listener);
+    saveBlueButton.addActionListener(listener);
+    loadRedButton.addActionListener(evt -> redImageFilePath = showLoadImageDialog());
+    loadGreenButton.addActionListener(evt -> greenImageFilePath = showLoadImageDialog());
+    loadBlueButton.addActionListener(evt -> blueImageFilePath = showLoadImageDialog());
   }
 
   @Override
@@ -248,6 +257,9 @@ public class ImageProcessingViewImpl extends JFrame implements ImageProcessingVi
         return List.of(new String[]{"vertical-flip", "image", "image"});
       case "greyscale":
         String greyscaleComponent = showOptionsForGreyScale();
+        if (greyscaleComponent == null) {
+          return null;
+        }
         return List.of(new String[]{"greyscale", greyscaleComponent, "image", "image"});
       case "sepia":
         return List.of(new String[]{"sepia", "image", "image"});
@@ -261,10 +273,24 @@ public class ImageProcessingViewImpl extends JFrame implements ImageProcessingVi
         return List.of(new String[]
                 {"rgb-split", "image", "redSplitImage", "greenSplitImage", "blueSplitImage"});
       case "rgb-combine":
-        showRGBCombineLoadDialog();
-        return List.of(new String[]
-                {"rgb-combine", "image", "redCombineImage", "greenCombineImage",
-                        "blueCombineImage"});
+        redImageFilePath = "";
+        greenImageFilePath = "";
+        blueImageFilePath = "";
+        List<String> filePaths = showRGBCombineLoadDialog();
+        if (filePaths == null) {
+          return null;
+        }
+        for (String filePath : filePaths) {
+          if (filePath == null || filePath.equals("")) {
+            displayErrorDialog();
+            return null;
+          }
+        }
+        return List.of(new String[]{"load-rgbcombine", filePaths.get(0), "redCombineImage",
+                "load-rgbcombine", filePaths.get(1), "greenCombineImage",
+                "load-rgbcombine", filePaths.get(2), "blueCombineImage",
+                "rgb-combine", "image", "redCombineImage", "greenCombineImage",
+                "blueCombineImage"});
       default:
         return null;
     }
@@ -275,21 +301,11 @@ public class ImageProcessingViewImpl extends JFrame implements ImageProcessingVi
     if (m.size() == 1) {
       BufferedImage image = getImageToDisplay(m.get(0));
       BufferedImage histogramImage = displayHistogram(image);
-      ImageIcon imageIcon = new ImageIcon(image);
-      JLabel imageLabel = new JLabel(imageIcon);
-      JScrollPane scrollPane = new JScrollPane(imageLabel);
-      scrollPane.setPreferredSize(new Dimension(450, 450));
-      ImageIcon histogramIcon = new ImageIcon(histogramImage);
-      JLabel histogramLabel = new JLabel(histogramIcon);
-      histogramLabel.setPreferredSize(new Dimension(300, 450));
-      JPanel panel = new JPanel(new GridLayout(1, 2));
-      panel.add(scrollPane);
-      panel.add(histogramLabel);
-      imagePanel.removeAll();
-      imagePanel.add(panel, BorderLayout.CENTER);
+      imageLabel.setIcon(new ImageIcon(image));
+      histogramLabel.setIcon(new ImageIcon(histogramImage));
       validate();
     } else {
-      showRGBSplitSaveDialog(m);
+      showRGBSplitSaveDialog();
     }
 
   }
@@ -320,24 +336,13 @@ public class ImageProcessingViewImpl extends JFrame implements ImageProcessingVi
     return image;
   }
 
-  private void showRGBSplitSaveDialog(List<Image> m) {
-//    JButton saveRedButton = new JButton("Save Red Image");
-//    saveRedButton.setActionCommand("save");
-//    JButton saveRedButton = new JButton("Save Red Image");
-//    JButton saveRedButton = new JButton("Save Red Image");
-//
-//    JOptionPane.showOptionDialog(this, "Please save RGB Split Images below",
-//            "Save RGB Split Images", JOptionPane.YES_NO_CANCEL_OPTION, null, )
+  private void showRGBSplitSaveDialog() {
     JOptionPane optionPane = new JOptionPane();
     JPanel buttonPanel = new JPanel(new FlowLayout());
     buttonPanel.add(saveRedButton);
     buttonPanel.add(saveGreenButton);
     buttonPanel.add(saveBlueButton);
-//    JOptionPane.showOptionDialog(this, "Please load images to combine",
-//            "Load RGB Combine Images", JOptionPane.DEFAULT_OPTION,
-//            JOptionPane.PLAIN_MESSAGE, null,
-//            new Object[]{loadRedButton, loadGreenButton, loadBlueButton}, null);
-    JDialog dialog;
+    JDialog dialog = null;
     optionPane.setMessage("Please save RGB Split images");
     optionPane.setMessageType(JOptionPane.PLAIN_MESSAGE);
     optionPane.setOptionType(JOptionPane.DEFAULT_OPTION);
@@ -346,23 +351,27 @@ public class ImageProcessingViewImpl extends JFrame implements ImageProcessingVi
     dialog.setVisible(true);
   }
 
-  private void showRGBCombineLoadDialog() {
+  private List<String> showRGBCombineLoadDialog() {
     JOptionPane optionPane = new JOptionPane();
     JPanel buttonPanel = new JPanel(new FlowLayout());
     buttonPanel.add(loadRedButton);
     buttonPanel.add(loadGreenButton);
     buttonPanel.add(loadBlueButton);
-//    JOptionPane.showOptionDialog(this, "Please load images to combine",
-//            "Load RGB Combine Images", JOptionPane.DEFAULT_OPTION,
-//            JOptionPane.PLAIN_MESSAGE, null,
-//            new Object[]{loadRedButton, loadGreenButton, loadBlueButton}, null);
-    JDialog dialog;
+    JDialog dialog = null;
     optionPane.setMessage("Please load images to combine");
     optionPane.setMessageType(JOptionPane.PLAIN_MESSAGE);
     optionPane.setOptionType(JOptionPane.DEFAULT_OPTION);
     optionPane.add(buttonPanel, 1);
     dialog = optionPane.createDialog(this, "Load RGB Combine Images");
     dialog.setVisible(true);
+    if (redImageFilePath == null) {
+      redImageFilePath = "";
+    } else if (greenImageFilePath == null) {
+      greenImageFilePath = "";
+    } else if (blueImageFilePath == null) {
+      blueImageFilePath = "";
+    }
+    return List.of(new String[]{redImageFilePath, greenImageFilePath, blueImageFilePath});
   }
 
   private String showLoadImageDialog() {
@@ -370,11 +379,8 @@ public class ImageProcessingViewImpl extends JFrame implements ImageProcessingVi
     int returnVal = fc.showOpenDialog(this);
     if (returnVal == JFileChooser.APPROVE_OPTION) {
       File file = fc.getSelectedFile();
-      //This is where a real application would open the file.
-      System.out.println("Opening: " + file.getName() + ".");
       return file.getPath();
     } else {
-      System.out.println("Open command cancelled by user.");
       return null;
     }
   }
@@ -384,11 +390,8 @@ public class ImageProcessingViewImpl extends JFrame implements ImageProcessingVi
     int returnVal = fc.showSaveDialog(this);
     if (returnVal == JFileChooser.APPROVE_OPTION) {
       File file = fc.getSelectedFile();
-      //This is where a real application would save the file.
-      System.out.println("Saving: " + file.getName() + ".");
       return file.getPath();
     } else {
-      System.out.println("Save command cancelled by user.");
       return null;
     }
   }
@@ -447,7 +450,7 @@ public class ImageProcessingViewImpl extends JFrame implements ImageProcessingVi
     optionPaneRB.add(radioPanel, 1);
     dialog = optionPaneRB.createDialog(this, "Greyscale on component");
     dialog.setVisible(true);
-    if (optionPaneRB.getValue() == null) {
+    if (optionPaneRB.getValue() == null || greyscaleOptions.getSelection() == null) {
       return null;
     }
     return greyscaleOptions.getSelection().getActionCommand();

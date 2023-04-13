@@ -5,12 +5,13 @@ package controller;
  * It contains a single method "execute()" which is implemented by the concrete class
  * that controls the Image Processing functionality.
  */
-public interface ImageMVCController {
+public interface ImageMVCController extends ImageProcessingController {
+
   /**
    * This method is responsible for executing the actions and functionalities of the
-   * ImageMVCController.
-   * It will be implemented by the concrete class that implements this interface and will contain
-   * the logic for processing image data and updating the view accordingly.
+   * ImageMVCController triggered by the action listeners from the view.
+   *
+   * @param command the action command passed from the action listener in the view.
    */
-  void execute();
+  void processImage(String command);
 }
