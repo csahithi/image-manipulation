@@ -32,7 +32,6 @@ public class CommandControllerTest {
   @Before
   public void setup() {
     out = new ByteArrayOutputStream();
-
   }
 
   /**
@@ -351,7 +350,8 @@ public class CommandControllerTest {
     ImageProcessingController controller = new ImageProcessingControllerImpl(model, in, view);
     controller.execute();
     assertEquals("Received inputs dog and dogvReceived inputs dog and "
-            + "dog-horizontalReceived inputs dog-horizontalReceived inputs dogv", mockLog.toString());
+            + "dog-horizontalReceived inputs dog-horizontalReceived inputs dogv",
+            mockLog.toString());
   }
 
   @Test
@@ -441,7 +441,8 @@ public class CommandControllerTest {
     in = new ByteArrayInputStream(input1.getBytes());
     controller = new ImageProcessingControllerImpl(model, in, view);
     controller.execute();
-    assertEquals("Invalid Command Entered horizontal-flip image\n" + "Invalid Command Entered "
+    assertEquals("Invalid Command Entered horizontal-flip image\n"
+            + "Invalid Command Entered "
             + input1, out.toString().stripTrailing());
   }
 
@@ -462,7 +463,8 @@ public class CommandControllerTest {
     in = new ByteArrayInputStream(input1.getBytes());
     controller = new ImageProcessingControllerImpl(model, in, view);
     controller.execute();
-    assertEquals("Invalid Command Entered vertical-flip image\n" + "Invalid Command Entered "
+    assertEquals("Invalid Command Entered vertical-flip image\n"
+            + "Invalid Command Entered "
             + input1, out.toString().stripTrailing());
   }
 

@@ -30,6 +30,9 @@ public class ImageUtil {
   public static Image readImage(String filepath) {
     try {
       BufferedImage image = ImageIO.read(new File(filepath));
+      if (image == null) {
+        return null;
+      }
       Pixel[][] listOfPixels = new RGBPixel[image.getHeight()][image.getWidth()];
       Image finalImage = new RGBImage(image.getWidth(), image.getHeight(), 255,
               listOfPixels);

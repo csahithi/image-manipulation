@@ -27,16 +27,16 @@ public class Load implements ImageCommandController {
 
   @Override
   public List<Image> execute(ImprovedImageProcessing m) {
-    String extension = null;
-    Image image;
+    String extension;
+    Image image = null;
     int index = imagePath.lastIndexOf('.');
     if (index > 0) {
       extension = imagePath.substring(index + 1);
-    }
-    if (extension.equalsIgnoreCase("PPM")) {
-      image = ImageUtil.readPPM(imagePath);
-    } else {
-      image = ImageUtil.readImage(imagePath);
+      if (extension.equalsIgnoreCase("PPM")) {
+        image = ImageUtil.readPPM(imagePath);
+      } else {
+        image = ImageUtil.readImage(imagePath);
+      }
     }
     if (image == null) {
       return null;
