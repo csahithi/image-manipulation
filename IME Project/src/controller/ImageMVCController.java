@@ -1,7 +1,7 @@
 package controller;
 
 /**
- * Interface for the Image MVC Controller.It main controller for gui view.
+ * Interface for the Image MVC Controller.It is the main controller for gui view.
  * It contains a single method "execute()" which is implemented by the concrete class
  * that controls the Image Processing functionality.
  */

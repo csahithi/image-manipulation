@@ -271,14 +271,23 @@ public class ImageProcessingViewImpl extends JFrame implements ImageProcessingVi
     if (m.size() == 1) {
       BufferedImage image = getImageToDisplay(m.get(0));
       BufferedImage histogramImage = displayHistogram(image);
-      imageLabel.setIcon(new ImageIcon(image));
-      imageLabel.setPreferredSize(new Dimension(450, 450));
+      ImageIcon imageIcon = new ImageIcon(image);
+      JLabel imageLabel = new JLabel(imageIcon);
+      JScrollPane scrollPane = new JScrollPane(imageLabel);
+      scrollPane.setPreferredSize(new Dimension(450, 450));
       ImageIcon histogramIcon = new ImageIcon(histogramImage);
-      histogramLabel.setIcon(histogramIcon);
+      JLabel histogramLabel = new JLabel(histogramIcon);
+      histogramLabel.setPreferredSize(new Dimension(300, 450));
+      JPanel panel = new JPanel(new GridLayout(1, 2));
+      panel.add(scrollPane);
+      panel.add(histogramLabel);
+      imagePanel.removeAll();
+      imagePanel.add(panel, BorderLayout.CENTER);
       validate();
     } else {
       showRGBSplitSaveDialog(m);
     }
+
   }
 
   @Override
