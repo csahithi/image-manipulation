@@ -29,9 +29,6 @@ public class CommandControllerTest {
 
   private OutputStream out;
 
-  /**
-   * Sets data for the PortfolioViewImplTest.
-   */
   @Before
   public void setup() {
     out = new ByteArrayOutputStream();
