@@ -181,6 +181,9 @@ interface. The new interface is implemented in a new class 'ImprovedImageProcess
 This class extends the older model class 'ImageProcessingModelImpl'. The new interface is
 created to support new features like blur ,sharpen, greyscale, sepia and dither.
 
+We have created a new Interface  'Image' and implemented that in 'RGBImage' class.We have also
+created new Interface 'Pixel' and implemented that in 'RGBPixel' class.
+
 Controller
 ------------
 In addition to reading and writing ppm files,in this version our controller supports reading and
@@ -211,7 +214,19 @@ ______________________________________
 ImprovedImageProcessing : This interface has new advanced operations on image.
 
 ImprovedImageProcessingImpl : This class implements all  new advanced operations from
-ImprovedImageProcessing that can applied on image.
+                              ImprovedImageProcessing that can applied on image.
+
+Image : The Image interface represents an image, which consists of an array of pixels and its
+        properties/attributes.
+
+RGBImage : The RGBImage class represents an RGB image and its properties such as width, height,
+            maximum value of color,and an array of pixels that make up the image.
+
+Pixel : The Pixel interface represents a single pixel in an image.It provides methods for
+        retrieving color, value, intensity, and luma components of the pixel.
+
+RGBPixel : The RGBPixel class represents a single RGB pixel in an image, storing its row and column
+           numbers,as well as the color component of the pixel.
 
 Test-Related Classes and Interfaces:
 ______________________________________
@@ -311,19 +326,3 @@ ImageProcessingViewImpl : The ImageProcessingViewImpl class implements the Image
 interface and provides a GUI for image processing. The GUI includes buttons for loading, saving,
 flipping, and modifying the colors of images, as well as panels for displaying images and
 histograms.This class extends the JFrame class and uses various Swing components to create the GUI.
-
-
-
-
-
- 
-
-
-
-
-
-
-
-
-
-
