@@ -1,19 +1,18 @@
 package model;
 
 /**
- * The Image class represents an image and its properties such as width, height,
+ * The RGBImage class represents an RGB image and its properties such as width, height,
  * maximum value of color,and an array of pixels that make up the image.
  */
-public class RGBImage implements Image{
+public class RGBImage implements Image {
 
   private final int width;
-
   private final int height;
   private final int maxValueOfColor;
   private final Pixel[][] listOfPixels;
 
   /**
-   * Constructor to initialize the attributes of Image class.
+   * Constructor to initialize the attributes of RGBImage class.
    *
    * @param width           is width of image.
    * @param height          is height of image.

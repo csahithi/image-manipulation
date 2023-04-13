@@ -5,6 +5,7 @@ package model;
  * properties/attributes.
  */
 public interface Image {
+
   /**
    * Returns the pixel values of Image.
    *
@@ -24,7 +25,7 @@ public interface Image {
    *
    * @return the integer value of height of Image
    */
-   int getHeight();
+  int getHeight();
 
   /**
    * Returns the maximum value of color of Image.
