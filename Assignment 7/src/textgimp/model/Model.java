@@ -132,4 +132,14 @@ public interface Model extends ReadOnlyModel {
    * @throws IllegalArgumentException if the image does not exist.
    */
   void dither(String sourceImageName, String newImageName) throws IllegalArgumentException;
+  /**
+   * Mosaic an image by a specified number of seeds and store the result in a new image.
+   *
+   * @param sourceImageName name for Image mosaicking .
+   * @param seeds           by how much to for Image mosaicking .
+   * @param newImageName    name of the mosaicked image.
+   * @throws IllegalArgumentException if the image does not exist.
+   */
+  void mosaic(String sourceImageName, int seeds, String newImageName)
+          throws IllegalArgumentException;
 }

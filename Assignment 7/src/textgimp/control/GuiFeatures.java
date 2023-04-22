@@ -185,4 +185,15 @@ public class GuiFeatures implements Features {
       return new ResultImpl(false, "Failed to dithered, no image loaded.");
     }
   }
+
+  @Override
+  public Result mosaic(int seeds) {
+    try {
+      model.mosaic(TARGET, seeds, TARGET);
+      view.displayImage(TARGET);
+      return new ResultImpl(true, "Successfully mosaicked the image");
+    } catch (Exception e) {
+      return new ResultImpl(false, "Failed to mosaic, no image loaded.");
+    }
+  }
 }

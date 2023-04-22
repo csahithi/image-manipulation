@@ -88,5 +88,9 @@ public interface Features {
    */
   Result dither();
 
-
+  /**
+   * Apply a mosaicking effect to an image and display the result on the GUI.
+   * @param seeds
+   */
+  Result mosaic(int seeds);
 }

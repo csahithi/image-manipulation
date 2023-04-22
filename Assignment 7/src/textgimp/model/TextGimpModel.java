@@ -19,6 +19,7 @@ import textgimp.model.macros.imagetransform.FilterManager;
 import textgimp.model.macros.imagetransform.FilterPresetManager;
 import textgimp.model.macros.imagetransform.FilterType;
 import textgimp.model.macros.imagetransform.HorizontalFlip;
+import textgimp.model.macros.imagetransform.Mosaic;
 import textgimp.model.macros.imagetransform.RGBCombine;
 import textgimp.model.macros.imagetransform.VerticalFlip;
 
@@ -345,4 +346,14 @@ public class TextGimpModel implements Model {
     ImageBuilder builder = this.fetchBuilder(image.getImageType());
     return builder.writeImage(image);
   }
+  @Override
+  public void mosaic(String sourceImageName, int seeds, String newImageName) throws IllegalArgumentException {
+    this.validateName(sourceImageName);
+    this.validateName(newImageName);
+    Image sourceImage = this.fetchImage(sourceImageName);
+    Macro macro = new Mosaic(seeds);
+    Image newImage = macro.apply(sourceImage);
+    this.imageSet.put(newImageName, newImage);
+  }
+
 }
