@@ -378,5 +378,6 @@ public class GFeaturesPane extends JPanel {
     this.operations.put("RGB Split", new AllOperations.RGBSplit(statusPanel, featureControl));
     this.operations.put("Sharpen", new AllOperations.Sharpen(statusPanel, featureControl));
     this.operations.put("Sepia", new AllOperations.Sepia(statusPanel, featureControl));
+    this.operations.put("Mosaic", new AllOperations.Mosaic(statusPanel, featureControl));
   }
 }

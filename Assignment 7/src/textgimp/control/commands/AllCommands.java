@@ -466,6 +466,58 @@ public class AllCommands {
       return this.helpMessage;
     }
   }
+
+  /**
+   * This class represents a command to perform mosaicking on the image. This class is responsible
+   * for validating parameters required for vertical flip command and calling the appropriate
+   * methods in the model.
+   */
+  static class Mosaic implements Command {
+
+    private final String helpMessage;
+
+    /**
+     * Constructs a mosaic command object and initializes the help message.
+     */
+    Mosaic() {
+      this.helpMessage = "mosaic <num-seeds> <image-name> <dest-image-name>\n"
+              + "\t\tMosaic the image with image-name with num-seeds"
+              + " and store it with dest-image-name.\n"
+              + "\t\tThe num-seeds decides the clustering done on"
+              + "pixels to perform mosaicking.";
+    }
+
+    @Override
+    public Result execute(String[] args, Model model) throws IllegalArgumentException {
+      Result res;
+      // we need at least 3 arguments, number of seeds, source image name and destination image name
+      if (args.length < 3) {
+        return new ResultImpl(false, "Incorrect usage.\n" + this.helpMessage);
+      }
+
+      // parse parameters and call the model to perform the operation
+      // first parameter is the integer number of seeds
+      // second parameter is the source image name
+      // third parameter is the destination image name
+      try {
+        int amount = Integer.parseInt(args[0]);
+        String sourceImageName = args[1];
+        String destImageName = args[2];
+        model.brighten(sourceImageName, amount, destImageName);
+        res = new ResultImpl(true, "Successfully mosaicked the image.");
+      } catch (NumberFormatException e) {
+        res = new ResultImpl(false, "Failed to convert amount to an integer");
+      } catch (IllegalArgumentException e) {
+        res = new ResultImpl(false, "Unable to mosaic the image: " + e.getMessage());
+      }
+      return res;
+    }
+
+    @Override
+    public String help() {
+      return this.helpMessage;
+    }
+  }
 }
 
 

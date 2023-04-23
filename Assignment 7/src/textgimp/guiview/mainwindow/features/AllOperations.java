@@ -14,6 +14,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+
 import textgimp.control.Features;
 import textgimp.guiview.mainwindow.Theme;
 import textgimp.guiview.mainwindow.status.StatusPanel;
@@ -634,6 +637,70 @@ public class AllOperations {
             bluePath.getText());
         this.statusPanel.setStatus("RGB Split", res);
       }
+      return res;
+    }
+  }
+
+  /**
+   * This class represents a callback for the Mosaic operation on the GUI. It delegates the
+   * operation to the feature controller.
+   */
+  static class Mosaic extends AbstractOperation {
+
+    private JTextField textField;
+    private int numSeeds;
+
+    /**
+     * Initialize the operation with status panel and features.
+     *
+     * @param statusPanel status panel from the UI
+     * @param features    feature controller
+     */
+    Mosaic(StatusPanel statusPanel, Features features) {
+      super(statusPanel, features);
+      numSeeds = 0;
+      this.setUpMosaicPanel();
+    }
+
+    private void setUpMosaicPanel(){
+      // add a slider to the buffer panel to set the number of seeds
+      // then call featureControl.mosaic() with the brightness value
+      textField = new JTextField();
+      textField.setBackground(Theme.getPrimaryColor());
+      textField.setForeground(Theme.getSecondaryColor());
+      JLabel label = new JLabel("Number of seeds: " + textField.getText());
+      Theme.setLabelColors(label);
+
+      // create a label to display the current value of the slider
+      textField.getDocument().addDocumentListener(new DocumentListener() {
+        public void changedUpdate(DocumentEvent e) {
+          warn();
+        }
+        public void removeUpdate(DocumentEvent e) {
+          warn();
+        }
+        public void insertUpdate(DocumentEvent e) {
+          warn();
+        }
+
+        public void warn() {
+          label.setText("Number of seeds: " + textField.getText());
+          numSeeds = Integer.parseInt(textField.getText());
+        }
+      });
+      JPanel wrapperPanel = new JPanel(new GridLayout(2, 1));
+      Theme.setPanelColors(wrapperPanel);
+      wrapperPanel.add(label);
+      wrapperPanel.add(textField);
+      this.supportPanel.add(wrapperPanel);
+    }
+
+    @Override
+    public Result run() {
+      // delegate the operation to the feature controller
+      Result res = features.mosaic(numSeeds);
+      this.statusPanel.setStatus("Mosaic", res);
+      this.textField.setText("0");
       return res;
     }
   }

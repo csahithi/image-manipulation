@@ -51,7 +51,7 @@ public class ImageCommandRunner implements CommandRunner {
     commandMap.put("sepia", new AllCommands.Transform("sepia"));
     commandMap.put("greyscale", new AllCommands.Greyscale());
     commandMap.put("dither", new AllCommands.Dither());
-    commandMap.put("mosaic", new AllCommands.);
+    commandMap.put("mosaic", new AllCommands.Mosaic());
     return commandMap;
   }
 
