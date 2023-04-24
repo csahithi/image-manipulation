@@ -1,37 +1,17 @@
-# TextGimp
-This project implements a simple image processing program with a Text User Interface.
+# Image Mosaicking
+- Mosaicking implementation: Yes 
+- Script command for Mosaicking: Yes
+- Mosaicking from GUI: Yes
 
-- Supported commands are provided in the [Useme.md](Useme.md)
-- Changelog of the application is in the [Changelog.md](Changelog.md)
+## Program:
 
-## Supported image types
-The application supports the following image formats (extensions).
-- PNG
-- JPG
-- BMP
-- PPM
+- Program runs by running main? Yes
+- Program runs correctly using -file option? Yes
+- Program runs correctly using -text option? Yes
+- Program runs correctly (opens GUI) with no command-line options? Yes
 
-You can load the image in any format and save it to any other format as you wish.
+## How we implemented image mosaicking to be in harmony with the design given to us.
 
-## Program arguments
-- Running the `GUIGimp.jar` file with no arguments will launch the GUI application.
-  - Run `java -jar GUIGimp.jar` or `./GUIGimp.jar` with appropriate permissions
-- The application supports the following arguments
-  - `-file`: Runs the script file and exits.
-    - `java -jar GUIGimp.jar -file script.tg` will run `script.tg` script and exit. The script
-    file must have a `.tg` extension.
-  - `-text`: Runs the program in interactive text mode.
-    - `java -jar GUIGimp.jar -text` will run the program in interactive text mode.
-  - `-output`: specify a log file where the output from ImageManager will be
-    recorded.
-    - `java -jar GUIGimp.jar -output pathToLog.txt` will record all output from ImageManager to `pathToLog.txt`.
-
-## How to run using Jarfile
-- Setup JDK 11 and check if `java` and `javac` commands are available in the terminal
-- A jar executable of the application is provided in the `/res` folder - [Click to download](/res/GUIGimp.jar)
-- Provide appropriate permissions to the downloaded jar file to use it as an executable.
-- Run the jar file using `java -jar GUIGimp.jar`
-- You can provide any command line arguments supported
 
 ## High Level MVC Structure
 - All the code resides in the `/src` folder
