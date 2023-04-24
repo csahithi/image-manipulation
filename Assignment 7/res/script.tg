@@ -122,6 +122,11 @@ dither elephant-sharpen elephant-sharp-dither
 # save the dithered image
 save elephant-sharp-dither.jpg elephant-sharp-dither
 
+load dog.png dog
+
+mosaic 1500 dog dogm1500
+
+save dogm1500.ppm dogm1500
 
 # quit
-q
+quit

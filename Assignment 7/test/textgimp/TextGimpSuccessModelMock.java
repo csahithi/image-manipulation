@@ -80,6 +80,11 @@ public class TextGimpSuccessModelMock extends LoggerMockModel implements Model {
     String[] args = {"dither", sourceImageName, newImageName};
     this.addToLog(args);
   }
+  @Override
+  public void mosaic(String sourceImageName,int seeds, String newImageName) {
+    String[] args = {"mosaic", sourceImageName,String.valueOf(seeds), newImageName};
+    this.addToLog(args);
+  }
 
   @Override
   public int[] getHistogramOfGreyscale(String name, String component)

@@ -500,10 +500,10 @@ public class AllCommands {
       // second parameter is the source image name
       // third parameter is the destination image name
       try {
-        int amount = Integer.parseInt(args[0]);
+        int seeds = Integer.parseInt(args[0]);
         String sourceImageName = args[1];
         String destImageName = args[2];
-        model.brighten(sourceImageName, amount, destImageName);
+        model.mosaic(sourceImageName, seeds, destImageName);
         res = new ResultImpl(true, "Successfully mosaicked the image.");
       } catch (NumberFormatException e) {
         res = new ResultImpl(false, "Failed to convert amount to an integer");

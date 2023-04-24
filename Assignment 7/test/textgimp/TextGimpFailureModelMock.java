@@ -84,6 +84,13 @@ public class TextGimpFailureModelMock extends LoggerMockModel implements Model {
   }
 
   @Override
+  public void mosaic(String sourceImageName, int seeds, String newImageName) {
+    String[] args = {"mosaic", sourceImageName, String.valueOf(seeds), newImageName};
+    this.addToLog(args);
+    throw new IllegalArgumentException("Incorrect params");
+  }
+
+  @Override
   public void dither(String sourceImageName, String newImageName) {
     String[] args = {"dither", sourceImageName, newImageName};
     this.addToLog(args);

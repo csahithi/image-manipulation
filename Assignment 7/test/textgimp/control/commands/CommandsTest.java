@@ -15,6 +15,7 @@ import textgimp.LoggerMockModel;
 import textgimp.TextGimpSuccessModelMock;
 import org.junit.Test;
 import textgimp.control.commands.AllCommands.Brighten;
+import textgimp.control.commands.AllCommands.Mosaic;
 import textgimp.utility.Result;
 import utility.TestHelper;
 
@@ -782,6 +783,61 @@ public class CommandsTest {
     @Test
     public void help() {
       Command c = new SaveFile();
+      assertNotEquals(0, c.help().length());
+    }
+  }
+
+  /**
+   * This is a JUnit test class for the Mosaic command.
+   */
+  class MosaicTest {
+
+    /**
+     * Tests the execute method of the Mosaic command using valid parameters.
+     */
+    @Test
+    public void success() {
+      Command c = new AllCommands.Mosaic();
+      LoggerMockModel m = new TextGimpSuccessModelMock();
+
+      // Test valid command
+      String sourceName = TestHelper.generateRandomStringOfSize(10);
+      String destName = TestHelper.generateRandomStringOfSize(10);
+      String[] commandString = new String[]{"1000", sourceName, destName};
+      String[] expectedCommand = new String[]{"mosaic", sourceName, "1000", destName};
+      Result res = c.execute(commandString, m);
+      assertTrue(res.isSuccess());
+      assertArrayEquals(m.getLog().get(0), expectedCommand);
+    }
+
+    /**
+     * Tests the execute method of the Mosaic command using invalid parameters.
+     */
+    @Test
+    public void fail() {
+      Command c = new Brighten();
+      LoggerMockModel m = new TextGimpSuccessModelMock();
+
+      // Test invalid command
+      String sourceName = TestHelper.generateRandomStringOfSize(10);
+      String destName = TestHelper.generateRandomStringOfSize(10);
+      String[] commandString = new String[]{sourceName, "1000", destName};
+      Result res = c.execute(commandString, m);
+      assertFalse(res.isSuccess());
+      assertEquals(m.getLog().size(), 0);
+
+      String[] commandString2 = new String[]{sourceName, "1000"};
+      res = c.execute(commandString2, m);
+      assertFalse(res.isSuccess());
+      assertEquals(m.getLog().size(), 0);
+    }
+
+    /**
+     * Tests the help method of the Mosaic command.
+     */
+    @Test
+    public void help() {
+      Command c = new Mosaic();
       assertNotEquals(0, c.help().length());
     }
   }

@@ -16,6 +16,7 @@ import textgimp.model.macros.imagetransform.Dither;
 import textgimp.model.macros.imagetransform.FilterManager;
 import textgimp.model.macros.imagetransform.FilterPresetManager;
 import textgimp.model.macros.imagetransform.FilterType;
+import textgimp.model.macros.imagetransform.Mosaic;
 
 /**
  * This class tests macros in TextGimp.
@@ -204,6 +205,23 @@ public class MacroTester {
 
     // test Floyd-Steinberg
     expectedPx = new RGBPixel(255, 255, 255, 255);
+    assertEquals(expectedPx, dm.apply(img).getPixel(0, 0));
+  }
+
+  @Test
+  public void mosaicTest() {
+    Macro dm = new Mosaic(1000);
+
+    Pixel pixel = new RGBPixel(100, 100, 100, 255);
+    Image img = createGenericImageWithPixel(1, 1, pixel, 255);
+
+    Pixel expectedPx = new RGBPixel(100, 100, 100, 255);
+    assertEquals(expectedPx, dm.apply(img).getPixel(0, 0));
+
+    pixel = new RGBPixel(200, 200, 200, 255);
+    img = createGenericImageWithPixel(1, 1, pixel, 255);
+
+    expectedPx = new RGBPixel(200, 200, 200, 255);
     assertEquals(expectedPx, dm.apply(img).getPixel(0, 0));
   }
 }
