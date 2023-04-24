@@ -344,7 +344,7 @@ public class TextGimpModel implements Model {
     Image image = this.fetchImage(name);
 
     // fetch the image builder for the given type
-    ImageBuilder builder = this.fetchBuilder(image.getImageType());
+    ImageBuilder builder = this.fetchBuilder("png");
     return builder.writeImage(image);
   }
 
