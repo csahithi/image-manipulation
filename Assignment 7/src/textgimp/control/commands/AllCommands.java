@@ -23,10 +23,10 @@ public class AllCommands {
      */
     Brighten() {
       this.helpMessage = "brighten <increment> <image-name> <dest-image-name>\n"
-          + "\t\tBrighten the image with image-name by increment"
-          + " and store it with dest-image-name.\n"
-          + "\t\tA positive increment brightens the image and"
-          + "a negative increment darkens it.";
+              + "\t\tBrighten the image with image-name by increment"
+              + " and store it with dest-image-name.\n"
+              + "\t\tA positive increment brightens the image and"
+              + "a negative increment darkens it.";
     }
 
     @Override
@@ -74,7 +74,7 @@ public class AllCommands {
      */
     Dither() {
       this.helpMessage = "dither <image-name> <dest-image-name>\n"
-          + "\t\tDither the image with image-name and store it with dest-image-name.";
+              + "\t\tDither the image with image-name and store it with dest-image-name.";
     }
 
     @Override
@@ -96,7 +96,7 @@ public class AllCommands {
         res = new ResultImpl(true, "Successfully dithered the image.");
       } catch (IllegalArgumentException e) {
         res = new ResultImpl(false, "Unable to dither the image: "
-            + e.getMessage());
+                + e.getMessage());
       }
       return res;
     }
@@ -124,8 +124,8 @@ public class AllCommands {
     Filter(String filterType) {
       this.filterType = filterType;
       this.helpMessage = filterType + " <image-name> <dest-image-name>\n"
-          + "\t\tApply " + filterType + " on the image with image-name and store it with "
-          + "dest-image-name.";
+              + "\t\tApply " + filterType + " on the image with image-name and store it with "
+              + "dest-image-name.";
     }
 
     @Override
@@ -145,10 +145,10 @@ public class AllCommands {
         String destImageName = args[1];
         model.filter(sourceImageName, this.filterType, destImageName);
         res = new ResultImpl(true, "Successfully applied " + this.filterType
-            + " on the image");
+                + " on the image");
       } catch (IllegalArgumentException e) {
         res = new ResultImpl(false, "Unable to apply " + this.filterType
-            + " on the image" + e.getMessage());
+                + " on the image" + e.getMessage());
       }
       return res;
     }
@@ -173,11 +173,11 @@ public class AllCommands {
      */
     public Greyscale() {
       this.helpMessage = "greyscale <component> <image-name> <dest-image-name>\n"
-          + "\t\tConvert the image with image-name to greyscale and store it with "
-          + "dest-image-name using the component.\n"
-          + "\t\tComponent can be one of the following: "
-          + "red-component, green-component, blue-component, "
-          + "value-component, luma-component, intensity-component";
+              + "\t\tConvert the image with image-name to greyscale and store it with "
+              + "dest-image-name using the component.\n"
+              + "\t\tComponent can be one of the following: "
+              + "red-component, green-component, blue-component, "
+              + "value-component, luma-component, intensity-component";
     }
 
     @Override
@@ -201,7 +201,7 @@ public class AllCommands {
         res = new ResultImpl(true, "Successfully obtained grayscaled image");
       } catch (IllegalArgumentException e) {
         res = new ResultImpl(false, "Unable to obtain grayscaled image: "
-            + e.getMessage());
+                + e.getMessage());
       }
       return res;
     }
@@ -226,8 +226,8 @@ public class AllCommands {
      */
     HorizontalFlip() {
       this.helpMessage = "horizontal-flip <image-name> <dest-image-name>\n"
-          + "\t\tFlip the image with image-name horizontally"
-          + "and store it with dest-image-name.";
+              + "\t\tFlip the image with image-name horizontally"
+              + "and store it with dest-image-name.";
     }
 
     @Override
@@ -249,7 +249,7 @@ public class AllCommands {
         res = new ResultImpl(true, "Successfully flipped the image horizontally");
       } catch (IllegalArgumentException e) {
         res = new ResultImpl(false, "Unable to flip the image horizontally: "
-            + e.getMessage());
+                + e.getMessage());
       }
       return res;
     }
@@ -275,9 +275,9 @@ public class AllCommands {
      */
     RGBCombine() {
       this.helpMessage = "rgb-combine <dest-image-name> <red-image-name> <green-image-name> "
-          + "<blue-image-name>\n"
-          + "\t\tCombine the 3 greyscale images with red-image-name, green-image-name and "
-          + "blue-image-name into a single image and store it with dest-image-name.";
+              + "<blue-image-name>\n"
+              + "\t\tCombine the 3 greyscale images with red-image-name, green-image-name and "
+              + "blue-image-name into a single image and store it with dest-image-name.";
     }
 
     @Override
@@ -303,7 +303,7 @@ public class AllCommands {
         res = new ResultImpl(true, "Successfully generated RGB Combined image");
       } catch (IllegalArgumentException e) {
         res = new ResultImpl(false, "Unable to generate RGB Combined image: "
-            + e.getMessage());
+                + e.getMessage());
       }
       return res;
     }
@@ -329,9 +329,9 @@ public class AllCommands {
      */
     RGBSplit() {
       this.helpMessage = "rgb-split <image-name> <red-image-name> <green-image-name> "
-          + " <blue-image-name>\n"
-          + "\t\tSplit the image with image-name into 3 greyscale images"
-          + "and store them with red-image-name, green-image-name and blue-image-name.";
+              + " <blue-image-name>\n"
+              + "\t\tSplit the image with image-name into 3 greyscale images"
+              + "and store them with red-image-name, green-image-name and blue-image-name.";
     }
 
     @Override
@@ -357,7 +357,7 @@ public class AllCommands {
         res = new ResultImpl(true, "Successfully rgb-split the image");
       } catch (IllegalArgumentException e) {
         res = new ResultImpl(false, "Unable to rgb-split the image: "
-            + e.getMessage());
+                + e.getMessage());
       }
       return res;
     }
@@ -383,8 +383,8 @@ public class AllCommands {
      */
     VerticalFLip() {
       this.helpMessage = "vertical-flip <image-name> <dest-image-name>\n"
-          + "\t\tFlip the image with image-name vertically"
-          + "and store it with dest-image-name.";
+              + "\t\tFlip the image with image-name vertically"
+              + "and store it with dest-image-name.";
     }
 
     @Override
@@ -405,7 +405,7 @@ public class AllCommands {
         res = new ResultImpl(true, "Successfully flipped the image vertically");
       } catch (IllegalArgumentException e) {
         res = new ResultImpl(false, "Unable to flip the image vertically: "
-            + e.getMessage());
+                + e.getMessage());
       }
       return res;
     }
@@ -433,8 +433,8 @@ public class AllCommands {
     Transform(String transformType) {
       this.transformType = transformType;
       this.helpMessage = transformType + " <image-name> <dest-image-name>\n"
-          + "\t\tApply " + transformType + " on the image with image-name and store it with "
-          + "dest-image-name.";
+              + "\t\tApply " + transformType + " on the image with image-name and store it with "
+              + "dest-image-name.";
     }
 
     @Override
@@ -453,10 +453,10 @@ public class AllCommands {
         String destImageName = args[1];
         model.transform(sourceImageName, this.transformType, destImageName);
         res = new ResultImpl(true, "Successfully applied " + this.transformType
-            + " on the image");
+                + " on the image");
       } catch (IllegalArgumentException e) {
         res = new ResultImpl(false, "Unable to apply " + this.transformType
-            + " on the image" + e.getMessage());
+                + " on the image" + e.getMessage());
       }
       return res;
     }

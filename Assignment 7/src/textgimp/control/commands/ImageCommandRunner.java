@@ -3,6 +3,7 @@ package textgimp.control.commands;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+
 import textgimp.model.Model;
 import textgimp.utility.Result;
 import textgimp.utility.ResultImpl;

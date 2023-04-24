@@ -29,7 +29,7 @@ public interface Model extends ReadOnlyModel {
    * @throws IOException              when input or output during save fails.
    */
   byte[] save(String name, String type) throws IllegalArgumentException,
-      IOException;
+          IOException;
 
   /**
    * Flip an image horizontally and store the result in a new image.
@@ -59,9 +59,9 @@ public interface Model extends ReadOnlyModel {
    * @throws IllegalArgumentException if the image does not exist.
    */
   void rgbSplit(String sourceImageName,
-      String redImageName,
-      String greenImageName,
-      String blueImageName) throws IllegalArgumentException;
+                String redImageName,
+                String greenImageName,
+                String blueImageName) throws IllegalArgumentException;
 
   /**
    * Brighten an image by a specified amount and store the result in a new image.
@@ -72,7 +72,7 @@ public interface Model extends ReadOnlyModel {
    * @throws IllegalArgumentException if the image does not exist.
    */
   void brighten(String sourceImageName, int amount, String newImageName)
-      throws IllegalArgumentException;
+          throws IllegalArgumentException;
 
   /**
    * Combine three images into one using the red, green, and blue channels and store the result in a
@@ -86,7 +86,7 @@ public interface Model extends ReadOnlyModel {
    *                                  the same size.
    */
   void rgbCombine(String sourceRedImageName, String sourceGreenImageName,
-      String sourceBlueImageName, String newImageName) throws IllegalArgumentException;
+                  String sourceBlueImageName, String newImageName) throws IllegalArgumentException;
 
   /**
    * Obtain greyscale of the image using the specified component and store the result in a new
@@ -98,7 +98,7 @@ public interface Model extends ReadOnlyModel {
    * @throws IllegalArgumentException if the image does not exist or the component is invalid.
    */
   void greyscale(String sourceImageName, String component, String newImageName)
-      throws IllegalArgumentException;
+          throws IllegalArgumentException;
 
   /**
    * Apply a filter to an image and store the result in a new image.
@@ -110,7 +110,7 @@ public interface Model extends ReadOnlyModel {
    */
 
   void filter(String sourceImageName, String filterType, String newImageName)
-      throws IllegalArgumentException;
+          throws IllegalArgumentException;
 
   /**
    * Apply a transformation to an image.
@@ -122,7 +122,7 @@ public interface Model extends ReadOnlyModel {
    *                                  exist.
    */
   void transform(String sourceImageName, String transformType, String newImageName)
-      throws IllegalArgumentException;
+          throws IllegalArgumentException;
 
   /**
    * Apply a dithering effect to an image and store the result in a new image.
@@ -132,6 +132,7 @@ public interface Model extends ReadOnlyModel {
    * @throws IllegalArgumentException if the image does not exist.
    */
   void dither(String sourceImageName, String newImageName) throws IllegalArgumentException;
+
   /**
    * Mosaic an image by a specified number of seeds and store the result in a new image.
    *

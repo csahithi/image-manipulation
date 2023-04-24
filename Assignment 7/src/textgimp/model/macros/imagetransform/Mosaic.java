@@ -1,11 +1,7 @@
 package textgimp.model.macros.imagetransform;
 
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
-import textgimp.model.Point;
 import textgimp.model.betterimage.GenericImage;
 import textgimp.model.betterimage.Image;
 import textgimp.model.betterimage.Pixel;
@@ -25,51 +21,39 @@ public class Mosaic extends AbstractMacro implements Macro {
 
   @Override
   public Image apply(Image sourceImage) throws IllegalArgumentException {
-    // validate the image
     this.validateImage(sourceImage);
-
-    // read the image properties
-    int maxValue = sourceImage.getMaxValue();
-    int height = sourceImage.getHeight();
-    int width = sourceImage.getWidth();
-    Random rand = new Random();
-    List<Point> seeds = new ArrayList<Point>();
-
-    // Generate the seeds randomly
-    for (int i = 0; i < numSeeds; i++) {
-      int x = rand.nextInt(width);
-      int y = rand.nextInt(height);
-      Point seed = new Point(x, y);
-      seeds.add(seed);
-    }
-
-    // Create the output image pixels array.
-    Pixel[][] newPixels = new Pixel[height][width];
-
-    // Replace each pixel with the color of its nearest seed
-    for (int x = 0; x < height; x++) {
-      for (int y = 0; y < width; y++) {
-        // Get the color of the current pixel
-        Pixel pixel = sourceImage.getPixel(x, y);
-        Point thisPoint = new Point(x, y);
-        // Find the nearest seed to the current pixel
+    Pixel[][] newPixels = new Pixel[sourceImage.getHeight()][sourceImage.getWidth()];
+    int[][] seeds = getSeeds(sourceImage.getHeight(), sourceImage.getWidth(), numSeeds);
+    for (int x = 0; x < sourceImage.getHeight(); x++) {
+      for (int y = 0; y < sourceImage.getWidth(); y++) {
         double minDistance = Double.MAX_VALUE;
-        Point nearestSeed = null;
-        for (Point seed : seeds) {
-          double distance = seed.distanceTo(thisPoint);
+        int nearestSeedX = 0;
+        int nearestSeedY = 0;
+        for (int i = 0; i < numSeeds; i++) {
+          double distance = getDistance(x, y, seeds[i][0], seeds[i][1]);
           if (distance < minDistance) {
             minDistance = distance;
-            nearestSeed = seed;
+            nearestSeedX = seeds[i][0];
+            nearestSeedY = seeds[i][1];
           }
         }
-
-        // Set the color of the current pixel to the color of the nearest seed
-        newPixels[x][y] = sourceImage.getPixel(nearestSeed.getX(), nearestSeed.getY());
+        newPixels[x][y] = sourceImage.getPixel(nearestSeedX, nearestSeedY);
       }
     }
-
-    // Save the output image
-    return new GenericImage(newPixels, maxValue, sourceImage.getImageType());
+    return new GenericImage(newPixels, sourceImage.getMaxValue(), sourceImage.getImageType());
   }
 
+  private double getDistance(int x1, int y1, int x2, int y2) {
+    return Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
+  }
+
+  private int[][] getSeeds(int height, int width, int numSeeds) {
+    Random rand = new Random();
+    int[][] seeds = new int[numSeeds][2];
+    for (int i = 0; i < numSeeds; i++) {
+      seeds[i][0] = rand.nextInt(height);
+      seeds[i][1] = rand.nextInt(width);
+    }
+    return seeds;
+  }
 }

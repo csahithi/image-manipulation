@@ -59,7 +59,7 @@ public interface Features {
    * @param bluePath  path to blue image file.
    */
   Result rgbCombine(String redPath, String greenPath,
-      String bluePath);
+                    String bluePath);
 
   /**
    * Obtain greyscale of the image using the specified component and display the result on the GUI.
@@ -90,6 +90,7 @@ public interface Features {
 
   /**
    * Apply a mosaicking effect to an image and display the result on the GUI.
+   *
    * @param seeds
    */
   Result mosaic(int seeds);

@@ -48,7 +48,7 @@ public class GuiFeatures implements Features {
   @Override
   public Result save(String path) {
     return imageCommandRunner.runCommand(String.format("save %s %s", path,
-        TARGET));
+            TARGET));
   }
 
   @Override
@@ -75,30 +75,30 @@ public class GuiFeatures implements Features {
 
   @Override
   public Result rgbSplit(String redPath, String greenPath,
-      String bluePath) {
+                         String bluePath) {
     try {
       model.rgbSplit(TARGET, TARGET_RED, TARGET_GREEN, TARGET_BLUE);
     } catch (Exception e) {
       return new ResultImpl(false, "Failed to split, no image loaded.");
     }
     Result res = imageCommandRunner.runCommand(String.format("save %s %s",
-        redPath,
-        TARGET_RED));
+            redPath,
+            TARGET_RED));
     if (!res.isSuccess()) {
       return res;
     }
     res = imageCommandRunner.runCommand(String.format("save %s %s", bluePath,
-        TARGET_BLUE));
+            TARGET_BLUE));
     if (!res.isSuccess()) {
       return res;
     }
     res = imageCommandRunner.runCommand(String.format("save %s %s", greenPath,
-        TARGET_GREEN));
+            TARGET_GREEN));
     if (!res.isSuccess()) {
       return res;
     }
     return new ResultImpl(true, "Successfully split the image and saved at "
-        + "the location");
+            + "the location");
   }
 
   @Override
@@ -114,31 +114,31 @@ public class GuiFeatures implements Features {
 
   @Override
   public Result rgbCombine(String redPath, String greenPath,
-      String bluePath) {
+                           String bluePath) {
     Result res = imageCommandRunner.runCommand(String.format("load %s %s",
-        redPath,
-        TARGET_RED));
+            redPath,
+            TARGET_RED));
     if (!res.isSuccess()) {
       return res;
     }
     res = imageCommandRunner.runCommand(String.format("load %s %s", bluePath,
-        TARGET_BLUE));
+            TARGET_BLUE));
     if (!res.isSuccess()) {
       return res;
     }
     res = imageCommandRunner.runCommand(String.format("load %s %s", greenPath,
-        TARGET_GREEN));
+            TARGET_GREEN));
     if (!res.isSuccess()) {
       return res;
     }
     try {
       model.rgbCombine(TARGET_RED, TARGET_GREEN,
-          TARGET_BLUE, TARGET);
+              TARGET_BLUE, TARGET);
       view.displayImage(TARGET);
       return new ResultImpl(true, "Successfully combined the images");
     } catch (Exception e) {
       return new ResultImpl(false, "Failed to combine, images are not of the "
-          + "same size.");
+              + "same size.");
     }
   }
 

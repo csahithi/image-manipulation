@@ -3,6 +3,7 @@ package textgimp.model;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+
 import textgimp.model.betterimage.Image;
 import textgimp.model.imagebuilder.BMPBuilder;
 import textgimp.model.imagebuilder.ImageBuilder;
@@ -75,7 +76,7 @@ public class TextGimpModel implements Model {
 
   @Override
   public void horizontalFlip(String sourceImageName, String newImageName)
-      throws IllegalArgumentException {
+          throws IllegalArgumentException {
     // validate name
     this.validateName(sourceImageName);
     this.validateName(newImageName);
@@ -91,7 +92,7 @@ public class TextGimpModel implements Model {
 
   @Override
   public void verticalFlip(String sourceImageName, String newImageName)
-      throws IllegalArgumentException {
+          throws IllegalArgumentException {
     // validate name
     this.validateName(sourceImageName);
     this.validateName(newImageName);
@@ -107,7 +108,7 @@ public class TextGimpModel implements Model {
 
   @Override
   public void rgbSplit(String sourceImageName, String redImageName, String greenImageName,
-      String blueImageName) throws IllegalArgumentException {
+                       String blueImageName) throws IllegalArgumentException {
     // validate name
     this.validateName(sourceImageName);
     this.validateName(redImageName);
@@ -137,7 +138,7 @@ public class TextGimpModel implements Model {
 
   @Override
   public void brighten(String sourceImageName, int amount, String newImageName)
-      throws IllegalArgumentException {
+          throws IllegalArgumentException {
     // validate name
     this.validateName(sourceImageName);
     this.validateName(newImageName);
@@ -153,7 +154,7 @@ public class TextGimpModel implements Model {
 
   @Override
   public void rgbCombine(String sourceRedImageName, String sourceGreenImageName,
-      String sourceBlueImageName, String newImageName) throws IllegalArgumentException {
+                         String sourceBlueImageName, String newImageName) throws IllegalArgumentException {
     // validate name
     this.validateName(sourceRedImageName);
     this.validateName(sourceGreenImageName);
@@ -174,7 +175,7 @@ public class TextGimpModel implements Model {
 
   @Override
   public void greyscale(String sourceImageName, String component, String newImageName)
-      throws IllegalArgumentException {
+          throws IllegalArgumentException {
     // validate name
     this.validateName(sourceImageName);
     this.validateName(newImageName);
@@ -194,7 +195,7 @@ public class TextGimpModel implements Model {
 
   @Override
   public void filter(String sourceImageName, String filterType, String newImageName)
-      throws IllegalArgumentException {
+          throws IllegalArgumentException {
     // validate name
     this.validateName(sourceImageName);
     this.validateName(newImageName);
@@ -214,7 +215,7 @@ public class TextGimpModel implements Model {
 
   @Override
   public void transform(String sourceImageName, String transformType, String newImageName)
-      throws IllegalArgumentException {
+          throws IllegalArgumentException {
     // validate name
     this.validateName(sourceImageName);
     this.validateName(newImageName);
@@ -317,7 +318,7 @@ public class TextGimpModel implements Model {
 
   @Override
   public int[] getHistogramOfGreyscale(String name, String component)
-      throws IllegalArgumentException {
+          throws IllegalArgumentException {
     // transform the image to the given component.
     ColorTransformType cType = colorTransformManager.getColorTransformType(component);
     Macro transformer = colorTransformManager.getColorTransform(cType);
@@ -346,6 +347,7 @@ public class TextGimpModel implements Model {
     ImageBuilder builder = this.fetchBuilder(image.getImageType());
     return builder.writeImage(image);
   }
+
   @Override
   public void mosaic(String sourceImageName, int seeds, String newImageName) throws IllegalArgumentException {
     this.validateName(sourceImageName);

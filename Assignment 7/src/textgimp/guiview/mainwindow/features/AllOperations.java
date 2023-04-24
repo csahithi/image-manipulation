@@ -1,7 +1,5 @@
 package textgimp.guiview.mainwindow.features;
 
-import static textgimp.guiview.mainwindow.Theme.setPanelColors;
-
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
@@ -22,6 +20,8 @@ import textgimp.guiview.mainwindow.Theme;
 import textgimp.guiview.mainwindow.status.StatusPanel;
 import textgimp.utility.Result;
 import textgimp.utility.ResultImpl;
+
+import static textgimp.guiview.mainwindow.Theme.setPanelColors;
 
 /**
  * This class represents a group of all operations. Multiple classes have been moved to this file to
@@ -634,7 +634,7 @@ public class AllOperations {
       if (res.isSuccess()) {
         // delegate the operation to the feature controller
         res = features.rgbSplit(redPath.getText(), greenPath.getText(),
-            bluePath.getText());
+                bluePath.getText());
         this.statusPanel.setStatus("RGB Split", res);
       }
       return res;
@@ -662,23 +662,22 @@ public class AllOperations {
       this.setUpMosaicPanel();
     }
 
-    private void setUpMosaicPanel(){
-      // add a slider to the buffer panel to set the number of seeds
-      // then call featureControl.mosaic() with the brightness value
+    private void setUpMosaicPanel() {
       textField = new JTextField();
       textField.setBackground(Theme.getPrimaryColor());
       textField.setForeground(Theme.getSecondaryColor());
       JLabel label = new JLabel("Number of seeds: " + textField.getText());
       Theme.setLabelColors(label);
 
-      // create a label to display the current value of the slider
       textField.getDocument().addDocumentListener(new DocumentListener() {
         public void changedUpdate(DocumentEvent e) {
           warn();
         }
+
         public void removeUpdate(DocumentEvent e) {
           warn();
         }
+
         public void insertUpdate(DocumentEvent e) {
           warn();
         }
