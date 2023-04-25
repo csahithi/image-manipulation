@@ -24,7 +24,7 @@ public class Mosaic extends AbstractMacro implements Macro {
   public Image apply(Image sourceImage) throws IllegalArgumentException {
     this.validateImage(sourceImage);
     if (numSeeds < 0) {
-      throw new IllegalArgumentException();
+      throw new IllegalArgumentException("Number of seeds must be greater than or equal to zero");
     }
     Pixel[][] newPixels = new Pixel[sourceImage.getHeight()][sourceImage.getWidth()];
     int[][] seeds = getSeeds(sourceImage.getHeight(), sourceImage.getWidth(), numSeeds);
