@@ -1,7 +1,11 @@
 <component name="libraryTable">
   <library name="jfreechart-1.0.19">
     <CLASSES>
+<<<<<<< HEAD
       <root url="jar://$USER_HOME$/Downloads/jfreechart-1.0.19/lib/jfreechart-1.0.19.jar!/" />
+=======
+      <root url="jar://$PROJECT_DIR$/../jfreechart-1.0.19.jar!/" />
+>>>>>>> parent of 91050f3 (added new changes to mosaic)
     </CLASSES>
     <JAVADOC />
     <SOURCES />

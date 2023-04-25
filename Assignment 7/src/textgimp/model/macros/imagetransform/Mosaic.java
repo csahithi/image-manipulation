@@ -7,7 +7,6 @@ import textgimp.model.betterimage.Image;
 import textgimp.model.betterimage.Pixel;
 import textgimp.model.macros.AbstractMacro;
 import textgimp.model.macros.Macro;
-import textgimp.utility.ResultImpl;
 
 
 /**
@@ -23,9 +22,6 @@ public class Mosaic extends AbstractMacro implements Macro {
   @Override
   public Image apply(Image sourceImage) throws IllegalArgumentException {
     this.validateImage(sourceImage);
-    if (numSeeds < 0) {
-      throw new IllegalArgumentException();
-    }
     Pixel[][] newPixels = new Pixel[sourceImage.getHeight()][sourceImage.getWidth()];
     int[][] seeds = getSeeds(sourceImage.getHeight(), sourceImage.getWidth(), numSeeds);
     for (int x = 0; x < sourceImage.getHeight(); x++) {
